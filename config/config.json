@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "ivan",
+    "password": "password",
+    "database": "shop_dev",
+    "host": "db-onlineshop.cqgypqdowsdi.us-east-1.rds.amazonaws.com",
+    "dialect": "postgresql"
   },
   "test": {
     "username": "root",
