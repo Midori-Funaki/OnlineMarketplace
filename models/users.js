@@ -8,12 +8,14 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     shipping_address: DataTypes.STRING,
     billing_address: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+  })
+  Users.associate = function(models){
+    Users.hasMany(models.CartItems,{foreignKey:'user_id',souceKey:'id'});
+    //Users.hasMany(models.Transactions,{foreignKey:'seller_id',sourceKey:'id'});
+    //Users.hasMany(models.Transactions,{foreignKey:'buyer_id',sourceKey:'id'});
+    Users.hasMany(models.Products,{foreignKey:'seller_id',sourceKey:'id'});
+    Users.hasMany(models.Products,{foreignKey:'buyer_id',sourceKey:'id'});
+    Users.hasMany(models.FavItems,{foreignKey:'user_id',sourceKey:'id'});
+  }
   return Users;
 };
