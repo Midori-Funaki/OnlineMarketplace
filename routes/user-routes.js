@@ -31,7 +31,6 @@ class UserRoutes{
   update(req,res){
     return this.userService.edit(req.params.id,req.body)
       .then((user)=>{
-        console.log(user);
         res.send('Updated Completed')
       })
       .catch((err)=>res.status(500).json(err))
