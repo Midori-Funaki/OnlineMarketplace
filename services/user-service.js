@@ -32,6 +32,34 @@ class UserService{
             console.log(err)
         })
     }
+
+    edit(userId,req){
+        let attr = req.attr;
+        let updates = req.updates;
+        let newData = {};
+        newData[attr] = updates; 
+        // console.log('new update '+req.attr+' '+req.updates)
+        console.log(newData);
+        return User.update(newData, {where:{userId: userId}})
+        .then(result => {
+            console.log(result);
+            console.log('Updated')
+            return result;
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+    }
+
+    deregister(userId){
+        return User.destroy({
+            where:{ userId:userId }
+        }).then(()=>{
+            console.log('Deleted ',userId)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
 }
 
 module.exports = UserService;
