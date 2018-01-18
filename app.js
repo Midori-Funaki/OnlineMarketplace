@@ -5,9 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//loading the routing files
 var index = require('./routes/index');
-var users = require('./routes/users');
-var sequelize = require('./postgres');
+var UserRoutes = require('./routes/user-routes');
+
+//service files
+var UserService = require('./services/user-service');
+
+//service instance
+var userService = new UserService(path);
 
 var app = express();
 
@@ -24,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/api/users',new UserRoutes(userService).router());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,13 +50,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//check sequelize connection
-sequelize.authenticate()
-  .then(()=>{
-    console.log('Sequelize connection established...');
-  })
-  .catch(err=>{
-    console.log('Unable to connect to postgres database...');
-  })
 
 module.exports = app;
