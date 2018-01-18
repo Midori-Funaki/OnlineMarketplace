@@ -1,0 +1,7 @@
+sequelize model:create --name Product --attributes title:string,description:text,curentBidPrice:float,currentAskPrice:float,quantity:integer,sellerId:integer,buyerId:integer,categoryId:integer
+
+sequelize model:create --name ProductPhoto --attributes url:string,productId:integer
+
+sequelize model:create --name Category --attributes title:string
+
+sequelize model:create --name Transaction --attributes status:string,price:float,sellerShipAddress:string,sellerBillAddress:string,buyerShipAddress:string,buyerBillAddress:string,buyerId:integer,sellerId:integer,productId:integer
