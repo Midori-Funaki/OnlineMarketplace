@@ -15,7 +15,7 @@ class UserRoutes{
   }
 
   get(req,res){
-    return this.userService.get(req.params.id)
+    return this.userService.retrieve(req.params.id)
       .then((user)=>res.json(user))
       .catch((err)=>res.status(500).json(err))
   }

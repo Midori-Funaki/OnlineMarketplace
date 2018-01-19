@@ -4,7 +4,7 @@ const models = require('./../models'),
 class UserService{
     constructor(){}
 
-    get(userid){
+    retrieve(userid){
         return User.findOne({
             where:{
                 userId: userid
@@ -14,6 +14,7 @@ class UserService{
             return user
         }).catch(err=>{
             console.log(err);
+            return err
         })
     }
 
