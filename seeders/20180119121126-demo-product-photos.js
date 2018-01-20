@@ -6,11 +6,11 @@ const ProductPhoto = models.ProductPhoto;
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let photos = [];
-    for (let i=0; i < 10; i++) {
+    for (let i=1; i <= 10; i++) {
       for (let j = 1; j <= 4; j++) {
         photos.push({
           url: faker.image.fashion(),
-          productId: j
+          productId: i
         })
       }
     }
