@@ -8,12 +8,15 @@ var bodyParser = require('body-parser');
 //loading the routing files
 var index = require('./routes/index');
 var UserRoutes = require('./routes/user-routes');
+var TransactionRoutes = require('./routes/transaction-routes');
 
 //service files
 var UserService = require('./services/user-service');
+var transactionService = require('./services/transaction-service');
 
 //service instance
 var userService = new UserService(path);
+var transactionService = new transactionService(path);
 
 var app = express();
 
@@ -31,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/api/users',new UserRoutes(userService).router());
+app.use('/api/transactions',new TransactionRoutes(transactionService).router());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -49,6 +53,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;

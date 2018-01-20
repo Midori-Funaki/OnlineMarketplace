@@ -22,10 +22,7 @@ class UserRoutes{
 
   post(req,res){
     return this.userService.register(req.body)
-      .then((result)=>{
-        console.log(result);
-        res.send(result);
-      })
+      .then((result)=>res.send(result))
       .catch((err)=>res.status(500).json(err))
   }
 
