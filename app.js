@@ -10,16 +10,19 @@ var index = require('./routes/index');
 var UserRoutes = require('./routes/user-routes');
 var ProductRoutes = require('./routes/product-routes');
 var CategoryRoutes = require('./routes/category-routes');
+var UserProductRoutes = require('./routes/user-product-routes');
 
 //service files
 var UserService = require('./services/user-service');
 var ProductService = require('./services/product-service');
 var CategoryService = require('./services/category-service');
+var UserProductService = require('./services/user-product-service');
 
 //service instance
 var userService = new UserService(path);
 var categoryService = new CategoryService(path);
 var productService = new ProductService(path);
+var userProductService = new UserProductService(path);
 
 var app = express();
 
@@ -38,8 +41,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routing
 app.use('/', index);
 app.use('/api/users',new UserRoutes(userService).router());
+app.use('/api/users/:userId/products', new UserProductRoutes(userProductService).router());
 app.use('/api/products', new ProductRoutes(productService).router());
-app.use('/api/categories', new CategoryRoutes(categoryService));
+app.use('/api/categories', new CategoryRoutes(categoryService).router());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

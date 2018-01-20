@@ -1,6 +1,6 @@
 var express = require('express');
 
-class CategoryRoute {
+class CategoryRoutes {
   constructor(categoryService) {
     this.categoryService = categoryService;
   }
@@ -8,6 +8,7 @@ class CategoryRoute {
   router() {
     let router = express.Router();
     router.get('/:title', this.get.bind(this));
+    return router;
   }
 
   get(req, res) {
