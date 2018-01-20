@@ -8,12 +8,18 @@ var bodyParser = require('body-parser');
 //loading the routing files
 var index = require('./routes/index');
 var UserRoutes = require('./routes/user-routes');
+var ProductRoutes = require('./routes/product-routes');
+var CategoryRoutes = require('./routes/category-routes');
 
 //service files
 var UserService = require('./services/user-service');
+var ProductService = require('./services/product-service');
+var CategoryService = require('./services/category-service');
 
 //service instance
 var userService = new UserService(path);
+var categoryService = new CategoryService(path);
+var productService = new ProductService(path);
 
 var app = express();
 
@@ -29,8 +35,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routing
 app.use('/', index);
 app.use('/api/users',new UserRoutes(userService).router());
+app.use('/api/products', new ProductRoutes(productService).router());
+app.use('/api/categories', new CategoryRoutes(categoryService));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -49,6 +58,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
