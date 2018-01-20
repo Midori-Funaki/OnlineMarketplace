@@ -29,8 +29,10 @@ class UserService{
             billingAddress: userInfo.billingAddress
         }).then(()=>{
             console.log('Succeeded to register')
+            return 'Succeeded to register'
         }).catch(err=>{
             console.log(err)
+            return err
         })
     }
 
@@ -41,8 +43,8 @@ class UserService{
             [attr]:updates
         };
         return User.update(newData, {where:{userId: userId}})
-        .then(result => {
-            return result;
+        .then(() => {
+            return 'Succeeded to register';
         })
         .catch(err =>{
             return err;

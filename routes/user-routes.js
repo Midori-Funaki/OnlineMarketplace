@@ -22,16 +22,17 @@ class UserRoutes{
 
   post(req,res){
     return this.userService.register(req.body)
-      .then(()=>{
-        res.send('Registration Completed')
+      .then((result)=>{
+        console.log(result);
+        res.send(result);
       })
       .catch((err)=>res.status(500).json(err))
   }
 
   update(req,res){
     return this.userService.edit(req.params.id,req.body)
-      .then((user)=>{
-        res.send('Updated Completed')
+      .then((result)=>{
+        res.send(result);
       })
       .catch((err)=>res.status(500).json(err))
   }
