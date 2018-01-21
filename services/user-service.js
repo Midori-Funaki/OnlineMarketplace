@@ -1,5 +1,6 @@
 const models = require('./../models'),
-      User = models.User;
+      User = models.User,
+      Product = models.Product;
 
 class UserService{
     constructor(){}
@@ -58,6 +59,21 @@ class UserService{
             console.log('Deleted ',userId)
         }).catch(err=>{
             console.log(err)
+        })
+    }
+
+    getProducts(userId) {
+        return User.findOne({
+            where: {
+                userId: userId
+            },
+            include: {
+                model: Product
+            }
+        }).then(user => {
+            return user.products
+        }).catch(err => {
+            console.log(err);
         })
     }
 }
