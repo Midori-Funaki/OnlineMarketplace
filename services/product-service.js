@@ -1,5 +1,5 @@
 const models = require('./../models');
-const Products = models.Product;
+const Product = models.Product;
 const Category = models.Category;
 const ProductPhoto = models.ProductPhoto;
 
@@ -8,7 +8,7 @@ class ProductService {
   constructor() { }
 
   getAll() {
-    return Products.findAll({
+    return Product.findAll({
       attributes: { exclude: ['CategoryId'] }
     })
       .then(products => {
@@ -21,7 +21,7 @@ class ProductService {
   }
 
   get(productId) {
-    return Products.findOne({
+    return Product.findOne({
       where: {
         id: productId
       },
@@ -45,7 +45,7 @@ class ProductService {
         title: productInfo.categoryName
       }
     }).then(category => {
-      return Products.create({
+      return Product.create({
         title: productInfo.title,
         description: productInfo.description,
         size: productInfo.size,
@@ -80,7 +80,7 @@ class ProductService {
     let newData = {
       [attr]: updates
     };
-    return Products.update(newData, { where: { id: productId } })
+    return Product.update(newData, { where: { id: productId } })
       .then(result => {
         return result;
       })
