@@ -7,9 +7,9 @@ class ProductRoutes{
   
   router(){
     let router = express.Router();
+    router.get('/:id',this.get.bind(this));
     router.get('/', this.getAll.bind(this));
-    router.post('/', this.get.bind(this));
-    router.get('/:id',this.post.bind(this));
+    router.post('/', this.post.bind(this));
     router.delete('/:id',this.delete.bind(this));
     router.put('/:id',this.update.bind(this));
     return router;
@@ -23,8 +23,8 @@ class ProductRoutes{
 
   get(req,res) {
       return this.productService.get(req.params.id)
-        .then(product => res.json(product))
-        .catch(err=> res.status(500).json(err))
+        .then((product) => res.json(product))
+        .catch((err)=> res.status(500).json(err))
   }
 
   post(req,res){

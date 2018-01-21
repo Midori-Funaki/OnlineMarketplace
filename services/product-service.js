@@ -1,5 +1,5 @@
 const models = require('./../models');
-const Product = models.Product;
+const Products = models.Product;
 const Category = models.Category;
 const ProductPhoto = models.ProductPhoto;
 
@@ -8,12 +8,15 @@ class ProductService {
   constructor() { }
 
   getAll() {
-    return Products.findAll()
+    return Products.findAll({
+      attributes: { exclude: ['CategoryId'] }
+    })
       .then(products => {
         console.log('Products found: ', products);
         return products;
       }).catch(err => {
         console.log(err);
+        return err;
       })
   }
 
@@ -21,13 +24,17 @@ class ProductService {
     return Products.findOne({
       where: {
         id: productId
+      },
+      attributes: { 
+        exclude: ['CategoryId'] 
       }
     })
-      .then(product => {
+      .then((product) => {
         console.log('Product found: ', product);
         return product;
       }).catch(err => {
         console.log(err);
+        return err;
       })
   }
 

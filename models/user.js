@@ -8,14 +8,16 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     shippingAddress: DataTypes.STRING,
     billingAddress: DataTypes.STRING
-  })
+  });
+
   User.associate = function(models){
-    User.hasMany(models.CartItem,{foreignKey:'userId',souceKey:'id'});
+    //User.hasMany(models.CartItem,{foreignKey:'userId',sourceKey:'id'});
     User.hasMany(models.Transaction,{foreignKey:'sellerId',sourceKey:'id'});
     User.hasMany(models.Transaction,{foreignKey:'buyerId',sourceKey:'id'});
     User.hasMany(models.Product,{foreignKey:'sellerId',sourceKey:'id'});
     User.hasMany(models.Product,{foreignKey:'buyerId',sourceKey:'id'});
-    User.hasMany(models.FavItem,{foreignKey:'userId',sourceKey:'id'});
+    //User.hasMany(models.FavItem,{foreignKey:'userId',sourceKey:'id'});
   }
+  
   return User;
 };
