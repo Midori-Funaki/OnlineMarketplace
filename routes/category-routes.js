@@ -13,6 +13,8 @@ class CategoryRoutes {
 
   get(req, res) {
     return this.categoryService.get(req.params.title)
+    .then((items)=>res.json(items))
+    .catch((err)=>res.status(500).json(err))
   }
 }
 

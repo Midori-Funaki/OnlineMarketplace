@@ -1,10 +1,10 @@
 const models = require('./../models'),
-  Category = models.Category,
-  Product = models.Product;
+      Category = models.Category,
+      Product = models.Product;
 
 class CategoryService {
   constructor() { }
-
+  
   get(categoryName) {
     return Category.findOne({
       where: {
@@ -18,6 +18,7 @@ class CategoryService {
       return category.products;
     }).catch(err => {
       console.log(err);
+      return err;
     })
   }
 }
