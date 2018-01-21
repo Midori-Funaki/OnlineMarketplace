@@ -45,7 +45,7 @@ class ProductService {
         title: productInfo.categoryName
       }
     }).then(category => {
-      return Product.create({
+      return Products.create({
         title: productInfo.title,
         description: productInfo.description,
         size: productInfo.size,
@@ -74,13 +74,13 @@ class ProductService {
     })
   }
 
-  update(product, req) {
+  update(productId, req) {
     let attr = req.attr;
     let updates = req.updates;
     let newData = {
       [attr]: updates
     };
-    return Product.update(newData, { where: { id: productId } })
+    return Products.update(newData, { where: { id: productId } })
       .then(result => {
         return result;
       })

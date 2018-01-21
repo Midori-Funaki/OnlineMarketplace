@@ -36,7 +36,7 @@ class ProductRoutes{
   }
 
   update(req,res){
-    return this.productService.edit(req.params.id,req.body)
+    return this.productService.update(req.params.id,req.body)
       .then((user)=>{
         res.send('Updated Completed')
       })
