@@ -5,6 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//braintree testing
+// var client = require('braintree-web/client');
+// var hostedFields = require('braintree-web/hosted-fields');
+
 //loading the routing files
 var index = require('./routes/index');
 var UserRoutes = require('./routes/user-routes');
@@ -19,6 +23,17 @@ var userService = new UserService(path);
 var transactionService = new transactionService(path);
 
 var app = express();
+
+//braintree testing
+// client.create({
+//   authorization: 'CLIENT_AUTHORIZATION'
+// }, function (err, clientInstance) {
+//   hostedFields.create([]);
+// });
+var dropin = require('braintree-web-drop-in');
+dropin.create({ /* options */ }, function(){
+  console.log('dropin created successfully')
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/api/users',new UserRoutes(userService).router());
 app.use('/api/transactions',new TransactionRoutes(transactionService).router());
+app.use(express.static('OnlineMarketplace/frontend'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
