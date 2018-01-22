@@ -1,5 +1,6 @@
 const models = require('./../models'),
-      Cart = models.Cart;
+      Cart = models.Cart,
+      Product = models.Product;
 
 class CartService{
     constructor(){}
@@ -8,7 +9,10 @@ class CartService{
         return Cart.findAll({
             where:{
                 userId: user
-            }
+            },
+            include:[{
+                model: Product
+            }]
         }).then((items)=>{
             return items
         }).catch((err)=>{

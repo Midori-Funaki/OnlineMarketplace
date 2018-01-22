@@ -1,4 +1,36 @@
-var gateway = require('./../gateway');
+var gateway = require('./../gateway'),
+    braintree = require('braintree');
+
+var TRANSACTION_SUCCESS_STATUSES = [
+    braintree.Transaction.Status.Authorizing,
+    braintree.Transaction.Status.Authorized,
+    braintree.Transaction.Status.Settled,
+    braintree.Transaction.Status.Settling,
+    braintree.Transaction.Status.SettlementConfirmed,
+    braintree.Transaction.Status.SettlementPending,
+    braintree.Transaction.Status.SubmittedForSettlement
+]
+
+function createResultObject(transaction){
+    let result;
+    let status = transaction.status;
+
+    if(TRANSACTION_SUCCESS_STATUSES.indexOf(status) !== -1){
+        result = {
+            header: 'Payment Success!',
+            icon: 'success',
+            message: 'Your test transaction has been successfully processed.'
+        }
+    } else {
+        result = {
+            header: 'Transaction Failed',
+            icon: 'fail',
+            message: 'Your test transaction has a status of ' + status + '.'
+        }
+    }
+
+    return result;
+}
 
 class transactionService{
     constructor(){}
