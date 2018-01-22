@@ -7,14 +7,21 @@ class CategoryRoutes {
 
   router() {
     let router = express.Router();
+    router.get('/', this.getAll.bind(this));
     router.get('/:title', this.get.bind(this));
     return router;
   }
 
   get(req, res) {
     return this.categoryService.get(req.params.title)
-    .then((items)=>res.json(items))
+    .then(items=>res.json(items))
     .catch((err)=>res.status(500).json(err))
+  }
+
+  getAll(req,res) {
+    return this.categoryService.getAll()
+      .then(categories => res.json(categories))
+      .catch(err => res.status(500).json(err));
   }
 }
 

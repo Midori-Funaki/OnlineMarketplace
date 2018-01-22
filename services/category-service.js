@@ -10,17 +10,29 @@ class CategoryService {
       where: {
         title: categoryName
       },
-      include: {
-        model: Product
-      },
-      required: false
+      include: [
+        {
+          model: Product,
+          required: false
+        }
+      ]
     }).then(category => {
       console.log('Found category: ', category.title)
-      return category.products;
+      return category.Products;
     }).catch(err => {
       console.log(err);
       return err;
     })
+  }
+  
+  getAll() {
+    return Category.findAll({})
+      .then(categories => {
+        return categories;
+      }).catch(err => {
+        console.log(err);
+        return err;
+      })
   }
 }
 

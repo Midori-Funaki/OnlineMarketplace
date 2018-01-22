@@ -63,19 +63,29 @@ class UserService{
     }
 
     getProducts(userId) {
+        console.log("User id: ", userId);
         return User.findOne({
             where: {
                 userId: userId
-            },
-            include: {
-                model: Product
             }
         }).then(user => {
-            return user.products
+            return Product.findAll({
+                where: {
+                    sellerId: user.id
+                }
+            })
+            .then(products => {
+                return products;
+            });
         }).catch(err => {
             console.log(err);
         })
     }
+    
+    getTransactions(userId) {
+        
+    }
+    
 }
 
 module.exports = UserService;

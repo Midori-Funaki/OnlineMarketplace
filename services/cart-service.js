@@ -1,5 +1,5 @@
 const models = require('./../models'),
-      Cart = require(models.Cart);
+      Cart = models.Cart;
 
 class CartService{
     constructor(){}

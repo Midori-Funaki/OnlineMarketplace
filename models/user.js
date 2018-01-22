@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     //User.hasMany(models.CartItem,{foreignKey:'userId',sourceKey:'id'});
     User.hasMany(models.Transaction,{foreignKey:'sellerId',sourceKey:'id'});
     User.hasMany(models.Transaction,{foreignKey:'buyerId',sourceKey:'id'});
-    User.hasMany(models.Product,{foreignKey:'sellerId',sourceKey:'id'});
-    User.hasMany(models.Product,{foreignKey:'buyerId',sourceKey:'id'});
+    // User.hasMany(models.Product,{foreignKey:'sellerId',sourceKey:'id'});
+    // User.hasMany(models.Product,{foreignKey:'buyerId',sourceKey:'id'});
     //User.hasMany(models.FavItem,{foreignKey:'userId',sourceKey:'id'});
   }
   
