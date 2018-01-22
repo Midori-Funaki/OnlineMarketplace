@@ -12,7 +12,8 @@ class CategoryService {
       },
       include: {
         model: Product
-      }
+      },
+      required: false
     }).then(category => {
       console.log('Found category: ', category.title)
       return category.products;

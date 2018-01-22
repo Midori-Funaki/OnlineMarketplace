@@ -19,6 +19,7 @@ var ProductService = require('./services/product-service');
 var CategoryService = require('./services/category-service');
 var UserProductService = require('./services/user-product-service');
 var TransactionService = require('./services/transaction-service');
+var CartService = require('./services/cart-service');
 
 //service instance
 var userService = new UserService(path);
@@ -26,6 +27,7 @@ var categoryService = new CategoryService(path);
 var productService = new ProductService(path);
 var userProductService = new UserProductService(path);
 var transactionService = new TransactionService(path);
+var cartService = new cartService(path);
 
 var app = express();
 
@@ -48,6 +50,7 @@ app.use('/api/transactions',new TransactionRoutes(transactionService).router());
 app.use('/api/users/:userId/products', new UserProductRoutes(userProductService).router());
 app.use('/api/products', new ProductRoutes(productService).router());
 app.use('/api/categories', new CategoryRoutes(categoryService).router());
+app.use('/api/carts', new CartService(cartService).router());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
