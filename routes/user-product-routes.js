@@ -1,8 +1,8 @@
 var express = require('express');
 
 class UserProductRoutes {
-  constructor(userProductService) {
-    this.userProductService = userProductService;
+  constructor(userService) {
+    this.userService = userService;
   }
 
   router(){
@@ -12,7 +12,13 @@ class UserProductRoutes {
   }
 
   get(req, res) {
-    return this.userProductService.get(req.params.userId);
+    return this.userService
+      .getProducts(req.params.id)
+      .then(products => {
+        console.log(products);
+        res.json(products);
+      })
+      .catch(err => res.status(500).json(err))
   }
 }
 

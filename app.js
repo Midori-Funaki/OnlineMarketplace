@@ -18,7 +18,6 @@ var CartRoutes = require('./routes/cart-routes');
 var UserService = require('./services/user-service');
 var ProductService = require('./services/product-service');
 var CategoryService = require('./services/category-service');
-var UserProductService = require('./services/user-product-service');
 var TransactionService = require('./services/transaction-service');
 var CartService = require('./services/cart-service');
 
@@ -26,7 +25,6 @@ var CartService = require('./services/cart-service');
 var userService = new UserService(path);
 var categoryService = new CategoryService(path);
 var productService = new ProductService(path);
-var userProductService = new UserProductService(path);
 var transactionService = new TransactionService(path);
 var cartService = new CartService(path);
 
@@ -46,9 +44,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routing
 app.use('/', index);
-app.use('/api/users',new UserRoutes(userService).router());
-app.use('/api/transactions',new TransactionRoutes(transactionService).router());
-app.use('/api/users/:userId/products', new UserProductRoutes(userProductService).router());
+app.use('/api/users/:id/products', new UserProductRoutes(userService).router());
+app.use('/api/users',new UserRoutes(userService).router().use('/api/users/:id/products', new UserProductRoutes(userService).router()));
+app.use('/api/transactions',new TransactionRoutes(transactionService).router({mergeParams: true}));
 app.use('/api/products', new ProductRoutes(productService).router());
 app.use('/api/categories', new CategoryRoutes(categoryService).router());
 app.use('/api/carts', new CartRoutes(cartService).router());
