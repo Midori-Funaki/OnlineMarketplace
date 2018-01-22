@@ -27,6 +27,7 @@ class ProductRoutes{
     }
 
     put(req,res){
+        //req.body format {"productId": XX, "quantity": [{"old":XX,"new":XX}]}
         return this.cartService.put(req.params.userId,req.body)
         .then((items)=>res.json(items))
         .catch((err)=>res.status(500).json)

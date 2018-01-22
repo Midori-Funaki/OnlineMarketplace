@@ -10,7 +10,6 @@ class CartService{
                 userId: user
             }
         }).then((items)=>{
-            console.log('items @cart-service',items)
             return items
         }).catch((err)=>{
             return err
@@ -20,7 +19,7 @@ class CartService{
     post(user,productInfo){
         return Cart.create({
             userId: user,
-            productId: productInfo.id,
+            productId: productInfo.productId,
             quantity: productInfo.quantity 
         }).then((item)=>{
             return this.get(user)
@@ -31,13 +30,13 @@ class CartService{
 
     put(user, productInfo){
         let newData = {
-            quantity: productInfo.quantity.new
+            quantity: productInfo.quantity[0].new
         }
         return Cart.update(newData,{
             where:{
                 userId: user,
-                productId: productInfo.id,
-                quantity: productInfo.qunatity.old
+                productId: productInfo.productId,
+                quantity: productInfo.quantity[0].old
             }    
         }).then(()=>{
             return this.get(user)
@@ -50,11 +49,11 @@ class CartService{
         return Cart.destroy({
             where:{
                 userId: user,
-                productId: productInfo.id,
+                productId: productInfo.productId,
                 quantity: productInfo.quantity
             }
         }).then(()=>{
-            return 'Deleted the item'
+            return this.get(user)
         }).catch((err)=>{
             return err
         })
