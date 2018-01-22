@@ -1,15 +1,16 @@
 const models = require('./../models'),
-      Cart = require(models.Cart);
+      Cart = models.Cart;
 
 class CartService{
     constructor(){}
 
-    get(userId){
+    get(user){
         return Cart.findAll({
             where:{
-                id: userId
+                userId: user
             }
         }).then((items)=>{
+            console.log('items @cart-service',items)
             return items
         }).catch((err)=>{
             return err

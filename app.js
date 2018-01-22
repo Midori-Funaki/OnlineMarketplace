@@ -12,6 +12,7 @@ var CategoryRoutes = require('./routes/category-routes');
 var UserProductRoutes = require('./routes/user-product-routes');
 var UserRoutes = require('./routes/user-routes');
 var TransactionRoutes = require('./routes/transaction-routes');
+var CartRoutes = require('./routes/cart-routes');
 
 //service files
 var UserService = require('./services/user-service');
@@ -27,7 +28,7 @@ var categoryService = new CategoryService(path);
 var productService = new ProductService(path);
 var userProductService = new UserProductService(path);
 var transactionService = new TransactionService(path);
-var cartService = new cartService(path);
+var cartService = new CartService(path);
 
 var app = express();
 
@@ -50,7 +51,7 @@ app.use('/api/transactions',new TransactionRoutes(transactionService).router());
 app.use('/api/users/:userId/products', new UserProductRoutes(userProductService).router());
 app.use('/api/products', new ProductRoutes(productService).router());
 app.use('/api/categories', new CategoryRoutes(categoryService).router());
-app.use('/api/carts', new CartService(cartService).router());
+app.use('/api/carts', new CartRoutes(cartService).router());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

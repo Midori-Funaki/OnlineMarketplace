@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
   })
   
   Cart.associate = function(models) {
-    Cart.belongsTo(models.User);
-    //Need the relationship with products
+    Cart.belongsTo(models.User,{foreignKey:'userId'});
+    Cart.belongsTo(models.Product,{foreignKey:'productId'});
   };
   return Cart;
 };
