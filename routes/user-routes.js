@@ -7,7 +7,7 @@ class UserRoutes{
   
   router(){
     let router = express.Router();
-    router.get('/:id', this.get.bind(this));
+    router.get('/:email', this.get.bind(this));
     router.post('/',this.post.bind(this));
     router.delete('/:id',this.delete.bind(this));
     router.put('/:id',this.update.bind(this));
@@ -15,7 +15,7 @@ class UserRoutes{
   }
 
   get(req,res){
-    return this.userService.retrieve(req.params.id)
+    return this.userService.retrieve(req.params.email)
       .then((user)=>res.json(user))
       .catch((err)=>res.status(500).json(err))
   }
