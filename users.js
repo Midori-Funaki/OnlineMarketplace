@@ -1,5 +1,5 @@
 // In REAL world , the password must be encrypted using library like bcrypt.
-export default [
+module.exports = [
     {
         id:0,
         name:"John Doe",
