@@ -16,11 +16,13 @@ import { AuthService } from './services/auth.service';
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { AuthGuard } from './services/auth-guard.service';
 import { GoogleAuthService } from './services/google-auth.service';
+import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
