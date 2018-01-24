@@ -22,11 +22,11 @@ var TransactionService = require('./services/transaction-service');
 var CartService = require('./services/cart-service');
 
 //service instance
-var userService = new UserService(path);
-var categoryService = new CategoryService(path);
-var productService = new ProductService(path);
-var transactionService = new TransactionService(path);
-var cartService = new CartService(path);
+var userService = new UserService();
+var categoryService = new CategoryService();
+var productService = new ProductService();
+var transactionService = new TransactionService();
+var cartService = new CartService();
 
 //frontend imports
 var reload = require('reload');
@@ -50,6 +50,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Authentication Login - switched to somewhere else later on
 app.post("/api/login", function(req, res) {  
