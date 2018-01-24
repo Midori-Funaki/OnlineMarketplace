@@ -4,11 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 //Routing imports
-import { MainRoutingModule } from './components/main/main-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 //Component imports
 import { AppComponent } from './app.component';
-import { routingComponents } from './components/main/main-routing.module';
+import { routingComponents } from './app-routing.module';
 import { MainComponent } from './components/main/main.component';
 import { TopComponent } from './components/top/top.component';
 import { BottomComponent } from './components/bottom/bottom.component';
@@ -35,7 +35,7 @@ import { SidebarComponent } from './components/main/sidebar/sidebar.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
-    MainRoutingModule
+    AppRoutingModule
   ],
   providers: [
     FacebookAuthService, 
