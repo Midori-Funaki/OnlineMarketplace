@@ -13,6 +13,7 @@ class ProductService {
     })
       .then(products => {
         console.log('Products found: ', products);
+        console.log(products);
         return products;
       }).catch(err => {
         console.log(err);

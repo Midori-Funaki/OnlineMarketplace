@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 import { getParseErrors } from '@angular/compiler/src/util';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-products',
@@ -9,19 +10,12 @@ import { getParseErrors } from '@angular/compiler/src/util';
 })
 export class ProductsComponent implements OnInit {
 
-  products: string[];
+  products: Observable<string[]>;
 
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
-    this.getProducts()
-  }
-
-  getProducts() {
-    this.productService.getProducts().subscribe(products => {
-      console.log(products);
-      this.products = products;
-    })
+    this.products = this.productService.getProducts();
   }
 
 }

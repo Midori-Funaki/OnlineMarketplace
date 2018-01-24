@@ -8,12 +8,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProductsService {
   items: string[];
   items$ = new Subject<string[]>();
-  constructor(private router:Router, private http:HttpClient) {
-    // this.items_sub = new Subject<string>();
-    // try{
-
-    // }
-  }
+  constructor(private router:Router, private http:HttpClient) { }
 
   getProducts(): Observable<string[]> {
     return this.http.get<string[]>('/api/products/');
