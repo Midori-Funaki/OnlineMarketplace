@@ -27,13 +27,9 @@ import { SidebarComponent } from './components/main/sidebar/sidebar.component';
   declarations: [
     AppComponent,
     routingComponents,
-<<<<<<< HEAD
-    SidebarComponent,
-=======
     TopComponent,
     BottomComponent,
     MainComponent,
->>>>>>> 532de789b8a22f8b465ba0395112eba287a7bc92
   ],
   imports: [
     BrowserModule,
