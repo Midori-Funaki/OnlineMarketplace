@@ -6,8 +6,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FacebookComponent } from './components/facebook/facebook.component';
 import { MainComponent } from './components/main/main.component';
 import { GoogleComponent } from './components/google/google.component';
-import { TabsComponent } from './components/tabs/tabs.component';
+import { TabsComponent } from './components/main/tabs/tabs.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
+import { ProductsComponent } from './components/main/products/products.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'main', component: MainComponent},
-    {path: 'tabs', component: TabsComponent}
+    {path: 'tabs', component: TabsComponent},
+    {path: 'products', component: ProductsComponent}
 ]
 
 @NgModule({
@@ -34,4 +36,5 @@ export const routingComponents = [LoginComponent,
                                   FacebookComponent, 
                                   MainComponent, 
                                   GoogleComponent,
-                                  TabsComponent]
+                                  TabsComponent,
+                                  ProductsComponent]
