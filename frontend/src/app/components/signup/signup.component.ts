@@ -19,15 +19,12 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.localSignup = this.formBuilder.group({
-      username: ["", [Validators.required, Validators.maxLength(25)]],
+      lastname: ["", [Validators.required, Validators.maxLength(25)]],
+      firstname: ["", [Validators.required, Validators.maxLength(25)]],
       email: ["", Validators.required],
       password: ["", Validators.required],
       passwordCheck: ["", [Validators.required]]
     }, { validator: PasswordValidation.MatchPassword });
-
-    if(this.authService.isAuthenticated()){
-      this.router.navigate(['main']);
-    }
   }
 
   onSubmit(e:any){
@@ -35,7 +32,7 @@ export class SignupComponent implements OnInit {
     console.log(this.localSignup.value);
     if (this.localSignup.valid && this.localSignup.dirty){
       console.log("Yeah submitting form!");
-      this.router.navigate(['login']);
+      this.router.navigate(['/']);
     }
   }
 

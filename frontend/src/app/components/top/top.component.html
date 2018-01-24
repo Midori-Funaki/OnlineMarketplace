@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">App Site Title Here</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li *ngIf="isLoggedIn; else login"><a href="#" (click)="logOut($event)">Logout</a></li>
+      <ng-template #login>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#LoginForm">Login</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#SignupForm">Sign Up</button>
+      </ng-template>
+    </ul>
+  </div>
+</nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="LoginForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <app-login></app-login>
+</div>
+
+<!-- Signup Modal -->
+<div class="modal fade" id="SignupForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <app-signup></app-signup>
+</div>
