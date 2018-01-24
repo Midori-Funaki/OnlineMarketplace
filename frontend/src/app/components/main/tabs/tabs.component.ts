@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn: boolean = true;
+  constructor(private authService: AuthService, private router: Router) {
+    // this.authService.isLoggedInNow().subscribe((res)=>{
+    //   this.isLoggedIn = res
+    // });
+  }
 
   ngOnInit() {
   }

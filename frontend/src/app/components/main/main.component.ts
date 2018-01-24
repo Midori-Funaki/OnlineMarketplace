@@ -9,7 +9,7 @@ import { TabsComponent } from './tabs/tabs.component';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(){}
 
   ngOnInit() {
   }
