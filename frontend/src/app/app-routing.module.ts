@@ -6,6 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FacebookComponent } from './components/facebook/facebook.component';
 import { MainComponent } from './components/main/main.component';
 import { GoogleComponent } from './components/google/google.component';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignupComponent},
     {path: 'main', component: MainComponent, canActivate:[AuthGuard]},
+    {path: 'tabs', component: TabsComponent}
 ]
 
 @NgModule({
@@ -30,4 +32,5 @@ export const routingComponents = [LoginComponent,
                                   SignupComponent, 
                                   FacebookComponent, 
                                   MainComponent, 
-                                  GoogleComponent]
+                                  GoogleComponent,
+                                  TabsComponent]

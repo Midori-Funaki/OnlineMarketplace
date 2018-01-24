@@ -2,7 +2,9 @@
   "name": "onlinemarketplace",
   "version": "0.0.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "start": "nodemon app.js & cd frontend; ng build --watch"    
+  },
   "dependencies": {
     "axios": "^0.17.1",
     "body-parser": "~1.18.2",

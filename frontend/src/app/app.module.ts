@@ -20,7 +20,7 @@ import { GoogleAuthService } from './services/google-auth.service';
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
+    routingComponents
   ],
   imports: [
     BrowserModule,
