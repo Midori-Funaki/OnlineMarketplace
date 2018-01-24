@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon app.js & cd frontend; ng build --watch"    
+    "start": "nodemon app.js & cd frontend; ng build --watch"
   },
   "dependencies": {
     "axios": "^0.17.1",
