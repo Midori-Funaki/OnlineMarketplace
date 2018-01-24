@@ -12,6 +12,8 @@ import { routingComponents } from './components/main/main-routing.module';
 import { MainComponent } from './components/main/main.component';
 import { TopComponent } from './components/top/top.component';
 import { BottomComponent } from './components/bottom/bottom.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 //Service imports
 import { FacebookAuthService } from './services/facebook-auth.service';
@@ -30,6 +32,8 @@ import { SidebarComponent } from './components/main/sidebar/sidebar.component';
     TopComponent,
     BottomComponent,
     MainComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

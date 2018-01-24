@@ -33,8 +33,10 @@ export class AuthService {
     facebookLogin(access_token){
         return this.http.post('/api/login/facebook',{access_token:access_token}).subscribe((res)=>{
             this.token = res.json().token;
+            this.isLoggedIn = true;
+            this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
-            this.router.navigate(['/main']);
+            this.router.navigate(['/']);
         },(err)=>{
             alert("Log In Failed!");
         });
@@ -43,8 +45,10 @@ export class AuthService {
     googleLogin(access_token){
         return this.http.post('/api/login/google',{access_token:access_token}).subscribe((res)=>{
             this.token = res.json().token;
+            this.isLoggedIn = true;
+            this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
-            this.router.navigate(['/main']);
+            this.router.navigate(['']);
         },(err)=>{
             alert("Log In Failed!");
         });
@@ -63,6 +67,8 @@ export class AuthService {
     logOut(){
         this.token = null;
         this.isLoggedIn = false;
+        this.isLoggedIn_sub.next(this.isLoggedIn);
         localStorage.removeItem('myToken');
+        this.router.navigate(['/']);
     }
 }

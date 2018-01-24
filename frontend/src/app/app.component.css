@@ -1,15 +1,21 @@
+body{
+    height: 100%;
+    width: 100%;
+    
+}
+
 #top {
     width: 100%;
     margin: 0px;
     padding: 0px;
-    height: 10%;
+    height: 100px;
 }
 
 #main {
     width: 100%;
     margin: 0px;
     padding: 0px;
-    height: 80%;
+    height: 500px;
 }
 
 #bottom {
