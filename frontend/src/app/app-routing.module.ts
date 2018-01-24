@@ -15,7 +15,7 @@ const routes: Routes = [
     {path: 'auth/google/callback',component: GoogleComponent},
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignupComponent},
-    {path: 'main', component: MainComponent}
+    {path: 'main', component: MainComponent},
 ]
 
 @NgModule({
