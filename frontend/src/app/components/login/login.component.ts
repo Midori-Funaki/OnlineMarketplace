@@ -22,13 +22,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.localLogin = this.formBuilder.group({
-      username: ["", [Validators.required, Validators.maxLength(25)]],
+      email: ["", [Validators.required]],
       password: ["",Validators.required]
     });
-
-    if(this.authService.isAuthenticated()){
-      this.router.navigate(['main']);
-    }
   }
 
   onSubmit(e:any){

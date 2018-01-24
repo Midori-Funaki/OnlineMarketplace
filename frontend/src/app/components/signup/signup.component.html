@@ -1,49 +1,65 @@
-<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 ">
-  <div id="signupform">
-      <h2>Signup</h2>
-      <form [formGroup]="localSignup" (ngSubmit)="onSubmit($event)">
-          <div class="modal-body">
-              <div class="form-group">
-                <label>Username</label>
-                <input type='text' name="username" class="form-control" placeholder="Username" 
-                    formControlName="username"/>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">Sign Up</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form [formGroup]="localSignup" (ngSubmit)="onSubmit($event)">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type='text' name="lastname" class="form-control" placeholder="Last Name" 
+                        formControlName="lastname"/>
 
-                <div *ngIf="localSignup.controls['username'].hasError('required') && localSignup.controls['username'].dirty" class="alert alert-danger">
-                    Password should be no less than 1 letter
+                    <div *ngIf="localSignup.controls['lastname'].hasError('required') && localSignup.controls['lastname'].dirty" class="alert alert-danger">
+                        Password should be no less than 1 letter
+                    </div>
+                    <div *ngIf="localSignup.controls['lastname'].hasError('maxlength') && localSignup.controls['lastname'].dirty" class="alert alert-danger">
+                        Password should be no more than 25 letters
+                    </div>
                 </div>
-                <div *ngIf="localSignup.controls['username'].hasError('maxlength') && localSignup.controls['username'].dirty" class="alert alert-danger">
-                    Password should be no more than 25 letters
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type='text' name="firstname" class="form-control" placeholder="First Name" 
+                        formControlName="firstname"/>
+
+                    <div *ngIf="localSignup.controls['firstname'].hasError('required') && localSignup.controls['firstname'].dirty" class="alert alert-danger">
+                        Password should be no less than 1 letter
+                    </div>
+                    <div *ngIf="localSignup.controls['firstname'].hasError('maxlength') && localSignup.controls['firstname'].dirty" class="alert alert-danger">
+                        Password should be no more than 25 letters
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type='text' name="email" class="form-control" placeholder="Enter your email" 
-                    formControlName="email"/>
-                <div *ngIf="localSignup.controls['email'].hasError('required') && localSignup.controls['email'].dirty" class="alert alert-danger">
-                    Email is required
+                <div class="form-group">
+                    <label>Email (for Login)</label>
+                    <input type='text' name="email" class="form-control" placeholder="Enter your email" 
+                        formControlName="email"/>
+                    <div *ngIf="localSignup.controls['email'].hasError('required') && localSignup.controls['email'].dirty" class="alert alert-danger">
+                        Email is required
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label>password</label>
-                <input type='text' name="password" class="form-control" placeholder="Enter your password" 
-                    formControlName="password"/>
-                <div *ngIf="localSignup.controls['password'].hasError('required') && localSignup.controls['password'].dirty" class="alert alert-danger">
-                    Password is required
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type='text' name="password" class="form-control" placeholder="Enter your password" 
+                        formControlName="password"/>
+                    <div *ngIf="localSignup.controls['password'].hasError('required') && localSignup.controls['password'].dirty" class="alert alert-danger">
+                        Password is required
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label>Confirm password</label>
-                <input type='text' name="passwordCheck" class="form-control" placeholder="Confirm password" 
-                    formControlName="passwordCheck"/>
-                <div *ngIf="localSignup.controls['passwordCheck'].hasError('MatchPassword') && localSignup.controls['passwordCheck'].dirty" class="alert alert-danger">
-                    Password does not match
+                <div class="form-group">
+                    <label>Confirm password</label>
+                    <input type='text' name="passwordCheck" class="form-control" placeholder="Confirm password" 
+                        formControlName="passwordCheck"/>
+                    <div *ngIf="localSignup.controls['passwordCheck'].hasError('MatchPassword') && localSignup.controls['passwordCheck'].dirty" class="alert alert-danger">
+                        Password does not match
+                    </div>
                 </div>
-              </div>
-          </div>
-          <div id="btn-box">
-              <input type="submit" class="btn btn-primary" id="link-submit-btn" value="Submit"/>
-          </div>
-      </form>
-      <a routerLink="/login" routerLinkActive="active">back to Login</a>
+            </div>
+            <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" id="link-submit-btn" value="Submit"/>
+            </div>
+        </form>
   </div>
 </div>

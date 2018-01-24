@@ -19,7 +19,7 @@ export class GoogleComponent implements OnInit {
   ngOnInit() {
     if(this.authService.isAuthenticated()){
       console.log('Google navigation')
-      this.router.navigate(['/main']);
+      this.router.navigate(['/']);
     }
       this.route.fragment.subscribe((fragment:string)=>{
       this.authService.googleLogin(parse(fragment).access_token);
