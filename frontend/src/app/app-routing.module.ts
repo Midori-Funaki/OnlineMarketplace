@@ -6,7 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { FacebookComponent } from './components/facebook/facebook.component';
 import { MainComponent } from './components/main/main.component';
 import { GoogleComponent } from './components/google/google.component';
-import { TabsComponent } from './components/tabs/tabs.component';
+import { TabsComponent } from './components/main/tabs/tabs.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 
 
