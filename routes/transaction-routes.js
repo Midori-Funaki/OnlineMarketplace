@@ -20,7 +20,7 @@ class TransactionRoutes{
     }
 
     confirm(req,res){
-        return this.transactionService.showCheckouts(req.params.id)
+        return this.transactionService. showCheckouts(req.params.id)
         .then((result)=>res.json(result))
         .catch((err)=>res.status(500).json(err))
     }
