@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 //Routing imports
 import { AppRoutingModule } from './app-routing.module';
@@ -22,6 +23,7 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { AuthGuard } from './services/auth-guard.service';
 import { GoogleAuthService } from './services/google-auth.service';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
+import { ProductsService } from './services/products.service';
 
 
 @NgModule({
@@ -38,14 +40,16 @@ import { SidebarComponent } from './components/main/sidebar/sidebar.component';
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     FacebookAuthService, 
     AuthService,
     OAuthService,
     AuthGuard,
-    GoogleAuthService
+    GoogleAuthService,
+    ProductsService
   ],
   bootstrap: [AppComponent]
 })
