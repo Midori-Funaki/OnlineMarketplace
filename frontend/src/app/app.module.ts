@@ -13,6 +13,7 @@ import { MainComponent } from './components/main/main.component';
 import { TopComponent } from './components/top/top.component';
 import { BottomComponent } from './components/bottom/bottom.component';
 import { TabsComponent } from './components/main/tabs/tabs.component';
+import { ProductsComponent} from './components/main/products/products.component';
 
 //Service imports
 import { FacebookAuthService } from './services/facebook-auth.service';
@@ -23,7 +24,6 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,8 +31,9 @@ import { SidebarComponent } from './components/main/sidebar/sidebar.component';
     TopComponent,
     BottomComponent,
     MainComponent,
-    TabsComponent
-  ],
+    TabsComponent,
+    ProductsComponent
+    ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
