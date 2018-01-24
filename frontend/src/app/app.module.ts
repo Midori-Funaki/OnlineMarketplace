@@ -38,7 +38,8 @@ import { SidebarComponent } from './components/main/sidebar/sidebar.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    MainRoutingModule
   ],
   providers: [
     FacebookAuthService, 

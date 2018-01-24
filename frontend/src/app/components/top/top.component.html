@@ -5,9 +5,20 @@
     </div>
     <ul class="nav navbar-nav">
       <li *ngIf="isLoggedIn; else login"><a href="#" (click)="logOut($event)">Logout</a></li>
-      <ng-template login>
-        <li><a href="#" (click)="logOut($event)">Login</a></li>
+      <ng-template #login>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#addLinkForm">Login</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#addLinkForm">Sign Up</button>
       </ng-template>
     </ul>
   </div>
 </nav>
+
+<!-- Login Modal -->
+<div class="modal fade" id="LoginForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+</div>
+
+<!-- Signup Modal -->
+<div class="modal fade" id="addLinkForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  
+</div>
