@@ -34,6 +34,30 @@ class CategoryService {
         return err;
       })
   }
+
+  getBrands(categoryName){
+    return Category.findAll({
+      where:{
+        title: categoryName
+      },
+      include: [
+        {
+          model: Product,
+          required: false
+        }
+      ]
+    }).then(categories => {
+      let brandlist = [];
+      categories[0].Products.map(product=>{
+        if (product.brand != null && brandlist.indexOf(product.brand) == -1){
+          brandlist.push(product.brand);
+        }
+      })
+      return brandlist;      
+    }).catch(err => {
+      return err;
+    })
+  }
 }
 
 module.exports = CategoryService;

@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
     sellerId: DataTypes.INTEGER,
     buyerId: DataTypes.INTEGER,
-    categoryId: DataTypes.INTEGER
+    categoryId: DataTypes.INTEGER,
+    brand: DataTypes.STRING
   });
 
   Product.associate = function (models) {
