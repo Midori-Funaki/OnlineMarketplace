@@ -29,6 +29,7 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
 import { TemporaryComponent } from './components/main/temporary/temporary.component';
 import { SellComponent } from './components/main/sell/sell.component';
+import { CartComponent } from './components/main/cart/cart.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SellComponent } from './components/main/sell/sell.component';
     ProductsComponent,
     TemporaryComponent,
     SellComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
