@@ -2,6 +2,7 @@
 const faker = require('faker');
 const models = require("./../models");
 const Product = models.Product;
+const brands = ["Nike","Boss","Rainbow","Meow"];
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -18,7 +19,8 @@ module.exports = {
         quantity: Math.floor(Math.random() * 10) + 1,
         sellerId: Math.floor(Math.random() * 3) + 1,
         buyerId: Math.floor(Math.random() * 3) + 4,
-        categoryId: Math.floor(Math.random() * 3) + 1
+        categoryId: Math.floor(Math.random() * 3) + 1,
+        brand: brands[Math.floor(Math.random()*3)]
       });
     }
     return Product.bulkCreate(products);
