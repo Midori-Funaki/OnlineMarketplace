@@ -13,6 +13,7 @@ export class SellComponent implements OnInit {
   // form: FormGroup;
   categories: Observable<string[]>;
   subscription: Subscription;
+  brands: string[];
 
   constructor(private sellService:SellService) {
     // this.form = new FormGroup({})
@@ -23,6 +24,12 @@ export class SellComponent implements OnInit {
   }
 
   filterBrand(category){
-    this.subscription = this.sellService.getBrandByCategory()
+    this.subscription = this.sellService.getBrandsByCategory(category).subscribe(brands=>{
+      this.brands = brands;
+    })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 }

@@ -47,10 +47,13 @@ class CategoryService {
         }
       ]
     }).then(categories => {
-      let brands = categories[0].Products.map((item)=>{
-        return item.brand;
+      let brandlist = [];
+      categories[0].Products.map(product=>{
+        if (product.brand != null && brandlist.indexOf(product.brand) == -1){
+          brandlist.push(product.brand);
+        }
       })
-      return brands;      
+      return brandlist;      
     }).catch(err => {
       return err;
     })

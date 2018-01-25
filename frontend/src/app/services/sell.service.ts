@@ -14,7 +14,7 @@ export class SellService {
     return this.http.get<string[]>('/api/categories/')
   }
 
-  getBrandByCategory(){
-    
+  getBrandsByCategory(categoryTitle:string){
+    return this.http.get<string[]>('/api/categories/brands/'+categoryTitle)
   }
 }
