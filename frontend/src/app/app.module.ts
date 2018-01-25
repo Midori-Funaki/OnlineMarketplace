@@ -5,11 +5,11 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 //Routing imports
-import { AppRoutingModule } from './app-routing.module';
+import { MainRoutingModule } from './components/main/main-routing.module';
 
 //Component imports
 import { AppComponent } from './app.component';
-import { routingComponents } from './app-routing.module';
+import { routingComponents } from './components/main/main-routing.module';
 import { MainComponent } from './components/main/main.component';
 import { TopComponent } from './components/top/top.component';
 import { BottomComponent } from './components/bottom/bottom.component';
@@ -44,7 +44,7 @@ import { ProductsService } from './services/products.service';
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule,
+    MainRoutingModule,
     HttpClientModule
   ],
   providers: [
