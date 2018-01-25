@@ -7,6 +7,7 @@ class UserRoutes{
   
   router(){
     let router = express.Router();
+    router.get('/', this.getCurrentUser.bind(this));
     router.get('/:email', this.get.bind(this));
     router.post('/',this.post.bind(this));
     router.delete('/:id',this.delete.bind(this));
@@ -40,6 +41,14 @@ class UserRoutes{
         res.send('Deregistration Completed')
       })
       .catch((err)=>{res.status(500).json(err)})
+  }
+
+  getCurrentUser(req, res) {
+    if (req.user) {
+      res.send(req.user.id);
+    } else {
+      res.status(404).send("not found");
+    }
   }
 }
 module.exports = UserRoutes;

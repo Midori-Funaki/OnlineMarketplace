@@ -6,6 +6,7 @@ import { GoogleComponent } from '../../components/google/google.component';
 import { ProductsComponent } from './products/products.component';
 import { TemporaryComponent } from './temporary/temporary.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,7 @@ const routes: Routes = [
     { path: 'products/:id', component: ProductDetailComponent },
     { path: 'favourites', component: TemporaryComponent },
     { path: 'transactions', component: TemporaryComponent },
-    { path: 'cart', component: TemporaryComponent },
+    { path: 'cart', component: CartComponent },
     { path: 'auth/facebook/callback', component: FacebookComponent },
     { path: 'auth/google/callback', component: GoogleComponent }
 ]
@@ -32,5 +33,6 @@ export const routingComponents = [
     GoogleComponent,
     ProductsComponent,
     TemporaryComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartComponent
 ]

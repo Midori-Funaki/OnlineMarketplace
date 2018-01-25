@@ -30,6 +30,7 @@ import { ProductsService } from './services/products.service';
 import { TemporaryComponent } from './components/main/temporary/temporary.component';
 import { SellComponent } from './components/main/sell/sell.component';
 import { CartComponent } from './components/main/cart/cart.component';
+import { CartService } from './services/cart.service';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { CartComponent } from './components/main/cart/cart.component';
     OAuthService,
     AuthGuard,
     GoogleAuthService,
-    ProductsService
+    ProductsService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

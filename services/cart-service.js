@@ -14,9 +14,9 @@ class CartService{
                 model: Product
             }]
         }).then((items)=>{
-            return items
+            return items;
         }).catch((err)=>{
-            return err
+            return err;
         })
     }
 
