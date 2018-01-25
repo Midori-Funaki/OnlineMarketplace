@@ -13,14 +13,15 @@ import { ProductDetailComponent } from './components/main/product-detail/product
 
 
 const routes: Routes = [
-    {path: '', component: LoginComponent},
-    {path: 'auth/facebook/callback',component: FacebookComponent},
-    {path: 'auth/google/callback',component: GoogleComponent},
-    {path: 'login', component: LoginComponent},
-    {path: 'signup', component: SignupComponent},
-    {path: 'main', component: MainComponent},
-    {path: 'tabs', component: TabsComponent},
-    {path: 'products', component: ProductsComponent},
+    { path: '', component: LoginComponent, pathMatch:'full' },
+    { path: 'auth/facebook/callback', component: FacebookComponent },
+    { path: 'auth/google/callback', component: GoogleComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent },
+    { path: 'main', component: MainComponent },
+    { path: 'tabs', component: TabsComponent },
+    { path: 'products', component: ProductsComponent },
+    { path: 'details', component: ProductDetailComponent }
 ]
 
 @NgModule({
@@ -31,11 +32,13 @@ const routes: Routes = [
         RouterModule
     ]
 })
-export class AppRoutingModule{}
-export const routingComponents = [LoginComponent, 
-                                  SignupComponent, 
-                                  FacebookComponent, 
-                                  MainComponent, 
-                                  GoogleComponent,
-                                  TabsComponent,
-                                  ProductsComponent]
+export class AppRoutingModule { }
+export const routingComponents = [
+    LoginComponent,
+    SignupComponent,
+    FacebookComponent,
+    MainComponent,
+    GoogleComponent,
+    TabsComponent,
+    ProductsComponent
+]

@@ -1,0 +1,25 @@
+.thumbnail {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  max-width: 100%;
+}
+
+.thumbnail:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.display, .display img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 1cm;
+}
+
+.size-button button {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+}
