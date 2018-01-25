@@ -1,3 +1,78 @@
-<p>
-  sell works!
-</p>
+<div class="container">
+  <div class="col-xs-6 mx-auto">
+    <!-- <form [formGroup]="form"> -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label" for="category">Category</label>
+          <select id="category" class="form-control">
+            <option value="" disabled selected></option>
+            <option>Handbag</option>
+            <option>Watch</option>
+          </select>
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label" for="category">Brand</label>
+          <select id="category" class="form-control">
+            <option value="" disabled selected></option>
+            <option>Brand 1</option>
+            <option>Brand 2</option>
+          </select>
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label" for="category">Size</label>
+          <div class="btn-toolbar">
+            <div class="btn-group mr-2">
+                <button class="btn btn-primary" type="button">1</button>
+                <button class="btn btn-primary" type="button">2</button>
+                <button class="btn btn-primary" type="button">3</button>
+                <button class="btn btn-primary" type="button">4</button>
+            </div>
+          </div>
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label" for="category">Color</label>
+          <div class="btn-toolbar">
+            <div class="btn-group mr-2">
+                <button class="btn btn-primary" type="button">1</button>
+                <button class="btn btn-primary" type="button">2</button>
+                <button class="btn btn-primary" type="button">3</button>
+                <button class="btn btn-primary" type="button">4</button>
+            </div>
+          </div>
+        </span>
+      </div><!-- form-group -->
+    <!-- </form> -->
+    <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label" for="category">Ask Price</label><br>
+          <input>
+        </span>
+    </div><!-- form-group -->
+    <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label" for="category">Product Condition</label>
+          <div class="btn-toolbar">
+            <div class="btn-group mr-2">
+                <button class="btn btn-primary" type="button">new</button>
+                <button class="btn btn-primary" type="button">used</button>
+            </div>
+          </div>
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label" for="category">Photos</label>
+          <div class="photo-upload-container">
+            <button class="btn btn-success">Upload</button>
+          </div>
+        </span>
+      </div><!-- form-group -->
+      <button class="btn btn-primary">Start Selling</button>
+  </div><!-- col -->
+</div>

@@ -1,0 +1,5 @@
+.tab-content{
+    height: 68vh;
+    width: 100vw;
+    overflow: scroll;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormArray } from '@angular/forms/src/model';
 
 @Component({
   selector: 'app-sell',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
-
-  constructor() { }
+  // form: FormGroup;
+  constructor() {
+    // this.form = new FormGroup({})
+  }
 
   ngOnInit() {
   }
