@@ -21,6 +21,8 @@ import { ProductsComponent } from './components/main/products/products.component
 import { ProductDetailComponent } from './components/main/product-detail/product-detail.component';
 import { TemporaryComponent } from './components/main/temporary/temporary.component';
 import { SellComponent } from './components/main/sell/sell.component';
+import { CartComponent } from './components/main/cart/cart.component';
+
 
 //Service imports
 import { FacebookAuthService } from './services/facebook-auth.service';
@@ -46,7 +48,8 @@ import { SellService } from './services/sell.service';
     ProductsComponent,
     TemporaryComponent,
     SellComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
