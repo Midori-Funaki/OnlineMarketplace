@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms/src/model';
+import { SellService } from '../../../services/sell.service';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-sell',
@@ -8,11 +11,18 @@ import { FormGroup, FormArray } from '@angular/forms/src/model';
 })
 export class SellComponent implements OnInit {
   // form: FormGroup;
-  constructor() {
+  categories: Observable<string[]>;
+  subscription: Subscription;
+
+  constructor(private sellService:SellService) {
     // this.form = new FormGroup({})
   }
 
   ngOnInit() {
+    this.categories = this.sellService.getCategories();
   }
 
+  filterBrand(category){
+    this.subscription = this.sellService.getBrandByCategory()
+  }
 }

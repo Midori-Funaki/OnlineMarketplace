@@ -4,10 +4,9 @@
       <div class="form-group">
         <span class="float-field float-select">
           <label class="float-label" for="category">Category</label>
-          <select id="category" class="form-control">
+          <select id="category" class="form-control" (change)="filterBrand($event.target.value)">
             <option value="" disabled selected></option>
-            <option>Handbag</option>
-            <option>Watch</option>
+            <option *ngFor="let category of categories | async">{{ category.title }}</option>
           </select>
         </span>
       </div><!-- form-group -->

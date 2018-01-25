@@ -19,6 +19,8 @@ import { TabsComponent } from './components/main/tabs/tabs.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 import { ProductsComponent } from './components/main/products/products.component';
 import { ProductDetailComponent } from './components/main/product-detail/product-detail.component';
+import { TemporaryComponent } from './components/main/temporary/temporary.component';
+import { SellComponent } from './components/main/sell/sell.component';
 
 //Service imports
 import { FacebookAuthService } from './services/facebook-auth.service';
@@ -27,8 +29,7 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { AuthGuard } from './services/auth-guard.service';
 import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
-import { TemporaryComponent } from './components/main/temporary/temporary.component';
-import { SellComponent } from './components/main/sell/sell.component';
+import { SellService } from './services/sell.service';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { SellComponent } from './components/main/sell/sell.component';
     OAuthService,
     AuthGuard,
     GoogleAuthService,
-    ProductsService
+    ProductsService,
+    SellService
   ],
   bootstrap: [AppComponent]
 })
