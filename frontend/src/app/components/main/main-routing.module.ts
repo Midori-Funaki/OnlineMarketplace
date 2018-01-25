@@ -4,12 +4,16 @@ import { AuthGuard } from '../../services/auth-guard.service';;
 import { FacebookComponent } from '../../components/facebook/facebook.component';
 import { GoogleComponent } from '../../components/google/google.component';
 import { ProductsComponent } from './products/products.component';
+import { TemporaryComponent } from './temporary/temporary.component';
 
 
 const routes: Routes = [
+    {path: '', component: ProductsComponent},
+    {path: 'favourites', component: TemporaryComponent},
+    {path: 'transactions', component: TemporaryComponent},
+    {path: 'cart', component: TemporaryComponent},
     {path: 'auth/facebook/callback',component: FacebookComponent},
-    {path: 'auth/google/callback',component: GoogleComponent},
-    {path: 'products', component: ProductsComponent},
+    {path: 'auth/google/callback',component: GoogleComponent}
 ]
 
 @NgModule({
@@ -24,4 +28,5 @@ export class MainRoutingModule{}
 export const routingComponents = [FacebookComponent, 
                                   GoogleComponent,
                                   ProductsComponent,
+                                  TemporaryComponent
                                 ]

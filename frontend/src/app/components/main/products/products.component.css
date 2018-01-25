@@ -1,6 +1,12 @@
+a{
+    text-decoration: none;
+}
 .products-container{
     display: flex;
     flex-wrap: wrap;
+}
+.each-product{
+    margin: 0 auto 0 0;
 }
 .card{
     margin: 10px;

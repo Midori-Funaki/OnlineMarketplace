@@ -1,20 +1,14 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item active">
-    <a class="nav-link active" id="marketplace-tab" data-toggle="tab" href="#marketplace" role="tab" aria-controls="marketplace" aria-selected="true">Marketplace</a>
+    <a class="nav-link active" id="marketplace-tab" data-toggle="tab" role="tab" routerLink="/" routerLinkActive="active">Marketplace</a>
   </li>
   <li *ngIf="isLoggedIn" class="nav-item">
-    <a class="nav-link" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="false">Favourites</a>
+    <a class="nav-link" id="favourites-tab" data-toggle="tab" role="tab" routerLink="/favourites" routerLinkActive="active">Favourites</a>
   </li>
   <li *ngIf="isLoggedIn" class="nav-item">
-    <a class="nav-link" id="transactions-tab" data-toggle="tab" href="#transactions" role="tab" aria-controls="transactions" aria-selected="false">Transactions</a>
+    <a class="nav-link" id="transactions-tab" data-toggle="tab" role="tab" routerLink="/transactions" routerLinkActive="active">Transactions</a>
   </li>
   <li *ngIf="isLoggedIn" class="nav-item">
-    <a class="nav-link" id="cart-tab" data-toggle="tab" href="#cart" role="tab" aria-controls="cart" aria-selected="false">Cart</a>
+    <a class="nav-link" id="cart-tab" data-toggle="tab" role="tab" routerLink="/cart" routerLinkActive="active">Cart</a>
   </li>
 </ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active in" id="marketplace" role="tabpanel" aria-labelledby="marketplace-tab">...marketplace</div>
-  <div class="tab-pane fade" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">...favourites</div>
-  <div class="tab-pane fade" id="transactions" role="tabpanel" aria-labelledby="transactions-tab">...transactions</div>
-  <div class="tab-pane fade" id="cart" role="tabpanel" aria-labelledby="cart-tab">...cart</div>
-</div>

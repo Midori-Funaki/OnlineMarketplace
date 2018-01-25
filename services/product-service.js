@@ -12,11 +12,8 @@ class ProductService {
       attributes: { exclude: ['CategoryId'] }
     })
       .then(products => {
-        console.log('Products found: ', products);
-        console.log(products);
         return products;
       }).catch(err => {
-        console.log(err);
         return err;
       })
   }
@@ -31,10 +28,8 @@ class ProductService {
       }
     })
       .then((product) => {
-        console.log('Product found: ', product);
         return product;
       }).catch(err => {
-        console.log(err);
         return err;
       })
   }
