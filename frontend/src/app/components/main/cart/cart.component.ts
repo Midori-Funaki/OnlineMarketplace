@@ -10,7 +10,7 @@ import { CartService } from '../../../services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  items: Product[];
+  items: Observable<Product[]>;
 
   constructor(
     private cartService: CartService,
@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   }
 
   getItems(userId){
-    
+    this.items = this.cartService.getItems(userId);
   }
 
 }

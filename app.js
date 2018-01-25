@@ -10,7 +10,7 @@ var ProductRoutes = require('./routes/product-routes');
 var CategoryRoutes = require('./routes/category-routes');
 var UserProductRoutes = require('./routes/user-product-routes');
 var UserRoutes = require('./routes/user-routes');
-var TransactionRoutes = require('./routes/transaction-routes');
+// var TransactionRoutes = require('./routes/transaction-routes');
 var CartRoutes = require('./routes/cart-routes');
 var LoginRoutes = require ('./routes/login-routes')
 
@@ -18,14 +18,14 @@ var LoginRoutes = require ('./routes/login-routes')
 var UserService = require('./services/user-service');
 var ProductService = require('./services/product-service');
 var CategoryService = require('./services/category-service');
-var TransactionService = require('./services/transaction-service');
+// var TransactionService = require('./services/transaction-service');
 var CartService = require('./services/cart-service');
 
 //service instance
 var userService = new UserService();
 var categoryService = new CategoryService();
 var productService = new ProductService();
-var transactionService = new TransactionService();
+// var transactionService = new TransactionService();
 var cartService = new CartService();
 
 //frontend imports
@@ -61,7 +61,7 @@ watch.watchTree(__dirname + "/frontend/dist", function (f, curr, prev) {
 // Routing
 app.use('/api/users/:id/products', new UserProductRoutes(userService).router());
 app.use('/api/users',new UserRoutes(userService).router().use('/api/users/:id/products', new UserProductRoutes(userService).router()));
-app.use('/api/transactions',new TransactionRoutes(transactionService).router({mergeParams: true}));
+// app.use('/api/transactions',new TransactionRoutes(transactionService).router({mergeParams: true}));
 app.use('/api/products', new ProductRoutes(productService).router());
 app.use('/api/categories', new CategoryRoutes(categoryService).router());
 app.use('/api/carts', new CartRoutes(cartService).router());

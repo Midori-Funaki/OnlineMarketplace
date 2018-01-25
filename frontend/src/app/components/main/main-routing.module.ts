@@ -15,10 +15,9 @@ const routes: Routes = [
     { path: 'favourites', component: TemporaryComponent },
     { path: 'transactions', component: TemporaryComponent },
     { path: 'sell', component: SellComponent },
-    { path: 'cart', component: TemporaryComponent },
-    { path: 'auth/facebook/callback', component: FacebookComponent },
-    { path: 'auth/google/callback', component: GoogleComponent },
     { path: 'cart', component: CartComponent },
+    { path: 'auth/facebook/callback', component: FacebookComponent },
+    { path: 'auth/google/callback', component: GoogleComponent }
 ]
 
 @NgModule({
