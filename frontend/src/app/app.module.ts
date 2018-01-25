@@ -26,6 +26,8 @@ import { AuthGuard } from './services/auth-guard.service';
 import { GoogleAuthService } from './services/google-auth.service';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
 import { ProductsService } from './services/products.service';
+import { TemporaryComponent } from './components/main/temporary/temporary.component';
+import { SellComponent } from './components/main/sell/sell.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { ProductsService } from './services/products.service';
     LoginComponent,
     SignupComponent,
     TabsComponent,
-    ProductsComponent
+    ProductsComponent,
+    TemporaryComponent,
+    SellComponent
     ],
   imports: [
     BrowserModule,

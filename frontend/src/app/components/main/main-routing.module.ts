@@ -9,6 +9,7 @@ import { TemporaryComponent } from './temporary/temporary.component';
 
 const routes: Routes = [
     {path: '', component: ProductsComponent},
+    {path: 'product/:id',component: TemporaryComponent},
     {path: 'favourites', component: TemporaryComponent},
     {path: 'transactions', component: TemporaryComponent},
     {path: 'cart', component: TemporaryComponent},
