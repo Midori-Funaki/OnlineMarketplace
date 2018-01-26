@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms/src/model';
+import { FormGroup, FormControl } from '@angular/forms';
 import { SellService } from '../../../services/sell.service';
 import { Observable } from 'rxjs/Observable';
 
@@ -9,12 +9,20 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
-  // form: FormGroup;
+  sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
 
   constructor(private sellService:SellService) {
-    // this.form = new FormGroup({})
+    this.sellForm = new FormGroup({
+      category: new FormControl(""),
+      brand: new FormControl(""),
+      size: new FormControl(""),
+      color: new FormControl(""),
+      askPrice: new FormControl(""),
+      condition: new FormControl(""),
+      photo: new FormControl("")
+    })
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
     });
