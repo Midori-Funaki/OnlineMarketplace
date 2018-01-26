@@ -6,15 +6,31 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class SellService {
 
-  category$: Subject<string>;
+  category$: Subject<string[]>;
+  brand$: Subject<string[]>;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { 
+    this.category$ = new Subject<string[]>(); 
+    this.brand$ = new Subject<string[]>(); 
+  }
 
-  getCategories():Observable<string[]>{
-    return this.http.get<string[]>('/api/categories/')
+  getcategorySub():Observable<string[]>{
+    return this.category$.asObservable();
+  }
+
+  getbrandSub():Observable<string[]>{
+    return this.brand$.asObservable();
+  }
+
+  getCategories():void{
+    this.http.get<string[]>('/api/categories/').subscribe(result=>{
+      this.category$.next(result);
+    });
   }
 
   getBrandsByCategory(categoryTitle:string){
-    return this.http.get<string[]>('/api/categories/brands/'+categoryTitle)
+    this.http.get<string[]>('/api/categories/brands/'+categoryTitle).subscribe(result=>{
+      this.brand$.next(result);
+    });
   }
 }

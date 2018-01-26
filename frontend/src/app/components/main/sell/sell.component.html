@@ -6,7 +6,7 @@
           <label class="float-label" for="category">Category</label>
           <select id="category" class="form-control" (change)="filterBrand($event.target.value)">
             <option value="" disabled selected></option>
-            <option *ngFor="let category of categories | async">{{ category.title }}</option>
+            <option *ngFor="let category of categories">{{ category.title }}</option>
           </select>
         </span>
       </div><!-- form-group -->
@@ -15,7 +15,7 @@
           <label class="float-label" for="category">Brand</label>
           <select id="category" class="form-control">
             <option value="" disabled selected></option>
-            <option *ngFor="let brand of brands | async">{{ brand }}</option>
+            <option *ngFor="let brand of brands">{{ brand }}</option>
           </select>
         </span>
       </div><!-- form-group -->
