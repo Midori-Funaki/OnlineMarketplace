@@ -1,4 +1,7 @@
 var express = require('express');
+var authClass = require('./../auth');
+
+var auth = authClass();
 
 class ProductRoutes{
     constructor(cartService){
@@ -7,15 +10,15 @@ class ProductRoutes{
 
     router(){
         let router = express.Router();
-        router.get('/:userId',this.get.bind(this));
-        router.post('/:userId',this.post.bind(this));
-        router.put('/:userId',this.put.bind(this));
-        router.delete('/:userId',this.delete.bind(this));
+        router.get('/',auth.authenticate(), this.get.bind(this));
+        router.post('/:userId',auth.authenticate(),this.post.bind(this));
+        router.put('/:userId',auth.authenticate(), this.put.bind(this));
+        router.delete('/:userId',auth.authenticate(), this.delete.bind(this));
         return router;
     }
 
     get(req,res){
-        return this.cartService.get(req.params.userId)
+        return this.cartService.get(req.user)
         .then((items)=>res.json(items))
         .catch((err)=>res.status(500).json)
     }

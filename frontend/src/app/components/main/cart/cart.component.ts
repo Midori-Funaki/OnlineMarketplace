@@ -17,11 +17,13 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.getItems();
   }
 
-  getItems(userId){
-    this.items = this.cartService.getItems(userId);
+  getItems(){
+    this.cartService.getItems().subscribe(items => {
+      console.log(items);
+    });
   }
 
 }

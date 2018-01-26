@@ -1,7 +1,8 @@
 var passport = require('passport');
 var passportJWT = require('passport-jwt');
 var config = require('./config');
-var users = require ('./users');
+var models = require('./models');
+var User = models.User;
 
 const ExtractJwt = passportJWT.ExtractJwt;
 
@@ -10,14 +11,18 @@ module.exports = function(){
         secretOrKey: config.jwtSecret,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
     },(payload,done)=>{
-        const user = users.find((user)=>{
-            return user.id == payload.id
-        });
-        if (user) {
-            return done(null, {id: user.id});
-        } else {
-            return done(new Error("User not found"), null);
-        }
+        User.findOne({
+            where: {
+                id: payload.id
+            }
+        }).then(user=> {
+            // console.log("user: " , user.id);
+            if (user) {
+                return done(null, {id: user.id});
+            } else {
+                return done(new Error("User not found"), null);
+            }
+        }).catch(err=> console.log(err));
     });
     passport.use(strategy);
 

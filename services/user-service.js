@@ -12,10 +12,10 @@ class UserService{
             }
         }).then(user =>{
             //console.log('findOne user',user)
-            return user
+            return user;
         }).catch(err=>{
             console.log(err);
-            return err
+            return err;
         })       
     }
 
@@ -26,10 +26,10 @@ class UserService{
             }
         }).then(user =>{
             console.log('findOne user',user)
-            return user
+            return user;
         }).catch(err=>{
             console.log(err);
-            return err
+            return err;
         })
     }
 
@@ -43,11 +43,11 @@ class UserService{
             shippingAddress: userInfo.shippingAddress,
             billingAddress: userInfo.billingAddress
         }).then(()=>{
-            console.log('Succeeded to register')
-            return 'Succeeded to register'
+            console.log('Succeeded to register');
+            return 'Succeeded to register';
         }).catch(err=>{
-            console.log(err)
-            return err
+            console.log(err);
+            return err;
         })
     }
 
@@ -72,7 +72,7 @@ class UserService{
         }).then(()=>{
             console.log('Deleted ',userId)
         }).catch(err=>{
-            console.log(err)
+            console.log(err);
         })
     }
 

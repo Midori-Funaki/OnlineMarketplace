@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Http } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 
+
 @Injectable()
 export class AuthService {
     token: string = null;

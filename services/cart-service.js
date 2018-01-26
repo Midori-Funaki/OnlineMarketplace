@@ -1,64 +1,64 @@
 const models = require('./../models'),
-      Cart = models.Cart,
-      Product = models.Product;
+    Cart = models.Cart,
+    Product = models.Product;
 
-class CartService{
-    constructor(){}
+class CartService {
+    constructor() { }
 
-    get(user){
+    get(user) {
         return Cart.findAll({
-            where:{
-                userId: user
+            where: {
+                userId: user.id
             },
-            include:[{
+            include: [{
                 model: Product
             }]
-        }).then((items)=>{
+        }).then((items) => {
             return items;
-        }).catch((err)=>{
+        }).catch((err) => {
             return err;
         })
     }
 
-    post(user,productInfo){
+    post(user, productInfo) {
         return Cart.create({
             userId: user,
             productId: productInfo.productId,
-            quantity: productInfo.quantity 
-        }).then((item)=>{
+            quantity: productInfo.quantity
+        }).then((item) => {
             return this.get(user)
-        }).catch((err)=>{
+        }).catch((err) => {
             return err
         })
     }
 
-    put(user, productInfo){
+    put(user, productInfo) {
         let newData = {
             quantity: productInfo.quantity[0].new
         }
-        return Cart.update(newData,{
-            where:{
+        return Cart.update(newData, {
+            where: {
                 userId: user,
                 productId: productInfo.productId,
                 quantity: productInfo.quantity[0].old
-            }    
-        }).then(()=>{
+            }
+        }).then(() => {
             return this.get(user)
-        }).catch((err)=>{
+        }).catch((err) => {
             return err
         })
     }
 
-    delete(user, productInfo){
+    delete(user, productInfo) {
         return Cart.destroy({
-            where:{
+            where: {
                 userId: user,
                 productId: productInfo.productId,
                 quantity: productInfo.quantity
             }
-        }).then(()=>{
+        }).then(() => {
             return this.get(user)
-        }).catch((err)=>{
+        }).catch((err) => {
             return err
         })
     }
