@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormsModule } from '@angular/forms';
 import { SellService } from '../../../services/sell.service';
 import { Observable } from 'rxjs/Observable';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-sell',
@@ -13,29 +15,33 @@ export class SellComponent implements OnInit {
   categories: string[] = [];
   brands: string[] = [];
 
-  constructor(private sellService:SellService) {
-    this.sellForm = new FormGroup({
-      category: new FormControl(""),
-      brand: new FormControl(""),
-      size: new FormControl(""),
-      color: new FormControl(""),
-      askPrice: new FormControl(""),
-      condition: new FormControl(""),
-      photo: new FormControl("")
-    })
+  constructor(private sellService:SellService, private formBuilder: FormBuilder) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
+      // this.categories.push("");
     });
     this.sellService.getbrandSub().subscribe(brands=>{
       this.brands = brands;
+      // this.brands.push("");
     });
   }
 
   ngOnInit() {
     this.sellService.getCategories();
+    this.sellForm = new FormGroup({
+      category: new FormControl(""),
+      brand: new FormControl(""),
+      size: new FormControl("")
+      // color: new FormControl(""),
+      // askPrice: new FormControl(""),
+      // condition: new FormControl(""),
+      // photo: new FormControl("")
+    })
   }
 
   filterBrand(category){
     this.sellService.getBrandsByCategory(category);
   }
+
+  createNewSell(){}
 }

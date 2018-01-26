@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl,FormGroup } from '@angular/forms';
 
 //Routing imports
 import { MainRoutingModule } from './components/main/main-routing.module';
@@ -52,11 +55,14 @@ import { SellService } from './services/sell.service';
     CartComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpModule,
     MainRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [
     FacebookAuthService, 
@@ -67,7 +73,9 @@ import { SellService } from './services/sell.service';
     ProductsService,
     SellService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 
 export class AppModule {}
