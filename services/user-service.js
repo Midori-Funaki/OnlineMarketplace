@@ -5,6 +5,20 @@ const models = require('./../models'),
 class UserService{
     constructor(){}
 
+    auth(email){
+        return User.findOne({
+            where:{
+                email: email
+            }
+        }).then(user =>{
+            //console.log('findOne user',user)
+            return user
+        }).catch(err=>{
+            console.log(err);
+            return err
+        })       
+    }
+
     retrieve(userid){
         return User.findOne({
             where:{

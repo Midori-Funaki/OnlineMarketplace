@@ -17,7 +17,7 @@ class LoginRoutes{
     }
 
     local(req,res){
-        return this.userService.retrieve(req.body.username)
+        return this.userService.auth(req.body.email)
         .then((user)=>{
             if (user) {
                 //check password
