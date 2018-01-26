@@ -10,9 +10,14 @@ import { Router } from '@angular/router';
 export class TabsComponent implements OnInit {
 
   isLoggedIn: boolean = true;
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+    /*this.authService.isLoggedInNow().subscribe(loggedIn =>{
+      this.isLoggedIn = loggedIn;
+    });*/
+   }
 
   ngOnInit() {
+
   }
 
 }
