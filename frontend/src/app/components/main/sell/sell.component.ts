@@ -18,11 +18,11 @@ export class SellComponent implements OnInit {
   constructor(private sellService:SellService, private formBuilder: FormBuilder) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
-      // this.categories.push("");
+      // this.categories.unshift("");
     });
     this.sellService.getbrandSub().subscribe(brands=>{
       this.brands = brands;
-      // this.brands.push("");
+      // this.brands.unshift("");
     });
   }
 
@@ -31,11 +31,11 @@ export class SellComponent implements OnInit {
     this.sellForm = new FormGroup({
       category: new FormControl(""),
       brand: new FormControl(""),
-      size: new FormControl("")
-      // color: new FormControl(""),
-      // askPrice: new FormControl(""),
-      // condition: new FormControl(""),
-      // photo: new FormControl("")
+      size: new FormControl(""),
+      color: new FormControl(""),
+      askPrice: new FormControl(""),
+      condition: new FormControl(""),
+      photo: new FormControl("")
     })
   }
 

@@ -4,7 +4,7 @@
       <div class="form-group">
         <span class="float-field float-select">
           <label class="float-label">Category</label>
-          <select id="category" class="form-control" ngbRadioGroup formControlName="category" (change)="filterBrand($event.target.value)">
+          <select id="category" class="form-control" formControlName="category" (change)="filterBrand($event.target.value)">
             <option *ngFor="let category of categories" [value]="category.title">{{ category.title }}</option>
           </select>
         </span>
@@ -12,7 +12,7 @@
       <div class="form-group">
         <span class="float-field float-select">
           <label class="float-label">Brand</label>
-          <select id="brand" class="form-control" ngbRadioGroup formControlName="brand">
+          <select id="brand" class="form-control" formControlName="brand">
             <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
           </select>
         </span>
@@ -31,53 +31,62 @@
               <label ngbButtonLabel class="btn-primary">
                 <input ngbButton type="radio" [value]="3"> 3
               </label>
-              <!-- <button class="btn btn-primary" type="button">1</button>
-              <button class="btn btn-primary" type="button">2</button>
-              <button class="btn btn-primary" type="button">3</button>
-              <button class="btn btn-primary" type="button">4</button> -->
             </div>
-            <pre>{{sellForm.value['size']}}</pre>
           </div>
         </span>
       </div><!-- form-group -->
-      <!-- <div class="form-group">
+      <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label" for="color">Color</label>
+          <label class="float-label">Color</label>
           <div class="btn-toolbar">
-            <div class="btn-group mr-2 form-control" ngbButton type="radio" value="" formControlName="color">
-                <button class="btn btn-primary" type="button">black</button>
-                <button class="btn btn-primary" type="button">white</button>
-                <button class="btn btn-primary" type="button">gray</button>
-                <button class="btn btn-primary" type="button">yellow</button>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color">
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="black"> black
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="white"> white
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="gray"> gray
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="yellow"> yellow
+              </label>
             </div>
           </div>
         </span>
-      </div>form-group -->
-      <!-- <div class="form-group">
-          <span class="float-field float-select">
-            <label class="float-label" for="askPrice">Ask Price</label><br>
-            <input id="askPrice" class="form-control" value="" formControlName="askPrice">
-          </span>
-      </div>form-group -->
-      <!-- <div class="form-group">
-          <span class="float-field float-select">
-            <label class="float-label" for="condition">Product Condition</label>
-            <div class="btn-toolbar">
-              <div class="btn-group mr-2 form-control" ngbButton type="radio" value="" formControlName="condition">
-                <button class="btn btn-primary" type="button">new</button>
-                <button class="btn btn-primary" type="button">used</button>
-            </div>
-          </div>
-        </span>
-      </div>form-group -->
-      <!-- <div class="form-group">
+      </div><!-- form-group -->
+      <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label" for="photo">Photos</label>
-          <div class="photo-upload-container form-control" formControlName="photo">
-            <button class="btn btn-success">Upload</button>
+          <label class="float-label">Ask Price</label><br>
+          <input type="number" name="askPrice" id="askPrice" class="form-control" [value]="" formControlName="askPrice">
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+          <span class="float-field float-select">
+            <label class="float-label">Product Condition</label>
+            <div class="btn-toolbar">
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="condition" formControlName="condition">
+                <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="new"> new
+                </label>
+                <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="used"> used
+                </label>
+            </div>
           </div>
         </span>
-      </div>form-group -->
+      </div><!-- form-group -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label">Photos</label>
+          <div class="photo-upload-container form-control" formControlName="photo">
+            <label ngbButtonLabel>
+              <input ngbButton class="btn btn-default" type="file" [value]="test">
+            </label>
+          </div>
+        </span>
+      </div><!-- form-group -->
       <button type="submit" class="btn btn-primary">Start Selling</button>
       <pre>{{ sellForm.value | json }}</pre>
     </form>
