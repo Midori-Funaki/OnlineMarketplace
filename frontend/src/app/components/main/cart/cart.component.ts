@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
 
   getItems(){
     this.cartService.getItems().subscribe(items => {
-      console.log(items);
+      console.log(items); //works now
     });
   }
 
