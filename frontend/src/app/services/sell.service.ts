@@ -33,4 +33,8 @@ export class SellService {
       this.brand$.next(result);
     });
   }
+
+  upload(){
+    console.log('received image data *****');
+  }
 }

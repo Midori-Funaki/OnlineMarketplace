@@ -7,6 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl,FormGroup } from '@angular/forms';
 
+import { FileUploadModule } from 'ng2-file-upload';
+import { FancyImageUploaderModule } from 'ng2-fancy-image-uploader';
+import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
+import * as cloudinary from 'cloudinary-core';
+import cloudinaryConfiguration from './config';
+
 //Routing imports
 import { MainRoutingModule } from './components/main/main-routing.module';
 
@@ -62,7 +68,10 @@ import { SellService } from './services/sell.service';
     HttpModule,
     MainRoutingModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    FancyImageUploaderModule,
+    FileUploadModule,
+    CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
   ],
   providers: [
     FacebookAuthService, 

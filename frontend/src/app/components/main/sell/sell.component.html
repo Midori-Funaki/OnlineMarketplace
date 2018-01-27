@@ -105,17 +105,20 @@
                 <input type="file" class="image-upload" accept="image/*" />
               </label>
             </div>
-          </div>        
-          <div class="box">
+          </div>
+          <!-- TESTING BOX -->        
+          <div class="box" ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}">
             <div class="js--image-preview"></div>
             <div class="upload-options">
               <label>
-                <input type="file" class="image-upload" accept="image/*" />
+                <input type="file" class="image-upload" ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"/>
               </label>
             </div>
           </div>
+          <!-- ./TESTING BOX -->
         </div>
       </div>
+      <fancy-image-uploader [options]="options" (onUpload)="onUpload($event)"></fancy-image-uploader>
       <button type="submit" class="btn btn-primary">Start Selling</button>
       <pre>{{ sellForm.value | json }}</pre>
     </form>
