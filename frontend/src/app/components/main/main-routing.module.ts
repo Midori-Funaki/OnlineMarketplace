@@ -8,6 +8,7 @@ import { TemporaryComponent } from './temporary/temporary.component';
 import { SellComponent } from './sell/sell.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartComponent } from './cart/cart.component';
+import { FavComponent } from './fav/fav.component';
 
 const routes: Routes = [
     { path: '', component: ProductsComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'transactions', component: TemporaryComponent },
     { path: 'sell', component: SellComponent },
     { path: 'cart', component: CartComponent },
+    { path: 'favourite', component: FavComponent },
     { path: 'auth/facebook/callback', component: FacebookComponent },
     { path: 'auth/google/callback', component: GoogleComponent }
 ]
@@ -36,5 +38,6 @@ export const routingComponents = [
     TemporaryComponent,
     ProductDetailComponent,
     CartComponent,
-    SellComponent
+    SellComponent,
+    FavComponent
 ]

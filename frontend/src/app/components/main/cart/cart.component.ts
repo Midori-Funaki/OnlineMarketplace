@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
     this.getItems();
   }
 
-  getItems(){
+  getItems() {
     this.cartService.getItems().subscribe(items => {
       console.log(items); //works now
     });

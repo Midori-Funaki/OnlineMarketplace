@@ -9,8 +9,8 @@ export class CartService {
 
 
   constructor(
-    private http:HttpClient,
-    private authService:AuthService
+    private http: HttpClient,
+    private authService: AuthService
   ) { }
 
   getItems(): Observable<Product[]> {
@@ -19,5 +19,5 @@ export class CartService {
         'Authorization', 'Bearer ' + this.authService.token)
     });
   }
-  
+
 }

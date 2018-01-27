@@ -33,6 +33,7 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
+import { FavComponent } from './components/main/fav/fav.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SellService } from './services/sell.service';
     TemporaryComponent,
     SellComponent,
     ProductDetailComponent,
-    CartComponent
+    CartComponent,
+    FavComponent
   ],
   imports: [
     BrowserModule,
