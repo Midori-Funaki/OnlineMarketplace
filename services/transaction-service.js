@@ -35,6 +35,18 @@ function createResultObject(transaction){
 class transactionService{
     constructor(){}
 
+    get(user){
+        return Transaction.findAll({
+            where:{
+                buyerId: user.id
+            }
+        }).then((transactions) => {
+            return transactions;
+        }).catch((err) => {
+            return err;
+        })
+    }
+
     getClientToken(){
         return new Promise(function(resolve,reject){
             gateway.clientToken.generate({},function(err, response){
