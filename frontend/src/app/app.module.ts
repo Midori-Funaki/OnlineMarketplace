@@ -22,6 +22,11 @@ import { ProductDetailComponent } from './components/main/product-detail/product
 import { TemporaryComponent } from './components/main/temporary/temporary.component';
 import { SellComponent } from './components/main/sell/sell.component';
 import { CartComponent } from './components/main/cart/cart.component';
+import { FavComponent } from './components/main/fav/fav.component';
+import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CheckoutDetailComponent } from './components/checkout/checkout-detail/checkout-detail.component';
+import { CartConfirmComponent } from './components/main/cart/cart-confirm/cart-confirm.component';
 
 
 //Service imports
@@ -33,10 +38,8 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
-import { FavComponent } from './components/main/fav/fav.component';
-import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-
+import { UserService } from './services/user.service';
+import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     FavComponent,
     CartItemComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CheckoutDetailComponent,
+    CartConfirmComponent,
+    CheckoutConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +79,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     GoogleAuthService,
     ProductsService,
     CartService,
-    SellService
+    SellService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
