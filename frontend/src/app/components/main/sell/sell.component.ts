@@ -3,11 +3,9 @@ import { FormGroup, FormBuilder, FormControl, FormsModule } from '@angular/forms
 import { SellService } from '../../../services/sell.service';
 import { Observable } from 'rxjs/Observable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FancyImageUploaderOptions, UploadedFile } from 'ng2-fancy-image-uploader';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
-import { ImageResult } from './../interfaces';
 
 @Component({
   selector: 'app-sell',
@@ -23,14 +21,9 @@ export class SellComponent implements OnInit {
   hasBaseDropZoneOver: boolean = false;
   uploader: FileUploader;
   title: string = '';
-
-  options: FancyImageUploaderOptions = {
-    thumbnailHeight: 150,
-    thumbnailWidth: 150,
-    uploadUrl: 'https://api.cloudinary.com/v1_1/dealshubspace/upload',
-    allowedImageTypes: ['image/png', 'image/jpeg'],
-    maxImageSize: 3
-  };
+  imageurl: string = '';
+  hasImage: boolean = false;
+  uploadResult: any;
 
   constructor(
     private sellService:SellService, 
@@ -109,6 +102,7 @@ export class SellComponent implements OnInit {
         } else {
           //Create new response
           this.responses.push(fileItem);
+          // console.log('1. RESPONSES ',this.responses);
         }
       });
     };
@@ -116,7 +110,16 @@ export class SellComponent implements OnInit {
     //Get upload response
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
       //file info is item.file
+      console.log('whole item info ',item);
+      console.log('file info ',item.file);
+      console.log('headers ',headers);
+      this.uploadResult = JSON.parse(response);
+      // console.log('2. RESPONSES ',this.responses);
       console.log('upload result ',response);
+      // console.log('file id ',uploadResult.public_id);
+      // console.log('format ',uploadResult.format);
+      this.imageurl = `${this.uploadResult.public_id}.${this.uploadResult.format}`;
+      this.hasImage = true;
       /* SAVE THE NECESSARY INFO FOR DB */
       /* CALL IMG FOR PREVIEW */
     }
@@ -133,13 +136,9 @@ export class SellComponent implements OnInit {
 
   createNewSell(){}
 
-  //Upload function for trial upload *****DELETE LATER*****
-  onUpload(file: UploadedFile) {
-    console.log('File res ',file.response);
+  deleteImage(){
+    this.sellService.deleteImageById(this.uploadResult.public_id);
   }
-  
-  //Delete photo function here
-  /* ... */
 
   fileOverBase(e: any): void{
     this.hasBaseDropZoneOver = e;

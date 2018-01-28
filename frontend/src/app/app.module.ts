@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl,FormGroup } from '@angular/forms';
 
 import { FileUploadModule } from 'ng2-file-upload';
-import { FancyImageUploaderModule } from 'ng2-fancy-image-uploader';
 import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
 import * as cloudinary from 'cloudinary-core';
 import cloudinaryConfiguration from './config';
@@ -69,7 +68,6 @@ import { SellService } from './services/sell.service';
     MainRoutingModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    FancyImageUploaderModule,
     FileUploadModule,
     CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
   ],

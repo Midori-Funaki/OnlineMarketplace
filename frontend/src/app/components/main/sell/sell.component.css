@@ -32,8 +32,8 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    /* -ms-flex-wrap: wrap;
+        flex-wrap: wrap; */
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -172,6 +172,27 @@ body {
             animation: ripple 0.4s linear;
   }
   
+  .delete-btn {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    background: rgba(203,32,39,0.7);
+    border-radius: 45px;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .delete-btn::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    content: '\f00d';
+    font-family: 'FontAwesome';
+    font-size: 20px;
+    color: white;
+  }
   @-webkit-keyframes ripple {
     100% {
       opacity: 0;
