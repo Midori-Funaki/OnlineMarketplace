@@ -1,4 +1,7 @@
 var express = require('express');
+var authClass = require('./../auth');
+
+var auth = authClass();
 
 class TransactionRoutes{
     constructor(transactionService){
@@ -15,8 +18,8 @@ class TransactionRoutes{
     }
 
     get(req,res){
-        return this.transactionService.get()
-        .then((token)=>res.json(token))
+        return this.transactionService.get(req.user)
+        .then((transactions)=>res.json(transactions))
         .catch((err)=>res.status(500).json(err))
     }
 
