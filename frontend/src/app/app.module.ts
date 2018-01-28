@@ -41,11 +41,11 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
-import { TransactionService } from './services/transaction.service';
+// import { TransactionService } from './services/transaction.service';
 import { FavComponent } from './components/main/fav/fav.component';
 import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { TransactionComponent } from './components/main/transactions/transaction.component';
+// import { TransactionComponent } from './components/main/transactions/transaction.component';
 
 
 @NgModule({
@@ -67,7 +67,7 @@ import { TransactionComponent } from './components/main/transactions/transaction
     FavComponent,
     CartItemComponent,
     CheckoutComponent,
-    TransactionComponent
+    // TransactionComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +79,7 @@ import { TransactionComponent } from './components/main/transactions/transaction
     HttpClientModule,
     NgbModule.forRoot(),
     FileUploadModule,
-    CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
+    // CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
   ],
   providers: [
     FacebookAuthService, 
@@ -90,7 +90,7 @@ import { TransactionComponent } from './components/main/transactions/transaction
     ProductsService,
     CartService,
     SellService,
-    TransactionService
+    // TransactionService
   ],
   bootstrap: [
     AppComponent
