@@ -30,6 +30,7 @@ import { ProductDetailComponent } from './components/main/product-detail/product
 import { TemporaryComponent } from './components/main/temporary/temporary.component';
 import { SellComponent } from './components/main/sell/sell.component';
 import { CartComponent } from './components/main/cart/cart.component';
+import { TransactionComponent } from './components/main/transactions/transaction.component';
 
 
 //Service imports
@@ -41,11 +42,10 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
-// import { TransactionService } from './services/transaction.service';
+import { TransactionService } from './services/transaction.service';
 import { FavComponent } from './components/main/fav/fav.component';
 import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-// import { TransactionComponent } from './components/main/transactions/transaction.component';
 
 
 @NgModule({
@@ -67,7 +67,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     FavComponent,
     CartItemComponent,
     CheckoutComponent,
-    // TransactionComponent
+    TransactionComponent
   ],
   imports: [
     CommonModule,
@@ -79,7 +79,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     HttpClientModule,
     NgbModule.forRoot(),
     FileUploadModule,
-    // CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
+    CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
   ],
   providers: [
     FacebookAuthService, 
@@ -90,7 +90,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     ProductsService,
     CartService,
     SellService,
-    // TransactionService
+    TransactionService
   ],
   bootstrap: [
     AppComponent
