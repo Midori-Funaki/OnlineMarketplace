@@ -1,5 +1,7 @@
 var gateway = require('./../gateway'),
-  braintree = require('braintree');
+    braintree = require('braintree'),
+    models = require('./../models'),
+    Transaction = models.Transaction;
 
 var TRANSACTION_SUCCESS_STATUSES = [
   braintree.Transaction.Status.Authorizing,
@@ -38,13 +40,14 @@ class transactionService {
     get(user){
         return Transaction.findAll({
             where:{
-                buyerId: user.id
+                sellerId: user.id
             }
-        }).then((transactions) => {
-            return transactions;
-        }).catch((err) => {
-            return err;
         })
+        // .then((transactions) => {
+        //     return transactions;
+        // }).catch((err) => {
+        //     return err;
+        // })
     }
 
     getClientToken(){
