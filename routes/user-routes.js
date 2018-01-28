@@ -1,4 +1,8 @@
 var express = require('express');
+var authClass = require('./../auth');
+
+var auth = authClass();
+
 
 class UserRoutes{
   constructor(userService){
@@ -7,7 +11,7 @@ class UserRoutes{
   
   router(){
     let router = express.Router();
-    router.get('/:email', this.get.bind(this));
+    router.get('/profile',auth.authenticate(), this.get.bind(this));
     router.post('/',this.post.bind(this));
     router.delete('/:id',this.delete.bind(this));
     router.put('/:id',this.update.bind(this));
@@ -41,5 +45,6 @@ class UserRoutes{
       })
       .catch((err)=>{res.status(500).json(err)})
   }
+
 }
 module.exports = UserRoutes;

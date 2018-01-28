@@ -17,7 +17,9 @@ export class TopComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.loggedIn();
+  }
 
   logOut(){
     this.authService.logOut();

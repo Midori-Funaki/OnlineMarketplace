@@ -1,13 +1,16 @@
 var express = require('express');
+var authClass = require('./../auth');
+
+var auth = authClass();
 
 class UserProductRoutes {
   constructor(userService) {
     this.userService = userService;
   }
 
-  router(){
-    let router = express.Router({mergeParams: true});
-    router.get('/', this.get.bind(this));
+  router() {
+    let router = express.Router({ mergeParams: true });
+    router.get('/', auth.authenticate(), this.get.bind(this));
     return router;
   }
 

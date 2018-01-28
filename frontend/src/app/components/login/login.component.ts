@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     e.preventDefault();
     //console.log(this.localLogin.value);
     if (this.localLogin.valid && this.localLogin.dirty){
-      this.authService.logIn(this.localLogin.value.username, this.localLogin.value.password);
+      this.authService.logIn(this.localLogin.value.email, this.localLogin.value.password);
     }
   }
 

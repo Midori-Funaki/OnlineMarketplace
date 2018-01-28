@@ -39,7 +39,11 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { AuthGuard } from './services/auth-guard.service';
 import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
+import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
+import { FavComponent } from './components/main/fav/fav.component';
+import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
@@ -57,7 +61,10 @@ import { SellService } from './services/sell.service';
     TemporaryComponent,
     SellComponent,
     ProductDetailComponent,
-    CartComponent
+    CartComponent,
+    FavComponent,
+    CartItemComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,
@@ -78,6 +85,7 @@ import { SellService } from './services/sell.service';
     AuthGuard,
     GoogleAuthService,
     ProductsService,
+    CartService,
     SellService
   ],
   bootstrap: [
