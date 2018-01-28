@@ -9,6 +9,7 @@ import { SellComponent } from './sell/sell.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartComponent } from './cart/cart.component';
 import { FavComponent } from './fav/fav.component';
+import { CheckoutComponent } from './../checkout/checkout.component';
 
 const routes: Routes = [
     { path: '', component: ProductsComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
     { path: 'cart', component: CartComponent },
     { path: 'favourite', component: FavComponent },
     { path: 'auth/facebook/callback', component: FacebookComponent },
-    { path: 'auth/google/callback', component: GoogleComponent }
+    { path: 'auth/google/callback', component: GoogleComponent },
+    { path: 'checkout', component: CheckoutComponent}
 ]
 
 @NgModule({
@@ -39,5 +41,6 @@ export const routingComponents = [
     ProductDetailComponent,
     CartComponent,
     SellComponent,
-    FavComponent
+    FavComponent,
+    CheckoutComponent
 ]

@@ -34,6 +34,8 @@ import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
 import { FavComponent } from './components/main/fav/fav.component';
+import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { FavComponent } from './components/main/fav/fav.component';
     SellComponent,
     ProductDetailComponent,
     CartComponent,
-    FavComponent
+    FavComponent,
+    CartItemComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

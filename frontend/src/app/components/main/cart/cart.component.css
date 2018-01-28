@@ -190,9 +190,6 @@ label {
   .product-quantity {
     width: 100px;
   }
-  .product-quantity input {
-    margin-left: 20px;
-  }
 
   .product-quantity:before {
     content: 'x';
