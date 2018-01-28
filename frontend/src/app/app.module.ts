@@ -31,6 +31,11 @@ import { TemporaryComponent } from './components/main/temporary/temporary.compon
 import { SellComponent } from './components/main/sell/sell.component';
 import { CartComponent } from './components/main/cart/cart.component';
 import { TransactionComponent } from './components/main/transactions/transaction.component';
+import { FavComponent } from './components/main/fav/fav.component';
+import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CheckoutDetailComponent } from './components/checkout/checkout-detail/checkout-detail.component';
+import { CartConfirmComponent } from './components/main/cart/cart-confirm/cart-confirm.component';
 
 
 //Service imports
@@ -43,10 +48,8 @@ import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
 import { TransactionService } from './services/transaction.service';
-import { FavComponent } from './components/main/fav/fav.component';
-import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
-import { CheckoutComponent } from './components/checkout/checkout.component';
-
+import { UserService } from './services/user.service';
+import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     FavComponent,
     CartItemComponent,
     CheckoutComponent,
-    TransactionComponent
+    TransactionComponent,
+    CheckoutDetailComponent,
+    CartConfirmComponent,
+    CheckoutConfirmComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +96,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     ProductsService,
     CartService,
     SellService,
-    TransactionService
+    TransactionService,
+    UserService
   ],
   bootstrap: [
     AppComponent

@@ -19,10 +19,10 @@ class UserService {
     })
   }
 
-  retrieve(userid) {
+  retrieve(user) {
     return User.findOne({
       where: {
-        userId: userid
+        id: user.id
       }
     }).then(user => {
       console.log('findOne user', user)
