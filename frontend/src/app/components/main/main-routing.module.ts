@@ -10,12 +10,12 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { CartComponent } from './cart/cart.component';
 import { FavComponent } from './fav/fav.component';
 import { CheckoutComponent } from './../checkout/checkout.component';
+import { TransactionComponent } from './../../components/main/transactions/transaction.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: ProductsComponent, pathMatch: 'full'},
     { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
-    { path: 'favourites', component: TemporaryComponent, pathMatch: 'full' },
     { path: 'transactions', component: TemporaryComponent, pathMatch: 'full' },
     { path: 'sell', component: SellComponent, pathMatch: 'full' },
     { path: 'cart', component: CartComponent,pathMatch: 'full' },
@@ -43,5 +43,6 @@ export const routingComponents = [
     CartComponent,
     SellComponent,
     FavComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    TransactionComponent
 ]
