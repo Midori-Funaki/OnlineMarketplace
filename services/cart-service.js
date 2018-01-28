@@ -1,6 +1,6 @@
 const models = require('./../models'),
-  Cart = models.Cart,
-  Product = models.Product;
+      Cart = models.Cart,
+      Product = models.Product;
 
 class CartService {
   constructor() { }

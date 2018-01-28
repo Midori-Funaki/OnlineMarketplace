@@ -41,9 +41,11 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
+import { TransactionService } from './services/transaction.service';
 import { FavComponent } from './components/main/fav/fav.component';
 import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { TransactionComponent } from './components/main/transactions/transaction.component';
 
 
 @NgModule({
@@ -64,7 +66,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     FavComponent,
     CartItemComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    TransactionComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +89,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     GoogleAuthService,
     ProductsService,
     CartService,
-    SellService
+    SellService,
+    TransactionService
   ],
   bootstrap: [
     AppComponent
