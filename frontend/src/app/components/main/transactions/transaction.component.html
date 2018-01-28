@@ -8,12 +8,12 @@
       </tr>
       <tr>
         <td>Item:</td>
-        <td>{{ transaction.Product.title }}</td>
+        <td *ngIf="transaction.Product != null">{{ transaction.Product.title }}</td>
         <td></td>
       </tr>
       <tr>
         <td>Quantity:</td>
-        <td>{{ transaction.Product.quantity }}</td>
+        <td *ngIf="transaction.Product != null">{{ transaction.Product.quantity }}</td>
         <td></td>
       </tr>
       <tr>
