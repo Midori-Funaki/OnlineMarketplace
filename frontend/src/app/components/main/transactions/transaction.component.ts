@@ -8,7 +8,7 @@ import { TransactionService } from './../../../services/transaction.service';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-  transactions: Observable<any[]>;
+  transactions: Observable<string[]>;
   
   constructor(
     private transactionService: TransactionService

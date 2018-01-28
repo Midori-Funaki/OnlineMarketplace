@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from "./auth.service";
+import { Transaction } from '../models/Transaction';
 
 @Injectable()
 export class TransactionService {
@@ -11,8 +12,8 @@ export class TransactionService {
     private authService: AuthService
   ) { }
 
-  getAll():Observable<any[]>{
-    return this.http.get<any[]>('api/transactions', {
+  getAll():Observable<Transaction[]>{
+    return this.http.get<Transaction[]>('api/transactions', {
       headers: new HttpHeaders().set(
         'Authorization', 'Bearer ' + this.authService.token)
     });

@@ -1,35 +1,27 @@
-<p>
-  transactions works!
-</p>
-<div *ngFor="let transaction of transactions | async">
-  <table class="table table-striped">
+<div *ngFor="let transaction of transactions | async;" class="transactionContainer">
+  <table class="table">
     <tbody>
       <tr>
-        <th scope="row">1</th>
         <td>Date:</td>
         <td>{{ transaction.updatedAt }}</td>
         <td></td>
       </tr>
       <tr>
-        <th scope="row">2</th>
         <td>Item:</td>
         <td>{{ transaction.Product.title }}</td>
         <td></td>
       </tr>
       <tr>
-        <th scope="row">3</th>
         <td>Quantity:</td>
         <td>{{ transaction.Product.quantity }}</td>
         <td></td>
       </tr>
       <tr>
-        <th scope="row">4</th>
         <td>Total Price:</td>
         <td>{{ transaction.price }}</td>
         <td></td>
       </tr>
       <tr>
-        <th scope="row">5</th>
         <td>Status:</td>
         <td>{{ transaction.status }}</td>
         <td></td>
