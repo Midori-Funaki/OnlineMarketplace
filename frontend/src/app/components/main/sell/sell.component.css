@@ -100,14 +100,15 @@ body {
     overflow: hidden;
   }
   .upload-options label::after {
-    content: 'add';
-    font-family: 'Material Icons';
+    content: '\f067';
+    font-family: 'FontAwesome';
     position: absolute;
     font-size: 2.5rem;
     color: #e6e6e6;
     top: calc(50% - 2.5rem);
     left: calc(50% - 1.25rem);
     z-index: 0;
+    padding-top: 10px;
   }
   .upload-options label span {
     display: inline-block;
@@ -135,8 +136,8 @@ body {
     background-size: cover;
   }
   .js--image-preview::after {
-    content: "\f1c5";
-    font-family: 'FontAwesome';
+    /* content: "\f1c5";
+    font-family: 'FontAwesome'; */
     position: relative;
     font-size: 4.5em;
     color: #e6e6e6;

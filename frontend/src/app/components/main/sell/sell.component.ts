@@ -7,6 +7,7 @@ import { FancyImageUploaderOptions, UploadedFile } from 'ng2-fancy-image-uploade
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
+import { ImageResult } from './../interfaces';
 
 @Component({
   selector: 'app-sell',
@@ -117,6 +118,7 @@ export class SellComponent implements OnInit {
       //file info is item.file
       console.log('upload result ',response);
       /* SAVE THE NECESSARY INFO FOR DB */
+      /* CALL IMG FOR PREVIEW */
     }
 
     //Upload process in progress
