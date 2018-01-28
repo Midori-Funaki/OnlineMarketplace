@@ -12,16 +12,17 @@ import { FavComponent } from './fav/fav.component';
 import { CheckoutComponent } from './../checkout/checkout.component';
 
 const routes: Routes = [
-    { path: '', component: ProductsComponent },
-    { path: 'products/:id', component: ProductDetailComponent },
-    { path: 'favourites', component: TemporaryComponent },
-    { path: 'transactions', component: TemporaryComponent },
-    { path: 'sell', component: SellComponent },
-    { path: 'cart', component: CartComponent },
-    { path: 'favourite', component: FavComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: ProductsComponent, pathMatch: 'full'},
+    { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
+    { path: 'favourites', component: TemporaryComponent, pathMatch: 'full' },
+    { path: 'transactions', component: TemporaryComponent, pathMatch: 'full' },
+    { path: 'sell', component: SellComponent, pathMatch: 'full' },
+    { path: 'cart', component: CartComponent,pathMatch: 'full' },
+    { path: 'favourite', component: FavComponent, pathMatch: 'full' },
     { path: 'auth/facebook/callback', component: FacebookComponent },
     { path: 'auth/google/callback', component: GoogleComponent },
-    { path: 'checkout', component: CheckoutComponent}
+    { path: 'checkout', component: CheckoutComponent, pathMatch: 'full'}
 ]
 
 @NgModule({
