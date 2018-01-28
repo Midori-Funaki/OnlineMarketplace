@@ -7,10 +7,17 @@ class TransactionRoutes{
 
     router(){
         let router = express.Router();
+        router.get('/',this.get.bind(this));
         router.get('/checkouts/new',this.getToken.bind(this));
         router.get('/checkouts/:id',this.confirm.bind(this));
         router.post('/checkouts',this.postNonce.bind(this));
         return router;
+    }
+
+    get(req,res){
+        return this.transactionService.get()
+        .then((token)=>res.json(token))
+        .catch((err)=>res.status(500).json(err))
     }
 
     getToken(req,res){
