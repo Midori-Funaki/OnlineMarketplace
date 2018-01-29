@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { FavComponent } from './fav/fav.component';
 import { CheckoutComponent } from './../checkout/checkout.component';
 import { TransactionComponent } from './../../components/main/transactions/transaction.component';
+import { SellListComponent } from './../../components/main/sell-list/sell-list.component';
 
 const routes: Routes = [
     { path: '', component: ProductsComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
     { path: 'favourites', component: TemporaryComponent },
     { path: 'transactions', component: TransactionComponent },
     { path: 'sell', component: SellComponent },
+    { path: 'sell-list',component:SellListComponent },
     { path: 'cart', component: CartComponent },
     { path: 'favourite', component: FavComponent },
     { path: 'auth/facebook/callback', component: FacebookComponent },
@@ -44,5 +46,6 @@ export const routingComponents = [
     SellComponent,
     FavComponent,
     CheckoutComponent,
-    TransactionComponent
+    TransactionComponent,
+    SellListComponent
 ]

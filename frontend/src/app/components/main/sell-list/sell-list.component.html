@@ -1,0 +1,17 @@
+<p>
+  sell-list works!
+</p>
+<div *ngFor="let product of products | async" class="each-product">
+  <a href="#">
+    <div class="card" style="width:20rem">
+      <cl-image class="card-img-top" [public-id]="sample">
+        <cl-transformation height="300" width="300" crop="fill"></cl-transformation>
+      </cl-image>
+      <div class="card-body">
+        <h4 class="card-title">{{ product.title }}</h4>
+        <p class="card-text">{{ product.description }}</p>
+        <p>Current ask price : $ {{ product.curentAskPrice }}</p>
+      </div>
+    </div><!-- ./card -->
+  </a>
+</div>
