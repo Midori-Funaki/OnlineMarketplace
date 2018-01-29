@@ -30,7 +30,6 @@ import { TemporaryComponent } from './components/main/temporary/temporary.compon
 import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutDetailComponent } from './components/checkout/checkout-detail/checkout-detail.component';
-import { CartConfirmComponent } from './components/main/cart/cart-confirm/cart-confirm.component';
 
 
 //Service imports
@@ -47,6 +46,8 @@ import { UserService } from './services/user.service';
 import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
 import { NotificationService } from './services/notification.service';
 import { NotificationComponent } from './components/top/notification/notification.component';
+import { CartChildComponent } from './components/main/cart/cart-child/cart-child.component';
+import { CheckoutCartComponent } from './components/checkout/checkout-cart/checkout-cart.component';
 
 @NgModule({
   declarations: [
@@ -62,9 +63,10 @@ import { NotificationComponent } from './components/top/notification/notificatio
     TemporaryComponent,
     CartItemComponent,
     CheckoutDetailComponent,
-    CartConfirmComponent,
     CheckoutConfirmComponent,
-    NotificationComponent
+    NotificationComponent,
+    CartChildComponent,
+    CheckoutCartComponent,
   ],
   imports: [
     CommonModule,

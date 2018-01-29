@@ -40,4 +40,5 @@ export class CheckoutDetailComponent implements OnInit {
       this.user = user;
     })
   }
+  
 }

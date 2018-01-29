@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <h1>Shopping Cart</h1>
+
+  <div class="shopping-cart">
+
+    <div class="column-labels">
+      <label class="product-image">Image</label>
+      <label class="product-details">Product</label>
+      <label class="product-price">Price</label>
+      <label class="product-quantity">Quantity</label>
+      <label class="product-line-price">Total</label>
+    </div>
+    <app-cart-item *ngFor="let item of items | async" [item]="item"></app-cart-item>
+    <div *ngIf="grandTotal" class="mr-5">
+      <div class="totals">
+        <div class="totals-item">
+          <label>Subtotal</label>
+          <div class="totals-value" id="cart-subtotal">{{grandTotal}}</div>
+        </div>
+        <div class="totals-item">
+          <label>Shipping</label>
+          <div class="totals-value" id="cart-shipping">{{shipping}}</div>
+        </div>
+        <div class="totals-item totals-item-total">
+          <label>Grand Total</label>
+          <div class="totals-value" id="cart-total">{{grandTotal}}</div>
+        </div>
+      </div>
+    </div>
+    <ng-content select="[content]"></ng-content>
+    <!-- <button class="checkout mr-5" (click)="goToCheckout()">Checkout</button> -->
+  </div>
+</div>
