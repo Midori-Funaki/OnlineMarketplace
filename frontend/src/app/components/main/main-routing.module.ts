@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'transactions', component: TransactionComponent, pathMatch: 'full' },
     { path: 'sell', component: SellComponent, pathMatch: 'full' },
     { path: 'cart', component: CartComponent,pathMatch: 'full' },
-    { path: 'favourite', component: FavComponent, pathMatch: 'full' },
+    { path: 'favourites', component: FavComponent, pathMatch: 'full' },
     { path: 'auth/facebook/callback', component: FacebookComponent },
     { path: 'auth/google/callback', component: GoogleComponent },
     { path: 'checkout', component: CheckoutComponent, pathMatch: 'full'}

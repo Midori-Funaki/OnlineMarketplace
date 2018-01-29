@@ -31,6 +31,11 @@ import { TemporaryComponent } from './components/main/temporary/temporary.compon
 import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutDetailComponent } from './components/checkout/checkout-detail/checkout-detail.component';
+import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
+import { NotificationService } from './services/notification.service';
+import { NotificationComponent } from './components/top/notification/notification.component';
+import { CartChildComponent } from './components/main/cart/cart-child/cart-child.component';
+import { CheckoutCartComponent } from './components/checkout/checkout-cart/checkout-cart.component';
 
 
 //Service imports
@@ -44,11 +49,8 @@ import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
 import { TransactionService } from './services/transaction.service';
 import { UserService } from './services/user.service';
-import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
-import { NotificationService } from './services/notification.service';
-import { NotificationComponent } from './components/top/notification/notification.component';
-import { CartChildComponent } from './components/main/cart/cart-child/cart-child.component';
-import { CheckoutCartComponent } from './components/checkout/checkout-cart/checkout-cart.component';
+import { CheckoutService } from './services/checkout.service';
+
 
 @NgModule({
   declarations: [
@@ -93,7 +95,8 @@ import { CheckoutCartComponent } from './components/checkout/checkout-cart/check
     SellService,
     TransactionService,
     UserService,
-    NotificationService
+    NotificationService,
+    CheckoutService,
   ],
   bootstrap: [
     AppComponent
