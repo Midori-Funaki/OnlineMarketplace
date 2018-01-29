@@ -52,7 +52,8 @@ class ProductService {
         quantity: productInfo.quantity,
         sellerId: user.id,
         // buyerId: productInfo.INTEGER,
-        categoryId: category.id
+        categoryId: category.id,
+        brand: productInfo.brand
       })
     })
     .then(product => {

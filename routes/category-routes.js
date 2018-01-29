@@ -8,7 +8,8 @@ class CategoryRoutes {
   router() {
     let router = express.Router();
     router.get('/', this.getAll.bind(this));
-    router.get('/brands/:title',this.getBrands.bind(this));    
+    router.get('/titles/:category/:brand', this.getTitles.bind(this));
+    router.get('/brands/:category',this.getBrands.bind(this));    
     router.get('/:title', this.get.bind(this));
     return router;
   }
@@ -26,8 +27,14 @@ class CategoryRoutes {
   }
 
   getBrands(req,res){
-    return this.categoryService.getBrands(req.params.title)
+    return this.categoryService.getBrands(req.params.category)
       .then(brands => res.json(brands))
+      .catch(err => res.status(500).json(err));
+  }
+
+  getTitles(req,res){
+    return this.categoryService.getTitles(req.params.category,req.params.brand)
+      .then(title => res.json(title))
       .catch(err => res.status(500).json(err));
   }
 }

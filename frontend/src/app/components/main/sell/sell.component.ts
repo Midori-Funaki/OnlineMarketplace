@@ -16,6 +16,7 @@ export class SellComponent implements OnInit {
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
+  titles: string[] = [];
   images: Array<any> = [];;//image array
 
   hasBaseDropZoneOver: boolean = false;
@@ -39,6 +40,9 @@ export class SellComponent implements OnInit {
       this.brands = brands;
       // this.brands.unshift("");
     });
+    this.sellService.gettitleSub().subscribe(titles=>{
+      this.titles = titles;
+    })
   }
 
   ngOnInit() {
@@ -46,11 +50,11 @@ export class SellComponent implements OnInit {
     this.sellForm = new FormGroup({
       category: new FormControl(""),
       brand: new FormControl(""),
+      title: new FormControl(""),
       size: new FormControl(""),
       color: new FormControl(""),
       askPrice: new FormControl(""),
-      condition: new FormControl(""),
-      photo: new FormControl("")
+      condition: new FormControl("")
     })
     //cloudinary uploader
     const uploaderOptions: FileUploaderOptions = {
@@ -141,10 +145,19 @@ export class SellComponent implements OnInit {
     this.sellService.getBrandsByCategory(category);
   }
 
-  createNewSell(){}
+  createNewSell(){
+    this.sellForm.value.images = this.images
+    this.sellService.registerNewSell(this.sellForm.value)
+  }
 
-  deleteImage(){
-    this.sellService.deleteImageById(this.uploadResult.public_id);
+  deleteImage(image){
+    // this.sellService.deleteImageById(this.uploadResult.public_id);
+    for(let i=0; i<this.images.length; i++){
+      if(this.images[i].id === image.id){
+        this.images.splice(i, 1);
+        break;
+      }
+    }
   }
 
   fileOverBase(e: any): void{

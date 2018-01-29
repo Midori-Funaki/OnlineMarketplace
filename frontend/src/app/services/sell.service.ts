@@ -9,10 +9,12 @@ export class SellService {
 
   category$: Subject<string[]>;
   brand$: Subject<string[]>;
+  title$: Subject<string[]>;
 
   constructor(private http:HttpClient, private cloudinary: Cloudinary) { 
     this.category$ = new Subject<string[]>(); 
-    this.brand$ = new Subject<string[]>(); 
+    this.brand$ = new Subject<string[]>();
+    this.title$ = new Subject<string[]>();
   }
 
   getcategorySub():Observable<string[]>{
@@ -21,6 +23,10 @@ export class SellService {
 
   getbrandSub():Observable<string[]>{
     return this.brand$.asObservable();
+  }
+
+  gettitleSub():Observable<string[]>{
+    return this.title$.asObservable();
   }
 
   getCategories():void{
@@ -33,6 +39,16 @@ export class SellService {
     this.http.get<string[]>('/api/categories/brands/'+categoryTitle).subscribe(result=>{
       this.brand$.next(result);
     });
+  }
+
+  getTitlesByBrands(categoryTitle:string, brand:string){
+    this.http.get<string[]>('/api/categories/titles/'+categoryTitle+'/'+brand).subscribe(result=>{
+      this.title$.next(result);
+    })
+  }
+
+  registerNewSell(formValues){
+    this.http.post('api/products/',formValues)
   }
 
   deleteImageById(id){
