@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl,FormGroup } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FileUploadModule } from 'ng2-file-upload';
 import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
@@ -79,6 +80,7 @@ import { CheckoutCartComponent } from './components/checkout/checkout-cart/check
     NgbModule.forRoot(),
     FileUploadModule,
     CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
+    BrowserAnimationsModule,
   ],
   providers: [
     FacebookAuthService, 
