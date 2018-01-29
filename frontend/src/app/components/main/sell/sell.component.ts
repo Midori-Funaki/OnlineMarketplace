@@ -16,13 +16,13 @@ export class SellComponent implements OnInit {
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
-  responses: Array<any> = [];;
+  titles: string[] = [];
+  images: Array<any> = [];;//image array
 
   hasBaseDropZoneOver: boolean = false;
   uploader: FileUploader;
   title: string = '';
   imageurl: string = '';
-  hasImage: boolean = false;
   uploadResult: any;
 
   constructor(
@@ -40,6 +40,9 @@ export class SellComponent implements OnInit {
       this.brands = brands;
       // this.brands.unshift("");
     });
+    this.sellService.gettitleSub().subscribe(titles=>{
+      this.titles = titles;
+    })
   }
 
   ngOnInit() {
@@ -47,11 +50,12 @@ export class SellComponent implements OnInit {
     this.sellForm = new FormGroup({
       category: new FormControl(""),
       brand: new FormControl(""),
+      title: new FormControl(""),
+      quantity: new FormControl(""),
       size: new FormControl(""),
       color: new FormControl(""),
-      askPrice: new FormControl(""),
-      condition: new FormControl(""),
-      photo: new FormControl("")
+      currentAskPrice: new FormControl(""),
+      condition: new FormControl("")
     })
     //cloudinary uploader
     const uploaderOptions: FileUploaderOptions = {
@@ -86,42 +90,40 @@ export class SellComponent implements OnInit {
     };
 
     //Insert or update file
-    const upsertResponse = fileItem => {
+    const upsertResponse = (fileItem):any => {
+      console.log('IMAGE ARR ',this.images);
       //Detect changes
       this.zone.run(() => {
         //Get the id of existing item
-        const existingId = this.responses.reduce((prev, current, index) => {
+        const existingId = this.images.reduce((prev, current, index) => {
           if (current.file.name === fileItem.file.name && !current.status) {
             return index;
           }
           return prev;
         }, -1);
+
         if (existingId > -1) {
           //Update existing item with new data
-          this.responses[existingId] = Object.assign(this.responses[existingId], fileItem);
+          this.images[existingId] = Object.assign(this.images[existingId], fileItem);
         } else {
           //Create new response
-          this.responses.push(fileItem);
-          // console.log('1. RESPONSES ',this.responses);
+          this.images.push(fileItem);
         }
       });
     };
 
     //Get upload response
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
-      //file info is item.file
-      console.log('whole item info ',item);
-      console.log('file info ',item.file);
-      console.log('headers ',headers);
-      this.uploadResult = JSON.parse(response);
-      // console.log('2. RESPONSES ',this.responses);
-      console.log('upload result ',response);
-      // console.log('file id ',uploadResult.public_id);
-      // console.log('format ',uploadResult.format);
-      this.imageurl = `${this.uploadResult.public_id}.${this.uploadResult.format}`;
-      this.hasImage = true;
-      /* SAVE THE NECESSARY INFO FOR DB */
-      /* CALL IMG FOR PREVIEW */
+      //Save the image data to images array
+      console.log('uploader status ',status);
+      upsertResponse(
+        {
+          file: item.file,
+          status,
+          data: JSON.parse(response),
+          url: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
+        }
+      ); 
     }
 
     //Upload process in progress
@@ -134,10 +136,31 @@ export class SellComponent implements OnInit {
     this.sellService.getBrandsByCategory(category);
   }
 
-  createNewSell(){}
+  filterTitle(brand){
+    this.sellService.getTitlesByBrands(this.sellForm.value.category, brand);
+  }
 
-  deleteImage(){
-    this.sellService.deleteImageById(this.uploadResult.public_id);
+  createNewSell(){
+    this.sellForm.value.photos = this.images;
+    console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
+    this.sellService.registerNewSell(this.sellForm.value);
+  }
+
+  deleteImage(image){
+    for(let i=0; i<this.images.length; i++){
+      if(this.images[i].id === image.id){
+        this.images.splice(i, 1);
+        break;
+      }
+    }
+    this.deleteFromCloudinary(image);
+  }
+
+  deleteFromCloudinary(photo){
+    //Delete the image on cloudinary
+    this.sellService.deleteImageById(photo.data.public_id).subscribe(result =>{
+      console.log(result);
+    });
   }
 
   fileOverBase(e: any): void{

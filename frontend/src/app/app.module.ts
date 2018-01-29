@@ -36,7 +36,7 @@ import { NotificationService } from './services/notification.service';
 import { NotificationComponent } from './components/top/notification/notification.component';
 import { CartChildComponent } from './components/main/cart/cart-child/cart-child.component';
 import { CheckoutCartComponent } from './components/checkout/checkout-cart/checkout-cart.component';
-
+import { SellListComponent } from './components/main/sell-list/sell-list.component';
 
 //Service imports
 import { FacebookAuthService } from './services/facebook-auth.service';
@@ -50,7 +50,6 @@ import { SellService } from './services/sell.service';
 import { TransactionService } from './services/transaction.service';
 import { UserService } from './services/user.service';
 import { CheckoutService } from './services/checkout.service';
-
 
 @NgModule({
   declarations: [
@@ -70,6 +69,8 @@ import { CheckoutService } from './services/checkout.service';
     NotificationComponent,
     CartChildComponent,
     CheckoutCartComponent,
+    CheckoutConfirmComponent,
+    SellListComponent
   ],
   imports: [
     CommonModule,

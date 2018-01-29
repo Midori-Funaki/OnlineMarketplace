@@ -18,7 +18,8 @@ export class ProductsService {
     })
   }
   constructor(
-    private http: HttpClient,
+    private router:Router, 
+    private http:HttpClient,
     private authService: AuthService
   ) { }
 
@@ -28,6 +29,13 @@ export class ProductsService {
 
   getProduct(id: number): Observable<Product> {
     return this.http.get<Product>('/api/products/' + id);
+  }
+  
+  getSellProducts(): Observable<string[]> {
+    return this.http.get<string[]>('/api/products/sell',{
+      headers: new HttpHeaders().set(
+        'Authorization', 'Bearer ' + this.authService.token)
+    });
   }
 
   addToCart(obj: {id: number, quantity: number}): Observable<Cart> {

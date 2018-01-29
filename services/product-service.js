@@ -1,7 +1,7 @@
 const models = require('./../models');
 const Product = models.Product;
-const Category = models.Category;
 const ProductPhoto = models.ProductPhoto;
+const Category = models.Category;
 
 class ProductService {
 
@@ -15,6 +15,23 @@ class ProductService {
         return products;
       }).catch(err => {
         return err;
+      })
+  }
+
+  getSell(user){
+    return Product.findAll({
+      where: {
+        sellerId: user.id
+      },
+      include: [{
+        model: ProductPhoto
+      }]
+    })
+      .then(products => {
+        return products
+      })
+      .catch(err => {
+        return err
       })
   }
 
@@ -35,25 +52,26 @@ class ProductService {
   }
 
   post(productInfo, user) {
-    let category;
-    Category.findOne({
+    // let category;
+    return Category.findOne({
       where: {
-        title: productInfo.categoryName
+        title: productInfo.category
       }
     })
     .then(category => {
       return Product.create({
         title: productInfo.title,
-        description: productInfo.description,
+        // description: productInfo.description,
         size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
-        curentBidPrice: productInfo.curentBidPrice,
+        // curentBidPrice: productInfo.curentBidPrice,
         currentAskPrice: productInfo.currentAskPrice,
         quantity: productInfo.quantity,
         sellerId: user.id,
         // buyerId: productInfo.INTEGER,
-        categoryId: category.id
+        categoryId: category.id,
+        brand: productInfo.brand
       })
     })
     .then(product => {
@@ -65,9 +83,11 @@ class ProductService {
       }
     })
     .then(() => {
-      console.log('Product posted')
+      console.log('Product posted');
+      return 'Product posted';
     }).catch(err => {
       console.log(err)
+      return err;
     })
   }
 
