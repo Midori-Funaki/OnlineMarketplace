@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2" style="background: lightblue">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
       <app-sidebar></app-sidebar>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 products-container" style="background: yellow">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 products-container">
       <div *ngFor="let product of products | async" class="each-product">
         <a href="products/{{product.id}}">
           <div class="card" style="width:20rem">
