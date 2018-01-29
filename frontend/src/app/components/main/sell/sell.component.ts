@@ -145,6 +145,10 @@ export class SellComponent implements OnInit {
     this.sellService.getBrandsByCategory(category);
   }
 
+  filterTitle(brand){
+    this.sellService.getTitlesByBrands(this.sellForm.value.category, brand)
+  }
+
   createNewSell(){
     this.sellForm.value.images = this.images
     this.sellService.registerNewSell(this.sellForm.value)
