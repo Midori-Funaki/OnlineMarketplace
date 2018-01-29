@@ -50,6 +50,7 @@ import { SellService } from './services/sell.service';
 import { TransactionService } from './services/transaction.service';
 import { UserService } from './services/user.service';
 import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
+import { SellListComponent } from './components/main/sell-list/sell-list.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm
     TransactionComponent,
     CheckoutDetailComponent,
     CartConfirmComponent,
-    CheckoutConfirmComponent
+    CheckoutConfirmComponent,
+    SellListComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 const models = require('./../models');
 const Product = models.Product;
-const Category = models.Category;
 const ProductPhoto = models.ProductPhoto;
+const Category = models.Category;
 
 class ProductService {
 
@@ -15,6 +15,23 @@ class ProductService {
         return products;
       }).catch(err => {
         return err;
+      })
+  }
+
+  getSell(user){
+    return Product.findAll({
+      where: {
+        sellerId: user.id
+      },
+      include: [{
+        model: ProductPhoto
+      }]
+    })
+      .then(products => {
+        return products
+      })
+      .catch(err => {
+        return err
       })
   }
 
