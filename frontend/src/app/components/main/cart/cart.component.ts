@@ -10,18 +10,30 @@ import { CartService } from '../../../services/cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  items: Observable<Product[]>;
+  items: Observable<any>;
+  grandTotal:number;
+  shipping:number = 0;
 
   constructor(
-    private cartService: CartService,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
-    
+    this.getItems();
+    this.getTotal();
   }
 
-  getItems(userId){
-    this.items = this.cartService.getItems(userId);
+  getItems() {
+    this.items = this.cartService.getItems();
+  }
+
+  getTotal(): void {
+    this.items.subscribe(items=> {
+      this.grandTotal =0 ;
+      for (let item of items) {
+        this.grandTotal += item.Product.curentBidPrice * item.quantity;
+      } 
+    })
   }
 
 }

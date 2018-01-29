@@ -18,7 +18,8 @@ export class LoginComponent implements OnInit {
               private authService: AuthService, 
               private facebookAuthService: FacebookAuthService,
               private googleAuthService: GoogleAuthService,
-              private router: Router,) {}
+              private router: Router
+            ) {}
 
   ngOnInit() {
     this.localLogin = this.formBuilder.group({
@@ -28,8 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(e:any){
-    e.preventDefault();
-    //console.log(this.localLogin.value);
+    // console.log(this.localLogin.value);
     if (this.localLogin.valid && this.localLogin.dirty){
       this.authService.logIn(this.localLogin.value.email, this.localLogin.value.password);
     }

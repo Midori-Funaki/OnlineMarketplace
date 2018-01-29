@@ -8,16 +8,21 @@ import { TemporaryComponent } from './temporary/temporary.component';
 import { SellComponent } from './sell/sell.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CartComponent } from './cart/cart.component';
+import { FavComponent } from './fav/fav.component';
+import { CheckoutComponent } from './../checkout/checkout.component';
+import { TransactionComponent } from './../../components/main/transactions/transaction.component';
 
 const routes: Routes = [
-    { path: '', component: ProductsComponent },
-    { path: 'products/:id', component: ProductDetailComponent },
-    { path: 'favourites', component: TemporaryComponent },
-    { path: 'transactions', component: TemporaryComponent },
-    { path: 'sell', component: SellComponent },
-    { path: 'cart', component: CartComponent },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: ProductsComponent, pathMatch: 'full'},
+    { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
+    { path: 'transactions', component: TemporaryComponent, pathMatch: 'full' },
+    { path: 'sell', component: SellComponent, pathMatch: 'full' },
+    { path: 'cart', component: CartComponent,pathMatch: 'full' },
+    { path: 'favourite', component: FavComponent, pathMatch: 'full' },
     { path: 'auth/facebook/callback', component: FacebookComponent },
-    { path: 'auth/google/callback', component: GoogleComponent }
+    { path: 'auth/google/callback', component: GoogleComponent },
+    { path: 'checkout', component: CheckoutComponent, pathMatch: 'full'}
 ]
 
 @NgModule({
@@ -36,5 +41,8 @@ export const routingComponents = [
     TemporaryComponent,
     ProductDetailComponent,
     CartComponent,
-    SellComponent
+    SellComponent,
+    FavComponent,
+    CheckoutComponent,
+    TransactionComponent
 ]

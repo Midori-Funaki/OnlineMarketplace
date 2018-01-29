@@ -1,0 +1,15 @@
+<div class="product">
+  <div class="product-image">
+    <img src="https://picsum.photos/500/500?image=2"> <!-- to add photos -->
+  </div>
+  <div class="product-details">
+    <div class="product-title">{{item.Product.title}}</div>
+    <p class="product-description">{{item.Product.description}}</p>
+  </div>
+  <div class="product-price">{{item.Product.curentBidPrice}}</div>
+  <div class="product-quantity">
+    {{item.quantity}}
+  </div>
+
+  <div class="product-line-price">{{item.Product.curentBidPrice * item.quantity}}</div>
+</div>

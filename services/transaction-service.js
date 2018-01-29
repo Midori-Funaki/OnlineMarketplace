@@ -1,81 +1,28 @@
 var gateway = require('./../gateway'),
-    braintree = require('braintree');
+    braintree = require('braintree'),
+    models = require('./../models'),
+    Transaction = models.Transaction,
+    Product = models.Product;
 
-var TRANSACTION_SUCCESS_STATUSES = [
-    braintree.Transaction.Status.Authorizing,
-    braintree.Transaction.Status.Authorized,
-    braintree.Transaction.Status.Settled,
-    braintree.Transaction.Status.Settling,
-    braintree.Transaction.Status.SettlementConfirmed,
-    braintree.Transaction.Status.SettlementPending,
-    braintree.Transaction.Status.SubmittedForSettlement
-]
+class transactionService {
+  constructor() { }
 
-function createResultObject(transaction){
-    let result;
-    let status = transaction.status;
-
-    if(TRANSACTION_SUCCESS_STATUSES.indexOf(status) !== -1){
-        result = {
-            header: 'Payment Success!',
-            icon: 'success',
-            message: 'Your test transaction has been successfully processed.'
-        }
-    } else {
-        result = {
-            header: 'Transaction Failed',
-            icon: 'fail',
-            message: 'Your test transaction has a status of ' + status + '.'
-        }
-    }
-
-    return result;
-}
-
-class transactionService{
-    constructor(){}
-
-    getClientToken(){
-        return new Promise(function(resolve,reject){
-            gateway.clientToken.generate({},function(err, response){
-                if(err){
-                    console.log(err);
-                    reject(err);
-                }
-                resolve(response.clientToken);
-            })
+    get(user){
+        //******** NEED TO CHANGE LINE14 sellerId TO buyerID ********
+        return Transaction.findAll({
+            where:{
+                sellerId: user.id
+            },
+            include: [{
+              model: Product
+            }]
+        }).then((transactions) => {
+            return transactions;
+        }).catch((err) => {
+            return err;
         })
     }
 
-    processNonce(paymentAmount,nonceFromTheClient){
-        //Using fake values for testing
-        return new Promise(function(resolve,reject){
-            gateway.transaction.sale({
-                amount: "10.00",
-                paymentMethodNonce: "fake-valid-nonce",
-                options:{
-                    submitForSettlement: true
-                }
-            }, function(err,result){
-                if(result.success || result.transaction){
-                    resolve(result);
-                } else {
-                    transactionErrors = result.errors.deepErrors();
-                    reject(formatErrors(transactionErrors));
-                }
-            })
-        })
-    }
-
-    showCheckouts(checkoutId){
-        let result;
-        return new Promise(function(resolve, reject){
-            gateway.transaction.find(checkoutId, function(err, transaction){
-                result = createResultObject(transaction);
-                resolve({transaction: transaction, result: result});
-            });
-        })
-    }
 }
 
 module.exports = transactionService;

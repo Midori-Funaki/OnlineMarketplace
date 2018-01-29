@@ -1,8 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl,FormGroup } from '@angular/forms';
+
+import { FileUploadModule } from 'ng2-file-upload';
+import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
+import * as cloudinary from 'cloudinary-core';
+import cloudinaryConfiguration from './config';
 
 //Routing imports
 import { MainRoutingModule } from './components/main/main-routing.module';
@@ -22,6 +30,12 @@ import { ProductDetailComponent } from './components/main/product-detail/product
 import { TemporaryComponent } from './components/main/temporary/temporary.component';
 import { SellComponent } from './components/main/sell/sell.component';
 import { CartComponent } from './components/main/cart/cart.component';
+import { TransactionComponent } from './components/main/transactions/transaction.component';
+import { FavComponent } from './components/main/fav/fav.component';
+import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CheckoutDetailComponent } from './components/checkout/checkout-detail/checkout-detail.component';
+import { CartConfirmComponent } from './components/main/cart/cart-confirm/cart-confirm.component';
 
 
 //Service imports
@@ -33,7 +47,9 @@ import { GoogleAuthService } from './services/google-auth.service';
 import { ProductsService } from './services/products.service';
 import { CartService } from './services/cart.service';
 import { SellService } from './services/sell.service';
-
+import { TransactionService } from './services/transaction.service';
+import { UserService } from './services/user.service';
+import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
 
 @NgModule({
   declarations: [
@@ -50,14 +66,26 @@ import { SellService } from './services/sell.service';
     TemporaryComponent,
     SellComponent,
     ProductDetailComponent,
-    CartComponent
+    CartComponent,
+    FavComponent,
+    CartItemComponent,
+    CheckoutComponent,
+    TransactionComponent,
+    CheckoutDetailComponent,
+    CartConfirmComponent,
+    CheckoutConfirmComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpModule,
     MainRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot(),
+    FileUploadModule,
+    CloudinaryModule.forRoot(cloudinary, cloudinaryConfiguration),
   ],
   providers: [
     FacebookAuthService, 
@@ -67,9 +95,13 @@ import { SellService } from './services/sell.service';
     GoogleAuthService,
     ProductsService,
     CartService,
-    SellService
+    SellService,
+    TransactionService,
+    UserService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 
 export class AppModule {}

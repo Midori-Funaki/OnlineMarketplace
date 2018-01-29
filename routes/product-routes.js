@@ -1,4 +1,6 @@
 var express = require('express');
+var authClass = require('./../auth');
+var auth = authClass();
 
 class ProductRoutes{
   constructor(productService){
@@ -9,9 +11,9 @@ class ProductRoutes{
     let router = express.Router();
     router.get('/:id',this.get.bind(this));
     router.get('/', this.getAll.bind(this));
-    router.post('/', this.post.bind(this));
-    router.delete('/:id',this.delete.bind(this));
-    router.put('/:id',this.update.bind(this));
+    router.post('/', auth.authenticate(), this.post.bind(this));
+    router.delete('/:id',auth.authenticate(), this.delete.bind(this));
+    router.put('/:id',auth.authenticate(), this.update.bind(this));
     return router;
   }
 

@@ -1,76 +1,114 @@
 <div class="container">
   <div class="col-xs-6 mx-auto">
-    <!-- <form [formGroup]="form"> -->
+    <form [formGroup]="sellForm" (ngSubmit)="createNewSell()">
       <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label" for="category">Category</label>
-          <select id="category" class="form-control" (change)="filterBrand($event.target.value)">
-            <option value="" disabled selected></option>
-            <option *ngFor="let category of categories | async">{{ category.title }}</option>
+          <label class="float-label">Category</label>
+          <select id="category" class="form-control" formControlName="category" (change)="filterBrand($event.target.value)">
+            <option *ngFor="let category of categories" [value]="category.title">{{ category.title }}</option>
           </select>
         </span>
       </div><!-- form-group -->
       <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label" for="category">Brand</label>
-          <select id="category" class="form-control">
-            <option value="" disabled selected></option>
-            <option *ngFor="let brand of brands | async">{{ brand }}</option>
+          <label class="float-label">Brand</label>
+          <select id="brand" class="form-control" formControlName="brand">
+            <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
           </select>
         </span>
       </div><!-- form-group -->
       <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label" for="category">Size</label>
+          <label class="float-label">Size</label>
           <div class="btn-toolbar">
-            <div class="btn-group mr-2">
-                <button class="btn btn-primary" type="button">1</button>
-                <button class="btn btn-primary" type="button">2</button>
-                <button class="btn btn-primary" type="button">3</button>
-                <button class="btn btn-primary" type="button">4</button>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="size" formControlName="size">
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="1"> 1
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="2"> 2
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" [value]="3"> 3
+              </label>
             </div>
           </div>
         </span>
       </div><!-- form-group -->
       <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label" for="category">Color</label>
+          <label class="float-label">Color</label>
           <div class="btn-toolbar">
-            <div class="btn-group mr-2">
-                <button class="btn btn-primary" type="button">1</button>
-                <button class="btn btn-primary" type="button">2</button>
-                <button class="btn btn-primary" type="button">3</button>
-                <button class="btn btn-primary" type="button">4</button>
-            </div>
-          </div>
-        </span>
-      </div><!-- form-group -->
-    <!-- </form> -->
-    <div class="form-group">
-        <span class="float-field float-select">
-          <label class="float-label" for="category">Ask Price</label><br>
-          <input>
-        </span>
-    </div><!-- form-group -->
-    <div class="form-group">
-        <span class="float-field float-select">
-          <label class="float-label" for="category">Product Condition</label>
-          <div class="btn-toolbar">
-            <div class="btn-group mr-2">
-                <button class="btn btn-primary" type="button">new</button>
-                <button class="btn btn-primary" type="button">used</button>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color">
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="black"> black
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="white"> white
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="gray"> gray
+              </label>
+              <label ngbButtonLabel class="btn-primary">
+                <input ngbButton type="radio" value="yellow"> yellow
+              </label>
             </div>
           </div>
         </span>
       </div><!-- form-group -->
       <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label" for="category">Photos</label>
-          <div class="photo-upload-container">
-            <button class="btn btn-success">Upload</button>
+          <label class="float-label">Ask Price</label><br>
+          <input type="number" name="askPrice" id="askPrice" class="form-control" [value]="" formControlName="askPrice">
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+          <span class="float-field float-select">
+            <label class="float-label">Product Condition</label>
+            <div class="btn-toolbar">
+              <div class="btn-group btn-group-toggle" ngbRadioGroup name="condition" formControlName="condition">
+                <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="new"> new
+                </label>
+                <label ngbButtonLabel class="btn-primary">
+                  <input ngbButton type="radio" value="used"> used
+                </label>
+            </div>
           </div>
         </span>
       </div><!-- form-group -->
-      <button class="btn btn-primary">Start Selling</button>
+      <!-- <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label">Photos</label>
+          <div class="photo-upload-container form-control" formControlName="photo">
+            <label ngbButtonLabel>
+              <input ngbButton class="btn btn-default" type="file" [value]="test">
+            </label>
+          </div>
+        </span>
+      </div>form-group -->
+      <div class="form-group">
+        <p>PHOTO UPLOAD TEST</p>
+        <fieldset>
+          <div class="wrapper">
+            <div class="box form-group" ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}">
+              <div class="js--image-preview">
+                <div *ngIf="hasImage" class="delete-btn" (click)="deleteImage()"></div>
+                <cl-image [public-id]="imageurl">
+                  <cl-transformation height="225" width="auto" crop="fill"></cl-transformation>
+                </cl-image>
+              </div>
+              <div class="upload-options">
+                <label>
+                  <input type="file" class="image-upload" ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"/>
+                </label>
+              </div>
+            </div>
+          </div><!-- wrapper -->
+        </fieldset>
+      </div>
+      <button type="submit" class="btn btn-primary">Start Selling</button>
+      <pre>{{ sellForm.value | json }}</pre>
+    </form>
   </div><!-- col -->
 </div>
