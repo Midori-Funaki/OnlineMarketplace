@@ -30,6 +30,8 @@ class ProductRoutes{
   }
 
   post(req,res){
+    let result = this.productService.post(req.body, req.user)
+    console.log("Result", result);
     return this.productService.post(req.body, req.user)
       .then(()=>{
         res.send('Registration Completed')

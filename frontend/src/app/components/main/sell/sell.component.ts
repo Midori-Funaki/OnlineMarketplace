@@ -51,9 +51,10 @@ export class SellComponent implements OnInit {
       category: new FormControl(""),
       brand: new FormControl(""),
       title: new FormControl(""),
+      quantity: new FormControl(""),
       size: new FormControl(""),
       color: new FormControl(""),
-      askPrice: new FormControl(""),
+      currentAskPrice: new FormControl(""),
       condition: new FormControl("")
     })
     //cloudinary uploader
@@ -128,7 +129,7 @@ export class SellComponent implements OnInit {
           file: item.file,
           status,
           data: JSON.parse(response),
-          id: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
+          url: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
         }
       ); 
       /* SAVE THE NECESSARY INFO FOR DB */
@@ -146,12 +147,13 @@ export class SellComponent implements OnInit {
   }
 
   filterTitle(brand){
-    this.sellService.getTitlesByBrands(this.sellForm.value.category, brand)
+    this.sellService.getTitlesByBrands(this.sellForm.value.category, brand);
   }
 
   createNewSell(){
-    this.sellForm.value.images = this.images
-    this.sellService.registerNewSell(this.sellForm.value)
+    this.sellForm.value.photos = this.images;
+    console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
+    this.sellService.registerNewSell(this.sellForm.value);
   }
 
   deleteImage(image){

@@ -35,19 +35,19 @@ class ProductService {
   }
 
   post(productInfo, user) {
-    let category;
-    Category.findOne({
+    // let category;
+    return Category.findOne({
       where: {
-        title: productInfo.categoryName
+        title: productInfo.category
       }
     }).then(category => {
       return Product.create({
         title: productInfo.title,
-        description: productInfo.description,
+        // description: productInfo.description,
         size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
-        curentBidPrice: productInfo.curentBidPrice,
+        // curentBidPrice: productInfo.curentBidPrice,
         currentAskPrice: productInfo.currentAskPrice,
         quantity: productInfo.quantity,
         sellerId: user.id,
@@ -65,9 +65,11 @@ class ProductService {
       }
     })
     .then(() => {
-      console.log('Product posted')
+      console.log('Product posted');
+      return 'Product posted';
     }).catch(err => {
       console.log(err)
+      return err;
     })
   }
 
