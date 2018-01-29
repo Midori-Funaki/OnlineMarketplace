@@ -40,7 +40,8 @@ class ProductService {
       where: {
         title: productInfo.categoryName
       }
-    }).then(category => {
+    })
+    .then(category => {
       return Product.create({
         title: productInfo.title,
         description: productInfo.description,

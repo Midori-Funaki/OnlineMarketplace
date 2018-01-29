@@ -13,20 +13,36 @@ class CartService {
       include: [{
         model: Product
       }]
-    }).then((items) => {
-      return items;
+    }).then((cart) => {
+      return cart;
     }).catch((err) => {
       return err;
     })
   }
 
   post(user, productInfo) {
-    return Cart.create({
-      userId: user,
-      productId: productInfo.productId,
-      quantity: productInfo.quantity
-    }).then((item) => {
-      return this.get(user)
+    // console.log("add to cart", user, productInfo);
+    return Cart.findOne({
+      where: {
+        userId: user.id,
+        productId : productInfo.id
+      }
+    }).then(cart => {
+      if (cart) {
+        // console.log("cart", cart);
+        cart.quantity += productInfo.quantity;
+        cart.save()  //Executing (default): UPDATE "Carts" SET "quantity"=4,"updatedAt"='2018-01-29 07:22:21.030 +00:00' WHERE "productId" = 5
+        return cart;
+      }
+      else {
+        return Cart.create({
+          userId: user.id,
+          productId: productInfo.id,
+          quantity: productInfo.quantity
+        }).then(cart => {
+          return cart;
+        })
+      }
     }).catch((err) => {
       return err
     })

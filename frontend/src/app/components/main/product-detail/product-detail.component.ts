@@ -3,6 +3,7 @@ import { Product } from '../../../models/Product';
 import { ProductsService } from '../../../services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,10 +11,12 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-
+  quantity:number =1;
+  
   constructor(
     private productsService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   product: Observable<Product>;
@@ -31,6 +34,10 @@ export class ProductDetailComponent implements OnInit {
 
   changeImage(event) {
     this.imgsrc = event.srcElement.src;
+  }
+
+  addToCart(id) {
+    this.productsService.addToCart({ id:id, quantity: this.quantity}).subscribe(cart => console.log(cart));
   }
 
 }
