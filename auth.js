@@ -24,6 +24,7 @@ module.exports = function(){
             }
         }).catch(err=> console.log(err));
     });
+    
     passport.use(strategy);
 
     return {
