@@ -157,13 +157,14 @@ export class SellComponent implements OnInit {
   }
 
   deleteImage(image){
-    // this.sellService.deleteImageById(this.uploadResult.public_id);
     for(let i=0; i<this.images.length; i++){
       if(this.images[i].id === image.id){
         this.images.splice(i, 1);
         break;
       }
     }
+    //Delete the image on cloudinary
+    this.sellService.deleteImageById(image.data.public_id);
   }
 
   fileOverBase(e: any): void{

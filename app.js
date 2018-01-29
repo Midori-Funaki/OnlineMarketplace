@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cloudinary = require('cloudinary');
 
 //routes instance
 var ProductRoutes = require('./routes/product-routes');
@@ -12,7 +13,8 @@ var UserProductRoutes = require('./routes/user-product-routes');
 var UserRoutes = require('./routes/user-routes');
 var TransactionRoutes = require('./routes/transaction-routes');
 var CartRoutes = require('./routes/cart-routes');
-var LoginRoutes = require ('./routes/login-routes')
+var LoginRoutes = require ('./routes/login-routes');
+var CloudinaryRoutes = require('./routes/cloudinary-routes');
 
 //service files
 var UserService = require('./services/user-service');
@@ -20,6 +22,7 @@ var ProductService = require('./services/product-service');
 var CategoryService = require('./services/category-service');
 var TransactionService = require('./services/transaction-service');
 var CartService = require('./services/cart-service');
+var cloudinaryService = require('./services/cloudinary-service');
 
 //service instance
 var userService = new UserService();
@@ -27,6 +30,7 @@ var categoryService = new CategoryService();
 var productService = new ProductService();
 var transactionService = new TransactionService();
 var cartService = new CartService();
+var cloudinaryService = new cloudinaryService();
 
 //frontend imports
 var reload = require('reload');
@@ -58,10 +62,18 @@ watch.watchTree(__dirname + "/frontend/dist", function (f, curr, prev) {
     reloadServer.reload();
 });
 
+// Coloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
+})
+
 // Routing
 app.use('/api/users/:id/products', new UserProductRoutes(userService).router());
 app.use('/api/users',new UserRoutes(userService).router().use('/api/users/:id/products', new UserProductRoutes(userService).router()));
 app.use('/api/transactions',new TransactionRoutes(transactionService).router());
+app.use('/api/images',new CloudinaryRoutes(cloudinaryService).router());
 app.use('/api/products', new ProductRoutes(productService).router());
 app.use('/api/categories', new CategoryRoutes(categoryService).router());
 app.use('/api/carts', new CartRoutes(cartService).router());
