@@ -46,8 +46,9 @@ export class AuthService {
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['/']);
+            this.notificationService.sendSuccessMessage('You have successfully logged In!');
         },(err)=>{
-            alert("Log In Failed!");
+            this.notificationService.sendErrorMessage('LogIn Failed!');
         });
     }
 
@@ -58,8 +59,9 @@ export class AuthService {
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['']);
+            this.notificationService.sendSuccessMessage('You have successfully logged In!');
         },(err)=>{
-            alert("Log In Failed!");
+            this.notificationService.sendErrorMessage('LogIn Failed!');
         });
     }
 
@@ -79,5 +81,6 @@ export class AuthService {
         this.isLoggedIn_sub.next(this.isLoggedIn);
         localStorage.removeItem('myToken');
         this.router.navigate(['/']);
+        this.notificationService.sendSuccessMessage('You have successfully Log Out!');
     }
 }

@@ -1,2 +1,1 @@
-<div *ngIf="message.type === 'success'" class="msg-box success">{{this.message.message}}</div>
-<div *ngIf="message.type === 'fail'" class="msg-box fail">{{this.message.message}}</div>
+<div [@Notification]="CurrentNotification" class="msg-box">{{this.message.message}}</div>

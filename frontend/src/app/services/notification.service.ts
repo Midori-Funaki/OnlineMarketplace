@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
+interface Message {
+    msgStatus: string;
+    message?: string;
+}
+
 @Injectable()
 export class NotificationService {
-    notification_subj: Subject<Object>;
-    type: string;
+    notification_subj: Subject<Message>;
     
     constructor(){
-        this.notification_subj = new Subject<Object>();
+        this.notification_subj = new Subject<Message>();
     }
 
     getNotificationSubj(){
@@ -15,24 +19,24 @@ export class NotificationService {
     }
 
     resetMessage(){
-        this.notification_subj.next({type:'', message: ''});
+        this.notification_subj.next({msgStatus: 'hide'});
     }
 
     getInitMessage(){
-        this.notification_subj.next({type:'', message: ''});
+        this.notification_subj.next({msgStatus: 'hide', message: ''});
     }
 
     sendSuccessMessage(message){
-        this.notification_subj.next({type:'success', message: message});
+        this.notification_subj.next({msgStatus: 'successShow', message: message});
         setTimeout(()=>{
             this.resetMessage();
-        }, 3000);
+        }, 2000);
     }
 
     sendErrorMessage(message){
-        this.notification_subj.next({type:'fail', message: message});
+        this.notification_subj.next({msgStatus: 'failShow', message: message});
         setTimeout(()=>{
             this.resetMessage();
-        }, 3000);
+        }, 2000);
     }
 }
