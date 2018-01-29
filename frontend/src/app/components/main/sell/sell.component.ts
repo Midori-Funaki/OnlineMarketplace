@@ -16,13 +16,12 @@ export class SellComponent implements OnInit {
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
-  responses: Array<any> = [];;
+  images: Array<any> = [];;//image array
 
   hasBaseDropZoneOver: boolean = false;
   uploader: FileUploader;
   title: string = '';
   imageurl: string = '';
-  hasImage: boolean = false;
   uploadResult: any;
 
   constructor(
@@ -90,7 +89,7 @@ export class SellComponent implements OnInit {
       //Detect changes
       this.zone.run(() => {
         //Get the id of existing item
-        const existingId = this.responses.reduce((prev, current, index) => {
+        const existingId = this.images.reduce((prev, current, index) => {
           if (current.file.name === fileItem.file.name && !current.status) {
             return index;
           }
@@ -98,10 +97,10 @@ export class SellComponent implements OnInit {
         }, -1);
         if (existingId > -1) {
           //Update existing item with new data
-          this.responses[existingId] = Object.assign(this.responses[existingId], fileItem);
+          this.images[existingId] = Object.assign(this.images[existingId], fileItem);
         } else {
           //Create new response
-          this.responses.push(fileItem);
+          this.images.push(fileItem);
           // console.log('1. RESPONSES ',this.responses);
         }
       });
@@ -110,16 +109,24 @@ export class SellComponent implements OnInit {
     //Get upload response
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
       //file info is item.file
-      console.log('whole item info ',item);
-      console.log('file info ',item.file);
-      console.log('headers ',headers);
+      // console.log('whole item info ',item);
+      // console.log('file info ',item.file);
+      // console.log('headers ',headers);
       this.uploadResult = JSON.parse(response);
-      // console.log('2. RESPONSES ',this.responses);
+      // console.log('2. IMAGES ',this.images);
       console.log('upload result ',response);
       // console.log('file id ',uploadResult.public_id);
       // console.log('format ',uploadResult.format);
       this.imageurl = `${this.uploadResult.public_id}.${this.uploadResult.format}`;
-      this.hasImage = true;
+      /* save image data to the array */
+      upsertResponse(
+        {
+          file: item.file,
+          status,
+          data: JSON.parse(response),
+          id: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
+        }
+      ); 
       /* SAVE THE NECESSARY INFO FOR DB */
       /* CALL IMG FOR PREVIEW */
     }
