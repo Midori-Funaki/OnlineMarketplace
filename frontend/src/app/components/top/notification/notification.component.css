@@ -1,0 +1,15 @@
+.msg-box{
+    text-align: center;
+    font-size: 18px;
+    color: white;
+    padding: 10px 0px;
+    border-radius: 10px;
+}
+
+.msg-box.success{
+    background: rgba(0, 128, 0, 0.500);
+}
+
+.msg-box.fail{
+    background: rgba(255, 0, 0, 0.500);
+}

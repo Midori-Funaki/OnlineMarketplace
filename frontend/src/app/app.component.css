@@ -8,14 +8,15 @@ body{
     width: 100%;
     margin: 0px;
     padding: 0px;
-    height: 100px;
+    height: 5%;
+    background: rgba(129, 126, 126, 0.507);
 }
 
 #main {
     width: 100%;
     margin: 0px;
     padding: 0px;
-    height: 500px;
+    height: 85%;
 }
 
 #bottom {
@@ -23,4 +24,5 @@ body{
     margin: 0px;
     padding: 0px;
     height: 10%;
+    background: rgba(129, 126, 126, 0.507);
 }

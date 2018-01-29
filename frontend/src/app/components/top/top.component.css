@@ -1,0 +1,28 @@
+.navbar-brand {
+    font-size: 35px;
+    font-weight: 700;
+    font-family: 'Lobster', cursive;
+}
+
+.container-fluid {
+    padding: 0px;
+}
+
+.btn.btn-secondary {
+    font-size: 13px;
+    background: transparent;
+}
+
+.col-lg-2 {
+    justify-content: flex-end;
+}
+
+#login-signup-btn {
+    padding-right: 5px;
+    text-align: right;
+}
+
+#signup-btn {
+    padding-left: 0px;
+    padding-right: 5px;
+}

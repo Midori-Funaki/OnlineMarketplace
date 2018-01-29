@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { Http } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
-
+import { NotificationService } from './notification.service';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +10,9 @@ export class AuthService {
     isLoggedIn: boolean = false;
     isLoggedIn_sub: Subject<boolean>;
 
-    constructor(private router: Router, private http: Http){
+    constructor(private router: Router, private http: Http, 
+                private notificationService: NotificationService){
+
         this.isLoggedIn_sub = new Subject<boolean>();
         try{
             this.token = localStorage.getItem('myToken');
@@ -31,8 +33,9 @@ export class AuthService {
             this.isLoggedIn = true;
             this.isLoggedIn_sub.next(this.isLoggedIn);
             this.router.navigate(['/']);
+            this.notificationService.sendSuccessMessage('You have successfully logged In!');
         },(err)=>{
-            alert("Log In Failed!");
+            this.notificationService.sendErrorMessage('LogIn Failed!');
         });
     }
 

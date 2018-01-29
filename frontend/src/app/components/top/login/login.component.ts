@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { FacebookAuthService } from '../../services/facebook-auth.service';
-import { GoogleAuthService } from '../../services/google-auth.service';
+import { FacebookAuthService } from '../../../services/facebook-auth.service';
+import { GoogleAuthService } from '../../../services/google-auth.service';
 
 @Component({
   selector: 'app-login',

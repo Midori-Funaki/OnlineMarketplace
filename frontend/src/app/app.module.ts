@@ -17,21 +17,16 @@ import { MainRoutingModule } from './components/main/main-routing.module';
 
 //Component imports
 import { AppComponent } from './app.component';
-import { routingComponents } from './app-routing.module';
+import { routingComponents } from './components/main/main-routing.module';
 import { MainComponent } from './components/main/main.component';
 import { TopComponent } from './components/top/top.component';
 import { BottomComponent } from './components/bottom/bottom.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/top/login/login.component';
+import { SignupComponent } from './components/top/signup/signup.component';
 import { TabsComponent } from './components/main/tabs/tabs.component';
 import { SidebarComponent } from './components/main/sidebar/sidebar.component';
-import { ProductsComponent } from './components/main/products/products.component';
 import { ProductDetailComponent } from './components/main/product-detail/product-detail.component';
 import { TemporaryComponent } from './components/main/temporary/temporary.component';
-import { SellComponent } from './components/main/sell/sell.component';
-import { CartComponent } from './components/main/cart/cart.component';
-import { TransactionComponent } from './components/main/transactions/transaction.component';
-import { FavComponent } from './components/main/fav/fav.component';
 import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutDetailComponent } from './components/checkout/checkout-detail/checkout-detail.component';
@@ -50,6 +45,8 @@ import { SellService } from './services/sell.service';
 import { TransactionService } from './services/transaction.service';
 import { UserService } from './services/user.service';
 import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
+import { NotificationService } from './services/notification.service';
+import { NotificationComponent } from './components/top/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -62,18 +59,12 @@ import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm
     LoginComponent,
     SignupComponent,
     TabsComponent,
-    ProductsComponent,
     TemporaryComponent,
-    SellComponent,
-    ProductDetailComponent,
-    CartComponent,
-    FavComponent,
     CartItemComponent,
-    CheckoutComponent,
-    TransactionComponent,
     CheckoutDetailComponent,
     CartConfirmComponent,
-    CheckoutConfirmComponent
+    CheckoutConfirmComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
@@ -97,7 +88,8 @@ import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm
     CartService,
     SellService,
     TransactionService,
-    UserService
+    UserService,
+    NotificationService
   ],
   bootstrap: [
     AppComponent

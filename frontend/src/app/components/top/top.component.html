@@ -1,15 +1,20 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">App Site Title Here</a>
+    <div class="col-lg-3">
+      <div class="navbar-brand">Deals Hub</div>
     </div>
-    <ul class="nav navbar-nav">
-      <li *ngIf="isLoggedIn; else login"><a href="#" (click)="logOut($event)">Logout</a></li>
-      <ng-template #login>
+    <div class="col-lg-6">
+      <app-notification></app-notification>
+    </div>
+    <div class="col-lg-1 col-lg-offset-2" *ngIf="isLoggedIn; else login">
+      <button class="btn btn-secondary"  (click)="logOut($event)">Logout</button>
+    </div>
+    <ng-template #login>
+      <div class="col-lg-2 col-lg-offset-1" id="login-signup-btn">
         <button class="btn btn-secondary" data-toggle="modal" data-target="#LoginForm">Login</button>
         <button class="btn btn-secondary" data-toggle="modal" data-target="#SignupForm">Sign Up</button>
-      </ng-template>
-    </ul>
+      </div>
+    </ng-template>
   </div>
 </nav>
 

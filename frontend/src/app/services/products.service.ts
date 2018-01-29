@@ -10,8 +10,7 @@ export class ProductsService {
   items: string[];
   items$ = new Subject<string[]>();
   constructor(
-    private router:Router, 
-    private http:HttpClient,
+    private http:HttpClient
   ) { }
 
   getProducts(): Observable<string[]> {
