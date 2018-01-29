@@ -57,8 +57,8 @@ export class SellService {
     })
   }
 
-  deleteImageById(url){
-    return this.http.delete('api/images/' + url)
+  deleteImageById(id){
+    return this.http.delete('api/images/' + id)
   }
 
   upload(){

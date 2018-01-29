@@ -91,39 +91,31 @@ export class SellComponent implements OnInit {
 
     //Insert or update file
     const upsertResponse = fileItem => {
-      //Detect changes
-      this.zone.run(() => {
-        //Get the id of existing item
-        const existingId = this.images.reduce((prev, current, index) => {
-          if (current.file.name === fileItem.file.name && !current.status) {
-            return index;
-          }
-          return prev;
-        }, -1);
-        if (existingId > -1) {
-          //Update existing item with new data
-          this.images[existingId] = Object.assign(this.images[existingId], fileItem);
-        } else {
-          //Create new response
-          this.images.push(fileItem);
-          // console.log('1. RESPONSES ',this.responses);
-        }
-      });
+      this.images.push(fileItem);
+      // //Detect changes
+      // this.zone.run(() => {
+      //   //Get the id of existing item
+      //   const existingId = this.images.reduce((prev, current, index) => {
+      //     if (current.file.name === fileItem.file.name && !current.status) {
+      //       return index;
+      //     }
+      //     return prev;
+      //   }, -1);
+      //   if (existingId > -1) {
+      //     //Update existing item with new data
+      //     this.images[existingId] = Object.assign(this.images[existingId], fileItem);
+      //   } else {
+      //     //Create new response
+      //     this.images.push(fileItem);
+      //     // console.log('1. RESPONSES ',this.responses);
+      //   }
+      // });
     };
 
     //Get upload response
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
-      //file info is item.file
-      // console.log('whole item info ',item);
-      // console.log('file info ',item.file);
-      // console.log('headers ',headers);
-      this.uploadResult = JSON.parse(response);
-      // console.log('2. IMAGES ',this.images);
-      console.log('upload result ',response);
-      // console.log('file id ',uploadResult.public_id);
-      // console.log('format ',uploadResult.format);
-      this.imageurl = `${this.uploadResult.public_id}.${this.uploadResult.format}`;
-      /* save image data to the array */
+      //Save the image data to images array
+      console.log('uploader status ',status);
       upsertResponse(
         {
           file: item.file,
@@ -132,8 +124,6 @@ export class SellComponent implements OnInit {
           url: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
         }
       ); 
-      /* SAVE THE NECESSARY INFO FOR DB */
-      /* CALL IMG FOR PREVIEW */
     }
 
     //Upload process in progress
@@ -163,8 +153,14 @@ export class SellComponent implements OnInit {
         break;
       }
     }
+    this.deleteFromCloudinary(image);
+  }
+
+  deleteFromCloudinary(photo){
     //Delete the image on cloudinary
-    this.sellService.deleteImageById(image.data.public_id);
+    this.sellService.deleteImageById(photo.data.public_id).subscribe(result =>{
+      console.log(result);
+    });
   }
 
   fileOverBase(e: any): void{
