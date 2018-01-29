@@ -90,26 +90,26 @@ export class SellComponent implements OnInit {
     };
 
     //Insert or update file
-    const upsertResponse = fileItem => {
-      this.images.push(fileItem);
-      // //Detect changes
-      // this.zone.run(() => {
-      //   //Get the id of existing item
-      //   const existingId = this.images.reduce((prev, current, index) => {
-      //     if (current.file.name === fileItem.file.name && !current.status) {
-      //       return index;
-      //     }
-      //     return prev;
-      //   }, -1);
-      //   if (existingId > -1) {
-      //     //Update existing item with new data
-      //     this.images[existingId] = Object.assign(this.images[existingId], fileItem);
-      //   } else {
-      //     //Create new response
-      //     this.images.push(fileItem);
-      //     // console.log('1. RESPONSES ',this.responses);
-      //   }
-      // });
+    const upsertResponse = (fileItem):any => {
+      console.log('IMAGE ARR ',this.images);
+      //Detect changes
+      this.zone.run(() => {
+        //Get the id of existing item
+        const existingId = this.images.reduce((prev, current, index) => {
+          if (current.file.name === fileItem.file.name && !current.status) {
+            return index;
+          }
+          return prev;
+        }, -1);
+
+        if (existingId > -1) {
+          //Update existing item with new data
+          this.images[existingId] = Object.assign(this.images[existingId], fileItem);
+        } else {
+          //Create new response
+          this.images.push(fileItem);
+        }
+      });
     };
 
     //Get upload response

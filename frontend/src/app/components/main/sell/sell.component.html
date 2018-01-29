@@ -110,7 +110,7 @@
               </div>
               <div class="upload-options">
                 <label>
-                  <input type="file" class="image-upload" ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"/>
+                  <input type="file" class="image-upload" #fileInput ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"/>
                 </label>
               </div>
             </div>
