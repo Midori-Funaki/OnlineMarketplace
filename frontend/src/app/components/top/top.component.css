@@ -2,6 +2,7 @@
     font-size: 35px;
     font-weight: 700;
     font-family: 'Lobster', cursive;
+    color: white;
 }
 
 .container-fluid {
@@ -11,6 +12,9 @@
 .btn.btn-secondary {
     font-size: 13px;
     background: transparent;
+    border: 2px solid rgb(137, 212, 26); 
+    color: white;
+    margin-right: 8px;
 }
 
 .col-lg-2 {
