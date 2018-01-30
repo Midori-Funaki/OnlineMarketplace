@@ -6,3 +6,60 @@
     border: solid 1px grey;
     border-radius: 10px;
 }
+.close {
+    color: white;
+}
+.submit-btn {
+    border: 5px solid rgb(137,212,26);
+    border-radius: 0;
+    color: rgb(137,212,26);
+    background-color: transparent;
+    margin: auto;
+}
+.modal-header {
+    border-bottom: 8px solid #333;
+}
+.modal-content {
+    width: 400px;
+    background-color: rgba(0,0,0,0.9);
+    border: 10px solid rgb(51,51,51);
+    border-radius: 0;
+    color: white;
+}
+.modal-footer {
+    border-top: none;
+}
+.form-group {
+    padding-right: 28px;
+    padding-left: 28px;
+}
+.social-login {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.facebook-login {
+    color: white;
+    background-color: rgb(75,119,192);
+    margin-bottom: 5px;
+    width: 210px;
+}
+.google-login {
+    color: white;
+    background-color: rgb(232, 77, 59);
+    margin-bottom: 5px;
+    width: 210px;
+}
+.facebook-login:hover,
+.google-login:hover,
+.close:hover {
+    cursor: pointer;
+}
+@media (max-width: 576px) {
+    .modal-content {
+        width: 300px;
+    }
+    .modal-dialog {
+        width: 300px;
+    }
+}
