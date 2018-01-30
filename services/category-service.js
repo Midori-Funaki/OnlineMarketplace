@@ -58,6 +58,29 @@ class CategoryService {
       return err;
     })
   }
+
+  getTitles(categoryName,brandName){
+    return Category.findAll({
+      where:{
+        title: categoryName
+      },
+      include: [
+        {
+          model: Product,
+          required: false,
+          where: {
+            brand: brandName
+          }
+        }
+      ]
+    }).then(result => {
+      return result[0].Products.map(item => {
+        return item.title;
+      })
+    }).catch(err => {
+      return err;
+    })
+  }
 }
 
 module.exports = CategoryService;

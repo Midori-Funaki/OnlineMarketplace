@@ -16,13 +16,15 @@ export class CheckoutDetailComponent implements OnInit {
     billInfo: new FormGroup({
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
+      address1: new FormControl(null, Validators.required),
+      address2: new FormControl(null),
       contact: new FormControl(null, Validators.required)
     }),
     shipInfo : new FormGroup({
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
-      address: new FormControl(null, Validators.required),
+      address1: new FormControl(null, Validators.required),
+      address2: new FormControl(null),
       contact: new FormControl(null, Validators.required)
     })
   });
@@ -40,4 +42,9 @@ export class CheckoutDetailComponent implements OnInit {
       this.user = user;
     })
   }
+
+  onSubmit() {
+    
+  }
+  
 }

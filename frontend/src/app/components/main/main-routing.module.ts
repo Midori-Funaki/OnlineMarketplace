@@ -11,15 +11,17 @@ import { CartComponent } from './cart/cart.component';
 import { FavComponent } from './fav/fav.component';
 import { CheckoutComponent } from './../checkout/checkout.component';
 import { TransactionComponent } from './../../components/main/transactions/transaction.component';
+import { SellListComponent } from './../../components/main/sell-list/sell-list.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: ProductsComponent, pathMatch: 'full'},
     { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
-    { path: 'transactions', component: TransactionComponent, pathMatch: 'full' },
     { path: 'sell', component: SellComponent, pathMatch: 'full' },
+    { path: 'transactions', component: TransactionComponent, pathMatch: 'full' },
+    { path: 'sell-list',component:SellListComponent, pathMatch: 'full' },
     { path: 'cart', component: CartComponent,pathMatch: 'full' },
-    { path: 'favourite', component: FavComponent, pathMatch: 'full' },
+    { path: 'favourites', component: FavComponent, pathMatch: 'full' },
     { path: 'auth/facebook/callback', component: FacebookComponent },
     { path: 'auth/google/callback', component: GoogleComponent },
     { path: 'checkout', component: CheckoutComponent, pathMatch: 'full'}
@@ -44,5 +46,6 @@ export const routingComponents = [
     SellComponent,
     FavComponent,
     CheckoutComponent,
-    TransactionComponent
+    TransactionComponent,
+    SellListComponent
 ]

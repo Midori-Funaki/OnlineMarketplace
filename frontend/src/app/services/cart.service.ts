@@ -18,5 +18,4 @@ export class CartService {
         'Authorization', 'Bearer ' + this.authService.token)
     });
   }
-  
 }

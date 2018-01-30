@@ -12,9 +12,23 @@
       <div class="form-group">
         <span class="float-field float-select">
           <label class="float-label">Brand</label>
-          <select id="brand" class="form-control" formControlName="brand">
+          <select id="brand" class="form-control" formControlName="brand" (change)="filterTitle($event.target.value)">
             <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
           </select>
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label">Title</label>
+          <select id="title" class="form-control" formControlName="title">
+            <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
+          </select>
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label">Quantity</label><br>
+          <input type="number" name="quantity" id="quantity" class="form-control" [value]="" formControlName="quantity">
         </span>
       </div><!-- form-group -->
       <div class="form-group">
@@ -59,7 +73,7 @@
       <div class="form-group">
         <span class="float-field float-select">
           <label class="float-label">Ask Price</label><br>
-          <input type="number" name="askPrice" id="askPrice" class="form-control" [value]="" formControlName="askPrice">
+          <input type="number" name="askPrice" id="askPrice" class="form-control" [value]="" formControlName="currentAskPrice">
         </span>
       </div><!-- form-group -->
       <div class="form-group">
@@ -77,38 +91,29 @@
           </div>
         </span>
       </div><!-- form-group -->
-      <!-- <div class="form-group">
-        <span class="float-field float-select">
-          <label class="float-label">Photos</label>
-          <div class="photo-upload-container form-control" formControlName="photo">
-            <label ngbButtonLabel>
-              <input ngbButton class="btn btn-default" type="file" [value]="test">
-            </label>
-          </div>
-        </span>
-      </div>form-group -->
       <div class="form-group">
-        <p>PHOTO UPLOAD TEST</p>
+        <p>Product Photos</p>
         <fieldset>
           <div class="wrapper">
             <div class="box form-group" ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}">
               <div class="js--image-preview">
-                <div *ngIf="hasImage" class="delete-btn" (click)="deleteImage()"></div>
-                <cl-image [public-id]="imageurl">
-                  <cl-transformation height="225" width="auto" crop="fill"></cl-transformation>
-                </cl-image>
               </div>
               <div class="upload-options">
                 <label>
-                  <input type="file" class="image-upload" ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"/>
+                  <input type="file" class="image-upload" #fileInput ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"/>
                 </label>
               </div>
+            </div>
+            <div class="box" *ngFor="let image of images">
+              <div class="delete-btn" (click)="deleteImage(image)"></div>
+              <cl-image [public-id]="image.url">
+                <cl-transformation height="300" width="300" crop="fill"></cl-transformation>
+              </cl-image>
             </div>
           </div><!-- wrapper -->
         </fieldset>
       </div>
       <button type="submit" class="btn btn-primary">Start Selling</button>
-      <pre>{{ sellForm.value | json }}</pre>
     </form>
   </div><!-- col -->
 </div>

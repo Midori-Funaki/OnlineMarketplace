@@ -12,9 +12,11 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/schematics": "0.0.46",
+    "@angular-devkit/core": "0.0.29",
+    "@angular-devkit/schematics": "0.0.52",
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
+    "@angular-devkit/build-optimizer": "~0.0.31",
     "@angular/compiler": "^5.0.0",
     "@angular/core": "^5.0.0",
     "@angular/forms": "^5.0.0",
