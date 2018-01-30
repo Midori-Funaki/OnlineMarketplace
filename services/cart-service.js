@@ -31,20 +31,20 @@ class CartService {
       }
     }).then(cart => {
       if (cart) {
-        // console.log("cart: ", cart);
-        // cart.quantity += productInfo.quantity;
-        // cart.save();
-        let quantity = cart.quantity + productInfo.quantity
-        return Cart.update( {
-          quantity: quantity
-        }, {
-          where: {
-            userId: user.id,
-            productId: productInfo.productId
-          }
-        }).then(cart => cart);
+        console.log("cart: ", cart.id);
+        cart.quantity += productInfo.quantity;
+        cart.save();
+        // let quantity = cart.quantity + productInfo.quantity
+        // return Cart.update( {
+        //   quantity: quantity
+        // }, {
+        //   where: {
+        //     userId: user.id,
+        //     productId: productInfo.productId
+        //   }
+        // }).then(cart => cart);
           //Executing (default): UPDATE "Carts" SET "quantity"=4,"updatedAt"='2018-01-29 07:22:21.030 +00:00' WHERE "productId" = 5
-        // return cart;
+        return cart;
       }
       else {
         return Cart.create({
