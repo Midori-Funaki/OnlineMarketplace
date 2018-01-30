@@ -27,6 +27,7 @@
     "reload": "^2.2.2",
     "sequelize": "^4.31.2",
     "serve-favicon": "~2.4.5",
+    "stripe": "^5.4.0",
     "watch": "^1.0.2"
   }
 }

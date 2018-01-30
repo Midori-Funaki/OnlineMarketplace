@@ -26,7 +26,7 @@ class ProductRoutes {
   post(req, res) {
     return this.cartService.post(req.user, req.body)
       .then((cart) => {
-        console.log("cart: ", cart )
+        // console.log("cart: ", cart )
         res.json(cart)
       })
       .catch((err) => res.status(500).json(err))
