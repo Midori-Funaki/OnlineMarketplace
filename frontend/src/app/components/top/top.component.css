@@ -11,6 +11,7 @@
 .btn.btn-secondary {
     font-size: 13px;
     background: transparent;
+    outline: none;
 }
 
 .col-lg-2 {
