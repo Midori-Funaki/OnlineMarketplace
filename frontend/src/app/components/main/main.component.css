@@ -2,4 +2,12 @@
     height: 68vh;
     width: 100%;
     overflow: auto;
+    background-color: #f1f1f1;
+}
+.tabs{
+    background: rgb(104,51,97);
+    padding-left: 30px;
+}
+.container-fluid{
+    padding: 0;
 }

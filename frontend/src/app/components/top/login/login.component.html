@@ -1,10 +1,10 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-        <h3 class="modal-title">Login</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+            <h3 class="modal-title">Login</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         <form [formGroup]="localLogin">
             <div class="modal-body">
@@ -14,7 +14,7 @@
                         formControlName="email"/>
 
                     <div *ngIf="localLogin.controls['email'].hasError('required') && localLogin.controls['email'].dirty" class="alert alert-danger">
-                        Password should be no less than 1 letter
+                        Email is required
                     </div>
                 </div>
                 <div class="form-group">
@@ -27,7 +27,34 @@
                 </div>
             </div>
         <div class="modal-footer">
-            <input (click)="onSubmit($event)" data-dismiss="modal" type="submit" class="btn btn-primary" id="link-submit-btn" value="Submit"/>
+            <input (click)="onSubmit($event)" data-dismiss="modal" type="submit" class="btn btn-primary submit-btn" id="link-submit-btn" value="Submit"/>
+        </div>
+        </form> 
+        <hr>
+        <div class="social-login">
+            <button class="btn btn-pirmary facebook-login" (click)="onLoginWithFacebook($event)">
+                <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <i class="fa fa-facebook-official"></i>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                        Login with Facebook
+                    </div>
+                </div>
+            </button>
+            <button class="btn btn-pirmary google-login" (click)="onLoginWithGoogle($event)">
+                <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <i class="fa fa-google"></i>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                        Login with Google
+                    </div>
+                </div>
+            </button>
+        </div>
+    </div><!-- ./modal-content -->
+            <!-- <input (click)="onSubmit($event)" data-dismiss="modal" type="submit" class="btn btn-primary" id="link-submit-btn" value="Submit"/>
         </div>
         </form> 
         
@@ -40,5 +67,5 @@
                 <i class="fa fa-google" aria-hidden="true"></i>
             </button>
         </div>
-    </div>
-</div>
+    </div>-->
+</div> 

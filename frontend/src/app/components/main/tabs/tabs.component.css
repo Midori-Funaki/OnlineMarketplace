@@ -1,0 +1,19 @@
+a {
+    color: rgb(71,131,12);
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+}
+.nav-tabs .nav-item {
+    border-radius: 0;
+    background-color: rgb(137,212,26);
+}
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    border: none;
+}
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    border: none;
+}
