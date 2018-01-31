@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../services/auth-guard.service';;
 import { FacebookComponent } from '../../components/facebook/facebook.component';
 import { GoogleComponent } from '../../components/google/google.component';
+import { StripeComponent } from '../../components/stripe/stripe.component';
 import { ProductsComponent } from './products/products.component';
 import { TemporaryComponent } from './temporary/temporary.component';
 import { SellComponent } from './sell/sell.component';
@@ -15,16 +16,17 @@ import { SellListComponent } from './../../components/main/sell-list/sell-list.c
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: ProductsComponent, pathMatch: 'full'},
+    { path: 'home', component: ProductsComponent, pathMatch: 'full' },
     { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
     { path: 'sell', component: SellComponent, pathMatch: 'full' },
     { path: 'transactions', component: TransactionComponent, pathMatch: 'full' },
-    { path: 'sell-list',component:SellListComponent, pathMatch: 'full' },
-    { path: 'cart', component: CartComponent,pathMatch: 'full' },
+    { path: 'sell-list', component: SellListComponent, pathMatch: 'full' },
+    { path: 'cart', component: CartComponent, pathMatch: 'full' },
     { path: 'favourites', component: FavComponent, pathMatch: 'full' },
     { path: 'auth/facebook/callback', component: FacebookComponent },
     { path: 'auth/google/callback', component: GoogleComponent },
-    { path: 'checkout', component: CheckoutComponent, pathMatch: 'full'}
+    { path: 'auth/stripe/callback', component: StripeComponent },
+    { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' }
 ]
 
 @NgModule({
@@ -47,5 +49,6 @@ export const routingComponents = [
     FavComponent,
     CheckoutComponent,
     TransactionComponent,
-    SellListComponent
+    SellListComponent,
+    StripeComponent
 ]
