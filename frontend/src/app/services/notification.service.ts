@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 interface Message {
     msgStatus: string;
     message?: string;
+    title ?: string;
 }
 
 @Injectable()
@@ -23,18 +24,18 @@ export class NotificationService {
     }
 
     getInitMessage(){
-        this.notification_subj.next({msgStatus: 'hide', message: ''});
+        this.notification_subj.next({msgStatus: 'hide', message: '', title: ''});
     }
 
-    sendSuccessMessage(message){
-        this.notification_subj.next({msgStatus: 'successShow', message: message});
+    sendSuccessMessage(title, message){
+        this.notification_subj.next({msgStatus: 'successShow', message: message, title: title});
         setTimeout(()=>{
             this.resetMessage();
         }, 2000);
     }
 
-    sendErrorMessage(message){
-        this.notification_subj.next({msgStatus: 'failShow', message: message});
+    sendErrorMessage(title, message){
+        this.notification_subj.next({msgStatus: 'failShow', message: message, title: title});
         setTimeout(()=>{
             this.resetMessage();
         }, 2000);

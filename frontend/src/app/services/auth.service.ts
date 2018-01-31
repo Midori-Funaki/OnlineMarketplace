@@ -33,9 +33,9 @@ export class AuthService {
             this.isLoggedIn = true;
             this.isLoggedIn_sub.next(this.isLoggedIn);
             this.router.navigate(['/']);
-            this.notificationService.sendSuccessMessage('You have successfully logged In!');
+            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your chat and other function.');
         },(err)=>{
-            this.notificationService.sendErrorMessage('LogIn Failed!');
+            this.notificationService.sendErrorMessage('LogIn Failed!', 'Please try again.');
         });
     }
 
@@ -46,9 +46,9 @@ export class AuthService {
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['/']);
-            this.notificationService.sendSuccessMessage('You have successfully logged In!');
+            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your chat and other function.');
         },(err)=>{
-            this.notificationService.sendErrorMessage('LogIn Failed!');
+            this.notificationService.sendErrorMessage('LogIn Failed!', 'Please check your facebook settings.');
         });
     }
 
@@ -59,9 +59,9 @@ export class AuthService {
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['']);
-            this.notificationService.sendSuccessMessage('You have successfully logged In!');
+            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your chat and other function.');
         },(err)=>{
-            this.notificationService.sendErrorMessage('LogIn Failed!');
+            this.notificationService.sendErrorMessage('LogIn Failed!', 'Please check your google settings.');
         });
     }
 
@@ -81,6 +81,6 @@ export class AuthService {
         this.isLoggedIn_sub.next(this.isLoggedIn);
         localStorage.removeItem('myToken');
         this.router.navigate(['/']);
-        this.notificationService.sendSuccessMessage('You have successfully Log Out!');
+        this.notificationService.sendSuccessMessage('Logout Successful!', 'Please do come back again.');
     }
 }

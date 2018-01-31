@@ -16,7 +16,7 @@
     background-color: transparent;
     margin: auto;
 }
-.sybmit-btn {
+.submit-btn {
     cursor: pointer;
 }
 .modal-header {
@@ -50,7 +50,7 @@
 .google-login {
     color: white;
     background-color: rgb(232, 77, 59);
-    margin-bottom: 5px;
+    margin-bottom: 30px;
     width: 210px;
 }
 .facebook-login:hover,
