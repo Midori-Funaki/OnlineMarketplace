@@ -16,6 +16,9 @@
     background-color: transparent;
     margin: auto;
 }
+.sybmit-btn {
+    cursor: pointer;
+}
 .modal-header {
     border-bottom: 8px solid #333;
 }
