@@ -78,7 +78,6 @@ class ProductService {
       return Product.create({
         title: productInfo.title,
         description: productInfo.description,
-        
         // size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
