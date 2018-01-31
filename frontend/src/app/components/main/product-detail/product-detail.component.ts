@@ -11,11 +11,11 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  quantity:number =1;
-  
+  quantity: number = 1;
+
   constructor(
     private productsService: ProductsService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private authService: AuthService
   ) { }
 
@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   imgsrc: string = "https://picsum.photos/500/500?image=2";
 
   ngOnInit() {
-    this.route.params.subscribe(param => {
+    this.activatedRoute.params.subscribe(param => {
       this.getProduct(param['id']);
     })
   }
@@ -37,7 +37,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(id) {
-    this.productsService.addToCart({ id:id, quantity: this.quantity}).subscribe(cart => console.log(cart));
+    this.productsService.addToCart({ id: id, quantity: this.quantity }).subscribe(cart => console.log(cart));
   }
 
 }

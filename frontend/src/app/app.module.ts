@@ -37,6 +37,8 @@ import { NotificationComponent } from './components/top/notification/notificatio
 import { CartChildComponent } from './components/main/cart/cart-child/cart-child.component';
 import { CheckoutCartComponent } from './components/checkout/checkout-cart/checkout-cart.component';
 import { SellListComponent } from './components/main/sell-list/sell-list.component';
+import { ConnectStripeComponent } from './components/main/sell/connect-stripe/connect-stripe.component';
+
 
 //Service imports
 import { FacebookAuthService } from './services/facebook-auth.service';
@@ -50,6 +52,8 @@ import { SellService } from './services/sell.service';
 import { TransactionService } from './services/transaction.service';
 import { UserService } from './services/user.service';
 import { CheckoutService } from './services/checkout.service';
+import { StripeService } from './services/stripe.service';
+import { StripeComponent } from './components/stripe/stripe.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +74,9 @@ import { CheckoutService } from './services/checkout.service';
     CartChildComponent,
     CheckoutCartComponent,
     CheckoutConfirmComponent,
-    SellListComponent
+    SellListComponent,
+    ConnectStripeComponent,
+    StripeComponent
   ],
   imports: [
     CommonModule,
@@ -98,6 +104,7 @@ import { CheckoutService } from './services/checkout.service';
     UserService,
     NotificationService,
     CheckoutService,
+    StripeService
   ],
   bootstrap: [
     AppComponent
