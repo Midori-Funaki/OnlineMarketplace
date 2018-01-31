@@ -13,7 +13,7 @@ module.exports = {
       products.push({
         title: data[i].name,
         description: faker.lorem.words(),
-        size: Math.floor(Math.random() * 6) + 4,
+        // size: Math.floor(Math.random() * 6) + 4,
         color: faker.commerce.color(),
         condition: conditions[Math.floor(Math.random() * 2)],
         curentBidPrice: faker.commerce.price(),
