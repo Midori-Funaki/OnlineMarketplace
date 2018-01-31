@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormsModule, Validators } from '@angular/forms';
 import { SellService } from '../../../services/sell.service';
 import { Observable } from 'rxjs/Observable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +17,7 @@ export class SellComponent implements OnInit {
   categories: string[] = [];
   brands: string[] = [];
   titles: string[] = [];
-  images: Array<any> = [];;//image array
+  images: Array<any> = [];//image array
   sizes: string[] = [];
   colors: string[] = [];
   isOther: boolean = false;
@@ -47,7 +47,11 @@ export class SellComponent implements OnInit {
       this.titles = titles;
     })
     this.sellService.getColorSub().subscribe(colors => {
-      this.colors = colors;
+      this.colors = colors.map((color) => {
+        if(this.colors.indexOf(color) < 0) {
+          return color
+        }
+      });
       this.colors.push("other");
     })
   }

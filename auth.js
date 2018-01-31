@@ -9,7 +9,7 @@ const ExtractJwt = passportJWT.ExtractJwt;
 module.exports = function(){
     const strategy = new passportJWT.Strategy({
         secretOrKey: config.jwtSecret,
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('JWT')
     },(payload,done)=>{
         User.findOne({
             where: {

@@ -77,8 +77,9 @@ class ProductService {
     .then(category => {
       return Product.create({
         title: productInfo.title,
-        // description: productInfo.description,
-        size: productInfo.size,
+        description: productInfo.description,
+        
+        // size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
         // curentBidPrice: productInfo.curentBidPrice,

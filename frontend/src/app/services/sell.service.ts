@@ -61,9 +61,8 @@ export class SellService {
   }
 
   registerNewSell(formValues){
-    this.http.post<string[]>('api/products/',{
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token),
-      data: formValues
+    return this.http.post<string[]>('api/products/', formValues, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)
     }).subscribe(result => {
       console.log('REGISTER NEW POST RESULT ',result);
     })
