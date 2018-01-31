@@ -6,6 +6,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
+import { ProductsService } from '../../../services/products.service';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from './../../../models/Product';
 
 @Component({
   selector: 'app-sell',
@@ -13,6 +16,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
+  sellProduct: any;
+  productId: any;
+
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
@@ -29,11 +35,13 @@ export class SellComponent implements OnInit {
   uploadResult: any;
 
   constructor(
+    private route: ActivatedRoute,
     private sellService:SellService, 
     private formBuilder: FormBuilder,
     private cloudinary: Cloudinary,
     private zone: NgZone,
-    private http: HttpClient
+    private http: HttpClient,
+    private productsService:ProductsService
   ) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
@@ -57,19 +65,34 @@ export class SellComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sellService.getCategories();
-    this.sellForm = new FormGroup({
-      category: new FormControl(""),
-      brand: new FormControl(""),
-      title: new FormControl(""),
-      quantity: new FormControl("1"),
-      size: new FormControl(""),
-      color: new FormControl(""),
-      currentAskPrice: new FormControl(""),
-      condition: new FormControl(""),
-      description: new FormControl(""),
-      otherColor: new FormControl("")
+    this.route.params.subscribe(param => {
+      this.productId = param['id'];
     })
+
+    this.getSellProduct(this.productId)
+      .then((data) => {
+        this.sellForm = new FormGroup({
+          brand: new FormControl(data.brand),
+          title: new FormControl(data.title),
+          quantity: new FormControl(data.quantity),
+          size: new FormControl(data.size),
+          color: new FormControl(data.color),
+          currentAskPrice: new FormControl(data.currentAskPrice),
+          condition: new FormControl(data.condition),
+          description: new FormControl(data.description),
+          otherColor: new FormControl("")
+        })
+      this.getBrandById(data.categoryId)
+    }).then((data) => {  
+      console.log("DATA", data)
+      this.sellForm.addControl('category',data)    
+    }).catch((err) => {
+      console.log(err)
+    })
+    
+
+    this.sellService.getCategories();
+    
     //cloudinary uploader
     const uploaderOptions: FileUploaderOptions = {
       url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
@@ -143,6 +166,19 @@ export class SellComponent implements OnInit {
     this.uploader.onProgressItem = (fileItem: any, progress: any) => {
       console.log('Upload in progress ',progress);
     }
+  }
+
+  getSellProduct(id) {
+    return this.productsService.getProduct(id).toPromise()
+      .then((result) => {
+        let brandName = this.getBrandById(result.categoryId);
+        result.categoryId = brandName;
+        return result
+      });
+  }
+
+  getBrandById(id) {
+    return this.sellService.getBrandById(id);
   }
 
   filterBrand(category){

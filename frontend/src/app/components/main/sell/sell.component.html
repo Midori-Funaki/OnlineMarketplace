@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-xs-6 mx-auto">
+  <!-- <div class="col-xs-6 mx-auto" *ngIf="product | async as product"> -->
     <form [formGroup]="sellForm" (ngSubmit)="createNewSell()">
       <div class="form-group">
         <span class="float-field float-select">
@@ -107,6 +107,6 @@
       </div>
       <button type="submit" class="btn btn-primary">Start Selling</button>
     </form>
-  </div><!-- col -->
+  <!-- </div>col -->
 </div>
-<pre>{{ sellForm.value | json }}</pre>
+<pre>{{ sellForm?.value | json }}</pre>

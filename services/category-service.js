@@ -86,6 +86,19 @@ class CategoryService {
       return err;
     })
   }
+
+  getBrandName(id) {
+    console.log('id @ cat service',id)
+    return Category.findOne({
+      where: {
+        id: id
+      }
+    }).then(result => {
+      return result.title
+    }).catch(err => {
+      return err
+    })
+  }
 }
 
 module.exports = CategoryService;

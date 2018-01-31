@@ -1,7 +1,10 @@
+<div>
+  <a href="sell/new"><button class="btn sell-btn">Sell New Item</button></a>
+</div>
 <div class="sell-container">
   <div *ngFor="let product of products | async" class="each-product">
-    <a href="#">
-      <div class="card" style="width:20rem">
+    <a href="sell/{{ product.id }}">
+      <div class="card">
         <cl-image *ngIf="product.ProductPhotos.length > 0" class="card-img-top" [public-id]="product.ProductPhotos[0].url">
           <cl-transformation height="300" width="300" crop="fill"></cl-transformation>
         </cl-image>

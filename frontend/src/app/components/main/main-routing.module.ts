@@ -17,7 +17,7 @@ const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: ProductsComponent, pathMatch: 'full'},
     { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
-    { path: 'sell', component: SellComponent, pathMatch: 'full' },
+    { path: 'sell/:id', component: SellComponent, pathMatch: 'full' },
     { path: 'transactions', component: TransactionComponent, pathMatch: 'full' },
     { path: 'sell-list',component:SellListComponent, pathMatch: 'full' },
     { path: 'cart', component: CartComponent,pathMatch: 'full' },
