@@ -54,4 +54,18 @@
             </button>
         </div>
     </div><!-- ./modal-content -->
+            <input (click)="onSubmit($event)" data-dismiss="modal" type="submit" class="btn btn-primary" id="link-submit-btn" value="Submit"/>
+        </div>
+        </form> 
+        
+        <div id="social-box">
+            <button class="social-btn" (click)="onLoginWithFacebook($event)">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+            </button>
+            <span><b><i>OR</i></b></span>
+            <button class="social-btn" (click)="onLoginWithGoogle($event)">
+                <i class="fa fa-google" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
 </div>

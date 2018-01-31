@@ -48,14 +48,41 @@ class LoginRoutes {
         .then((data) => {
           console.log(data.data);
           if (!data.data.error) {
-            var payload = {
-              id: accessToken
-            };
-            var token = jwt.encode(payload, config.jwtSecret);
-            res.json({
-              token: token
+            //check if that email exist in the database
+            this.userService.auth(data.data.email).then((user) => {
+                if (user) {
+                  var payload = {
+                    id: user.id
+                  };
+                  var token = jwt.encode(payload, config.jwtSecret);
+                  res.json({
+                    token: token
+                  });
+                } else {
+                  //create new user if not available
+                  this.userService.register({
+                    userId: data.data.id,
+                    firstName: data.data.name,
+                    lastName: '',
+                    password: '',
+                    email: data.data.email,
+                    shippingAddress: '',
+                    billingAddress: ''
+                  }).then(()=>{
+                    var payload = {
+                      id: data.data.id
+                    };
+                    var token = jwt.encode(payload, config.jwtSecret);
+                    res.json({
+                      token: token
+                    });
+                  }).catch((err)=>{
+                    console.log(err);
+                  })
+                }
             });
           } else {
+            console.log(data.data.error);
             res.sendStatus(401);
           }
         }).catch((err) => {
@@ -94,7 +121,6 @@ class LoginRoutes {
         });
     } else {
       res.sendStatus(401);
-      return Promise.reject();
     }
   }
 

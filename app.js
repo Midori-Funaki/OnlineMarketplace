@@ -15,6 +15,7 @@ var TransactionRoutes = require('./routes/transaction-routes');
 var CartRoutes = require('./routes/cart-routes');
 var LoginRoutes = require ('./routes/login-routes');
 var CloudinaryRoutes = require('./routes/cloudinary-routes');
+var StripeRoutes = require('./routes/stripe-route');
 
 //service files
 var UserService = require('./services/user-service');
@@ -37,7 +38,7 @@ var reload = require('reload');
 var watch = require('watch');
 var authClass = require('./auth');
 var config = require('./config');
-var users = require('./users');
+// var users = require('./users');
 
 var app = express();
 
@@ -78,6 +79,7 @@ app.use('/api/products', new ProductRoutes(productService).router());
 app.use('/api/categories', new CategoryRoutes(categoryService).router());
 app.use('/api/carts', new CartRoutes(cartService).router());
 app.use('/api/login', new LoginRoutes(userService).router());
+app.use('/api/checkout', new StripeRoutes().router());
 
 //redirect all other route to the SPA
 app.use(function(req, res, next) {
