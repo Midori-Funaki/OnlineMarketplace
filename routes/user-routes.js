@@ -1,8 +1,7 @@
 var express = require('express');
+
 var authClass = require('./../auth');
-
 var auth = authClass();
-
 
 class UserRoutes{
   constructor(userService){
@@ -19,7 +18,7 @@ class UserRoutes{
   }
 
   get(req,res){
-    console.log("user: ", req.user);
+    // console.log("user: ", req.user);
     return this.userService.retrieve(req.user)
       .then((user)=>res.json(user))
       .catch((err)=>res.status(500).json(err))

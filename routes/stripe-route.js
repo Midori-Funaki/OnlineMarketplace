@@ -1,34 +1,27 @@
 var express = require('express');
-var stripe = require("stripe")("sk_test_ngBTWibbJkB5kFe1B5WevZo8");
+
+var authClass = require('./../auth');
+var auth = authClass();
 
 class StripeRoute {
-  constructor() {
+  constructor(stripeService) {
+    this.stripeService = stripeService;
   }
 
   router() {
     let router = express.Router();
-    router.get('/', this.get.bind(this));
+    // router.get('/', this.get.bind(this));
+    router.post('/api/stripe/register', auth.authenticate(),this.register.bind(this));
     return router;
   }
 
-  get(req, res) {
-    return stripe.accounts.create({
-      country: "US",
-      type: "custom"
-    }).then(function (acct) {
-      stripe.charges.create({
-        amount: 1000,
-        currency: "hkd",
-        source: "tok_visa",
-        destination: {
-          account: acct.id,
-        },
-      }).then(function(charge) {
-        res.json(charge);
-      });
-      
-    });
+  register(req, res) {
+    return this.stripeService.register(req.body.token, req.user)
+      .then((res)=>res.json(res))
+      .catch((err)=>res.status(500).json(err))
   }
+
+  
 }
 
 module.exports = StripeRoute;
