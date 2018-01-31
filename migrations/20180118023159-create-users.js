@@ -21,14 +21,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
       },
-      shippingAddress: {
-        type: Sequelize.STRING
-      },
-      billingAddress: {
-        type: Sequelize.STRING
-      },
+      shippingAddress: Sequelize.STRING,
+      shippingAddress2: Sequelize.STRING,
+      billingAddress: Sequelize.STRING,
+      billingAddress2: Sequelize.STRING,
+      contact: Sequelize.STRING,
+      stripeToken: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

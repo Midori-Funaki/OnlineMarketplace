@@ -7,6 +7,10 @@ export interface Product {
   curentBidPrice: number;
   currentAskPrice: number;
   quantity: number;
+  photos: {
+    default?: string[];
+    upload?: string[];
+  };
   sellerId: number;
   buyerId: number;
   categoryId: number;

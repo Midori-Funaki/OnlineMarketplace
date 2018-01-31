@@ -1,12 +1,12 @@
 var cloudinary = require('cloudinary');
 
-class CloudinaryService{
-    constructor(){}
+class CloudinaryService {
+    constructor() { }
 
-    deleteImage(id){
+    deleteImage(id) {
         let cid = 'dealshub/' + id;
-        return cloudinary.v2.uploader.destroy(cid, function(error, result){
-            if(error){
+        return cloudinary.v2.uploader.destroy(cid, function (error, result) {
+            if (error) {
                 console.log(error);
                 return error
             }
