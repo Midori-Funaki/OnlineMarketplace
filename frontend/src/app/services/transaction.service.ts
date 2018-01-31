@@ -12,8 +12,8 @@ export class TransactionService {
     private authService: AuthService
   ) { }
 
-  getAll():Observable<string[]>{
-    return this.http.get<string[]>('api/transactions', {
+  getAll():Observable<Transaction[]>{
+    return this.http.get<Transaction[]>('api/transactions', {
       headers: new HttpHeaders().set(
         'Authorization', 'Bearer ' + this.authService.token)
     });

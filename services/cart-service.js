@@ -2,6 +2,8 @@ const models = require('./../models'),
       Cart = models.Cart,
       Product = models.Product;
 
+const Op = models.Op;
+
 class CartService {
   constructor() { }
 
@@ -25,19 +27,29 @@ class CartService {
     return Cart.findOne({
       where: {
         userId: user.id,
-        productId : productInfo.id
+        productId : productInfo.productId
       }
     }).then(cart => {
       if (cart) {
-        // console.log("cart", cart);
+        console.log("cart: ", cart.id);
         cart.quantity += productInfo.quantity;
-        cart.save()  //Executing (default): UPDATE "Carts" SET "quantity"=4,"updatedAt"='2018-01-29 07:22:21.030 +00:00' WHERE "productId" = 5
+        cart.save();
+        // let quantity = cart.quantity + productInfo.quantity
+        // return Cart.update( {
+        //   quantity: quantity
+        // }, {
+        //   where: {
+        //     userId: user.id,
+        //     productId: productInfo.productId
+        //   }
+        // }).then(cart => cart);
+          //Executing (default): UPDATE "Carts" SET "quantity"=4,"updatedAt"='2018-01-29 07:22:21.030 +00:00' WHERE "productId" = 5
         return cart;
       }
       else {
         return Cart.create({
           userId: user.id,
-          productId: productInfo.id,
+          productId: productInfo.productId,
           quantity: productInfo.quantity
         }).then(cart => {
           return cart;
