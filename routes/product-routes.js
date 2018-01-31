@@ -10,6 +10,7 @@ class ProductRoutes{
   
   router(){
     let router = express.Router();
+    router.get('/color/:title', this.getColor.bind(this));
     router.get('/sell', auth.authenticate(), this.getSell.bind(this));
     router.get('/:id', this.get.bind(this));
     router.get('/', this.getAll.bind(this));
@@ -28,6 +29,13 @@ class ProductRoutes{
   getSell(req,res){
     return this.productService.getSell(req.user)
       .then((products) => res.json(products))
+      .catch((err) => res.status(500).json(err))
+  }
+
+  getColor(req,res){
+    let title = (req.params.title).replace(/\+/g,' ');
+    return this.productService.getColor(title)
+      .then((result) => res.json(result))
       .catch((err) => res.status(500).json(err))
   }
 

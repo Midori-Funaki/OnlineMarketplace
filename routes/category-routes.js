@@ -9,7 +9,8 @@ class CategoryRoutes {
     let router = express.Router();
     router.get('/', this.getAll.bind(this));
     router.get('/titles/:category/:brand', this.getTitles.bind(this));
-    router.get('/brands/:category',this.getBrands.bind(this));    
+    router.get('/brands/:category',this.getBrands.bind(this));
+    // router.get('/size&color/:title',this.getSizeColor.bind(this));    
     router.get('/:title', this.get.bind(this));
     return router;
   }

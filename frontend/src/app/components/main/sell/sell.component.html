@@ -19,8 +19,8 @@
       </div><!-- form-group -->
       <div class="form-group">
         <span class="float-field float-select">
-          <label class="float-label">Title</label>
-          <select id="title" class="form-control" formControlName="title">
+          <label class="float-label">Item Name</label>
+          <select id="title" class="form-control" formControlName="title" (change)="filterColor($event.target.value)">
             <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
           </select>
         </span>
@@ -35,15 +35,9 @@
         <span class="float-field float-select">
           <label class="float-label">Size</label>
           <div class="btn-toolbar">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="size" formControlName="size">
+            <div *ngFor="let size of sizes" class="btn-group btn-group-toggle" ngbRadioGroup name="size" formControlName="size">
               <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="1"> 1
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="2"> 2
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" [value]="3"> 3
+                <input ngbButton type="radio" [value]="size"> {{ size }}
               </label>
             </div>
           </div>
@@ -53,20 +47,12 @@
         <span class="float-field float-select">
           <label class="float-label">Color</label>
           <div class="btn-toolbar">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color">
+            <div *ngFor="let color of colors" class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color">
               <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" value="black"> black
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" value="white"> white
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" value="gray"> gray
-              </label>
-              <label ngbButtonLabel class="btn-primary">
-                <input ngbButton type="radio" value="yellow"> yellow
+                <input ngbButton type="radio" [value]="color" (change)="checkColor($event.target.value)"> {{ color }}
               </label>
             </div>
+            <input class="form-control" *ngIf="isOther" type="text" name="otherColor" id="otherColor" [value]="" formControlName="otherColor">
           </div>
         </span>
       </div><!-- form-group -->
@@ -92,6 +78,12 @@
         </span>
       </div><!-- form-group -->
       <div class="form-group">
+        <span class="float-field float-select">
+          <label class="float-label">Description</label><br>
+          <textarea name="description" id="description" class="form-control" [value]="" formControlName="description"></textarea>
+        </span>
+      </div><!-- form-group -->
+      <div class="form-group">
         <p>Product Photos</p>
         <fieldset>
           <div class="wrapper">
@@ -104,7 +96,7 @@
                 </label>
               </div>
             </div>
-            <div class="box" *ngFor="let image of images">
+            <div class="box box-preview" *ngFor="let image of images">
               <div class="delete-btn" (click)="deleteImage(image)"></div>
               <cl-image [public-id]="image.url">
                 <cl-transformation height="300" width="300" crop="fill"></cl-transformation>
@@ -117,3 +109,4 @@
     </form>
   </div><!-- col -->
 </div>
+<pre>{{ sellForm.value | json }}</pre>

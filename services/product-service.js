@@ -35,6 +35,22 @@ class ProductService {
       })
   }
 
+  getColor(title) {
+    return Product.findAll({
+      where: {
+        title: title
+      }
+    })
+      .then((result) => {
+        return result.map((e) => {
+          return e.color
+        })
+      })
+      .catch((err) => {
+        return err
+      })
+  }
+
   get(productId) {
     return Product.findOne({
       where: {

@@ -18,6 +18,9 @@ export class SellComponent implements OnInit {
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];;//image array
+  sizes: string[] = [];
+  colors: string[] = [];
+  isOther: boolean = false;
 
   hasBaseDropZoneOver: boolean = false;
   uploader: FileUploader;
@@ -43,6 +46,10 @@ export class SellComponent implements OnInit {
     this.sellService.gettitleSub().subscribe(titles=>{
       this.titles = titles;
     })
+    this.sellService.getColorSub().subscribe(colors => {
+      this.colors = colors;
+      this.colors.push("other");
+    })
   }
 
   ngOnInit() {
@@ -51,11 +58,13 @@ export class SellComponent implements OnInit {
       category: new FormControl(""),
       brand: new FormControl(""),
       title: new FormControl(""),
-      quantity: new FormControl(""),
+      quantity: new FormControl("1"),
       size: new FormControl(""),
       color: new FormControl(""),
       currentAskPrice: new FormControl(""),
-      condition: new FormControl("")
+      condition: new FormControl(""),
+      description: new FormControl(""),
+      otherColor: new FormControl("")
     })
     //cloudinary uploader
     const uploaderOptions: FileUploaderOptions = {
@@ -140,6 +149,17 @@ export class SellComponent implements OnInit {
     this.sellService.getTitlesByBrands(this.sellForm.value.category, brand);
   }
 
+  filterColor(title){
+    this.sellService.getColor(title);
+  }
+
+  checkColor(color){
+    if (color === "other") {
+      this.isOther = true;
+    } else {
+      this.isOther = false;
+    }
+  }
   createNewSell(){
     this.sellForm.value.photos = this.images;
     console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);

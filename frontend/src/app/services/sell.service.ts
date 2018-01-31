@@ -11,11 +11,13 @@ export class SellService {
   category$: Subject<string[]>;
   brand$: Subject<string[]>;
   title$: Subject<string[]>;
+  color$: Subject<string[]>;
 
   constructor(private http:HttpClient, private cloudinary: Cloudinary, private authService: AuthService) { 
     this.category$ = new Subject<string[]>(); 
     this.brand$ = new Subject<string[]>();
     this.title$ = new Subject<string[]>();
+    this.color$ = new Subject<string[]>();
   }
 
   getcategorySub():Observable<string[]>{
@@ -28,6 +30,10 @@ export class SellService {
 
   gettitleSub():Observable<string[]>{
     return this.title$.asObservable();
+  }
+
+  getColorSub(): Observable<string[]> {
+    return this.color$.asObservable();
   }
 
   getCategories():void{
@@ -45,7 +51,13 @@ export class SellService {
   getTitlesByBrands(categoryTitle:string, brand:string){
     this.http.get<string[]>('/api/categories/titles/'+categoryTitle+'/'+brand).subscribe(result=>{
       this.title$.next(result);
-    })
+    });
+  }
+
+  getColor(title:string) {
+    this.http.get<string[]>('/api/products/color/'+title).subscribe(result => {
+      this.color$.next(result);
+    });
   }
 
   registerNewSell(formValues){
