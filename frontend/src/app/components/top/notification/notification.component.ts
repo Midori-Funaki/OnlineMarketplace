@@ -24,8 +24,8 @@ interface Message {
       state('hide', style({
         opacity: 0
       })),
-      transition('hide => successShow', animate('600ms ease-in')),
-      transition('hide => failShow', animate('600ms ease-in')),
+      transition('hide => successShow', animate('200ms ease-in')),
+      transition('hide => failShow', animate('200ms ease-in')),
       transition('successShow => hide', animate('600ms ease-out')),
       transition('failShow => hide', animate('600ms ease-out')),
     ]),

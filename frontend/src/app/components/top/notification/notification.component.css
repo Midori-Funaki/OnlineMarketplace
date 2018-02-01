@@ -1,14 +1,16 @@
 .msg-box{
     text-align: left;
-    color: white;
     padding: 5px 0px;
     box-shadow: 0 0 0 1px #a3c293 inset, 0 0 0 0 transparent;
+    height: 50px;
 }
 
 .msg-title {
     font-size: 16px;
+    color: white;
 }
 
 .msg-content {
     font-size: 13px;
+    color: rgba(196, 196, 196, 0.514);
 }

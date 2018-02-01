@@ -10,9 +10,9 @@ a{
     margin: 0 auto 0 0;
 }
 .card{
-    width: 210px;
     margin: 5px;
     background-color: #f1f1f1;
     border: 5px solid white;
     border-radius: 0;
+    width: 210px;
 }

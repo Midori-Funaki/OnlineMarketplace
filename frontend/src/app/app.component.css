@@ -8,7 +8,7 @@ body{
     width: 100%;
     margin: 0px;
     padding: 0px;
-    height: 5%;
+    height: 10vh;
     background:rgb(104,50,99);
 }
 
@@ -16,13 +16,13 @@ body{
     width: 100%;
     margin: 0px;
     padding: 0px;
-    height: 85%;
+    height: 80vh;
 }
 
 #bottom {
     width: 100%;
     margin: 0px;
     padding: 0px;
-    height: 10%;
+    min-height: 10vh;
     background: rgba(129, 126, 126, 0.507);
 }
