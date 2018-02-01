@@ -6,6 +6,9 @@
     border: solid 1px grey;
     border-radius: 10px;
 }
+btn:hover {
+    cursor: pointer;
+}
 .close {
     color: white;
 }
@@ -16,7 +19,7 @@
     background-color: transparent;
     margin: auto;
 }
-.submit-btn {
+.submit-btn:hover {
     cursor: pointer;
 }
 .modal-header {

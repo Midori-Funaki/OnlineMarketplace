@@ -12,8 +12,12 @@ a:hover {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
     border: none;
+    color: black;
+    border-radius: 0;
 }
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     border: none;
+    color: black;
+    border-radius: 0;
 }

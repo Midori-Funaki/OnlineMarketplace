@@ -2,6 +2,9 @@ a{
     color: black;
     text-decoration: none;
 }
+p {
+    margin: 0;
+}
 .products-container{
     display: flex;
     flex-wrap: wrap;
@@ -11,8 +14,24 @@ a{
 }
 .card{
     width: 210px;
+    height: 315px;
     margin: 5px;
     background-color: #f1f1f1;
     border: 5px solid white;
     border-radius: 0;
+}
+.card-title {
+    font-size: 20px;
+    margin: 0;
+}
+.card-body {
+    padding: 5px 10px;
+}
+.card-footer {
+    padding: 0;
+}
+.price {
+    font-size: 22px;
+    float: right;
+    margin-right: 26px;
 }
