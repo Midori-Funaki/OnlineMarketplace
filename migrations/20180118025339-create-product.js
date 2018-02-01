@@ -35,9 +35,6 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
-      photos: {
-        type: Sequelize.JSON
-      },
       sellerId: {
         type: Sequelize.INTEGER
       },

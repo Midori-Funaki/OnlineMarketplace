@@ -9,7 +9,9 @@ class ProductService {
 
   getAll() {
     return Product.findAll({
-      attributes: { exclude: ['CategoryId'] }
+      include: [{
+        model: ProductPhoto
+      }]
     })
       .then(products => {
         return products;

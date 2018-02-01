@@ -7,11 +7,11 @@
       <div *ngFor="let product of products | async" class="each-product">
         <a href="products/{{product.id}}">
           <div class="card">
-            <img class="card-img-top" [src]="product.photos.default[0]" alt="Card image cap">
+            <img class="card-img-top" [src]="product.ProductPhotos[0].url" alt="Card image cap">
             <div class="card-body">
               <h4 class="card-title">{{ product.title }}</h4>
               <p class="card-text">{{ product.description }}</p>
-              <p>Lowest bid price : $ {{ product.curentBidPrice }}</p>
+              <p>Lowest bid price : $ {{ product.currentBidPrice }}</p>
             </div>
           </div>
           <!-- ./card -->

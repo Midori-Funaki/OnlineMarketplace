@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
     curentBidPrice: DataTypes.FLOAT,
     currentAskPrice: DataTypes.FLOAT,
     quantity: DataTypes.INTEGER,
-    photos: DataTypes.JSON,
     sellerId: DataTypes.INTEGER,
     buyerId: DataTypes.INTEGER,
     categoryId: DataTypes.INTEGER
@@ -22,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   Product.associate = function (models) {
     Product.belongsTo(models.Category,{foreignKey:'categoryId',targetKey:'id'});
     Product.hasMany(models.Cart, {foreignKey:'productId', sourceKey: 'id'});
+    Product.hasMany(models.ProductPhoto, {foreignKey: 'productId', sourceKey: 'id'})
   }
   return Product;
 };

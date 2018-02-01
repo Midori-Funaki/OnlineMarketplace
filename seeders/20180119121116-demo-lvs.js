@@ -12,7 +12,7 @@ module.exports = {
     for (let i = 0; i < data.length; i++) {
       products.push({
         title: data[i].name,
-        description: faker.lorem.words(),
+        description: faker.lorem.lines(),
         // size: Math.floor(Math.random() * 6) + 4,
         color: faker.commerce.color(),
         condition: conditions[Math.floor(Math.random() * 2)],
@@ -23,7 +23,7 @@ module.exports = {
         buyerId: Math.floor(Math.random() * 3) + 4,
         categoryId: Math.floor(Math.random() * 3) + 1,
         brand: "louis Vuitton",
-        photos: [data[i].link]
+        // photos: [data[i].link]
       });
     }
     return Product.bulkCreate(products);
