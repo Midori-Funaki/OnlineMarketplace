@@ -69,24 +69,46 @@ export class SellComponent implements OnInit {
       this.productId = param['id'];
     })
 
+    this.sellForm = new FormGroup({
+      category: new FormControl(''),
+      brand: new FormControl(''),
+      title: new FormControl(''),
+      quantity: new FormControl(''),
+      size: new FormControl(''),
+      color: new FormControl(''),
+      currentAskPrice: new FormControl(''),
+      condition: new FormControl(''),
+      description: new FormControl(''),
+      otherColor: new FormControl('')
+    })
+
     this.getSellProduct(this.productId)
-      .then((data) => {
-        this.sellForm = new FormGroup({
-          brand: new FormControl(data.brand),
-          title: new FormControl(data.title),
-          quantity: new FormControl(data.quantity),
-          size: new FormControl(data.size),
-          color: new FormControl(data.color),
-          currentAskPrice: new FormControl(data.currentAskPrice),
-          condition: new FormControl(data.condition),
-          description: new FormControl(data.description),
-          otherColor: new FormControl("")
-        })
-      this.getBrandById(data.categoryId)
-    }).then((data) => {  
-      console.log("DATA", data)
-      this.sellForm.addControl('category',data)    
-    }).catch((err) => {
+    .then((data) => {
+      console.log('RECEIVED DATA @ sell compo ',data);
+      // console.log(typeof data);
+      this.sellForm = new FormGroup({
+        category: new FormControl(data.Category.title),
+        brand: new FormControl(data.brand),
+        title: new FormControl(data.title),
+        quantity: new FormControl(data.quantity),
+        size: new FormControl(data.size),
+        color: new FormControl(data.color),
+        currentAskPrice: new FormControl(data.currentAskPrice),
+        condition: new FormControl(data.condition),
+        description: new FormControl(data.description),
+        otherColor: new FormControl('')
+      })
+      this.filterBrand(data.Category.title);
+      this.filterTitle(data.brand);
+      this.colors.push(data.color);
+      this.colors.push('other');
+      // this.getBrandById(data.categoryId)
+    })
+    // .then((data) => {  
+    //   console.log("DATA", data)
+    //   this.sellForm.addControl('category',data)    
+    // })
+    .catch((err) => {
       console.log(err)
     })
     
@@ -170,16 +192,16 @@ export class SellComponent implements OnInit {
 
   getSellProduct(id) {
     return this.productsService.getProduct(id).toPromise()
-      .then((result) => {
-        let brandName = this.getBrandById(result.categoryId);
-        result.categoryId = brandName;
-        return result
-      });
+      // .then((result) => {
+      //   let brandName = this.getBrandById(result.categoryId);
+      //   result.categoryId = brandName;
+      //   return result
+      // });
   }
 
-  getBrandById(id) {
-    return this.sellService.getBrandById(id);
-  }
+  // getBrandById(id) {
+  //   return this.sellService.getBrandById(id).toPromise()
+  // }
 
   filterBrand(category){
     this.sellService.getBrandsByCategory(category);
