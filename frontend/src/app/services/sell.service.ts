@@ -81,8 +81,12 @@ export class SellService {
     })
   }
 
-  deleteImageById(id){
+  deleteImageByIdFromCloudinary(id){
     return this.http.delete('api/images/' + id)
+  }
+
+  deleteImageByIdFromDb(id) {
+    return this.http.delete('api/photos/' + id)
   }
 
   upload(){

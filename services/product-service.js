@@ -58,7 +58,12 @@ class ProductService {
       },
       attributes: { 
         exclude: ['CategoryId'] 
-      }
+      },
+      include: [{
+        model: Category
+      },{
+        model:ProductPhoto
+      }]
     })
       .then((product) => {
         return product;
@@ -107,19 +112,47 @@ class ProductService {
     })
   }
 
-  update(productId, req) {
-    let attr = req.attr;
-    let updates = req.updates;
-    let newData = {
-      [attr]: updates
-    };
-    return Product.update(newData, { where: { id: productId } })
-      .then(result => {
-        return result;
+  update(productId, productInfo, user) {
+    // let attr = req.attr;
+    // let updates = req.updates;
+    // let newData = {
+    //   [attr]: updates
+    // };
+    // return Product.update(newData, { where: { id: productId } })
+    //   .then(result => {
+    //     return result;
+    //   })
+    //   .catch(err => {
+    //     return err;
+    //   })
+    return Product.findOne({
+      where:{
+        id: productId,
+        buyerId: user.id
+      }
+    }).then((product) => {
+      //NEED TO SEND PRODUCTINFO
+      console.log('PRODUCT @ pro service ',product.dataValues);
+      console.log('NEW INFO ',productInfo)
+      return product.updateAttributes({
+        title: productInfo.title,
+        description: productInfo.description,
+        //   // size: productInfo.size,
+        color: productInfo.color,
+        condition: productInfo.condition,
+        //   // curentBidPrice: productInfo.curentBidPrice,
+        currentAskPrice: productInfo.currentAskPrice,
+        quantity: productInfo.quantity,
+        //   // sellerId: user.id, *****NEED USER ID
+        //   // buyerId: productInfo.INTEGER,
+        // categoryId: category.id, ****HOW TO CHANGE CAT ID
+        brand: productInfo.brand
+      }).then(() => {
+        return 'Update completed'
       })
-      .catch(err => {
-        return err;
-      })
+    }).catch((err) => {
+      return err
+    })
   }
 
   delete(productId) {

@@ -29,6 +29,7 @@ export class SellComponent implements OnInit {
   isOther: boolean = false;
 
   hasBaseDropZoneOver: boolean = false;
+  isEditMode: boolean = true;
   uploader: FileUploader;
   title: string = '';
   imageurl: string = '';
@@ -67,6 +68,11 @@ export class SellComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => {
       this.productId = param['id'];
+      if(this.productId !== "new") {
+        this.isEditMode = true;
+      } else {
+        this.isEditMode = false;
+      }
     })
 
     this.sellForm = new FormGroup({
@@ -84,8 +90,6 @@ export class SellComponent implements OnInit {
 
     this.getSellProduct(this.productId)
     .then((data) => {
-      console.log('RECEIVED DATA @ sell compo ',data);
-      // console.log(typeof data);
       this.sellForm = new FormGroup({
         category: new FormControl(data.Category.title),
         brand: new FormControl(data.brand),
@@ -102,12 +106,14 @@ export class SellComponent implements OnInit {
       this.filterTitle(data.brand);
       this.colors.push(data.color);
       this.colors.push('other');
-      // this.getBrandById(data.categoryId)
+      for(let i=0; i<data.ProductPhotos.length; i++) {
+        this.images.push({
+          id: data.ProductPhotos[i].url.split('.')[0],
+          url: data.ProductPhotos[i].url
+        });
+      }
+      console.log('IMAGES ',this.images);
     })
-    // .then((data) => {  
-    //   console.log("DATA", data)
-    //   this.sellForm.addControl('category',data)    
-    // })
     .catch((err) => {
       console.log(err)
     })
@@ -178,7 +184,8 @@ export class SellComponent implements OnInit {
         {
           file: item.file,
           status,
-          data: JSON.parse(response),
+          // data: JSON.parse(response),
+          id: JSON.parse(response).public_id,
           url: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
         }
       ); 
@@ -192,16 +199,7 @@ export class SellComponent implements OnInit {
 
   getSellProduct(id) {
     return this.productsService.getProduct(id).toPromise()
-      // .then((result) => {
-      //   let brandName = this.getBrandById(result.categoryId);
-      //   result.categoryId = brandName;
-      //   return result
-      // });
   }
-
-  // getBrandById(id) {
-  //   return this.sellService.getBrandById(id).toPromise()
-  // }
 
   filterBrand(category){
     this.sellService.getBrandsByCategory(category);
@@ -228,24 +226,33 @@ export class SellComponent implements OnInit {
     this.sellService.registerNewSell(this.sellForm.value);
   }
 
-  deleteImage(image){
+  deleteImage(delid){
     for(let i=0; i<this.images.length; i++){
-      if(this.images[i].id === image.id){
+      if(this.images[i].id === delid){
         this.images.splice(i, 1);
         break;
       }
     }
-    this.deleteFromCloudinary(image);
+    console.log('DEL IMAGE ARR ',this.images);
+    this.deleteFromCloudinary(delid);
   }
 
-  deleteFromCloudinary(photo){
+  deleteFromCloudinary(id){
+    console.log('deleting image id ',id);
     //Delete the image on cloudinary
-    this.sellService.deleteImageById(photo.data.public_id).subscribe(result =>{
+    this.sellService.deleteImageByIdFromCloudinary(id).subscribe(result =>{
       console.log(result);
     });
+    if (this.productId != 'new') {
+      this.sellService.deleteImageByIdFromDb(id)
+    }
   }
 
   fileOverBase(e: any): void{
     this.hasBaseDropZoneOver = e;
+  }
+
+  editSellItem() {
+    
   }
 }

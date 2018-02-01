@@ -56,9 +56,11 @@ class ProductRoutes{
   }
 
   update(req,res){
-    return this.productService.update(req.params.id,req.body)
-      .then((user)=>{
-        res.send('Updated Completed')
+    console.log('REQ BODY @ pro route ', req.body);
+    console.log('USER ID',req.user);
+    return this.productService.update(req.params.id, req.body, req.user)
+      .then((result)=>{
+        res.send(result)
       })
       .catch((err)=>res.status(500).json(err))
   }
