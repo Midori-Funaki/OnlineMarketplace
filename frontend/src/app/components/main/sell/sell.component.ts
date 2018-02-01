@@ -222,7 +222,7 @@ export class SellComponent implements OnInit {
   }
   createNewSell(){
     this.sellForm.value.photos = this.images;
-    console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
+    // console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
     this.sellService.registerNewSell(this.sellForm.value);
   }
 
@@ -233,12 +233,12 @@ export class SellComponent implements OnInit {
         break;
       }
     }
-    console.log('DEL IMAGE ARR ',this.images);
+    // console.log('DEL IMAGE ARR ',this.images);
     this.deleteFromCloudinary(delid);
   }
 
   deleteFromCloudinary(id){
-    console.log('deleting image id ',id);
+    // console.log('deleting image id ',id);
     //Delete the image on cloudinary
     this.sellService.deleteImageByIdFromCloudinary(id).subscribe(result =>{
       console.log(result);
@@ -253,6 +253,8 @@ export class SellComponent implements OnInit {
   }
 
   editSellItem() {
-    
+    this.sellForm.value.id = this.productId;
+    this.sellForm.value.photos = this.images;
+    this.sellService.editSellItem(this.sellForm.value)
   }
 }

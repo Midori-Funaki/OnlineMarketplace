@@ -13,10 +13,10 @@ class ProductRoutes{
     router.get('/color/:title', this.getColor.bind(this));
     router.get('/sell', auth.authenticate(), this.getSell.bind(this));
     router.get('/:id', this.get.bind(this));
-    router.get('/', this.getAll.bind(this));
-    router.post('/', auth.authenticate(), this.post.bind(this));
     router.delete('/:id',auth.authenticate(), this.delete.bind(this));
     router.put('/:id',auth.authenticate(), this.update.bind(this));
+    router.post('/', auth.authenticate(), this.post.bind(this));
+    router.get('/', this.getAll.bind(this));
     return router;
   }
 

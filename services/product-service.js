@@ -125,6 +125,8 @@ class ProductService {
     //   .catch(err => {
     //     return err;
     //   })
+    console.log('backend pro id',productId);
+    console.log(typeof productInfo);
     return Product.findOne({
       where:{
         id: productId,
@@ -147,7 +149,8 @@ class ProductService {
         //   // buyerId: productInfo.INTEGER,
         // categoryId: category.id, ****HOW TO CHANGE CAT ID
         brand: productInfo.brand
-      }).then(() => {
+      }).then((updatedItem) => {
+        console.log('updated item ',updatedItem)
         return 'Update completed'
       })
     }).catch((err) => {
