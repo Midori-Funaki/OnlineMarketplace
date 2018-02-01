@@ -23,9 +23,7 @@ module.exports = {
         // buyerId: Math.floor(Math.random() * 3) + 4,
         categoryId: Math.floor(Math.random() * 3) + 1,
         brand: "adidas",
-        photos: {
-          default: [data[i].link]
-        }
+        photos: [data[i].link]
       });
     }
     return Product.bulkCreate(products);

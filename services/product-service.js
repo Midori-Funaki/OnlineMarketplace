@@ -71,16 +71,11 @@ class ProductService {
         sellerId: user.id,
         // buyerId: productInfo.INTEGER,
         categoryId: category.id,
-        brand: productInfo.brand
+        brand: productInfo.brand,
+        photos: Array(productInfo.photos.map(photo=> {
+          return photo.url;
+        }))
       })
-    })
-    .then(product => {
-      for (let photo of productInfo.photos) {
-        ProductPhoto.create({
-          url: photo.url,
-          productId: product.id
-        })
-      }
     })
     .then(() => {
       console.log('Product posted');
