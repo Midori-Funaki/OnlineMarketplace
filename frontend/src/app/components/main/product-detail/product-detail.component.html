@@ -1,53 +1,52 @@
-<<div class="container-fluid p-5" *ngIf="product | async as product">
+<div class="container-fluid p-5" *ngIf="product | async as product">
   <div class="row">
-      <div class="col-sm-1 px-2">
-          <div>
-              <button class="img-control">
-                  <img class="thumbnail" src="https://picsum.photos/500/500?image=2" (click)="changeImage($event)">
-              </button>
-              <button class="img-control">
-                  <img class="thumbnail" src="https://picsum.photos/500/500?image=3"
-                  (click)="changeImage($event)">
-              </button>
-          </div>
+    <div class="col-sm-1 px-2">
+      <div>
+        <button class="img-control">
+          <img class="thumbnail" src="https://picsum.photos/500/500?image=2" (click)="changeImage($event)">
+        </button>
+        <button class="img-control">
+          <img class="thumbnail" src="https://picsum.photos/500/500?image=3" (click)="changeImage($event)">
+        </button>
       </div>
-      <div class="col-sm-5 px-2">
-          <div class="display">
-              <img [src]="imgsrc" alt="">
-          </div>
+    </div>
+    <div class="col-sm-5 px-2">
+      <div class="display">
+        <img [src]="imgsrc" alt="">
       </div>
-      <div class="col-sm-6">
-          <h1>{{product.title}}</h1>
-          <p class="lead mb-4">
-              {{product.description}}
-          </p>
-          <div class="price">Current Price: {{ product.curentBidPrice | currency}}</div>
-          <div class="options">
-              <div class="my-3">
-                  <h5>Size:</h5>
-                  <div class="size-button">
-                      <button class="btn btn-outline-dark" type="button">{{product.size}}</button>
-                      <!-- <button class="btn btn-outline-dark" type="button">M</button>
+    </div>
+    <div class="col-sm-6">
+      <h1>{{product.title}}</h1>
+      <p class="lead mb-4">
+        {{product.description}}
+      </p>
+      <div class="price">Current Price: {{ product.curentBidPrice | currency}}</div>
+      <div class="options">
+        <div class="my-3">
+          <h5>Size:</h5>
+          <div class="size-button">
+            <button class="btn btn-outline-dark" type="button">{{product.size}}</button>
+            <!-- <button class="btn btn-outline-dark" type="button">M</button>
                       <button class="btn btn-outline-dark" type="button">L</button>
                       <button class="btn btn-outline-dark" type="button">XL</button> -->
-                  </div>
-              </div>
-              <div class="color-button my-3">
-                  <h5>Color:</h5>
-                  <button class="btn btn-outline-dark" type="button">{{product.color}}</button>
-                  <!-- <button class="btn btn-danger" type="button">Red</button>
-                  <button class="btn btn-warning" type="button">Yellow</button> -->
-              </div>
-              <div class="quantity-select">
-                  <h5>Quantity:</h5>
-                  <input class="form-control form-number" type="number" name="quantity" [(ngModel)]="quantity">
-              </div>
-              <div class="add-item my-5">
-                  <div class="btn-group">
-                      <button class="btn btn-primary btn-lg" type="button" (click)="addToCart(product.id)">Add to cart</button>
-                  </div>
-              </div>
           </div>
+        </div>
+        <div class="color-button my-3">
+          <h5>Color:</h5>
+          <button class="btn btn-outline-dark" type="button">{{product.color}}</button>
+          <!-- <button class="btn btn-danger" type="button">Red</button>
+                  <button class="btn btn-warning" type="button">Yellow</button> -->
+        </div>
+        <div class="quantity-select">
+          <h5>Quantity:</h5>
+          <input class="form-control form-number" type="number" name="quantity" [(ngModel)]="quantity">
+        </div>
+        <div class="add-item my-5">
+          <div class="btn-group">
+            <button class="btn btn-primary btn-lg" type="button" (click)="addToCart(product.id)">Add to cart</button>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>>
