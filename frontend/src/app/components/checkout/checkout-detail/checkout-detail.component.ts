@@ -15,6 +15,10 @@ export class CheckoutDetailComponent implements OnInit {
   items: any[]; //cart object with Product sub object
   grandTotal: number;
   checkoutForm: FormGroup
+  sellersTransfer: {
+    stripeClient: string,
+    amount: number,
+  }
 
   constructor(
     private userService: UserService,
@@ -42,13 +46,14 @@ export class CheckoutDetailComponent implements OnInit {
             contact: new FormControl(null, Validators.required)
           })
         });
-      });
+      })
+      
   }
 
   getItems() {
     return this.checkoutService.getCartItems().toPromise().then(items => {
-      this.items = items
-    })
+      this.items = items;
+    });
   }
 
   getUser() {
@@ -65,18 +70,24 @@ export class CheckoutDetailComponent implements OnInit {
       this.grandTotal += item.Product.curentBidPrice * item.quantity;
     }
   }
-
+  
   onSubmit() {
     if (this.checkoutForm.invalid) {
       // Forbid the form from submitting if it is invalid.
       return;
     }
+    console.log("Items: ", this.items);
+    console.log(this.checkoutForm.value)
+    console.log("total", this.grandTotal);
     this.openCheckOut(this.grandTotal * 100);
+  }
+
+  prepareCheckout() {
+    
   }
 
   openCheckOut(grandTotal) {
     this.checkoutService.openCheckout(grandTotal);
   }
-
 
 }

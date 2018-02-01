@@ -34,14 +34,14 @@ class ProductRoutes {
 
   put(req, res) {
     //req.body format {"productId": XX, "quantity": [{"old":XX,"new":XX}]}
-    return this.cartService.put(req.params.userId, req.body)
+    return this.cartService.put(req.params.id, req.body)
       .then((items) => res.json(items))
       .catch((err) => res.status(500).json(err))
   }
 
   delete(req, res) {
-    return this.cartService.delete(req.params.userId, req.body)
-      .then((items) => res.json(items))
+    return this.cartService.delete(req.params.id, req.body)
+      .then((items) => res.status(200).end())
       .catch((err) => res.status(500).json(err))
   }
 }

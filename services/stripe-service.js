@@ -1,10 +1,11 @@
 const models = require('./../models');
 const User = models.User;
 const axios = require('axios');
+const stripe = require('stripe')("sk_test_gW7J5GmExE8SZUyO90AedDOY");
 
 class StripeService {
 
-  constructor() { }
+  constructor() {}
 
   register(token, user) { //user = { id : 1}
     if (token) {
@@ -16,14 +17,14 @@ class StripeService {
           grant_type: "authorization_code"
         }
       ).then(res => {
-        console.log(res);
+        console.log("stripe: ", res);
         if (res.error) {
           return res.error;
         } else {
           return res.data.stripe_user_id;
         }
       }).then(user_id => {
-        console.log(user_id); 
+        console.log("stripe user: ", user_id); 
         return User.findById(user.id).then(user => {
           user.stripeId = user_id;
           return user.save();
@@ -32,6 +33,13 @@ class StripeService {
         return err;
       })
     }
+    else {
+      return "Token not found";
+    }
+  }
+
+  createCharge(totalAmount, tranferObject, token, ) {
+    stripe.createCharge()
   }
 }
 

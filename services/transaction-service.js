@@ -23,6 +23,12 @@ class transactionService {
     })
   }
 
+  post(userid, body) {
+    return Transaction.create({
+      
+    })
+  }
+
 }
 
 module.exports = transactionService;

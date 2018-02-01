@@ -11,9 +11,7 @@ class TransactionRoutes {
   router() {
     let router = express.Router();
     router.get('/', auth.authenticate(), this.get.bind(this));
-    router.get('/checkouts/new', this.getToken.bind(this));
-    router.get('/checkouts/:id', this.confirm.bind(this));
-    router.post('/checkouts', this.postNonce.bind(this));
+    // router.post('/checkouts', this.postNonce.bind(this));
     return router;
   }
 

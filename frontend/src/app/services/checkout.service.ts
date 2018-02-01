@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from './../payment-config';
 import { CartService } from './cart.service';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../models/Product';
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class CheckoutService {
@@ -13,7 +14,8 @@ export class CheckoutService {
 
   constructor(
     private http: HttpClient,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: AuthService
   ) { }
 
   getCartItems() {
@@ -26,7 +28,7 @@ export class CheckoutService {
     };
     return ID();
   }
-  
+
   openCheckout(total) {
     // return this.http.get('/api/checkout');
     var handler = (<any>window).StripeCheckout.configure({
@@ -34,6 +36,7 @@ export class CheckoutService {
       locale: 'auto',
       currency: 'hkd',
       token: function (token: any) {
+        console.log(token);
       }
     });
 
@@ -44,6 +47,19 @@ export class CheckoutService {
     });
   }
 
-
+  //private functions
+  private createCharge(totalAmount, transferObject, token) {
+    return this.http.post('/api/charges',
+      {
+        totalAmount: totalAmount,
+        transferObject: transferObject,
+        token: token
+      },
+      {
+        headers: new HttpHeaders().set(
+          'Authorization', 'Bearer ' + this.authService.token)
+      }
+    )
+  }
 
 }
