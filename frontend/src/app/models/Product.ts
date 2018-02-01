@@ -12,4 +12,5 @@ export interface Product {
   categoryId: number;
   createdAt: string;
   updatedAt: string;
+  ProductPhotos?: any
 }

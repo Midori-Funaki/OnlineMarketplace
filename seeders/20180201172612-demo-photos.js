@@ -2,6 +2,7 @@
 const data = require('./../productdata');
 const models = require("./../models");
 const ProductPhoto = models.ProductPhoto;
+const faker = require('faker');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -12,7 +13,15 @@ module.exports = {
         {
           url: data.adidas[i].link,
           productId: id
-        }
+        },
+        {
+          url: faker.image.fashion(),
+          productId: id
+        },
+        {
+          url: faker.image.fashion(),
+          productId: id
+        },
       )
       id++;
     }
@@ -21,7 +30,15 @@ module.exports = {
         {
           url: data.adidas[i].link,
           productId: id
-        }
+        },
+        {
+          url: faker.image.fashion(),
+          productId: id
+        },
+        {
+          url: faker.image.fashion(),
+          productId: id
+        },
       )
       id++;
     }

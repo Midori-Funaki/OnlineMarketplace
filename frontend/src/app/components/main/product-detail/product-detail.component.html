@@ -1,18 +1,21 @@
-<div class="container-fluid p-5" *ngIf="product | async as product">
+<div class="container-fluid p-5" *ngIf="product ">
   <div class="row">
     <div class="col-sm-1 px-2">
       <div>
-        <button class="img-control">
+        <button class="img-control" *ngFor="let photo of product.ProductPhotos">
+          <img class="thumbnail" [src]="photo.url" (click)="changeImage($event)">
+        </button>
+        <!-- <button class="img-control">
           <img class="thumbnail" src="https://picsum.photos/500/500?image=2" (click)="changeImage($event)">
         </button>
         <button class="img-control">
           <img class="thumbnail" src="https://picsum.photos/500/500?image=3" (click)="changeImage($event)">
-        </button>
+        </button> -->
       </div>
     </div>
     <div class="col-sm-5 px-2">
       <div class="display">
-        <img [src]="imgsrc" alt="">
+        <img [src]="product.ProductPhotos[0].url" alt="">
       </div>
     </div>
     <div class="col-sm-6">
@@ -49,4 +52,4 @@
       </div>
     </div>
   </div>
-</div>>
+</div>

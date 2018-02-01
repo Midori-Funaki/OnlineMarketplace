@@ -42,6 +42,9 @@ class ProductService {
       where: {
         id: productId
       },
+      include: {
+        model: ProductPhoto
+      },
       attributes: { 
         exclude: ['CategoryId'] 
       }

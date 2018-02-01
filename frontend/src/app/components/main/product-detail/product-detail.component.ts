@@ -19,8 +19,8 @@ export class ProductDetailComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  product: Observable<Product>;
-  imgsrc: string = "https://picsum.photos/500/500?image=2";
+  product: Pro;
+  imgsrc: string;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(param => {
@@ -29,10 +29,14 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getProduct(id) {
-    this.product = this.productsService.getProduct(id);
+    this.productsService.getProduct(id).subscribe(product => {
+      this.product = product;
+      this.imgsrc = product.ProductPhotos[0].url;
+    })
   }
 
   changeImage(event) {
+    console.log(event)
     this.imgsrc = event.srcElement.src;
   }
 
