@@ -13,10 +13,10 @@ class ProductRoutes{
     router.get('/color/:title', this.getColor.bind(this));
     router.get('/sell', auth.authenticate(), this.getSell.bind(this));
     router.get('/:id', this.get.bind(this));
-    router.get('/', this.getAll.bind(this));
-    router.post('/', auth.authenticate(), this.post.bind(this));
     router.delete('/:id',auth.authenticate(), this.delete.bind(this));
     router.put('/:id',auth.authenticate(), this.update.bind(this));
+    router.post('/', auth.authenticate(), this.post.bind(this));
+    router.get('/', this.getAll.bind(this));
     return router;
   }
 
@@ -46,19 +46,21 @@ class ProductRoutes{
   }
 
   post(req,res){
-    let result = this.productService.post(req.body, req.user)
-    console.log("Result", result);
+    // let result = this.productService.post(req.body, req.user)
+    // console.log("Result", result);
     return this.productService.post(req.body, req.user)
-      .then(()=>{
-        res.send('Registration Completed')
+      .then((result)=>{
+        res.send(result)
       })
       .catch((err)=>res.status(500).json(err))
   }
 
   update(req,res){
-    return this.productService.update(req.params.id,req.body)
-      .then((user)=>{
-        res.send('Updated Completed')
+    console.log('REQ BODY @ pro route ', req.body);
+    console.log('USER ID',req.user);
+    return this.productService.update(req.params.id, req.body, req.user)
+      .then((result)=>{
+        res.send(result)
       })
       .catch((err)=>res.status(500).json(err))
   }

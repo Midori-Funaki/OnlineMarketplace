@@ -1,11 +1,14 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormsModule, Validators } from '@angular/forms';
 import { SellService } from '../../../services/sell.service';
 import { Observable } from 'rxjs/Observable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
+import { ProductsService } from '../../../services/products.service';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from './../../../models/Product';
 
 @Component({
   selector: 'app-sell',
@@ -13,27 +16,33 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
+  sellProduct: any;
+  productId: any;
+
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
   titles: string[] = [];
-  images: Array<any> = [];;//image array
+  images: Array<any> = [];//image array
   sizes: string[] = [];
   colors: string[] = [];
   isOther: boolean = false;
 
   hasBaseDropZoneOver: boolean = false;
+  isEditMode: boolean = true;
   uploader: FileUploader;
   title: string = '';
   imageurl: string = '';
   uploadResult: any;
 
   constructor(
+    private route: ActivatedRoute,
     private sellService:SellService, 
     private formBuilder: FormBuilder,
     private cloudinary: Cloudinary,
     private zone: NgZone,
-    private http: HttpClient
+    private http: HttpClient,
+    private productsService:ProductsService
   ) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
@@ -47,25 +56,71 @@ export class SellComponent implements OnInit {
       this.titles = titles;
     })
     this.sellService.getColorSub().subscribe(colors => {
-      this.colors = colors;
+      colors.forEach((color) => {
+        if(this.colors.indexOf(color) < 0) {
+          this.colors.push(color)
+        }
+      });
       this.colors.push("other");
     })
   }
 
   ngOnInit() {
-    this.sellService.getCategories();
-    this.sellForm = new FormGroup({
-      category: new FormControl(""),
-      brand: new FormControl(""),
-      title: new FormControl(""),
-      quantity: new FormControl("1"),
-      size: new FormControl(""),
-      color: new FormControl(""),
-      currentAskPrice: new FormControl(""),
-      condition: new FormControl(""),
-      description: new FormControl(""),
-      otherColor: new FormControl("")
+    this.route.params.subscribe(param => {
+      this.productId = param['id'];
+      if(this.productId !== "new") {
+        this.isEditMode = true;
+      } else {
+        this.isEditMode = false;
+      }
     })
+
+    this.sellForm = new FormGroup({
+      category: new FormControl(''),
+      brand: new FormControl(''),
+      title: new FormControl(''),
+      quantity: new FormControl(''),
+      size: new FormControl(''),
+      color: new FormControl(''),
+      currentAskPrice: new FormControl(''),
+      condition: new FormControl(''),
+      description: new FormControl(''),
+      otherColor: new FormControl('')
+    })
+
+    this.getSellProduct(this.productId)
+    .then((data) => {
+      this.sellForm = new FormGroup({
+        category: new FormControl(data.Category.title),
+        brand: new FormControl(data.brand),
+        title: new FormControl(data.title),
+        quantity: new FormControl(data.quantity),
+        size: new FormControl(data.size),
+        color: new FormControl(data.color),
+        currentAskPrice: new FormControl(data.currentAskPrice),
+        condition: new FormControl(data.condition),
+        description: new FormControl(data.description),
+        otherColor: new FormControl('')
+      })
+      this.filterBrand(data.Category.title);
+      this.filterTitle(data.brand);
+      this.colors.push(data.color);
+      this.colors.push('other');
+      for(let i=0; i<data.ProductPhotos.length; i++) {
+        this.images.push({
+          id: data.ProductPhotos[i].url.split('.')[0],
+          url: data.ProductPhotos[i].url
+        });
+      }
+      console.log('IMAGES ',this.images);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+    
+
+    this.sellService.getCategories();
+    
     //cloudinary uploader
     const uploaderOptions: FileUploaderOptions = {
       url: `https://api.cloudinary.com/v1_1/${this.cloudinary.config().cloud_name}/upload`,
@@ -129,7 +184,8 @@ export class SellComponent implements OnInit {
         {
           file: item.file,
           status,
-          data: JSON.parse(response),
+          // data: JSON.parse(response),
+          id: JSON.parse(response).public_id,
           url: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
         }
       ); 
@@ -139,6 +195,10 @@ export class SellComponent implements OnInit {
     this.uploader.onProgressItem = (fileItem: any, progress: any) => {
       console.log('Upload in progress ',progress);
     }
+  }
+
+  getSellProduct(id) {
+    return this.productsService.getProduct(id).toPromise()
   }
 
   filterBrand(category){
@@ -162,28 +222,39 @@ export class SellComponent implements OnInit {
   }
   createNewSell(){
     this.sellForm.value.photos = this.images;
-    console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
+    // console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
     this.sellService.registerNewSell(this.sellForm.value);
   }
 
-  deleteImage(image){
+  deleteImage(delid){
     for(let i=0; i<this.images.length; i++){
-      if(this.images[i].id === image.id){
+      if(this.images[i].id === delid){
         this.images.splice(i, 1);
         break;
       }
     }
-    this.deleteFromCloudinary(image);
+    // console.log('DEL IMAGE ARR ',this.images);
+    this.deleteFromCloudinary(delid);
   }
 
-  deleteFromCloudinary(photo){
+  deleteFromCloudinary(id){
+    // console.log('deleting image id ',id);
     //Delete the image on cloudinary
-    this.sellService.deleteImageById(photo.data.public_id).subscribe(result =>{
+    this.sellService.deleteImageByIdFromCloudinary(id).subscribe(result =>{
       console.log(result);
     });
+    if (this.productId != 'new') {
+      this.sellService.deleteImageByIdFromDb(id)
+    }
   }
 
   fileOverBase(e: any): void{
     this.hasBaseDropZoneOver = e;
+  }
+
+  editSellItem() {
+    this.sellForm.value.id = this.productId;
+    this.sellForm.value.photos = this.images;
+    this.sellService.editSellItem(this.sellForm.value)
   }
 }

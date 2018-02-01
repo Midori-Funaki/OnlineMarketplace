@@ -10,6 +10,7 @@ export class SellService {
 
   category$: Subject<string[]>;
   brand$: Subject<string[]>;
+  brandName$: Subject<string>;
   title$: Subject<string[]>;
   color$: Subject<string[]>;
 
@@ -18,6 +19,7 @@ export class SellService {
     this.brand$ = new Subject<string[]>();
     this.title$ = new Subject<string[]>();
     this.color$ = new Subject<string[]>();
+    this.brandName$ = new Subject<string>();
   }
 
   getcategorySub():Observable<string[]>{
@@ -36,6 +38,10 @@ export class SellService {
     return this.color$.asObservable();
   }
 
+  getBrandNameSub(): Observable<string> {
+    return this.brandName$.asObservable();
+  }
+
   getCategories():void{
     this.http.get<string[]>('/api/categories/').subscribe(result=>{
       this.category$.next(result);
@@ -46,6 +52,13 @@ export class SellService {
     this.http.get<string[]>('/api/categories/brands/'+categoryTitle).subscribe(result=>{
       this.brand$.next(result);
     });
+  }
+
+  getBrandById(id:any) {
+    console.log('id @ sell.service ',id);
+    this.http.get<string>('/api/categories/name/' + id).subscribe(brand => {
+      this.brandName$.next(brand);
+    })
   }
 
   getTitlesByBrands(categoryTitle:string, brand:string){
@@ -61,16 +74,29 @@ export class SellService {
   }
 
   registerNewSell(formValues){
-    this.http.post<string[]>('api/products/',{
-      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token),
-      data: formValues
+    return this.http.post<string[]>('api/products/', formValues, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)
     }).subscribe(result => {
       console.log('REGISTER NEW POST RESULT ',result);
     })
   }
 
-  deleteImageById(id){
+  editSellItem(productInfo) {
+    console.log('sending id',productInfo.id)
+    console.log('sending prodyctInfo @ sell.service',productInfo);
+    return this.http.put('api/products/' + productInfo.id, productInfo, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)
+    }).subscribe(result => {
+      console.log('PUT REQ RESULT ',result);
+    })
+  }
+
+  deleteImageByIdFromCloudinary(id){
     return this.http.delete('api/images/' + id)
+  }
+
+  deleteImageByIdFromDb(id) {
+    return this.http.delete('api/photos/' + id)
   }
 
   upload(){

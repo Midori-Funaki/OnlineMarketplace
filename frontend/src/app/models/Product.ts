@@ -10,6 +10,7 @@ export interface Product {
   sellerId: number;
   buyerId: number;
   categoryId: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
+  brand: string;
 }
