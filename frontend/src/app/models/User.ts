@@ -9,7 +9,7 @@ export interface User {
   billingAddress: string;
   billingAddress2: string;
   contact:string;
-  stripeToken: string;
+  stripeId: string;
   createdAt: string;
   updatedAt: string;
 }

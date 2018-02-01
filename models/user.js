@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     billingAddress: DataTypes.STRING,
     billingAddress2: DataTypes.STRING,
     contact: DataTypes.STRING,
-    stripeToken: DataTypes.STRING
+    stripeId: DataTypes.STRING
   });
 
   User.associate = function(models){

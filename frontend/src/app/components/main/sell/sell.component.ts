@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../models/User';
 
 @Component({
   selector: 'app-sell',
@@ -13,6 +15,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
+  isConnectedAccount: boolean = false;
+  user: User;
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
@@ -26,6 +30,7 @@ export class SellComponent implements OnInit {
   uploadResult: any;
 
   constructor(
+    private userService: UserService,
     private sellService:SellService, 
     private formBuilder: FormBuilder,
     private cloudinary: Cloudinary,
@@ -46,6 +51,12 @@ export class SellComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+      if (this.user.stripeId) {
+        this.isConnectedAccount = true;
+      }
+    })
     this.sellService.getCategories();
     this.sellForm = new FormGroup({
       category: new FormControl(""),

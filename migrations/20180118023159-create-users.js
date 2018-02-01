@@ -30,7 +30,7 @@ module.exports = {
       billingAddress: Sequelize.STRING,
       billingAddress2: Sequelize.STRING,
       contact: Sequelize.STRING,
-      stripeToken: Sequelize.STRING,
+      stripeId: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
