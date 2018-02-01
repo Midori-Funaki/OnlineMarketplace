@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/User';
 import { CheckoutService } from '../../../services/checkout.service';
+import { Product } from '../../../models/Product';
 
 @Component({
   selector: 'app-checkout-detail',
@@ -11,6 +12,8 @@ import { CheckoutService } from '../../../services/checkout.service';
 })
 export class CheckoutDetailComponent implements OnInit {
   user: User
+  items: any[]; //cart object with Product sub object
+  grandTotal: number;
   checkoutForm: FormGroup
 
   constructor(
@@ -19,6 +22,8 @@ export class CheckoutDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getItems()
+      .then(_ => this.getTotal());
     this.getUser()
       .then(_ => {
         this.checkoutForm = new FormGroup({
@@ -40,6 +45,12 @@ export class CheckoutDetailComponent implements OnInit {
       });
   }
 
+  getItems() {
+    return this.checkoutService.getCartItems().toPromise().then(items => {
+      this.items = items
+    })
+  }
+
   getUser() {
     return this.userService.getUser().toPromise().then(
       user => {
@@ -48,8 +59,24 @@ export class CheckoutDetailComponent implements OnInit {
     )
   }
 
-  onSubmit() {
-    this.checkoutService.openCheckout()
+  getTotal(): void {
+    this.grandTotal = 0;
+    for (let item of this.items) {
+      this.grandTotal += item.Product.curentBidPrice * item.quantity;
+    }
   }
+
+  onSubmit() {
+    if (this.checkoutForm.invalid) {
+      // Forbid the form from submitting if it is invalid.
+      return;
+    }
+    this.openCheckOut(this.grandTotal * 100);
+  }
+
+  openCheckOut(grandTotal) {
+    this.checkoutService.openCheckout(grandTotal);
+  }
+
 
 }

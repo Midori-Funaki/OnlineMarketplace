@@ -4,10 +4,13 @@ const models = require('./../models');
 const Transaction = models.Transaction;
 
 module.exports = {
+  
   up: (queryInterface, Sequelize) => {
+    
     let transactions = [];
     for(let i=0; i<10; i++){
       transactions.push({
+        orderId: (i + 1)% 3,
         status: Math.floor(Math.random() * 5) + 1,
         price: faker.commerce.price(),
         sellerShipAddress: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.country()}`,
@@ -21,6 +24,7 @@ module.exports = {
         updatedAt: "2016-08-09 07:42:28"
       })
     }
+  
   return Transaction.bulkCreate(transactions);
   },
 

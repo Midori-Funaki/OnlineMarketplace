@@ -1,6 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Transaction = sequelize.define('Transaction', {
+    orderId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     status: DataTypes.STRING,
     price: DataTypes.FLOAT,
     sellerShipAddress: DataTypes.STRING,

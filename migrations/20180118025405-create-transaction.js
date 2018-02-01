@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      orderId: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       status: {
         type: Sequelize.INTEGER
       },

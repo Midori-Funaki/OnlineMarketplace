@@ -11,6 +11,7 @@ module.exports = {
       email: "avia@gmail.com",
       shippingAddress: "70 Bowman St., South Windsor, CT 06074",
       billingAddress: "70 Bowman St., South Windsor, CT 06074",
+      stripeId: "acct_1BpoeSCNO1ltiIm0",
       createdAt: "2016-08-09 07:42:28",
       updatedAt: "2016-08-09 07:42:28"
     },{

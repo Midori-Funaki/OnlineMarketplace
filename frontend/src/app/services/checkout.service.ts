@@ -1,44 +1,49 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { HttpClient } from '@angular/common/http';
-
+import config from './../payment-config';
+import { CartService } from './cart.service';
+import { Observable } from 'rxjs/Observable';
+import { Product } from '../models/Product';
 
 @Injectable()
 export class CheckoutService {
 
-  chargeAmount$: Subject<number>;
-  chargeAmount: number;
-
+  grandTotal: number;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cartService: CartService
   ) { }
 
-  openCheckout() {
+  getCartItems() {
+    return this.cartService.getItems();
+  }
+
+  newOrderID(): string {
+    var ID = function () {
+      return Math.random().toString(36).substr(2, 9);
+    };
+    return ID();
+  }
+  
+  openCheckout(total) {
     // return this.http.get('/api/checkout');
     var handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_gRoV8PvaQUbswxHlWWLNYhbL',
+      key: config.publish_key,
       locale: 'auto',
+      currency: 'hkd',
       token: function (token: any) {
-        
       }
     });
 
     handler.open({
-      name: 'Demo Site',
-      description: '2 widgets',
-      amount: 2000
+      name: 'Dealshub.space',
+      description: 'test order',
+      amount: total
     });
   }
 
-  updateTotal(amount): void {
-    this.chargeAmount$.next(amount);
-  }
 
-  getChargeAmount() {
-    this.chargeAmount$.subscribe(amount => {
-      this.chargeAmount = amount;
-    })
-  }
 
 }

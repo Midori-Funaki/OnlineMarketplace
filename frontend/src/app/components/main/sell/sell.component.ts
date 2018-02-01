@@ -21,7 +21,7 @@ export class SellComponent implements OnInit {
   categories: string[] = [];
   brands: string[] = [];
   titles: string[] = [];
-  images: Array<any> = [];;//image array
+  images: Array<any> = [];//image array
 
   hasBaseDropZoneOver: boolean = false;
   uploader: FileUploader;
