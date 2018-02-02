@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  product: Pro;
+  product: Product;
   imgsrc: string;
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   changeImage(event) {
-    console.log(event)
+    console.log(event.srcElement.src);
     this.imgsrc = event.srcElement.src;
   }
 

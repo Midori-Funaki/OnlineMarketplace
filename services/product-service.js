@@ -11,7 +11,8 @@ class ProductService {
     return Product.findAll({
       include: [{
         model: ProductPhoto
-      }]
+      }],
+      limit: 20
     })
       .then(products => {
         return products;
