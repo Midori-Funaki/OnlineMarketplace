@@ -89,7 +89,7 @@ class ProductService {
       return Product.create({
         title: productInfo.title,
         description: productInfo.description,
-        // size: productInfo.size,
+        size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
         // curentBidPrice: productInfo.curentBidPrice,
@@ -123,7 +123,7 @@ class ProductService {
       return product.updateAttributes({
         title: productInfo.title,
         description: productInfo.description,
-        //   // size: productInfo.size,
+        size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
         currentAskPrice: productInfo.currentAskPrice,

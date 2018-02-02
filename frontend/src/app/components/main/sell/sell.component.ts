@@ -242,6 +242,9 @@ export class SellComponent implements OnInit {
     }
   }
   createNewSell(){
+    if (!this.isShoeCategory){
+      this.sellForm.value.size = 0;
+    }
     this.sellForm.value.photos = this.images;
     // console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
     this.sellService.registerNewSell(this.sellForm.value);
