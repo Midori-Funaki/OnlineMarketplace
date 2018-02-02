@@ -51,7 +51,7 @@ export class SellComponent implements OnInit {
   ) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
-      // this.categories.unshift("");
+      this.categories.unshift("");
     });
     this.sellService.getbrandSub().subscribe(brands=>{
       this.brands = brands;
@@ -71,21 +71,6 @@ export class SellComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(param => {
-      this.productId = param['id'];
-      if(this.productId !== "new") {
-        this.isEditMode = true;
-      } else {
-        this.isEditMode = false;
-      }
-    })
-
-    this.userService.getUser().subscribe(user => {
-      this.user = user;
-      if (this.user.stripeId) {
-        this.isConnectedAccount = true;
-      }
-    })
     this.sellService.getCategories();
     this.sellForm = new FormGroup({
       category: new FormControl(''),
@@ -100,36 +85,22 @@ export class SellComponent implements OnInit {
       otherColor: new FormControl('')
     })
 
-    this.getSellProduct(this.productId)
-    .then((data) => {
-      this.sellForm = new FormGroup({
-        category: new FormControl(data.Category.title),
-        brand: new FormControl(data.brand),
-        title: new FormControl(data.title),
-        quantity: new FormControl(data.quantity),
-        size: new FormControl(data.size),
-        color: new FormControl(data.color),
-        currentAskPrice: new FormControl(data.currentAskPrice),
-        condition: new FormControl(data.condition),
-        description: new FormControl(data.description),
-        otherColor: new FormControl('')
-      })
-      this.filterBrand(data.Category.title);
-      this.filterTitle(data.brand);
-      this.colors.push(data.color);
-      this.colors.push('other');
-      for(let i=0; i<data.ProductPhotos.length; i++) {
-        this.images.push({
-          id: data.ProductPhotos[i].url.split('.')[0],
-          url: data.ProductPhotos[i].url
-        });
+    this.route.params.subscribe(param => {
+      this.productId = param['id'];
+      if(this.productId !== "new") {
+        this.isEditMode = true;
+        this.getSellInfoForEdit();
+      } else {
+        this.isEditMode = false;
       }
-      console.log('IMAGES ',this.images);
     })
-    .catch((err) => {
-      console.log(err)
+
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+      if (this.user.stripeId) {
+        this.isConnectedAccount = true;
+      }
     })
-    
 
     this.sellService.getCategories();
     
@@ -207,6 +178,38 @@ export class SellComponent implements OnInit {
     this.uploader.onProgressItem = (fileItem: any, progress: any) => {
       console.log('Upload in progress ',progress);
     }
+  }
+
+  getSellInfoForEdit() {
+    this.getSellProduct(this.productId)
+    .then((data) => {
+      this.sellForm = new FormGroup({
+        category: new FormControl(data.Category.title),
+        brand: new FormControl(data.brand),
+        title: new FormControl(data.title),
+        quantity: new FormControl(data.quantity),
+        size: new FormControl(data.size),
+        color: new FormControl(data.color),
+        currentAskPrice: new FormControl(data.currentAskPrice),
+        condition: new FormControl(data.condition),
+        description: new FormControl(data.description),
+        otherColor: new FormControl('')
+      })
+      this.filterBrand(data.Category.title);
+      this.filterTitle(data.brand);
+      this.colors.push(data.color);
+      this.colors.push('other');
+      for(let i=0; i<data.ProductPhotos.length; i++) {
+        this.images.push({
+          id: data.ProductPhotos[i].url.split('.')[0],
+          url: data.ProductPhotos[i].url
+        });
+      }
+      console.log('IMAGES ',this.images);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   getSellProduct(id) {

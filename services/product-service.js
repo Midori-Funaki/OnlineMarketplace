@@ -114,39 +114,23 @@ class ProductService {
   }
 
   update(productId, productInfo, user) {
-    console.log('backend pro id',productId);
-    console.log('pro info ', productInfo);
-    console.log(typeof productInfo);
-    console.log('backend user id',user.id);
     return Product.findOne({
       where:{
         id: productId,
         sellerId: user.id
       }
     }).then((product) => {
-      //NEED TO SEND PRODUCTINFO
-      console.log('PRODUCT @ pro service ',product.dataValues);
-      // let photoOrigArr = product.dataValues.ProductPhotos.map(photoVal => {
-      //   return photoVal.dataValues;
-      // })
-      // console.log('Photo detail ',photoInfo)
-      // console.log('extracted data ',product)
       return product.updateAttributes({
         title: productInfo.title,
         description: productInfo.description,
         //   // size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
-        //   // curentBidPrice: productInfo.curentBidPrice,
         currentAskPrice: productInfo.currentAskPrice,
         quantity: productInfo.quantity,
-        //   // sellerId: user.id, *****NEED USER ID
-        //   // buyerId: productInfo.INTEGER,
         // categoryId: category.id, ****HOW TO CHANGE CAT ID
         brand: productInfo.brand
       }).then(() => {
-        // console.log('FINISHED FIRST THEN')
-        // console.log('Extracted product after 1st then ', product.dataValues);
         return ProductPhoto.destroy({
           where:{
             productId: productId
