@@ -11,6 +11,18 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      brand: {
+        type: Sequelize.STRING
+      },
+      size: {
+        type: Sequelize.FLOAT
+      },
+      color: {
+        type: Sequelize.STRING
+      },
+      condition:{
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.TEXT
       },

@@ -1,12 +1,13 @@
 .tab-content{
-    height: 68vh;
+    height: 74.3vh;
     width: 100%;
-    overflow: auto;
+    overflow-y: auto;
     background-color: #f1f1f1;
 }
 .tabs{
     background: rgb(104,51,97);
     padding-left: 30px;
+    height: 5.6vh;
 }
 .container-fluid{
     padding: 0;

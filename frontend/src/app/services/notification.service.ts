@@ -31,13 +31,13 @@ export class NotificationService {
         this.notification_subj.next({msgStatus: 'successShow', message: message, title: title});
         setTimeout(()=>{
             this.resetMessage();
-        }, 2000);
+        }, 3000);
     }
 
     sendErrorMessage(title, message){
         this.notification_subj.next({msgStatus: 'failShow', message: message, title: title});
         setTimeout(()=>{
             this.resetMessage();
-        }, 2000);
+        }, 3000);
     }
 }

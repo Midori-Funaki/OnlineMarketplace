@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cloudinary = require('cloudinary');
+var cors = require('cors');
 
 //routes instance
 var ProductRoutes = require('./routes/product-routes');
@@ -26,6 +27,7 @@ var TransactionService = require('./services/transaction-service');
 var CartService = require('./services/cart-service');
 var CloudinaryService = require('./services/cloudinary-service');
 var PhotoService = require('./services/photo-service');
+var StripeService = require('./services/stripe-service');
 
 //service instance
 var userService = new UserService();
@@ -35,6 +37,7 @@ var transactionService = new TransactionService();
 var cartService = new CartService();
 var cloudinaryService = new CloudinaryService();
 var photoService = new PhotoService();
+var stripeService = new StripeService();
 
 //frontend imports
 var reload = require('reload');
@@ -51,6 +54,7 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -84,6 +88,7 @@ app.use('/api/carts', new CartRoutes(cartService).router());
 app.use('/api/login', new LoginRoutes(userService).router());
 app.use('/api/checkout', new StripeRoutes().router());
 app.use('/api/photos', new PhotoRoutes(photoService).router());
+app.use('/api/stripe', new StripeRoutes(stripeService).router());
 
 //redirect all other route to the SPA
 app.use(function(req, res, next) {

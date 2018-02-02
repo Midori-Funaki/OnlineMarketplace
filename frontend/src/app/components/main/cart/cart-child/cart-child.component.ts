@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../../../services/cart.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-cart-child',
   templateUrl: './cart-child.component.html',
@@ -10,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class CartChildComponent implements OnInit {
   items: Observable<any>;
-  grandTotal:number;
-  shipping:number = 0;
+  grandTotal: number;
+  shipping: number = 0;
 
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -28,14 +27,13 @@ export class CartChildComponent implements OnInit {
   }
 
   getTotal(): void {
-    this.items.subscribe(items=> {
-      this.grandTotal =0 ;
+    this.items.subscribe(items => {
+      this.grandTotal = 0;
       for (let item of items) {
+        // console.log(item);
         this.grandTotal += item.Product.curentBidPrice * item.quantity;
-      } 
+      }
     })
   }
-
-  
 
 }
