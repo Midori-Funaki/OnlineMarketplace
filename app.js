@@ -17,6 +17,7 @@ var CartRoutes = require('./routes/cart-routes');
 var LoginRoutes = require ('./routes/login-routes');
 var CloudinaryRoutes = require('./routes/cloudinary-routes');
 var StripeRoutes = require('./routes/stripe-route');
+var PhotoRoutes = require('./routes/photo-routes');
 
 //service files
 var UserService = require('./services/user-service');
@@ -24,7 +25,8 @@ var ProductService = require('./services/product-service');
 var CategoryService = require('./services/category-service');
 var TransactionService = require('./services/transaction-service');
 var CartService = require('./services/cart-service');
-var cloudinaryService = require('./services/cloudinary-service');
+var CloudinaryService = require('./services/cloudinary-service');
+var PhotoService = require('./services/photo-service');
 var StripeService = require('./services/stripe-service');
 
 //service instance
@@ -33,7 +35,8 @@ var categoryService = new CategoryService();
 var productService = new ProductService();
 var transactionService = new TransactionService();
 var cartService = new CartService();
-var cloudinaryService = new cloudinaryService();
+var cloudinaryService = new CloudinaryService();
+var photoService = new PhotoService();
 var stripeService = new StripeService();
 
 //frontend imports
@@ -84,6 +87,7 @@ app.use('/api/categories', new CategoryRoutes(categoryService).router());
 app.use('/api/carts', new CartRoutes(cartService).router());
 app.use('/api/login', new LoginRoutes(userService).router());
 app.use('/api/checkout', new StripeRoutes().router());
+app.use('/api/photos', new PhotoRoutes(photoService).router());
 app.use('/api/stripe', new StripeRoutes(stripeService).router());
 
 //redirect all other route to the SPA

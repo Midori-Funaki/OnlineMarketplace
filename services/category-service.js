@@ -74,11 +74,29 @@ class CategoryService {
         }
       ]
     }).then(result => {
-      return result[0].Products.map(item => {
-        return item.title;
+      let filteredTitle = [];
+      result[0].Products.forEach((item) => {
+        if (filteredTitle.indexOf(item.title) < 0 ) {
+          console.log('pushing ',item.title);
+          filteredTitle.push(item.title)
+        }
       })
+      return filteredTitle;
     }).catch(err => {
       return err;
+    })
+  }
+
+  getBrandName(id) {
+    console.log('id @ cat service',id)
+    return Category.findOne({
+      where: {
+        id: id
+      }
+    }).then(result => {
+      return result.title
+    }).catch(err => {
+      return err
     })
   }
 }

@@ -38,7 +38,7 @@ class StripeService {
     }
   }
 
-  createCharge(totalAmount, tranferObject, token, ) {
+  createCharge(totalAmount, tranferObject, token) {
     stripe.createCharge()
   }
 }

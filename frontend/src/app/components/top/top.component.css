@@ -12,9 +12,10 @@
 .btn.btn-secondary {
     font-size: 13px;
     background: transparent;
-    border: 2px solid rgb(137, 212, 26); 
+    border: 4px solid rgb(137, 212, 26); 
     color: white;
     outline: none;
+    border-radius: 0;
 }
 
 .col-lg-2 {
