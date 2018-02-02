@@ -19,7 +19,7 @@ export class ProductDetailComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  product: Pro;
+  product: Product;
   imgsrc: string;
 
   ngOnInit() {
