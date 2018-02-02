@@ -2,6 +2,7 @@ const models = require('./../models');
 const Product = models.Product;
 const ProductPhoto = models.ProductPhoto;
 const Category = models.Category;
+const Transaction = models.Transaction;
 
 class ProductService {
 
@@ -126,11 +127,13 @@ class ProductService {
     //     return err;
     //   })
     console.log('backend pro id',productId);
+    console.log('pro info ', productInfo);
     console.log(typeof productInfo);
+    console.log('backend user id',user.id);
     return Product.findOne({
       where:{
         id: productId,
-        buyerId: user.id
+        sellerId: user.id
       }
     }).then((product) => {
       //NEED TO SEND PRODUCTINFO

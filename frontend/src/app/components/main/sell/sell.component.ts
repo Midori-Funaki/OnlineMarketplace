@@ -282,6 +282,9 @@ export class SellComponent implements OnInit {
   editSellItem() {
     this.sellForm.value.id = this.productId;
     this.sellForm.value.photos = this.images;
+
+    console.log("sending edit info @ sell compo ",this.sellForm.value);
+
     this.sellService.editSellItem(this.sellForm.value)
   }
 }
