@@ -36,7 +36,7 @@
           <input type="number" name="quantity" id="quantity" class="form-control" [value]="" formControlName="quantity">
         </span>
       </div><!-- form-group -->
-      <div class="form-group">
+      <div *ngIf="isShoeCategory" class="form-group">
         <span class="float-field float-select">
           <label class="float-label">Size</label>
           <div class="btn-toolbar">

@@ -28,9 +28,10 @@ export class SellComponent implements OnInit {
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];//image array
-  sizes: string[] = [];
+  sizes: number[] = [20,20.5,21,21.5,22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30];
   colors: string[] = [];
   isOther: boolean = false;
+  isShoeCategory: boolean = false;
 
   hasBaseDropZoneOver: boolean = false;
   isEditMode: boolean = true;
@@ -217,6 +218,11 @@ export class SellComponent implements OnInit {
   }
 
   filterBrand(category){
+    if(category === "Sneakers") {
+      this.isShoeCategory = true;
+    } else {
+      this.isShoeCategory = false;
+    }
     this.sellService.getBrandsByCategory(category);
   }
 
