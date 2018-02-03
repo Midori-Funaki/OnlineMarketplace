@@ -47,6 +47,10 @@ export class CheckoutService {
     });
   }
 
+  saveCharge() {
+    
+  }
+
   //private functions
   private createCharge(totalAmount, transferObject, token) {
     return this.http.post('/api/charges',
@@ -61,5 +65,7 @@ export class CheckoutService {
       }
     )
   }
+
+  
 
 }

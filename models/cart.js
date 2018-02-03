@@ -1,14 +1,23 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Cart = sequelize.define('Cart', {
-    userId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    productId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   })
-  
-  Cart.associate = function(models) {
-    Cart.belongsTo(models.User,{foreignKey:'userId', targetKey: 'id'});
-    Cart.belongsTo(models.Product,{foreignKey:'productId', targetKey: 'id'});
+
+  Cart.associate = function (models) {
+    Cart.belongsTo(models.User, { foreignKey: 'userId', targetKey: 'id' });
+    Cart.belongsTo(models.Product, { foreignKey: 'productId', targetKey: 'id' });
   };
   return Cart;
 };

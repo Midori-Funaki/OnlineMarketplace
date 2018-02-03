@@ -6,14 +6,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders, FileItem } from 'ng2-file-upload';
 import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
-<<<<<<< HEAD
 import { ProductsService } from '../../../services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from './../../../models/Product';
-=======
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/User';
->>>>>>> ddbbb6d168f0b3aa92b061f013086883d2cf2ec1
 
 @Component({
   selector: 'app-sell',
@@ -21,25 +18,19 @@ import { User } from '../../../models/User';
   styleUrls: ['./sell.component.css']
 })
 export class SellComponent implements OnInit {
-<<<<<<< HEAD
   sellProduct: any;
   productId: any;
 
-=======
   isConnectedAccount: boolean = false;
   user: User;
->>>>>>> ddbbb6d168f0b3aa92b061f013086883d2cf2ec1
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];//image array
-<<<<<<< HEAD
   sizes: string[] = [];
   colors: string[] = [];
   isOther: boolean = false;
-=======
->>>>>>> ddbbb6d168f0b3aa92b061f013086883d2cf2ec1
 
   hasBaseDropZoneOver: boolean = false;
   isEditMode: boolean = true;
@@ -49,11 +40,8 @@ export class SellComponent implements OnInit {
   uploadResult: any;
 
   constructor(
-<<<<<<< HEAD
     private route: ActivatedRoute,
-=======
     private userService: UserService,
->>>>>>> ddbbb6d168f0b3aa92b061f013086883d2cf2ec1
     private sellService:SellService, 
     private formBuilder: FormBuilder,
     private cloudinary: Cloudinary,
@@ -83,7 +71,6 @@ export class SellComponent implements OnInit {
   }
 
   ngOnInit() {
-<<<<<<< HEAD
     this.route.params.subscribe(param => {
       this.productId = param['id'];
       if(this.productId !== "new") {
@@ -93,7 +80,6 @@ export class SellComponent implements OnInit {
       }
     })
 
-=======
     this.userService.getUser().subscribe(user => {
       this.user = user;
       if (this.user.stripeId) {
@@ -101,7 +87,6 @@ export class SellComponent implements OnInit {
       }
     })
     this.sellService.getCategories();
->>>>>>> ddbbb6d168f0b3aa92b061f013086883d2cf2ec1
     this.sellForm = new FormGroup({
       category: new FormControl(''),
       brand: new FormControl(''),

@@ -2,6 +2,7 @@ const models = require('./../models');
 const Product = models.Product;
 const ProductPhoto = models.ProductPhoto;
 const Category = models.Category;
+const User = models.user;
 
 class ProductService {
 
@@ -21,7 +22,7 @@ class ProductService {
       })
   }
 
-  getSell(user){
+  getSell(user){  
     return Product.findAll({
       where: {
         sellerId: user.id

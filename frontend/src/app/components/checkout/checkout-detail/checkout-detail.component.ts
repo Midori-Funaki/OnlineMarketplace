@@ -14,11 +14,9 @@ export class CheckoutDetailComponent implements OnInit {
   user: User
   items: any[]; //cart object with Product sub object
   grandTotal: number;
-  checkoutForm: FormGroup
-  sellersTransfer: {
-    stripeClient: string,
-    amount: number,
-  }
+  checkoutForm: FormGroup;
+  sellersTransfer: any[];
+
 
   constructor(
     private userService: UserService,
@@ -47,11 +45,11 @@ export class CheckoutDetailComponent implements OnInit {
           })
         });
       })
-      
   }
 
   getItems() {
     return this.checkoutService.getCartItems().toPromise().then(items => {
+      // console.log(items);
       this.items = items;
     });
   }
@@ -67,27 +65,50 @@ export class CheckoutDetailComponent implements OnInit {
   getTotal(): void {
     this.grandTotal = 0;
     for (let item of this.items) {
-      this.grandTotal += item.Product.curentBidPrice * item.quantity;
+      this.grandTotal += item.Product.currentAskPrice * item.quantity;
     }
   }
-  
+
   onSubmit() {
     if (this.checkoutForm.invalid) {
       // Forbid the form from submitting if it is invalid.
       return;
     }
-    console.log("Items: ", this.items);
-    console.log(this.checkoutForm.value)
-    console.log("total", this.grandTotal);
+    // console.log("Items: ", this.items);
+    // console.log(this.checkoutForm.value)
+    // console.log("total", this.grandTotal);
+    console.log(this.createTransfer(this.items));
     this.openCheckOut(this.grandTotal * 100);
   }
 
   prepareCheckout() {
-    
+
   }
 
   openCheckOut(grandTotal) {
     this.checkoutService.openCheckout(grandTotal);
+  }
+
+  // private methods:
+  private createTransfer(items) {
+    let transfers = []
+    for (let item of items) {
+      let inArray = false;
+      for (let i = 0; i < transfers.length; i++) {
+        if (transfers[i].id == item.Product.User.id) {
+          transfers[i].amount += item.Product.currentAskPrice * item.quantity;
+          inArray = true;
+        }
+      }
+      if (inArray == false) {
+        transfers.push({
+          id: item.Product.User.id,
+          stripeId: item.Product.User.stripeId,
+          amount: item.Product.currentAskPrice * item.quantity
+        })
+      }
+    }
+    return transfers;
   }
 
 }
