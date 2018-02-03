@@ -265,8 +265,9 @@ export class SellComponent implements OnInit {
       }
     }
     // console.log('DEL IMAGE ARR ',this.images);
-  
-    this.deleteFromCloudinary(delid);
+    if(/dealshub/.test(delid)){
+      this.deleteFromCloudinary(delid);
+    }
   }
 
   deleteFromCloudinary(id){
