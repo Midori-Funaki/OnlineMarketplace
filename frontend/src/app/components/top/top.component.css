@@ -4,11 +4,12 @@
     font-family: 'Lobster', cursive;
     color: white;
 }
-
+.logo-icon {
+    width: 160px;
+}
 .container-fluid {
     padding: 0px;
 }
-
 .btn.btn-secondary {
     font-size: 13px;
     background: transparent;
@@ -17,16 +18,13 @@
     outline: none;
     border-radius: 0;
 }
-
 .col-lg-2 {
     justify-content: flex-end;
 }
-
 #login-signup-btn {
     padding-right: 5px;
     text-align: right;
 }
-
 #signup-btn {
     padding-left: 0px;
     padding-right: 5px;

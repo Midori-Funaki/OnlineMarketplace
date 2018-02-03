@@ -1,16 +1,16 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="col-lg-3">
-      <div class="navbar-brands">Deals Hub</div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+      <div class="navbar-brands"><img class="logo-icon" src='/assets/img/dealshub.png'></div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
       <app-notification></app-notification>
     </div>
-    <div class="col-lg-1 col-lg-offset-2" *ngIf="isLoggedIn; else login">
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-lg-offset-2" *ngIf="isLoggedIn; else login">
       <button class="btn btn-secondary"  (click)="logOut($event)">Logout</button>
     </div>
     <ng-template #login>
-      <div class="col-lg-2 col-lg-offset-1" id="login-signup-btn">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-lg-offset-1" id="login-signup-btn">
         <button class="btn btn-secondary toggle-form" data-toggle="modal" data-target="#LoginForm">Login</button>
         <button class="btn btn-secondary toggle-form" data-toggle="modal" data-target="#SignupForm">Sign Up</button>
       </div>
