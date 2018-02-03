@@ -8,7 +8,7 @@
         <a href="products/{{product.id}}">
           <div class="card">
             <div class="card-img-top">
-              <img class="card-product-img" [src]="product.ProductPhotos[0].url" alt="Card image cap">
+              <img *ngIf="product.ProductPhotos[0]" class="card-product-img" [src]="product.ProductPhotos[0].url" alt="Card image cap">
             </div>
             <div class="card-body">
               <h4 class="card-title">{{ product.title }}</h4>

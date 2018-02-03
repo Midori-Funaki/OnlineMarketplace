@@ -170,9 +170,11 @@ export class SellComponent implements OnInit {
           // status,
           // data: JSON.parse(response),
           id: JSON.parse(response).public_id,
-          url: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
+          url: JSON.parse(response).url
+          // url: `http://res.cloudinary.com/dealshubspace/image/upload/v${JSON.parse(response).version}/${JSON.parse(response).public_id}.${JSON.parse(response).format}`
         }
       ); 
+      console.log(response);
     }
 
     //Upload process in progress
