@@ -1,9 +1,9 @@
 <form [formGroup]="checkoutForm" class="form-checkout" (ngSubmit)="onSubmit()" *ngIf="user" #myform="ngForm">
   <div class="billing-info" formGroupName="billInfo">
-    <h2>Billing information</h2>
-    <div class="form-inline form-group">
-      <label class="mr-2">Name: </label>
-      <input class="form-control mr-2" formControlName="firstName" placeholder="First name" name="firstName">
+    <h3>Billing Information</h3>
+    <div class="form-group">
+      <label class="mr-2">Name:</label>
+      <input class="form-control mb-2" formControlName="firstName" placeholder="First name" name="firstName">
       <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['billInfo'].controls['firstName'].hasError('required')">This field is required</small>
       <input class="form-control" formControlName="lastName" placeholder="Last name" name="lastName">
       <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['billInfo'].controls['lastName'].hasError('required')">This field is required</small>
@@ -24,10 +24,10 @@
   <hr>
   <div class="shipping-info">
     <div class="billing-info" formGroupName="shipInfo">
-      <h2>Shipping information</h2>
-      <div class="form-inline form-group">
+      <h3>Shipping Information</h3>
+      <div class="form-group">
         <label class="mr-2">Name: </label>
-        <input class="form-control mr-2" formControlName="firstName" placeholder="First name" name="firstName">
+        <input class="form-control mb-2" formControlName="firstName" placeholder="First name" name="firstName">
         <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['shipInfo'].controls['firstName'].hasError('required')">This field is required</small>
         <input class="form-control" formControlName="lastName" placeholder="Last name" name="lastName">
         <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['shipInfo'].controls['lastName'].hasError('required')">This field is required</small>

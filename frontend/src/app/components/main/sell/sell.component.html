@@ -41,7 +41,7 @@
           <label class="float-label">Size (CM)</label>
           <div class="btn-toolbar">
             <div *ngFor="let size of sizes" class="btn-group btn-group-toggle" ngbRadioGroup name="size" formControlName="size">
-              <label ngbButtonLabel class="btn-primary">
+              <label ngbButtonLabel class="btn-primary select-btn">
                 <input ngbButton type="radio" [value]="size"> {{ size }}
               </label>
             </div>
@@ -53,7 +53,7 @@
           <label class="float-label">Color</label>
           <div class="btn-toolbar">
             <div *ngFor="let color of colors" class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color">
-              <label ngbButtonLabel class="btn-primary">
+              <label ngbButtonLabel class="btn-primary select-btn">
                 <input ngbButton type="radio" [value]="color" (change)="checkColor($event.target.value)"> {{ color }}
               </label>
             </div>
@@ -72,10 +72,10 @@
             <label class="float-label">Product Condition</label>
             <div class="btn-toolbar">
               <div class="btn-group btn-group-toggle" ngbRadioGroup name="condition" formControlName="condition">
-                <label ngbButtonLabel class="btn-primary">
+                <label ngbButtonLabel class="btn-primary select-btn">
                   <input ngbButton type="radio" value="new"> new
                 </label>
-                <label ngbButtonLabel class="btn-primary">
+                <label ngbButtonLabel class="btn-primary select-btn">
                   <input ngbButton type="radio" value="used"> used
                 </label>
             </div>
@@ -116,4 +116,4 @@
     </form>
   <!-- </div>col -->
 </div>
-<!-- <pre>{{ sellForm?.value | json }}</pre> -->
+<pre>{{ sellForm?.value | json }}</pre>

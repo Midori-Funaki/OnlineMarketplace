@@ -3,7 +3,6 @@
     width: 380px;
     border: 1px dotted gray;
 }
-
 /* Photo Upload Trial */
 body {
   font-family: "Raleway", sans-serif;
@@ -22,6 +21,9 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   background-color: #eff5f6;
+}
+.select-btn {
+  width: 100px;
 }
 .wrapper {
   display: -webkit-box;
