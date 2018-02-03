@@ -54,6 +54,7 @@ import { UserService } from './services/user.service';
 import { CheckoutService } from './services/checkout.service';
 import { StripeService } from './services/stripe.service';
 import { StripeComponent } from './components/stripe/stripe.component';
+import { ProductComponent } from './components/main/product/product.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { StripeComponent } from './components/stripe/stripe.component';
     CheckoutConfirmComponent,
     SellListComponent,
     ConnectStripeComponent,
-    StripeComponent
+    StripeComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,
