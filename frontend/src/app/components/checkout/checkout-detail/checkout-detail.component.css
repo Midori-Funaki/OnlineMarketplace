@@ -11,12 +11,14 @@
   margin-top: 20px;
   padding: 6px 25px;
   background-color:rgb(72,20,68);
+  border: 5px solid rgb(137,212,26);
   color: #fff;
   font-size: 25px;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 .checkout:hover,
 .checkout:click {
-  color: rgb(137,212,26);
+  color: black;
+  background-color: rgb(137,212,26);
 }
