@@ -101,7 +101,7 @@
                 </label>
               </div>
             </div>
-            <div class="box box-preview" *ngFor="let image of images">
+            <div class="box box-preview box-full-preview" *ngFor="let image of images">
               <div class="delete-btn" (click)="deleteImage(image.id)"></div>
               <img class="product-img" [src]="image.url">
               <!-- <cl-image [public-id]="image.url">
