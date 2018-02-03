@@ -1,3 +1,6 @@
+.navbar {
+    padding: 0;
+}
 .navbar-brands {
     font-size: 35px;
     font-weight: 700;
@@ -5,7 +8,7 @@
     color: white;
 }
 .logo-icon {
-    width: 160px;
+    width: 150px;
 }
 .container-fluid {
     padding: 0px;
