@@ -3,15 +3,16 @@ var gateway = require('./../gateway'),
   models = require('./../models'),
   Transaction = models.Transaction,
   Product = models.Product;
+const Op = require('sequelize').Op;
 
 class transactionService {
   constructor() { }
 
-  get(user) {
+  get(id) {
     //******** NEED TO CHANGE LINE14 sellerId TO buyerID ********
     return Transaction.findAll({
       where: {
-        sellerId: user.id
+        [Op.or]: [{sellerId: id}, {buyerId: id}]
       },
       include: [{
         model: Product

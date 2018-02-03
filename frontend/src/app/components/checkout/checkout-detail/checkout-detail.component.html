@@ -17,7 +17,7 @@
     </div>
     <div class="form-group form-contact">
       <label>Contact Number:</label>
-      <input type="tel" class="form-control form-control-short" name="contact"  formControlName="contact">
+      <input type="tel" class="form-control form-control-short" name="contact"  formControlName="contact" placeholder="Contact Number">
       <small class="form-text text-danger" *ngIf="checkoutForm.controls['billInfo'].controls['contact'].hasError('required') && myform.submitted">This field is required</small>
     </div>
   </div>
@@ -41,7 +41,7 @@
       </div>
       <div class="form-group form-contact">
         <label>Contact Number:</label>
-        <input type="tel" class="form-control form-control-short" name="contact" formControlName="contact">
+        <input type="tel" class="form-control form-control-short" name="contact" formControlName="contact" placeholder="Contact Number">
         <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['shipInfo'].controls['contact'].hasError('required')">This field is required</small>
       </div>
     </div>

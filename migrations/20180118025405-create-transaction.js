@@ -9,35 +9,58 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       orderId: {
-        allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
+        allowNull: false
       },
       price: {
-        type: Sequelize.FLOAT
+        type: Sequelize.FLOAT,
+        allowNull: false
+      },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       sellerShipAddress: {
+        type: Sequelize.STRING
+      },
+      sellerShipAddress2: {
         type: Sequelize.STRING
       },
       sellerBillAddress: {
         type: Sequelize.STRING
       },
+      sellerBillAddress2: {
+        type: Sequelize.STRING
+      },
       buyerShipAddress: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      buyerShipAddress2: {
         type: Sequelize.STRING
       },
       buyerBillAddress: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      buyerBillAddress2: {
         type: Sequelize.STRING
       },
       buyerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       sellerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       productId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

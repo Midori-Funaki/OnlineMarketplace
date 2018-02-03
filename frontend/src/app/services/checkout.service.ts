@@ -42,7 +42,7 @@ export class CheckoutService {
 
     handler.open({
       name: 'Dealshub.space',
-      description: 'test order',
+      description: 'Place order',
       amount: total
     });
   }

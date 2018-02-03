@@ -25,7 +25,7 @@ module.exports = {
       })
     }
   
-  return Transaction.bulkCreate(transactions);
+  // return Transaction.bulkCreate(transactions);
   },
 
   down: (queryInterface, Sequelize) => {

@@ -1,31 +1,7 @@
-<div *ngFor="let transaction of transactions | async;" class="transactionContainer">
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>Date:</td>
-        <td>{{ transaction.updatedAt }}</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Item:</td>
-        <td *ngIf="transaction.Product != null">{{ transaction.Product.title }}</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Quantity:</td>
-        <td *ngIf="transaction.Product != null">{{ transaction.Product.quantity }}</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Total Price:</td>
-        <td>{{ transaction.price }}</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>Status:</td>
-        <td>{{ transaction.status }}</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container-fluid mt-5">
+  <h2 class="mb-3">Items sold:</h2>
+  <app-purchase></app-purchase>
+  <hr class="mb-5">
+  <h2 class="mb-3">Items Bought:</h2>
+  <app-sold></app-sold>
 </div>

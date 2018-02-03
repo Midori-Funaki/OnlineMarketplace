@@ -31,7 +31,6 @@ import { TemporaryComponent } from './components/main/temporary/temporary.compon
 import { CartItemComponent } from './components/main/cart/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CheckoutDetailComponent } from './components/checkout/checkout-detail/checkout-detail.component';
-import { CheckoutConfirmComponent } from './components/checkout/checkout-confirm/checkout-confirm.component';
 import { NotificationService } from './services/notification.service';
 import { NotificationComponent } from './components/top/notification/notification.component';
 import { CartChildComponent } from './components/main/cart/cart-child/cart-child.component';
@@ -71,11 +70,9 @@ import { SoldComponent } from './components/main/transactions/sold/sold.componen
     TemporaryComponent,
     CartItemComponent,
     CheckoutDetailComponent,
-    CheckoutConfirmComponent,
     NotificationComponent,
     CartChildComponent,
     CheckoutCartComponent,
-    CheckoutConfirmComponent,
     SellListComponent,
     ConnectStripeComponent,
     StripeComponent,
