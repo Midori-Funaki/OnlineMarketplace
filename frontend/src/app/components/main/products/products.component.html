@@ -12,17 +12,12 @@
             </div>
             <div class="card-body">
               <h4 class="card-title">{{ product.title }}</h4>
-              <!-- <p class="card-text">{{ product.description }}</p> -->
-              <!-- <h6>{{ product.condition }}</h6> -->
               <span *ngIf="product.condition == 'new'" class="badge badge-pill badge-success">NEW</span>
             </div>
             <footer class="card-footer">Lowest bid price : <br><span class="price">$ {{ product.curentBidPrice }}</span></footer>
-          </div>
-          <!-- ./card -->
+          </div><!-- ./card -->
         </a>
-      </div>
-      <!-- ngFor -->
-    </div>
-    <!-- col-xs-10 -->
+      </div><!-- ngFor -->
+    </div><!-- col-xs-10 -->
   </div>
 </div>

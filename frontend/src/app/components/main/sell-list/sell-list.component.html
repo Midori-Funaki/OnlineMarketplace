@@ -1,7 +1,8 @@
 <div>
   <a href="sell/new"><button class="btn sell-btn">Sell New Item</button></a>
 </div>
-<div class="sell-container">
+<app-products></app-products>
+<!-- <div class="sell-container">
   <div *ngFor="let product of products | async" class="each-product">
     <a href="sell/{{ product.id }}">
       <div class="card">
@@ -13,7 +14,7 @@
           <p class="card-text">{{ product.description }}</p>
           <p>Current ask price : $ {{ product.curentAskPrice }}</p>
         </div>
-      </div><!-- ./card -->
+      </div>
     </a>
   </div>
-</div>
+</div> -->
