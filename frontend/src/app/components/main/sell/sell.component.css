@@ -39,6 +39,7 @@ body {
   -webkit-box-pack: left;
       -ms-flex-pack: left;
           justify-content: left;
+  overflow: scroll;
 }
 h1 {
   font-family: inherit;
