@@ -1,7 +1,9 @@
-<div>
+<div class="btn-container">
   <a href="sell/new"><button class="btn sell-btn">Sell New Item</button></a>
 </div>
-<app-products></app-products>
+<div class="sell-item-container">
+  <app-product></app-product>
+</div>
 <!-- <div class="sell-container">
   <div *ngFor="let product of products | async" class="each-product">
     <a href="sell/{{ product.id }}">

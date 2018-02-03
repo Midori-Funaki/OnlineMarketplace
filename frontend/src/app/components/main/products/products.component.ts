@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 import { getParseErrors } from '@angular/compiler/src/util';
 import { Observable } from 'rxjs/Observable';
-import { Cloudinary } from '@cloudinary/angular-5.x';
 
 @Component({
   selector: 'app-products',
@@ -11,15 +10,10 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 })
 export class ProductsComponent implements OnInit {
 
-  products: Observable<string[]>;
   
-  constructor(private productService: ProductsService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getAll();
   }
 
-  getAll() {
-    this.products = this.productService.getProducts();
-  }
 }
