@@ -1,0 +1,14 @@
+.side-card {
+    background-color: transparent;
+}
+.side-card h4{
+    color: #888888;
+    font-size: 18px;
+}
+.side-card a{
+    color: black;
+    font-size: 16px;
+}
+.side-card-body {
+    padding: 0;
+}
