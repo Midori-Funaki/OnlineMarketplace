@@ -7,8 +7,12 @@
 .tabs{
     background: rgb(104,51,97);
     padding-left: 30px;
-    height: 5.6vh;
 }
 .container-fluid{
     padding: 0;
+}
+.nav-tabs,
+.nav-link {
+    width: 120px;
+    text-align: center;
 }
