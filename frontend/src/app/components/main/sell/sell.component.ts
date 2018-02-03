@@ -203,8 +203,12 @@ export class SellComponent implements OnInit {
       this.colors.push(data.color);
       this.colors.push('other');
       for(let i=0; i<data.ProductPhotos.length; i++) {
+        let cloudinaryId = data.ProductPhotos[i].url.match(/dealshub\/[a-z0-9]+/g);
+        if (cloudinaryId === null){
+          cloudinaryId = i;
+        }
         this.images.push({
-          id: data.ProductPhotos[i].url.split('.')[0],
+          id: cloudinaryId.toString(),
           url: data.ProductPhotos[i].url
         });
       }
@@ -253,6 +257,7 @@ export class SellComponent implements OnInit {
   }
 
   deleteImage(delid){
+    console.log('DELID ',delid);
     for(let i=0; i<this.images.length; i++){
       if(this.images[i].id === delid){
         this.images.splice(i, 1);
@@ -260,6 +265,7 @@ export class SellComponent implements OnInit {
       }
     }
     // console.log('DEL IMAGE ARR ',this.images);
+  
     this.deleteFromCloudinary(delid);
   }
 
@@ -269,9 +275,9 @@ export class SellComponent implements OnInit {
     this.sellService.deleteImageByIdFromCloudinary(id).subscribe(result =>{
       console.log(result);
     });
-    if (this.productId != 'new') {
-      this.sellService.deleteImageByIdFromDb(id)
-    }
+    // if (this.productId != 'new') {
+    //   this.sellService.deleteImageByIdFromDb(url)
+    // }
   }
 
   fileOverBase(e: any): void{
