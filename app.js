@@ -46,7 +46,13 @@ var authClass = require('./auth');
 var config = require('./config');
 // var users = require('./users');
 
+var tagCreator = require('./tag-creator');
+
 var app = express();
+
+
+tagCreator.registerTags();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,13 +1,14 @@
 .checkout {
   float: right;
   border: 0;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 6px 25px;
   background-color: rgb(72,20,68);
   color: #fff;
   font-size: 20px;
   border-radius: 0;
   border: 5px solid rgb(137,212,26);
+  margin-bottom: 20px;
 }
 
 .checkout:hover {
