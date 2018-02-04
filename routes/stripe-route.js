@@ -12,7 +12,7 @@ class StripeRoute {
     let router = express.Router();
     // router.get('/', this.get.bind(this));
     router.post('/register', auth.authenticate(), this.register.bind(this));
-    router.post('/charges', auth.authenticate(), this.charge.bind(this));
+    router.post('/charge', auth.authenticate(), this.charge.bind(this));
     return router;
   }
 
@@ -27,9 +27,6 @@ class StripeRoute {
       .then(data => res.json(data))
       .catch(err => res.status(500).json(err))
   }
-
-  
-
 
 }
 

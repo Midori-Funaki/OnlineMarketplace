@@ -28,20 +28,26 @@ export class CheckoutService {
     return this.cartService.getItems();
   }
 
-  openCheckout(total) {
+  openCheckout(total, transferObject) {
     // return this.http.get('/api/checkout');
+    let orderId = this.newOrderID();
     var handler = (<any>window).StripeCheckout.configure({
       key: config.publish_key,
       locale: 'auto',
       currency: 'hkd',
       token: function (token: any) {
-        console.log(token);
+        return this.http.post('/api/charge', {
+          totalAmount: total,
+          token: token,
+          orderId: orderId,
+          transferObject: transferObject
+        }, this.httpOptions);
       }
     });
 
     handler.open({
       name: 'Dealshub.space',
-      description: 'Place order',
+      description: 'Place order for order id: ' + orderId,
       amount: total
     });
   }

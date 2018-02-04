@@ -12,7 +12,7 @@ class transactionService {
     //******** NEED TO CHANGE LINE14 sellerId TO buyerID ********
     return Transaction.findAll({
       where: {
-        [Op.or]: [{sellerId: id}, {buyerId: id}]
+        [Op.or]: [{ sellerId: id }, { buyerId: id }]
       },
       include: [{
         model: Product
@@ -30,18 +30,29 @@ class transactionService {
       status: body.status,
       price: body.price,
       quantity: body.quantity,
-      sellerShipAddress: body.sellerShipAddress,
-      sellerShipAddress2: body.sellerBillAddress2,
-      sellerBillAddress: body.sellerBillAddress,
-      sellerBillAddress2: body.sellerBillAddress2,
       buyerShipAddress: body.buyerShipAddress,
       buyerShipAddress2: body.buyerShipAddress2,
+      contact: body.contact,
       buyerBillAddress: body.buyerBillAddress,
       buyerBillAddress2: body.buyerBillAddress2,
       buyerId: userId,
       sellerId: body.sellerId,
       productId: body.productId
     })
+      .then(transaction => {
+        return Product.findById(transaction.productId)
+      })
+      .then(product => {
+        product.quantity -= transaction.quantity;
+        if (product.quantity <= 0) {
+          return product.destroy();
+        } else {
+          return product.save();
+        }
+      })
+      .catch(err => {
+        return err;
+      });
   }
 
 }

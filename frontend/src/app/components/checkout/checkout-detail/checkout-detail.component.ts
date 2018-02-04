@@ -71,6 +71,24 @@ export class CheckoutDetailComponent implements OnInit {
     }
   }
 
+  createTransactions(items, form) {
+    for (let item of this.items) {
+      let transaction = {
+        status: 1,
+        price: item.currentAskPrice,
+        quantity: item.quantity,
+        buyerShipAddress: form.shipInfo.address,
+        buyerShipAddress2: form.shipInfo.address2,
+        buyerBillAddress: form.billInfo.address,
+        buyerBillAddress2: form.billInfo.address2,
+        contact: form.shipInfo.contact,
+        sellerId: item.sellerId,
+        productId: item.id
+      };
+      this.transactionService.create(transaction)
+    }
+  }
+
   onSubmit() {
     if (this.checkoutForm.invalid) {
       // Forbid the form from submitting if it is invalid.
@@ -84,7 +102,8 @@ export class CheckoutDetailComponent implements OnInit {
   }
 
   openCheckOut(grandTotal) {
-    this.checkoutService.openCheckout(grandTotal);
+    this.sellersTransfer = this.createTransfer(this.items);
+    this.checkoutService.openCheckout(grandTotal, this.sellersTransfer);
   }
 
   // private methods:
@@ -109,25 +128,7 @@ export class CheckoutDetailComponent implements OnInit {
     return transfers;
   }
 
-  private createTransactions(items, form) {
-    for (let item of this.items) {
-      let transaction = {
-        status: 1,
-        price: item.currentAskPrice,
-        quantity: item.quantity,
-        buyerShipAddress: form.shipInfo.address,
-        buyerShipAddress2: form.shipInfo.address2,
-        buyerBillAddress: form.billInfo.address,
-        buyerBillAddress2: form.billInfo.address2,
-        sellerId: item.sellerId,
-        productId: item.id
-      };
-      this.transactionService.create(transaction)
-    }
-  }
-
   private emptyCart() {
     this.checkoutService.emptyCart();
   }
-
 }

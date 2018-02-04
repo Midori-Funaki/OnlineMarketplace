@@ -18,7 +18,7 @@ module.exports = {
         condition: conditions[Math.floor(Math.random() * 2)],
         curentBidPrice: faker.commerce.price(),
         currentAskPrice: faker.commerce.price(),
-        quantity: Math.floor(Math.random() * 10) + 1,
+        quantity: Math.floor(Math.random() * 10) + 5,
         sellerId: Math.floor(Math.random() * 3) + 1,
         // buyerId: Math.floor(Math.random() * 3) + 4,
         categoryId: Math.floor(Math.random() * 3) + 1,
