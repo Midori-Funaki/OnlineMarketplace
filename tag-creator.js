@@ -34,4 +34,6 @@ function registerTags(){
     })
 }
 
-function registerInTable(productId, keywords){}
+function registerInTable(productId, keywords) {
+    
+}
