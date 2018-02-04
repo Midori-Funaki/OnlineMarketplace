@@ -10,8 +10,8 @@
     </div>
     <div class="form-group">
       <label>Billing Address:</label>
-      <input type="text" class="form-control" placeholder="line 1" formControlName="address1" name="address1">
-      <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['billInfo'].controls['address1'].hasError('required')">This field is required</small>
+      <input type="text" class="form-control" placeholder="line 1" formControlName="address" name="address">
+      <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['billInfo'].controls['address'].hasError('required')">This field is required</small>
       <input type="text" class="form-control mt-2" placeholder="line 2" formControlName="address2" name="address2">
       <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['billInfo'].controls['address2'].hasError('required')">This field is required</small>
     </div>
@@ -34,8 +34,8 @@
       </div>
       <div class="form-group">
         <label>Shipping Address:</label>
-        <input type="text" class="form-control" placeholder="line 1" formControlName="address1" name="address1">
-        <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['shipInfo'].controls['address1'].hasError('required')">This field is required</small>
+        <input type="text" class="form-control" placeholder="line 1" formControlName="address" name="address">
+        <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['shipInfo'].controls['address'].hasError('required')">This field is required</small>
         <input type="text" class="form-control mt-2" placeholder="line 2" formControlName="address2" name="address2">
         <small class="form-text text-danger" *ngIf="myform.submitted && checkoutForm.controls['shipInfo'].controls['address2'].hasError('required')">This field is required</small>
       </div>

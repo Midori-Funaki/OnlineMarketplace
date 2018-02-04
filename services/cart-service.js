@@ -4,7 +4,6 @@ const models = require('./../models'),
 const User = models.User;
 const ProductPhoto = models.ProductPhoto
 
-
 class CartService {
   constructor() { }
 
@@ -75,17 +74,28 @@ class CartService {
     })
   }
 
-  delete(user, productInfo) {
+  delete(userId, productId) {
     return Cart.destroy({
       where: {
-        userId: user,
-        productId: productInfo.productId,
-        quantity: productInfo.quantity
+        userId: userId,
+        productId: productId,
+      }
+    }).then(() => {
+      return this.get(user);
+    }).catch((err) => {
+      return err;
+    })
+  }
+
+  empty(userId) {
+    return Cart.destroy({
+      where: {
+        userId: userId
       }
     }).then(() => {
       return this.get(user)
-    }).catch((err) => {
-      return err
+    }).catch(err => {
+      return err;
     })
   }
 }

@@ -38,7 +38,7 @@ class transactionService {
       buyerShipAddress2: body.buyerShipAddress2,
       buyerBillAddress: body.buyerBillAddress,
       buyerBillAddress2: body.buyerBillAddress2,
-      buyerId: body.buyerId,
+      buyerId: userId,
       sellerId: body.sellerId,
       productId: body.productId
     })

@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/User';
 import { CheckoutService } from '../../../services/checkout.service';
 import { Product } from '../../../models/Product';
+import { TransactionService } from '../../../services/transaction.service';
 
 @Component({
   selector: 'app-checkout-detail',
@@ -20,7 +21,8 @@ export class CheckoutDetailComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private transactionService: TransactionService
   ) { }
 
   ngOnInit() {
@@ -32,14 +34,14 @@ export class CheckoutDetailComponent implements OnInit {
           billInfo: new FormGroup({
             firstName: new FormControl(this.user.firstName, Validators.required),
             lastName: new FormControl(this.user.lastName, Validators.required),
-            address1: new FormControl(this.user.billingAddress, Validators.required),
+            address: new FormControl(this.user.billingAddress, Validators.required),
             address2: new FormControl(null),
             contact: new FormControl(null, Validators.required)
           }),
           shipInfo: new FormGroup({
             firstName: new FormControl(this.user.firstName, Validators.required),
             lastName: new FormControl(this.user.lastName, Validators.required),
-            address1: new FormControl(this.user.shippingAddress, Validators.required),
+            address: new FormControl(this.user.shippingAddress, Validators.required),
             address2: new FormControl(null),
             contact: new FormControl(null, Validators.required)
           })
@@ -75,7 +77,7 @@ export class CheckoutDetailComponent implements OnInit {
       return;
     }
     // console.log("Items: ", this.items);
-    // console.log(this.checkoutForm.value)
+    console.log(this.checkoutForm.value)
     // console.log("total", this.grandTotal);
     console.log(this.createTransfer(this.items));
     this.openCheckOut(this.grandTotal * 100);
@@ -105,6 +107,27 @@ export class CheckoutDetailComponent implements OnInit {
       }
     }
     return transfers;
+  }
+
+  private createTransactions(items, form) {
+    for (let item of this.items) {
+      let transaction = {
+        status: 1,
+        price: item.currentAskPrice,
+        quantity: item.quantity,
+        buyerShipAddress: form.shipInfo.address,
+        buyerShipAddress2: form.shipInfo.address2,
+        buyerBillAddress: form.billInfo.address,
+        buyerBillAddress2: form.billInfo.address2,
+        sellerId: item.sellerId,
+        productId: item.id
+      };
+      this.transactionService.create(transaction)
+    }
+  }
+
+  private emptyCart() {
+    this.checkoutService.emptyCart();
   }
 
 }

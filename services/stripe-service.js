@@ -2,6 +2,7 @@ const models = require('./../models');
 const User = models.User;
 const axios = require('axios');
 const stripe = require('stripe')("sk_test_gW7J5GmExE8SZUyO90AedDOY");
+const transactionService = require('./transaction-service');
 
 class StripeService {
 

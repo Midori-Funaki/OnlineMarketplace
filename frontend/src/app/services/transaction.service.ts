@@ -6,6 +6,12 @@ import { Transaction } from '../models/Transaction';
 
 @Injectable()
 export class TransactionService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.authService.token
+    })
+  }
 
   constructor(
     private http: HttpClient,
@@ -18,4 +24,10 @@ export class TransactionService {
         'Authorization', 'Bearer ' + this.authService.token)
     });
   }
+
+  create(transaction): Observable<Transaction> {
+    return this.http.post<Transaction>('/api/transactions', transaction, this.httpOptions);
+  }
+
+  
 }
