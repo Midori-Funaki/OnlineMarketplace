@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     Transaction.belongsTo(models.User, { foreignKey: 'buyerId', targetKey: 'id' });
     Transaction.belongsTo(models.User, { foreignKey: 'sellerId', targetKey: 'id' });
     Transaction.belongsTo(models.Product, { foreignKey: 'productId', targetKey: 'id' });
-    Transaction.hasOne(models.ProductPhoto, { foreignKey: 'productId', sourceKey: 'productId' });
+    Transaction.hasMany(models.ProductPhoto, { foreignKey: 'productId', sourceKey: 'productId' });
   }
   return Transaction;
 };

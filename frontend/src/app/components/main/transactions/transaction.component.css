@@ -6,6 +6,7 @@
 }
 .table-container {
     width: 80vw;
+    margin: auto;
 }
 .table-title {
     background-color: rgb(72,20,68);
@@ -15,4 +16,7 @@
     border: 1px solid rgb(72,20,68);
     border-top: 0;
     background-color: white;
+}
+.transaction-product-img {
+    width: 100%;
 }
