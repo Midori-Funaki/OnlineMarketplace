@@ -98,12 +98,12 @@ export class CheckoutDetailComponent implements OnInit {
     console.log(this.checkoutForm.value)
     // console.log("total", this.grandTotal);
     console.log(this.createTransfer(this.items));
-    this.openCheckOut(this.grandTotal * 100);
+    this.openCheckOut(this.grandTotal * 100)
   }
 
   openCheckOut(grandTotal) {
     this.sellersTransfer = this.createTransfer(this.items);
-    this.checkoutService.openCheckout(grandTotal, this.sellersTransfer);
+    return this.checkoutService.openCheckout(grandTotal, this.sellersTransfer);
   }
 
   // private methods:

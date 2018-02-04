@@ -23,8 +23,9 @@ class StripeRoute {
   }
 
   charge(req, res) {
+    console.log("charging...")
     return this.stripeService.charge(req.body.totalAmount, req.body.token, req.body.orderId, req.body.transferObject)
-      .then(data => res.json(data))
+      .then(charges => res.json(charges))
       .catch(err => res.status(500).json(err))
   }
 

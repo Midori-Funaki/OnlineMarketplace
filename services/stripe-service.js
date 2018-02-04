@@ -43,14 +43,14 @@ class StripeService {
 
   charge(totalAmount, paymentToken, orderId, transferObject) {
     // stripe.createCharge()
-    if (token) {
-      return stripe.charge.create({
+    if (paymentToken) {
+      return stripe.charges.create({
         amount: totalAmount,
         currency: 'hkd',
         source: paymentToken,
         transfer_group: orderId,
       })
-        .then(charge => transfer(charge, transferObject))
+        .then(charge => transfer(charge, transferObject));
     }
   }
 
@@ -59,7 +59,7 @@ class StripeService {
     let requests = [];
     for (let transfer of transferObject) {
       requests.push(
-        stripe.charges.create({
+        stripe.transfers.create({
           amount: transfer.amount * 0.9,
           currentcy: "hkd",
           destination: transfer.stripeId,

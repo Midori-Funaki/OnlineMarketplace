@@ -31,12 +31,13 @@ export class CheckoutService {
   openCheckout(total, transferObject) {
     // return this.http.get('/api/checkout');
     let orderId = this.newOrderID();
-    var handler = (<any>window).StripeCheckout.configure({
+    let handler = (<any>window).StripeCheckout.configure({
       key: config.publish_key,
       locale: 'auto',
       currency: 'hkd',
-      token: function (token: any) {
-        return this.http.post('/api/charge', {
+      token: (token: any) => {
+        console.log(total, token, orderId, transferObject);
+        return this.http.post('/api/stripe/charge/', {
           totalAmount: total,
           token: token,
           orderId: orderId,
@@ -47,36 +48,15 @@ export class CheckoutService {
 
     handler.open({
       name: 'Dealshub.space',
-      description: 'Place order for order id: ' + orderId,
+      description: 'Checkout Order id: ' + orderId,
       amount: total
     });
-  }
-
-  createTransactions(form, transferObject, token) {
-    let body = {};
-    return this.http.post('/api/transactions/', body, this.httpOptions);
   }
 
   emptyCart() {
     return this.http.delete('/api/carts/', this.httpOptions);
   }
-
-  updateProductRecord() {
-    let body = {};
-    return this.http.put('api/products/', body, this.httpOptions)
-  }
-
   //private functions
-  private createCharge(totalAmount, transferObject, token) {
-    return this.http.post('/api/charges/',
-      {
-        totalAmount: totalAmount,
-        transferObject: transferObject,
-        token: token
-      },
-      this.httpOptions
-    )
-  }
 
   private newOrderID(): string {
     var ID = function () {
