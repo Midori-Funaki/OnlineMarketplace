@@ -81,10 +81,6 @@ export class CheckoutDetailComponent implements OnInit {
     this.openCheckOut(this.grandTotal * 100);
   }
 
-  prepareCheckout() {
-
-  }
-
   openCheckOut(grandTotal) {
     this.checkoutService.openCheckout(grandTotal);
   }

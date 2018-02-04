@@ -20,7 +20,7 @@ module.exports = {
         currentAskPrice: faker.commerce.price(),
         quantity: Math.floor(Math.random() * 10) + 1,
         sellerId: Math.floor(Math.random() * 3) + 1,
-        buyerId: Math.floor(Math.random() * 3) + 4,
+        // buyerId: Math.floor(Math.random() * 3) + 4,
         categoryId: Math.floor(Math.random() * 3) + 1,
         brand: "louis Vuitton",
         // photos: [data[i].link]

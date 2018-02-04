@@ -31,6 +31,7 @@ module.exports = {
       billingAddress2: Sequelize.STRING,
       contact: Sequelize.STRING,
       stripeId: Sequelize.STRING,
+      refresh_token: Sequelize.STRING,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
