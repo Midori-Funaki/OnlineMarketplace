@@ -1,6 +1,6 @@
 <div class="product">
   <div class="product-image">
-    <img src="https://picsum.photos/500/500?image=2"> <!-- to add photos -->
+    <img [src]="item.ProductPhotos[0].url"> <!-- to add photos -->
   </div>
   <div class="product-details">
     <div class="product-title">{{item.Product.title}}</div>

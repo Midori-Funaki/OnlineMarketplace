@@ -6,8 +6,8 @@ const Tag = models.Tag;
 
 const productArr = [{
     "id": 21,
-    "title": "adidas NMD Racer Juice HK",
-    "description": "Nobis culpa autem nesciunt molestiae perspiciatis modi voluptatem corrupti.\nQui ad voluptatem in architecto ratione maiores vel.\nIn sit in soluta dolor totam nesciunt voluptatem.\nVero voluptatibus id repellendus et voluptate perferendis quos quo.\nQuisquam itaque reiciendis eum.",
+    "title": "One Two Three Four",
+    "description": "This is the first product. Yahoo.",
     "brand": "adidas",
     "size": 8,
     "color": "red",
@@ -51,9 +51,9 @@ const productArr = [{
     ]
 },{
     "id": 13,
-    "title": "adidas Yeezy Boost 350 V2 Black Red",
-    "description": "Eum cupiditate harum est possimus et.\nMolestiae recusandae repellendus a numquam.",
-    "brand": "adidas",
+    "title": "one two three four five",
+    "description": "This is the second item. Google",
+    "brand": "adidaaas",
     "size": 5,
     "color": "lavender",
     "condition": "new",
@@ -115,13 +115,34 @@ const productArr = [{
 //         console.log(err)
 //     });
 
-function registerTags(){
-    productArr.forEach((eachProduct) => {
+function registerTagByEach(){
+    // for(let i=0;i<productArr.length; i++) {
+    //     registerTags(productArr[i]);
+    // }
+    if (productArr.length > 0) {
+        let loop = function(productArr, i, registerTags, done) {
+            registerTags(productArr[i], i, function() {
+                if (++i < productArr.length) {
+                    loop(productArr, i, registerTags, done);
+                } else {
+                    done();
+                }
+            })
+        }
+        loop(productArr, 0, registerTags, done);
+    } else {
+        done();
+    }
+}
+
+function registerTags(eachProduct, i){
+    // productArr.forEach((eachProduct) => {
         //there is id
         let wordsSet = new Set();
         if (eachProduct.Category.title === 'sneakers') {
             wordsSet.add(eachProduct.size);
         }
+        wordsSet.add(eachProduct.Category.title.toLowerCase());
         wordsSet.add(eachProduct.brand.toLowerCase());
         wordsSet.add(eachProduct.color.toLowerCase());
         eachProduct.title.toLowerCase().replace(/\.\s/g,' ').split(' ').forEach((word) => {
@@ -131,7 +152,7 @@ function registerTags(){
             wordsSet.add(word);
         })
         registerInTable(eachProduct.id, Array.from(wordsSet));
-    })
+    // })
 }
 
 function registerInTable(productNumber, keywordsArr) {
@@ -177,5 +198,6 @@ function registerInTable(productNumber, keywordsArr) {
     }
 }
 
+module.exports.registerTagByEach = registerTagByEach;
 module.exports.registerTags = registerTags;
 module.exports.registerInTable = registerInTable;

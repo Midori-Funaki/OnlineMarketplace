@@ -14,6 +14,8 @@ class CartService {
       },
       include: [{
         model: Product
+      },{
+        model: ProductPhoto
       }]
     }).then((cart) => {
       return cart;

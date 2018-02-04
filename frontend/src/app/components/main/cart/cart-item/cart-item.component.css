@@ -16,6 +16,7 @@
   .product-quantity {
     float: left;
     width: 10%;
+    text-align: center;
   }
   
   .product-removal {
@@ -85,15 +86,21 @@
   
   /* Product entries */
   .product {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 1px solid rgb(104,51,97);
+    background: white;
+    margin-left: 30px;
+    margin-right: 30px;
   }
   .product .product-image {
     text-align: center;
   }
   .product .product-image img {
-    width: 100px;
+    width: 100%;
+  }
+  .product-details {
+    padding-left: 20px;
   }
   .product .product-details .product-title {
     margin-right: 20px;
