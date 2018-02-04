@@ -39,7 +39,15 @@ class StripeService {
   }
 
   createCharge(totalAmount, tranferObject, token) {
-    stripe.createCharge()
+    // stripe.createCharge()
+    if (token) {
+      return stripe.charge.create({
+        amount: totalAmount,
+        currency: 'hkd',
+        source: 'tok_visa',
+        transfer_group: 
+      })
+    }
   }
 }
 

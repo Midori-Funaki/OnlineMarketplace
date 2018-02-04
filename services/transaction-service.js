@@ -26,7 +26,21 @@ class transactionService {
 
   post(userid, body) {
     return Transaction.create({
-      
+      orderId: body.orderId,
+      status: body.status,
+      price: body.price,
+      quantity: body.quantity,
+      sellerShipAddress: body.sellerShipAddress,
+      sellerShipAddress2: body.sellerBillAddress2,
+      sellerBillAddress: body.sellerBillAddress,
+      sellerBillAddress2: body.sellerBillAddress2,
+      buyerShipAddress: body.buyerShipAddress,
+      buyerShipAddress2: body.buyerShipAddress2,
+      buyerBillAddress: body.buyerBillAddress,
+      buyerBillAddress2: body.buyerBillAddress2,
+      buyerId: body.buyerId,
+      sellerId: body.sellerId,
+      productId: body.productId
     })
   }
 

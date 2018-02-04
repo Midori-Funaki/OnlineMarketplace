@@ -9,6 +9,12 @@ import { AuthService } from "./auth.service";
 
 @Injectable()
 export class CheckoutService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + this.authService.token
+    })
+  }
 
   grandTotal: number;
 
@@ -20,13 +26,6 @@ export class CheckoutService {
 
   getCartItems() {
     return this.cartService.getItems();
-  }
-
-  newOrderID(): string {
-    var ID = function () {
-      return Math.random().toString(36).substr(2, 9);
-    };
-    return ID();
   }
 
   openCheckout(total) {
@@ -47,25 +46,37 @@ export class CheckoutService {
     });
   }
 
-  saveCharge() {
-    
+  createTransactions(form, transferObject, token) {
+    let body = {};
+    return this.http.post('/api/transactions/', body, this.httpOptions);
+  }
+
+  emptyCart() {
+    return this.http.delete('/api/carts/', this.httpOptions);
+  }
+
+  updateProductRecord() {
+    let body = {};
+    return this.http.put('api/products/', body, this.httpOptions)
   }
 
   //private functions
   private createCharge(totalAmount, transferObject, token) {
-    return this.http.post('/api/charges',
+    return this.http.post('/api/charges/',
       {
         totalAmount: totalAmount,
         transferObject: transferObject,
         token: token
       },
-      {
-        headers: new HttpHeaders().set(
-          'Authorization', 'Bearer ' + this.authService.token)
-      }
+      this.httpOptions
     )
   }
 
-  
+  private newOrderID(): string {
+    var ID = function () {
+      return Math.random().toString(36).substr(2, 9);
+    };
+    return ID();
+  }
 
 }
