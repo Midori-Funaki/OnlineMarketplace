@@ -1,3 +1,26 @@
+<div class="table-container mt-5">
+  <div class="row table-title">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Date</div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Transaction</div>
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">Product</div>
+  </div>
+  <div class="row detail-row pt-3 pb-3"  *ngFor="let transaction of transactions | async;">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      {{ transaction.updatedAt }}
+    </div>
+    <div *ngIf="transaction.Product != null" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      Qty: {{ transaction.Product.quantity }}<br>
+      TOTAL: $ {{ transaction.price }}<br>
+      Status: {{ transaction.status }}
+    </div>
+    <div *ngIf="transaction.Product != null" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      {{ transaction.Product.brand }}<br>
+      {{ transaction.Product.title }}<br>
+      {{ transaction.Product.color }}
+    </div>
+  </div>
+</div>
+
 <div *ngFor="let transaction of transactions | async;" class="transactionContainer">
   <table class="table">
     <tbody>

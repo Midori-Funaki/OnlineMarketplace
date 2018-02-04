@@ -4,3 +4,15 @@
     margin: 15px 10px;
     padding: 5px;
 }
+.table-container {
+    width: 80vw;
+}
+.table-title {
+    background-color: rgb(72,20,68);
+    color: white;
+}
+.detail-row {
+    border: 1px solid rgb(72,20,68);
+    border-top: 0;
+    background-color: white;
+}
