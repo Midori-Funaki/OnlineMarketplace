@@ -1,9 +1,18 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Cart = sequelize.define('Cart', {
-    userId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    productId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   })
   
   Cart.associate = function(models) {

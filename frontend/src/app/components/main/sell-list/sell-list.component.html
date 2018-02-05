@@ -1,4 +1,10 @@
 <div class="btn-container">
+<app-connect-stripe *ngIf="!isConnectedAccount && user; else connected"></app-connect-stripe>
+<ng-template #connected>
+  <div *ngIf="user">Your stripe account is connected</div>
+</ng-template>
+
+<div>
   <a href="sell/new"><button class="btn sell-btn">Sell New Item</button></a>
 </div>
 

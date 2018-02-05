@@ -3,6 +3,7 @@ const Product = models.Product;
 const ProductPhoto = models.ProductPhoto;
 const Category = models.Category;
 const Transaction = models.Transaction;
+const User = models.user;
 
 class ProductService {
 
@@ -22,7 +23,7 @@ class ProductService {
       })
   }
 
-  getSell(user){
+  getSell(user){  
     return Product.findAll({
       where: {
         sellerId: user.id
