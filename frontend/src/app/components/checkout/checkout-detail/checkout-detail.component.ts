@@ -49,6 +49,11 @@ export class CheckoutDetailComponent implements OnInit {
       })
   }
 
+  ngOnDestroy() {
+    this.createTransactions(this.items, this.checkoutForm.value);
+    this.emptyCart();
+  }
+
   getItems() {
     return this.checkoutService.getCartItems().toPromise().then(items => {
       // console.log(items);
@@ -72,20 +77,21 @@ export class CheckoutDetailComponent implements OnInit {
   }
 
   createTransactions(items, form) {
+    // console.log(form);
     for (let item of this.items) {
       let transaction = {
         status: 1,
-        price: item.currentAskPrice,
+        price: item.Product.currentAskPrice,
         quantity: item.quantity,
         buyerShipAddress: form.shipInfo.address,
         buyerShipAddress2: form.shipInfo.address2,
         buyerBillAddress: form.billInfo.address,
         buyerBillAddress2: form.billInfo.address2,
         contact: form.shipInfo.contact,
-        sellerId: item.sellerId,
+        sellerId: item.Product.sellerId,
         productId: item.id
       };
-      this.transactionService.create(transaction)
+      this.transactionService.create(transaction).subscribe(transaction => console.log(transaction));
     }
   }
 
@@ -95,7 +101,7 @@ export class CheckoutDetailComponent implements OnInit {
       return;
     }
     // console.log("Items: ", this.items);
-    console.log(this.checkoutForm.value)
+    // console.log(this.checkoutForm.value)
     // console.log("total", this.grandTotal);
     console.log(this.createTransfer(this.items));
     this.openCheckOut(this.grandTotal * 100)
@@ -129,6 +135,9 @@ export class CheckoutDetailComponent implements OnInit {
   }
 
   private emptyCart() {
-    this.checkoutService.emptyCart();
+    this.checkoutService.emptyCart().subscribe(res => {
+      console.log("cart emptied");
+    }
+    );
   }
 }

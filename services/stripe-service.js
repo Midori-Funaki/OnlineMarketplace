@@ -47,22 +47,26 @@ class StripeService {
       return stripe.charges.create({
         amount: totalAmount,
         currency: 'hkd',
-        source: paymentToken,
+        source: 'tok_visa',
         transfer_group: orderId,
       })
-        .then(charge => transfer(charge, transferObject));
+        .then(charge => {
+          // console.log(charge);
+          return this.transfer(charge, transferObject
+        )});
     }
   }
-
 
   transfer(charge, transferObject) {
     let requests = [];
     for (let transfer of transferObject) {
+      // console.log(charge.transfer_group);
       requests.push(
         stripe.transfers.create({
-          amount: transfer.amount * 0.9,
-          currentcy: "hkd",
+          amount: Math.floor(transfer.amount * 100*0.9),
+          currency: "hkd",
           destination: transfer.stripeId,
+          source_transaction: charge.id,
           transfer_group: charge.transfer_group
         })
       );

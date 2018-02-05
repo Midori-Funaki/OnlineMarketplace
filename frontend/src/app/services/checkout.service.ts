@@ -6,6 +6,8 @@ import { CartService } from './cart.service';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../models/Product';
 import { AuthService } from "./auth.service";
+import { TransactionService } from './transaction.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CheckoutService {
@@ -16,12 +18,17 @@ export class CheckoutService {
     })
   }
 
-  grandTotal: number;
+  token: string;
+  total: number;
+  transferObject: any;
+  orderId: string;
 
   constructor(
     private http: HttpClient,
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private transactionService: TransactionService,
+    private router: Router
   ) { }
 
   getCartItems() {
@@ -30,19 +37,20 @@ export class CheckoutService {
 
   openCheckout(total, transferObject) {
     // return this.http.get('/api/checkout');
+    this.total = total;
+    this.transferObject = transferObject;
     let orderId = this.newOrderID();
+    this.orderId = orderId;
+    this.transactionService.orderId = orderId;
     let handler = (<any>window).StripeCheckout.configure({
       key: config.publish_key,
+      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
       locale: 'auto',
       currency: 'hkd',
       token: (token: any) => {
-        console.log(total, token, orderId, transferObject);
-        return this.http.post('/api/stripe/charge/', {
-          totalAmount: total,
-          token: token,
-          orderId: orderId,
-          transferObject: transferObject
-        }, this.httpOptions);
+        // console.log(total, token, orderId, transferObject);
+        this.token = token;
+        this.postCharge();
       }
     });
 
@@ -53,10 +61,21 @@ export class CheckoutService {
     });
   }
 
+  postCharge() {
+    // console.log(this.token);
+    this.http.post('/api/stripe/charge/', {
+      totalAmount: this.total,
+      token: this.token,
+      orderId: this.orderId,
+      transferObject: this.transferObject
+    }, this.httpOptions).subscribe(charges => {
+      this.router.navigate(['complete']);
+    });
+  }
+
   emptyCart() {
     return this.http.delete('/api/carts/', this.httpOptions);
   }
-  //private functions
 
   private newOrderID(): string {
     var ID = function () {

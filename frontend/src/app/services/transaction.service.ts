@@ -12,6 +12,7 @@ export class TransactionService {
       'Authorization': 'Bearer ' + this.authService.token
     })
   }
+  orderId: string;
 
   constructor(
     private http: HttpClient,
@@ -19,13 +20,15 @@ export class TransactionService {
   ) { }
 
   getAll():Observable<Transaction[]>{
-    return this.http.get<Transaction[]>('api/transactions', {
+    return this.http.get<Transaction[]>('/api/transactions', {
       headers: new HttpHeaders().set(
         'Authorization', 'Bearer ' + this.authService.token)
     });
   }
 
   create(transaction): Observable<Transaction> {
+    transaction.orderId = this.orderId;
+    console.log(transaction);
     return this.http.post<Transaction>('/api/transactions', transaction, this.httpOptions);
   }
 

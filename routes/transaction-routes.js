@@ -11,7 +11,7 @@ class TransactionRoutes {
   router() {
     let router = express.Router();
     router.get('/', auth.authenticate(), this.get.bind(this));
-    // router.post('/checkouts', this.postNonce.bind(this));
+    router.post('/', auth.authenticate(), this.post.bind(this));
     return router;
   }
 
@@ -24,7 +24,7 @@ class TransactionRoutes {
 
   post(req, res) {
     return this.transactionService.post(req.user.id, req.body)
-      .then((transaction) => res.json(transaction))
+      .then(transaction => res.json(transaction))
       .catch((err) => res.status(500).json(err))
   }
 

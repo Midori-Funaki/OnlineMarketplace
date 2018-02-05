@@ -55,6 +55,7 @@ import { StripeService } from './services/stripe.service';
 import { StripeComponent } from './components/stripe/stripe.component';
 import { PurchaseComponent } from './components/main/transactions/purchase/purchase.component';
 import { SoldComponent } from './components/main/transactions/sold/sold.component';
+import { ConfirmComponent } from './components/checkout/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { SoldComponent } from './components/main/transactions/sold/sold.componen
     ConnectStripeComponent,
     StripeComponent,
     PurchaseComponent,
-    SoldComponent
+    SoldComponent,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,

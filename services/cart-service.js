@@ -92,8 +92,8 @@ class CartService {
       where: {
         userId: userId
       }
-    }).then(() => {
-      return this.get(user)
+    }).then(res => {
+      return res;
     }).catch(err => {
       return err;
     })

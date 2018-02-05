@@ -25,6 +25,7 @@ class transactionService {
   }
 
   post(userid, body) {
+    console.log("posting...");
     return Transaction.create({
       orderId: body.orderId,
       status: body.status,
@@ -35,26 +36,30 @@ class transactionService {
       contact: body.contact,
       buyerBillAddress: body.buyerBillAddress,
       buyerBillAddress2: body.buyerBillAddress2,
-      buyerId: userId,
+      buyerId: userid,
       sellerId: body.sellerId,
       productId: body.productId
     })
       .then(transaction => {
+        console.log("post done", transaction);
         return Product.findById(transaction.productId)
+          .then(product => {
+            console.log("Product Found", product)
+            product.quantity -= transaction.quantity;
+            if (product.quantity <= 0) {
+              return product.destroy();
+            } else {
+              return product.save();
+            }
+          })
       })
-      .then(product => {
-        product.quantity -= transaction.quantity;
-        if (product.quantity <= 0) {
-          return product.destroy();
-        } else {
-          return product.save();
-        }
+      .then(_ => {
+        return "Transaction created"
       })
       .catch(err => {
         return err;
       });
   }
-
 }
 
 module.exports = transactionService;
