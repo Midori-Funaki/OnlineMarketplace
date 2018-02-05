@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-searchbar',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
 
-  constructor() { }
+  productSearch: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, 
+              private router: Router,
+             ) {}
 
   ngOnInit() {
+    this.productSearch = this.formBuilder.group({
+      searchkey: [""]
+    });
+  }
+
+  onSubmit(e:any){
+    // console.log(this.localLogin.value);
+    if (this.productSearch.dirty){
+      // console.log(this.productSearch.value);
+      this.router.navigate([`/home/`, this.productSearch.value.searchkey]);
+      this.productSearch.reset();
+    }
   }
 
 }
