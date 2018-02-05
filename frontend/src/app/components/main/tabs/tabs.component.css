@@ -5,6 +5,11 @@ a {
 a:hover {
     color: black;
 }
+
+.nav-tabs {
+    padding-top: 10px;
+}
+
 .nav-tabs .nav-item {
     border-radius: 0;
     background-color: rgb(137,212,26);

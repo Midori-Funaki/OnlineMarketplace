@@ -1,5 +1,5 @@
 .navbar {
-    padding: 0;
+    padding: 10px;
 }
 .navbar-brands {
     font-size: 35px;
@@ -7,20 +7,11 @@
     font-family: 'Lobster', cursive;
     color: white;
 }
-<<<<<<< HEAD
 
 .nav-container {
     display: grid;
     grid-template-columns: 35% 30% 20% 15%;
     width: 100%;
-=======
-.logo-icon {
-    width: 150px;
-    margin-bottom: 20px;
-}
-.container-fluid {
-    padding: 0px;
->>>>>>> b05d1b7a98adaee764d30d9f8b4c834fed8f5387
 }
 .btn.btn-secondary {
     font-size: 13px;
@@ -34,12 +25,8 @@
 .col-lg-2 {
     justify-content: flex-end;
 }
-<<<<<<< HEAD
 
 .login-signup-btn {
-=======
-#login-signup-btn {
->>>>>>> b05d1b7a98adaee764d30d9f8b4c834fed8f5387
     padding-right: 5px;
     float: right;
     text-align: right;

@@ -55,6 +55,7 @@ import { CheckoutService } from './services/checkout.service';
 import { StripeService } from './services/stripe.service';
 import { StripeComponent } from './components/stripe/stripe.component';
 import { SearchbarComponent } from './components/top/searchbar/searchbar.component';
+import { ProductComponent } from './components/main/product/product.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { SearchbarComponent } from './components/top/searchbar/searchbar.compone
     SellListComponent,
     ConnectStripeComponent,
     StripeComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    ProductComponent,
   ],
   imports: [
     CommonModule,
