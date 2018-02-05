@@ -117,7 +117,6 @@ const productArr = [{
 //create a queue object with concurrency 1
 let q = async.queue(function(keyword, callback) {
     console.log('Handling ',keyword);
-    // registerInTable(product,callback);
     findTagNumber(keyword, callback);
 }, 1);
 
@@ -133,73 +132,58 @@ function registerTagByEach(){
 }
 
 function registerTags(eachProduct){
-    // productArr.forEach((eachProduct) => {
-        //there is id
-        let wordsSet = new Set();
-        if (eachProduct.Category.title === 'sneakers') {
-            wordsSet.add(eachProduct.size);
+    let wordsSet = new Set();
+    if (eachProduct.Category.title === 'sneakers') {
+        wordsSet.add(eachProduct.size);
+    }
+    wordsSet.add(eachProduct.Category.title.toLowerCase());
+    wordsSet.add(eachProduct.brand.toLowerCase());
+    wordsSet.add(eachProduct.color.toLowerCase());
+    eachProduct.title.toLowerCase().split(' ').forEach((word) => {
+        wordsSet.add(word);
+    })
+    eachProduct.description.replace(/\.(?=(?:\s*[A-Z])|$)/g,' ').toLowerCase().split(' ').forEach((word) => {
+        if (word.length > 1) {
+            wordsSet.add(word);
         }
-        wordsSet.add(eachProduct.Category.title.toLowerCase());
-        wordsSet.add(eachProduct.brand.toLowerCase());
-        wordsSet.add(eachProduct.color.toLowerCase());
-        eachProduct.title.toLowerCase().replace(/\.\s/g,' ').split(' ').forEach((word) => {
-            wordsSet.add(word);
-        })
-        eachProduct.description.toLowerCase().split(' ').forEach((word) => {
-            wordsSet.add(word);
-        })
+    })
 
-        registerInTable(eachProduct.id, Array.from(wordsSet));
-
-        // console.log ('PUSHING ', {id: eachProduct.id, keywords: Array.from(wordsSet)});
-        // q.push({id: eachProduct.id, keywords: Array.from(wordsSet)},function(err){
-        //     if (err){
-        //         console.log(err);
-        //     }
-        //     console.log('finished registering item');
-        // });
-
-    // })
+    registerInTable(eachProduct.id, Array.from(wordsSet));
 }
 
 function registerInTable(productNumber, keywordsArr) {
-    // let productNumber = keywordsData.id;
-    // let keywordsArr = keywordsData.keywords;
-
     for(let i=0; i<keywordsArr.length; i++){
         q.push({product:productNumber, key:keywordsArr[i]});
     }
 }
 
 function findTagNumber(newkeyWordData, callback){
-    // return new Promise(function(resolve,reject){
-        let tagNumber = 0;
-        let newkeyword = newkeyWordData.key;
-        let productNumber = newkeyWordData.product;
-        Tag.findOne({
-            where: {
+    let tagNumber = 0;
+    let newkeyword = newkeyWordData.key;
+    let productNumber = newkeyWordData.product;
+    Tag.findOne({
+        where: {
+            keyword: newkeyword
+        },attributes: { 
+            exclude: ['tagId'] 
+        }
+    }).then((result) => {
+        console.log('findOne result ',result);
+        if (result === null ) {
+            Tag.create({
                 keyword: newkeyword
-            },attributes: { 
-                exclude: ['tagId'] 
-            }
-        }).then((result) => {
-            console.log('findOne result ',result);
-            if (result === null ) {
-                Tag.create({
-                    keyword: newkeyword
-                }).then((newEntry) => {
-                    console.log('new entry id',newEntry.id);
-                    tagNumber = newEntry.id
-                    registerTagId(tagNumber, productNumber, callback);
-                })
-            } else {
-                tagNumber = result.id
+            }).then((newEntry) => {
+                console.log('new entry id',newEntry.id);
+                tagNumber = newEntry.id
                 registerTagId(tagNumber, productNumber, callback);
-            }
-        }).catch((err) => {
-            console.log(err);
-        })
-    // })
+            })
+        } else {
+            tagNumber = result.id
+            registerTagId(tagNumber, productNumber, callback);
+        }
+    }).catch((err) => {
+        console.log(err);
+    })
 }
 
 function registerTagId(tag, product, callback){
@@ -216,6 +200,6 @@ function registerTagId(tag, product, callback){
 }
 
 // module.exports.registerTagByEach = registerTagByEach;
-module.exports.registerTags = registerTags;
-module.exports.registerInTable = registerInTable;
+// module.exports.registerTags = registerTags;
+// module.exports.registerInTable = registerInTable;
 module.exports.registerTagByEach = registerTagByEach;
