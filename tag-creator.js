@@ -3,6 +3,7 @@ const productService = new ProductService();
 const models = require('./models');
 const ProductTag = models.ProductTag;
 const Tag = models.Tag;
+const async = require('async');
 
 const productArr = [{
     "id": 21,
@@ -104,8 +105,6 @@ const productArr = [{
 }];
 
 
-
-
 // productService.get()
 //     .then((products) => {
 //         // productArr = products;
@@ -115,27 +114,25 @@ const productArr = [{
 //         console.log(err)
 //     });
 
+//create a queue object with concurrency 1
+let q = async.queue(function(keyword, callback) {
+    console.log('Handling ',keyword);
+    // registerInTable(product,callback);
+    findTagNumber(keyword, callback);
+}, 1);
+
+//assign a callback
+q.drain = function() {
+    console.log('Finished processing the item')
+};
+
 function registerTagByEach(){
-    // for(let i=0;i<productArr.length; i++) {
-    //     registerTags(productArr[i]);
-    // }
-    if (productArr.length > 0) {
-        let loop = function(productArr, i, registerTags, done) {
-            registerTags(productArr[i], i, function() {
-                if (++i < productArr.length) {
-                    loop(productArr, i, registerTags, done);
-                } else {
-                    done();
-                }
-            })
-        }
-        loop(productArr, 0, registerTags, done);
-    } else {
-        done();
+    for(let i=0;i<productArr.length; i++) {
+        registerTags(productArr[i]);
     }
 }
 
-function registerTags(eachProduct, i){
+function registerTags(eachProduct){
     // productArr.forEach((eachProduct) => {
         //there is id
         let wordsSet = new Set();
@@ -151,53 +148,74 @@ function registerTags(eachProduct, i){
         eachProduct.description.toLowerCase().split(' ').forEach((word) => {
             wordsSet.add(word);
         })
+
         registerInTable(eachProduct.id, Array.from(wordsSet));
+
+        // console.log ('PUSHING ', {id: eachProduct.id, keywords: Array.from(wordsSet)});
+        // q.push({id: eachProduct.id, keywords: Array.from(wordsSet)},function(err){
+        //     if (err){
+        //         console.log(err);
+        //     }
+        //     console.log('finished registering item');
+        // });
+
     // })
 }
 
 function registerInTable(productNumber, keywordsArr) {
-    for(let i=0; i<keywordsArr.length; i++){
-        let tagNumber = 0;
-        let findTagNumber = new Promise(function(resolve,reject){
-            Tag.findOne({
-                where: {
-                    keyword: keywordsArr[i]
-                },attributes: { 
-                    exclude: ['tagId'] 
-                }
-            }).then((result) => {
-                console.log('findOne result ',result);
-                if (result === null ) {
-                    Tag.create({
-                        keyword: keywordsArr[i]
-                    }).then((newEntry) => {
-                        console.log('new entry id',newEntry.id);
-                        tagNumber = newEntry.id
-                        resolve(tagNumber);
-                    })
-                } else {
-                    tagNumber = result.id
-                    resolve(tagNumber);
-                }
-            }).catch((err) => {
-                reject(err);
-            })
-        })
+    // let productNumber = keywordsData.id;
+    // let keywordsArr = keywordsData.keywords;
 
-        findTagNumber.then((tag) => {
-            console.log('tag id passed on',tag);
-            ProductTag.create({
-                tagId: tag,
-                productId: productNumber
-            }).then(() => {
-                console.log('producttag registration ok')
-            }).catch((err) => {
-                console.log(err)
-            })
-        })
+    for(let i=0; i<keywordsArr.length; i++){
+        q.push({product:productNumber, key:keywordsArr[i]});
     }
 }
 
-module.exports.registerTagByEach = registerTagByEach;
+function findTagNumber(newkeyWordData, callback){
+    // return new Promise(function(resolve,reject){
+        let tagNumber = 0;
+        let newkeyword = newkeyWordData.key;
+        let productNumber = newkeyWordData.product;
+        Tag.findOne({
+            where: {
+                keyword: newkeyword
+            },attributes: { 
+                exclude: ['tagId'] 
+            }
+        }).then((result) => {
+            console.log('findOne result ',result);
+            if (result === null ) {
+                Tag.create({
+                    keyword: newkeyword
+                }).then((newEntry) => {
+                    console.log('new entry id',newEntry.id);
+                    tagNumber = newEntry.id
+                    registerTagId(tagNumber, productNumber, callback);
+                })
+            } else {
+                tagNumber = result.id
+                registerTagId(tagNumber, productNumber, callback);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+    // })
+}
+
+function registerTagId(tag, product, callback){
+    console.log('tag id passed on',tag);
+    ProductTag.create({
+        tagId: tag,
+        productId: product
+    }).then(() => {
+        console.log('producttag registration ok')
+        callback(); //====== CALLBACK =======//
+    }).catch((err) => {
+        console.log(err)
+    })
+}
+
+// module.exports.registerTagByEach = registerTagByEach;
 module.exports.registerTags = registerTags;
 module.exports.registerInTable = registerInTable;
+module.exports.registerTagByEach = registerTagByEach;

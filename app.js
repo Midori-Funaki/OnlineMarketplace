@@ -48,8 +48,8 @@ var config = require('./config');
 
 var app = express();
 
-// var tagCreator = require('./tag-creator');
-// tagCreator.registerTagByEach();
+var tagCreator = require('./tag-creator'); 
+tagCreator.registerTagByEach();
 
 
 // view engine setup
