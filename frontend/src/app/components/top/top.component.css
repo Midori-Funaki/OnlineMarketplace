@@ -5,8 +5,10 @@
     color: white;
 }
 
-.container-fluid {
-    padding: 0px;
+.nav-container {
+    display: grid;
+    grid-template-columns: 35% 30% 20% 15%;
+    width: 100%;
 }
 
 .btn.btn-secondary {
@@ -16,14 +18,16 @@
     color: white;
     outline: none;
     border-radius: 0;
+    margin-top: 6px;
 }
 
 .col-lg-2 {
     justify-content: flex-end;
 }
 
-#login-signup-btn {
+.login-signup-btn {
     padding-right: 5px;
+    float: right;
     text-align: right;
 }
 

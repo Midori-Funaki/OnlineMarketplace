@@ -1,16 +1,19 @@
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="col-lg-3">
+  <div class="nav-container">
+    <div>
       <div class="navbar-brands">Deals Hub</div>
     </div>
-    <div class="col-lg-6">
+    <div>
       <app-notification></app-notification>
     </div>
-    <div class="col-lg-1 col-lg-offset-2" *ngIf="isLoggedIn; else login">
+    <div>
+      <app-searchbar></app-searchbar>
+    </div>
+    <div class="login-signup-btn" *ngIf="isLoggedIn; else login">
       <button class="btn btn-secondary"  (click)="logOut($event)">Logout</button>
     </div>
     <ng-template #login>
-      <div class="col-lg-2 col-lg-offset-1" id="login-signup-btn">
+      <div class="login-signup-btn">
         <button class="btn btn-secondary toggle-form" data-toggle="modal" data-target="#LoginForm">Login</button>
         <button class="btn btn-secondary toggle-form" data-toggle="modal" data-target="#SignupForm">Sign Up</button>
       </div>

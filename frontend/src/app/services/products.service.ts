@@ -27,6 +27,10 @@ export class ProductsService {
     return this.http.get<string[]>('/api/products/');
   }
 
+  getSearchedProduuct(searchtype: string, searchkey: string): Observable<any> {
+    return this.http.get<any>('/api/products/');
+  }
+
   getProduct(id: number): Observable<any> {
     return this.http.get<any>('/api/products/' + id);
   }
