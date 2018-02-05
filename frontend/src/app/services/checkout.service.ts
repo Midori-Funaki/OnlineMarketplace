@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from './../payment-config';
 import { CartService } from './cart.service';
@@ -22,13 +22,14 @@ export class CheckoutService {
   total: number;
   transferObject: any;
   orderId: string;
+  paymentComplete$ = new BehaviorSubject(false);
 
   constructor(
     private http: HttpClient,
     private cartService: CartService,
     private authService: AuthService,
     private transactionService: TransactionService,
-    private router: Router
+    private router: Router,
   ) { }
 
   getCartItems() {
@@ -69,7 +70,7 @@ export class CheckoutService {
       orderId: this.orderId,
       transferObject: this.transferObject
     }, this.httpOptions).subscribe(charges => {
-      this.router.navigate(['complete']);
+      this.paymentComplete$.next(true);
     });
   }
 

@@ -5,6 +5,7 @@ import { User } from '../../../models/User';
 import { CheckoutService } from '../../../services/checkout.service';
 import { Product } from '../../../models/Product';
 import { TransactionService } from '../../../services/transaction.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-detail',
@@ -18,11 +19,11 @@ export class CheckoutDetailComponent implements OnInit {
   checkoutForm: FormGroup;
   sellersTransfer: any[];
 
-
   constructor(
     private userService: UserService,
     private checkoutService: CheckoutService,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -47,11 +48,13 @@ export class CheckoutDetailComponent implements OnInit {
           })
         });
       })
-  }
-
-  ngOnDestroy() {
-    this.createTransactions(this.items, this.checkoutForm.value);
-    this.emptyCart();
+    this.checkoutService.paymentComplete$.subscribe(boo => {
+      if (boo == true) {
+        this.emptyCart();
+        this.createTransactions(this.items, this.checkoutForm.value);
+        this.router.navigate(['complete']);
+      }
+    })
   }
 
   getItems() {
