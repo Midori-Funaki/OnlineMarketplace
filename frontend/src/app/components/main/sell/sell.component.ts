@@ -9,6 +9,11 @@ import { HttpClient } from '@angular/common/http';
 import { ProductsService } from '../../../services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from './../../../models/Product';
+<<<<<<< HEAD
+=======
+import { UserService } from '../../../services/user.service';
+import { User } from '../../../models/User';
+>>>>>>> b05d1b7a98adaee764d30d9f8b4c834fed8f5387
 
 @Component({
   selector: 'app-sell',
@@ -19,14 +24,26 @@ export class SellComponent implements OnInit {
   sellProduct: any;
   productId: any;
 
+<<<<<<< HEAD
+=======
+  isConnectedAccount: boolean = false;
+  user: User;
+>>>>>>> b05d1b7a98adaee764d30d9f8b4c834fed8f5387
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];//image array
+<<<<<<< HEAD
   sizes: string[] = [];
   colors: string[] = [];
   isOther: boolean = false;
+=======
+  sizes: number[] = [20,20.5,21,21.5,22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30];
+  colors: string[] = [];
+  isOther: boolean = false;
+  isShoeCategory: boolean = false;
+>>>>>>> b05d1b7a98adaee764d30d9f8b4c834fed8f5387
 
   hasBaseDropZoneOver: boolean = false;
   isEditMode: boolean = true;
@@ -37,6 +54,10 @@ export class SellComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+<<<<<<< HEAD
+=======
+    private userService: UserService,
+>>>>>>> b05d1b7a98adaee764d30d9f8b4c834fed8f5387
     private sellService:SellService, 
     private formBuilder: FormBuilder,
     private cloudinary: Cloudinary,
@@ -46,7 +67,7 @@ export class SellComponent implements OnInit {
   ) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
-      // this.categories.unshift("");
+      this.categories.unshift("");
     });
     this.sellService.getbrandSub().subscribe(brands=>{
       this.brands = brands;
@@ -66,6 +87,7 @@ export class SellComponent implements OnInit {
   }
 
   ngOnInit() {
+<<<<<<< HEAD
     this.route.params.subscribe(param => {
       this.productId = param['id'];
       if(this.productId !== "new") {
@@ -75,6 +97,9 @@ export class SellComponent implements OnInit {
       }
     })
 
+=======
+    this.sellService.getCategories();
+>>>>>>> b05d1b7a98adaee764d30d9f8b4c834fed8f5387
     this.sellForm = new FormGroup({
       category: new FormControl(''),
       brand: new FormControl(''),
@@ -88,36 +113,22 @@ export class SellComponent implements OnInit {
       otherColor: new FormControl('')
     })
 
-    this.getSellProduct(this.productId)
-    .then((data) => {
-      this.sellForm = new FormGroup({
-        category: new FormControl(data.Category.title),
-        brand: new FormControl(data.brand),
-        title: new FormControl(data.title),
-        quantity: new FormControl(data.quantity),
-        size: new FormControl(data.size),
-        color: new FormControl(data.color),
-        currentAskPrice: new FormControl(data.currentAskPrice),
-        condition: new FormControl(data.condition),
-        description: new FormControl(data.description),
-        otherColor: new FormControl('')
-      })
-      this.filterBrand(data.Category.title);
-      this.filterTitle(data.brand);
-      this.colors.push(data.color);
-      this.colors.push('other');
-      for(let i=0; i<data.ProductPhotos.length; i++) {
-        this.images.push({
-          id: data.ProductPhotos[i].url.split('.')[0],
-          url: data.ProductPhotos[i].url
-        });
+    this.route.params.subscribe(param => {
+      this.productId = param['id'];
+      if(this.productId !== "new") {
+        this.isEditMode = true;
+        this.getSellInfoForEdit();
+      } else {
+        this.isEditMode = false;
       }
-      console.log('IMAGES ',this.images);
     })
-    .catch((err) => {
-      console.log(err)
+
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+      if (this.user.stripeId) {
+        this.isConnectedAccount = true;
+      }
     })
-    
 
     this.sellService.getCategories();
     
@@ -160,7 +171,7 @@ export class SellComponent implements OnInit {
       this.zone.run(() => {
         //Get the id of existing item
         const existingId = this.images.reduce((prev, current, index) => {
-          if (current.file.name === fileItem.file.name && !current.status) {
+          if (current.id === fileItem.id && !current.status) {
             return index;
           }
           return prev;
@@ -182,13 +193,15 @@ export class SellComponent implements OnInit {
       console.log('uploader status ',status);
       upsertResponse(
         {
-          file: item.file,
-          status,
+          // file: item.file,
+          // status,
           // data: JSON.parse(response),
           id: JSON.parse(response).public_id,
-          url: `${JSON.parse(response).public_id}.${JSON.parse(response).format}`
+          url: JSON.parse(response).url
+          // url: `http://res.cloudinary.com/dealshubspace/image/upload/v${JSON.parse(response).version}/${JSON.parse(response).public_id}.${JSON.parse(response).format}`
         }
       ); 
+      console.log(response);
     }
 
     //Upload process in progress
@@ -197,11 +210,52 @@ export class SellComponent implements OnInit {
     }
   }
 
+  getSellInfoForEdit() {
+    this.getSellProduct(this.productId)
+    .then((data) => {
+      this.sellForm = new FormGroup({
+        category: new FormControl(data.Category.title),
+        brand: new FormControl(data.brand),
+        title: new FormControl(data.title),
+        quantity: new FormControl(data.quantity),
+        size: new FormControl(data.size),
+        color: new FormControl(data.color),
+        currentAskPrice: new FormControl(data.currentAskPrice),
+        condition: new FormControl(data.condition),
+        description: new FormControl(data.description),
+        otherColor: new FormControl('')
+      })
+      this.filterBrand(data.Category.title);
+      this.filterTitle(data.brand);
+      this.colors.push(data.color);
+      this.colors.push('other');
+      for(let i=0; i<data.ProductPhotos.length; i++) {
+        let cloudinaryId = data.ProductPhotos[i].url.match(/dealshub\/[a-z0-9]+/g);
+        if (cloudinaryId === null){
+          cloudinaryId = i;
+        }
+        this.images.push({
+          id: cloudinaryId.toString(),
+          url: data.ProductPhotos[i].url
+        });
+      }
+      console.log('IMAGES ',this.images);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   getSellProduct(id) {
     return this.productsService.getProduct(id).toPromise()
   }
 
   filterBrand(category){
+    if(category === "Sneakers") {
+      this.isShoeCategory = true;
+    } else {
+      this.isShoeCategory = false;
+    }
     this.sellService.getBrandsByCategory(category);
   }
 
@@ -221,12 +275,16 @@ export class SellComponent implements OnInit {
     }
   }
   createNewSell(){
+    if (!this.isShoeCategory){
+      this.sellForm.value.size = 0;
+    }
     this.sellForm.value.photos = this.images;
     // console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
     this.sellService.registerNewSell(this.sellForm.value);
   }
 
   deleteImage(delid){
+    console.log('DELID ',delid);
     for(let i=0; i<this.images.length; i++){
       if(this.images[i].id === delid){
         this.images.splice(i, 1);
@@ -234,7 +292,9 @@ export class SellComponent implements OnInit {
       }
     }
     // console.log('DEL IMAGE ARR ',this.images);
-    this.deleteFromCloudinary(delid);
+    if(/dealshub/.test(delid)){
+      this.deleteFromCloudinary(delid);
+    }
   }
 
   deleteFromCloudinary(id){
@@ -243,9 +303,9 @@ export class SellComponent implements OnInit {
     this.sellService.deleteImageByIdFromCloudinary(id).subscribe(result =>{
       console.log(result);
     });
-    if (this.productId != 'new') {
-      this.sellService.deleteImageByIdFromDb(id)
-    }
+    // if (this.productId != 'new') {
+    //   this.sellService.deleteImageByIdFromDb(url)
+    // }
   }
 
   fileOverBase(e: any): void{
@@ -255,6 +315,9 @@ export class SellComponent implements OnInit {
   editSellItem() {
     this.sellForm.value.id = this.productId;
     this.sellForm.value.photos = this.images;
+
+    console.log("sending edit info @ sell compo ",this.sellForm.value);
+
     this.sellService.editSellItem(this.sellForm.value)
   }
 }

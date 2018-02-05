@@ -95,9 +95,9 @@ export class SellService {
     return this.http.delete('api/images/' + id)
   }
 
-  deleteImageByIdFromDb(id) {
-    return this.http.delete('api/photos/' + id)
-  }
+  // deleteImageByIdFromDb(id) {
+  //   return this.http.delete('api/photos/' + id)
+  // }
 
   upload(){
     console.log('received image data *****');

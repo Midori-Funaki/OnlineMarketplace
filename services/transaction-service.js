@@ -3,6 +3,7 @@ var gateway = require('./../gateway'),
   models = require('./../models'),
   Transaction = models.Transaction,
   Product = models.Product;
+  ProductPhoto = models.ProductPhoto;
 
 class transactionService {
   constructor() { }
@@ -15,6 +16,8 @@ class transactionService {
       },
       include: [{
         model: Product
+      },{
+        model: ProductPhoto
       }]
     }).then((transactions) => {
       return transactions;

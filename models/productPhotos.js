@@ -6,10 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     ProductPhoto.associate = function (models) {
-        ProductPhoto.belongsTo(models.Product, {
-            foreignKey: 'productId',
-            targetKey: 'id'
-        })
+        ProductPhoto.belongsTo(models.Product, {foreignKey: 'productId',targetKey: 'id'});
+        ProductPhoto.belongsTo(models.Transaction, { foreignKey: 'productId', targetKey: 'productId'});
+        ProductPhoto.belongsTo(models.Cart, { foreignKey: 'productId', targetKey: 'productId'});
     }
     return ProductPhoto;
 };

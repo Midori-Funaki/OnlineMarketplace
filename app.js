@@ -48,6 +48,10 @@ var config = require('./config');
 
 var app = express();
 
+// var tagCreator = require('./tag-creator');
+// tagCreator.registerTagByEach();
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');

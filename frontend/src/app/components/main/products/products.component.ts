@@ -10,15 +10,10 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProductsComponent implements OnInit {
 
-  products: Observable<string[]>;
-
-  constructor(private productService: ProductsService) { }
+  
+  constructor() { }
 
   ngOnInit() {
-    this.getAll();
   }
 
-  getAll() {
-    this.products = this.productService.getProducts();
-  }
 }

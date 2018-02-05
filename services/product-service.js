@@ -2,6 +2,7 @@ const models = require('./../models');
 const Product = models.Product;
 const ProductPhoto = models.ProductPhoto;
 const Category = models.Category;
+const Transaction = models.Transaction;
 
 class ProductService {
 
@@ -89,7 +90,7 @@ class ProductService {
       return Product.create({
         title: productInfo.title,
         description: productInfo.description,
-        // size: productInfo.size,
+        size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
         // curentBidPrice: productInfo.curentBidPrice,
@@ -114,45 +115,37 @@ class ProductService {
   }
 
   update(productId, productInfo, user) {
-    // let attr = req.attr;
-    // let updates = req.updates;
-    // let newData = {
-    //   [attr]: updates
-    // };
-    // return Product.update(newData, { where: { id: productId } })
-    //   .then(result => {
-    //     return result;
-    //   })
-    //   .catch(err => {
-    //     return err;
-    //   })
-    console.log('backend pro id',productId);
-    console.log(typeof productInfo);
     return Product.findOne({
       where:{
         id: productId,
-        buyerId: user.id
+        sellerId: user.id
       }
     }).then((product) => {
-      //NEED TO SEND PRODUCTINFO
-      console.log('PRODUCT @ pro service ',product.dataValues);
-      console.log('NEW INFO ',productInfo)
       return product.updateAttributes({
         title: productInfo.title,
         description: productInfo.description,
-        //   // size: productInfo.size,
+        size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
-        //   // curentBidPrice: productInfo.curentBidPrice,
         currentAskPrice: productInfo.currentAskPrice,
         quantity: productInfo.quantity,
-        //   // sellerId: user.id, *****NEED USER ID
-        //   // buyerId: productInfo.INTEGER,
         // categoryId: category.id, ****HOW TO CHANGE CAT ID
         brand: productInfo.brand
-      }).then((updatedItem) => {
-        console.log('updated item ',updatedItem)
-        return 'Update completed'
+      }).then(() => {
+        return ProductPhoto.destroy({
+          where:{
+            productId: productId
+          }
+        }).then(() => {
+          return productInfo.photos.forEach((data)=>{
+            ProductPhoto.create({
+              url: data.url,
+              productId: productId
+            })
+          }).then(()=>{
+            return 'Update completed'
+          })
+        })
       })
     }).catch((err) => {
       return err

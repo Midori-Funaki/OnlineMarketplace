@@ -1,7 +1,35 @@
-<div>
+<div class="btn-container">
   <a href="sell/new"><button class="btn sell-btn">Sell New Item</button></a>
 </div>
-<div class="sell-container">
+
+<div class="products-container">
+  <div *ngFor="let product of products | async" class="each-product">
+    <a href="sell/{{product.id}}">
+      <div class="card">
+        <div class="card-img-top">
+          <img *ngIf="product.ProductPhotos[0]" class="card-product-img" [src]="product.ProductPhotos[0].url" alt="Card image cap">
+        </div>
+        <div class="card-body">
+          <h4 class="card-title">{{ product.title }}</h4>
+          <span *ngIf="product.condition == 'new'" class="badge badge-pill badge-success">NEW</span>
+        </div>
+        <footer class="card-footer">
+          <div>
+            Lowest bid : <span class="price bid-price">$ {{ product.curentBidPrice }}</span>
+          </div>
+          <div>
+            Lowest ask : <span class="price ask-price">$ {{ product.currentAskPrice }}</span>
+          </div>
+        </footer>
+      </div><!-- ./card -->
+    </a>
+  </div><!-- ngFor -->
+</div>
+<!-- <div class="sell-item-container">
+  <app-product></app-product>
+</div> -->
+
+<!-- <div class="sell-container">
   <div *ngFor="let product of products | async" class="each-product">
     <a href="sell/{{ product.id }}">
       <div class="card">
@@ -10,10 +38,11 @@
         </cl-image>
         <div class="card-body">
           <h4 class="card-title">{{ product.title }}</h4>
-          <p class="card-text">{{ product.description }}</p>
-          <p>Current ask price : $ {{ product.curentAskPrice }}</p>
+            <p class="card-text">{{ product.description }}</p>
+            <p>Current ask price : $ {{ product.curentAskPrice }}</p>
+          <footer class="card-footer">Lowest ask price : <br><span class="price">$ {{ product.currentAskPrice }}</span></footer>
         </div>
-      </div><!-- ./card -->
+      </div>
     </a>
   </div>
-</div>
+</div> -->

@@ -1,4 +1,31 @@
-.sell-container{
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+.sell-btn {
+    margin: 5px 40px 5px 0;
+    color: white;
+    border: 5px solid rgb(137,212,26);
+    background-color: rgb(104,51,97);
+    border-radius: 0;
+}
+.sell-btn:hover {
+    background-color: rgb(137,212,26);
+    color: rgb(51,51,51);
+}
+.sell-item-container {
+    margin-left: 10px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+p {
+    margin: 0;
+}
+.products-container{
+    padding-left: 20px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -7,13 +34,46 @@
 }
 .card{
     width: 210px;
+    height: 315px;
     margin: 5px;
-    background-color: #f1f1f1;
+    background-color: white;
     border: 5px solid white;
     border-radius: 0;
+    width: 210px;
 }
-.sell-btn {
-    margin: 5px;
-    border: 3px solid rgb(137,212,26);
-    border-radius: 0;
+.card-img-top {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    overflow: hidden;
+}
+.card-product-img {
+    position: absolute;
+    width: 190px;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.card-title {
+    font-size: 18px;
+    margin: 0;
+}
+.card-body {
+    padding: 5px 10px;
+}
+.card-footer {
+    padding: 0;
+}
+.price {
+    font-size: 22px;
+    float: right;
+    margin-right: 26px;
+}
+.bid-price {
+    color: green;
+}
+.ask-price {
+    color: red;
 }

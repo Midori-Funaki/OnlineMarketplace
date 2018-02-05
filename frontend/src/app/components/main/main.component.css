@@ -11,3 +11,8 @@
 .container-fluid{
     padding: 0;
 }
+.nav-tabs,
+.nav-link {
+    width: 120px;
+    text-align: center;
+}

@@ -3,7 +3,6 @@
     width: 380px;
     border: 1px dotted gray;
 }
-
 /* Photo Upload Trial */
 body {
   font-family: "Raleway", sans-serif;
@@ -23,6 +22,9 @@ body {
           flex-direction: column;
   background-color: #eff5f6;
 }
+.select-btn {
+  width: 100px;
+}
 .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -39,6 +41,7 @@ body {
   -webkit-box-pack: left;
       -ms-flex-pack: left;
           justify-content: left;
+  overflow: scroll;
 }
 h1 {
   font-family: inherit;
@@ -49,7 +52,7 @@ h1 {
 .box {
   display: block;
   min-width: 300px;
-  height: 300px;
+  height: 200px;
   margin: 10px;
   background-color: white;
   border-radius: 0px;
@@ -63,6 +66,16 @@ h1 {
 }
 .box-preview {
   border: none;
+}
+.box-full-preview {
+  position: relative;
+  height: 180px;
+  width: 300px;
+}
+.product-img {
+  width: 300px;
+  position: absolute;
+  bottom: 0;
 }
 .upload-options {
   position: relative;
@@ -125,7 +138,7 @@ h1 {
   color: lightgray;
 }
 .js--image-preview {
-  height: 225px;
+  height: 125px;
   width: 100%;
   position: relative;
   overflow: hidden;
