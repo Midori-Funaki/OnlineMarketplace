@@ -26,7 +26,7 @@ module.exports = {
         // photos: [data[i].link]
       });
     }
-    return Product.bulkCreate(products);
+    // return Product.bulkCreate(products);
   },
 
   down: (queryInterface, Sequelize) => {
