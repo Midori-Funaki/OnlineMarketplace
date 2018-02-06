@@ -27,6 +27,10 @@ export class ProductsService {
     return this.http.get<string[]>('/api/products/');
   }
 
+  getSearchedProduuct(searchtype: string, searchkey: string): Observable<any> {
+    return this.http.get<any>('/api/products/');
+  }
+
   getProduct(id: number): Observable<any> {
     return this.http.get<any>('/api/products/' + id);
   }
@@ -38,11 +42,11 @@ export class ProductsService {
     });
   }
 
-  addToCart(obj: {id: number, quantity: number}): Observable<Cart> {
-    console.log("posting")
+  addToCart(obj: {id: number, quantity: number, productId:number}): Observable<Cart> {
     return this.http.post<Cart>('/api/carts/', { 
       id: obj.id, 
-      quantity: obj.quantity 
+      quantity: obj.quantity,
+      productId: obj.productId
     }, this.httpOptions );
   }
 }

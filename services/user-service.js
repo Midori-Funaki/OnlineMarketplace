@@ -25,7 +25,7 @@ class UserService {
         id: user.id
       }
     }).then(user => {
-      console.log('findOne user', user)
+      // console.log('findOne user', user)
       return user;
     }).catch(err => {
       console.log(err);

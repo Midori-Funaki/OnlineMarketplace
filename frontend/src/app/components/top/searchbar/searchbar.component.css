@@ -1,0 +1,13 @@
+#searchbar {
+    width: 90%;
+    margin-top: 8px;
+    display: inline-grid;
+    grid-template-columns: 20% 80%;
+    float: right;
+}
+
+#search-submit-btn {
+    border-radius: 5px;
+    margin: 0px;
+    height: 40px;
+}

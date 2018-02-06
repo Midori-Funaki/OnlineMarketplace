@@ -1,8 +1,8 @@
 const models = require('./../models'),
-      Cart = models.Cart,
-      Product = models.Product;
-
-const Op = models.Op;
+  Cart = models.Cart,
+  Product = models.Product;
+const User = models.User;
+const ProductPhoto = models.ProductPhoto
 
 class CartService {
   constructor() { }
@@ -12,11 +12,16 @@ class CartService {
       where: {
         userId: user.id
       },
-      include: [{
-        model: Product
-      },{
-        model: ProductPhoto
-      }]
+      include: [
+        {
+          model: Product,
+          include: [{
+            model: User
+          }, {
+            model: ProductPhoto
+          }]
+        }
+      ]
     }).then((cart) => {
       return cart;
     }).catch((err) => {
@@ -29,23 +34,13 @@ class CartService {
     return Cart.findOne({
       where: {
         userId: user.id,
-        productId : productInfo.productId
+        productId: productInfo.productId
       }
     }).then(cart => {
       if (cart) {
         console.log("cart: ", cart.id);
         cart.quantity += productInfo.quantity;
         cart.save();
-        // let quantity = cart.quantity + productInfo.quantity
-        // return Cart.update( {
-        //   quantity: quantity
-        // }, {
-        //   where: {
-        //     userId: user.id,
-        //     productId: productInfo.productId
-        //   }
-        // }).then(cart => cart);
-          //Executing (default): UPDATE "Carts" SET "quantity"=4,"updatedAt"='2018-01-29 07:22:21.030 +00:00' WHERE "productId" = 5
         return cart;
       }
       else {
@@ -58,7 +53,7 @@ class CartService {
         })
       }
     }).catch((err) => {
-      return err
+      return err;
     })
   }
 
@@ -79,17 +74,28 @@ class CartService {
     })
   }
 
-  delete(user, productInfo) {
+  delete(userId, productId) {
     return Cart.destroy({
       where: {
-        userId: user,
-        productId: productInfo.productId,
-        quantity: productInfo.quantity
+        userId: userId,
+        productId: productId,
       }
     }).then(() => {
-      return this.get(user)
+      return this.get(user);
     }).catch((err) => {
-      return err
+      return err;
+    })
+  }
+
+  empty(userId) {
+    return Cart.destroy({
+      where: {
+        userId: userId
+      }
+    }).then(res => {
+      return res;
+    }).catch(err => {
+      return err;
     })
   }
 }

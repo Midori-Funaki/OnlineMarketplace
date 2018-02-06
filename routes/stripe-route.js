@@ -12,7 +12,7 @@ class StripeRoute {
     let router = express.Router();
     // router.get('/', this.get.bind(this));
     router.post('/register', auth.authenticate(), this.register.bind(this));
-    router.post('/charges', auth.authenticate(), this.charge.bind(this));
+    router.post('/charge', auth.authenticate(), this.charge.bind(this));
     return router;
   }
 
@@ -23,10 +23,13 @@ class StripeRoute {
   }
 
   charge(req, res) {
-    return this.stripeService.charge(req.body.totalAmount, req.body.transferObject, req.body.token, req.user)
-      .then(data => res.json(data))
+    // console.log("charging...")
+    // console.log(req.body);
+    return this.stripeService.charge(req.body.totalAmount, req.body.token, req.body.orderId, req.body.transferObject)
+      .then(charges => res.json(charges))
       .catch(err => res.status(500).json(err))
   }
+
 }
 
 module.exports = StripeRoute;

@@ -8,8 +8,8 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '@angular/common/http';
 import { ProductsService } from '../../../services/products.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from './../../../models/Product';
 import { UserService } from '../../../services/user.service';
+import { Product } from './../../../models/Product';
 import { User } from '../../../models/User';
 
 @Component({
@@ -21,16 +21,16 @@ export class SellComponent implements OnInit {
   sellProduct: any;
   productId: any;
 
-  isConnectedAccount: boolean = false;
-  user: User;
   sellForm: FormGroup;
   categories: string[] = [];
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];//image array
-  sizes: number[] = [20,20.5,21,21.5,22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30];
+  sizes: string[] = [];
   colors: string[] = [];
   isOther: boolean = false;
+  user: User;
+  isConnectedAccount: boolean = false;
   isShoeCategory: boolean = false;
 
   hasBaseDropZoneOver: boolean = false;
@@ -42,13 +42,13 @@ export class SellComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
     private sellService:SellService, 
     private formBuilder: FormBuilder,
     private cloudinary: Cloudinary,
     private zone: NgZone,
     private http: HttpClient,
-    private productsService:ProductsService
+    private productsService:ProductsService,
+    private userService: UserService,
   ) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
@@ -72,7 +72,15 @@ export class SellComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sellService.getCategories();
+    this.route.params.subscribe(param => {
+      this.productId = param['id'];
+      if(this.productId !== "new") {
+        this.isEditMode = true;
+      } else {
+        this.isEditMode = false;
+      }
+    })
+
     this.sellForm = new FormGroup({
       category: new FormControl(''),
       brand: new FormControl(''),

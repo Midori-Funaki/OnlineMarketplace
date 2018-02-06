@@ -1,4 +1,5 @@
 export interface Product {
+  id: number;
   title: string;
   description: string;
   size: number;
@@ -10,8 +11,7 @@ export interface Product {
   sellerId: number;
   buyerId: number;
   categoryId: number;
+  createdAt: Date;
+  updatedAt: Date;
   brand: string;
-  createdAt: string;
-  updatedAt: string;
-  ProductPhotos?: any
 }

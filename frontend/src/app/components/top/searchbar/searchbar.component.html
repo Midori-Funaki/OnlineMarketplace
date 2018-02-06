@@ -1,0 +1,9 @@
+<div>
+  <form [formGroup]="productSearch"  id="searchbar">
+    <button (click)="onSubmit($event)" type="submit" id="search-submit-btn"><i class="fa fa-search"></i></button>
+    <div class="form-group">
+        <input type='text' name="searchkey" class="form-control" placeholder="Search product" 
+            formControlName="searchkey"/>
+    </div>
+  </form>
+</div>

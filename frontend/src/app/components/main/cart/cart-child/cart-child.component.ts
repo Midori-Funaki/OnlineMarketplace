@@ -31,7 +31,7 @@ export class CartChildComponent implements OnInit {
       this.grandTotal = 0;
       for (let item of items) {
         // console.log(item);
-        this.grandTotal += item.Product.curentBidPrice * item.quantity;
+        this.grandTotal += item.Product.currentAskPrice * item.quantity;
       }
     })
   }

@@ -13,10 +13,12 @@ import { FavComponent } from './fav/fav.component';
 import { CheckoutComponent } from './../checkout/checkout.component';
 import { TransactionComponent } from './../../components/main/transactions/transaction.component';
 import { SellListComponent } from './../../components/main/sell-list/sell-list.component';
+import { ConfirmComponent } from '../checkout/confirm/confirm.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: ProductsComponent, pathMatch: 'full' },
+    { path: 'home/:searchkey', component: ProductsComponent, pathMatch: 'full' },
     { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
     { path: 'sell/:id', component: SellComponent, pathMatch: 'full' },
     { path: 'transactions', component: TransactionComponent, pathMatch: 'full' },
@@ -26,7 +28,8 @@ const routes: Routes = [
     { path: 'auth/facebook/callback', component: FacebookComponent },
     { path: 'auth/google/callback', component: GoogleComponent },
     { path: 'auth/stripe/callback', component: StripeComponent },
-    { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' }
+    { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' },
+    { path: 'complete', component: ConfirmComponent, pathMatch: 'full'}
 ]
 
 @NgModule({

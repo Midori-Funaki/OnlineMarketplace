@@ -52,3 +52,12 @@ p {
     float: right;
     margin-right: 26px;
 }
+
+.loadmore-container {
+    margin: 30px 0px;
+    text-align: center;
+}
+
+.loadmore-container .btn{
+    width: 95%;
+}

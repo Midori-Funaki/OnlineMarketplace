@@ -29,19 +29,27 @@ export class ProductDetailComponent implements OnInit {
   }
 
   getProduct(id) {
-    this.productsService.getProduct(id).subscribe(product => {
+    this.productsService.getProduct(id)
+      .subscribe(product => {
       this.product = product;
       this.imgsrc = product.ProductPhotos[0].url;
     })
   }
 
   changeImage(event) {
-    console.log(event)
+    console.log(event.srcElement.src);
     this.imgsrc = event.srcElement.src;
   }
 
   addToCart(id) {
-    this.productsService.addToCart({ id: id, quantity: this.quantity }).subscribe(cart => console.log(cart));
+    this.productsService.addToCart({ 
+        id: id, 
+        quantity: this.quantity, 
+        productId: this.product.id 
+      })
+      .subscribe(_=> {
+        console.log(_);
+      });
   }
 
 }

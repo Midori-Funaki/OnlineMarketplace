@@ -1,5 +1,5 @@
 .navbar {
-    padding: 0;
+    padding: 10px;
 }
 .navbar-brands {
     font-size: 35px;
@@ -7,12 +7,11 @@
     font-family: 'Lobster', cursive;
     color: white;
 }
-.logo-icon {
-    width: 150px;
-    margin-bottom: 20px;
-}
-.container-fluid {
-    padding: 0px;
+
+.nav-container {
+    display: grid;
+    grid-template-columns: 35% 30% 20% 15%;
+    width: 100%;
 }
 .btn.btn-secondary {
     font-size: 13px;
@@ -21,12 +20,15 @@
     color: white;
     outline: none;
     border-radius: 0;
+    margin-top: 6px;
 }
 .col-lg-2 {
     justify-content: flex-end;
 }
-#login-signup-btn {
+
+.login-signup-btn {
     padding-right: 5px;
+    float: right;
     text-align: right;
 }
 #signup-btn {
