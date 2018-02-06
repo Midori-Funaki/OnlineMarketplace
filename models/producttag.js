@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   ProductTag.associate = function(models) {
-    ProductTag.belongsTo(models.Product,{foreignKey: 'productId'});
-    ProductTag.hasMany(models.Tag,{foreignKey: 'tagId'});
+    // ProductTag.belongsTo(models.Product,{foreignKey: 'productId'});
+    // ProductTag.hasMany(models.Tag,{foreignKey: 'tagId'});
   }
   return ProductTag;
 };

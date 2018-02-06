@@ -62,12 +62,6 @@ export class SellComponent implements OnInit {
       this.titles = titles;
     })
     this.sellService.getColorSub().subscribe(colors => {
-      // colors.forEach((color) => {
-      //   if(this.colors.indexOf(color) < 0) {
-      //     this.colors.push(color)
-      //   }
-      // });
-      // this.colors.push("other");
       this.colors = colors;
       this.colors.push("other");
     })
