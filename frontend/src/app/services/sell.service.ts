@@ -69,6 +69,12 @@ export class SellService {
 
   getColor(title:string) {
     this.http.get<string[]>('/api/products/color/'+title).subscribe(result => {
+      let colors = [];
+      result.forEach((each) => {
+        if(colors.indexOf(each) === -1) {
+          colors.push(each);
+        }
+      })
       this.color$.next(result);
     });
   }

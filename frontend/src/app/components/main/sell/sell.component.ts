@@ -26,7 +26,7 @@ export class SellComponent implements OnInit {
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];//image array
-  sizes: string[] = [];
+  sizes: number[] = [20,20.5,21,21.5,22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30];
   colors: string[] = [];
   isOther: boolean = false;
   user: User;
@@ -62,11 +62,13 @@ export class SellComponent implements OnInit {
       this.titles = titles;
     })
     this.sellService.getColorSub().subscribe(colors => {
-      colors.forEach((color) => {
-        if(this.colors.indexOf(color) < 0) {
-          this.colors.push(color)
-        }
-      });
+      // colors.forEach((color) => {
+      //   if(this.colors.indexOf(color) < 0) {
+      //     this.colors.push(color)
+      //   }
+      // });
+      // this.colors.push("other");
+      this.colors = colors;
       this.colors.push("other");
     })
   }
