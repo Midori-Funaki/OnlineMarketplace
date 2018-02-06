@@ -11,7 +11,7 @@ module.exports = {
         productId: Math.floor(Math.random() * 30) + 22
       })
     }
-    return Favourite.bulkCreate(favourite);
+    // return Favourite.bulkCreate(favourite);
   },
 
   down: (queryInterface, Sequelize) => {
