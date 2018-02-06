@@ -9,18 +9,18 @@ p {
     padding-left: 20px;
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 .each-product{
-    margin: 0 auto 0 0;
+    margin: 0px;
 }
 .card{
     width: 210px;
-    height: 315px;
+    height: 280px;
     margin: 5px;
     background-color: white;
     border: 5px solid white;
     border-radius: 0;
-    width: 210px;
 }
 .card-img-top {
     position: relative;

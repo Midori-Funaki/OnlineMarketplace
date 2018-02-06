@@ -42,9 +42,10 @@ class UserService {
       email: userInfo.email,
       shippingAddress: userInfo.shippingAddress,
       billingAddress: userInfo.billingAddress
-    }).then(() => {
-      console.log('Succeeded to register');
-      return 'Succeeded to register';
+    }).then((user) => {
+      // console.log(user);
+      // console.log('Succeeded to register');
+      return user;
     }).catch(err => {
       console.log(err);
       return err;

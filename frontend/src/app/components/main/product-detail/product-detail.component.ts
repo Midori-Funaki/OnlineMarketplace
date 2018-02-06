@@ -21,11 +21,23 @@ export class ProductDetailComponent implements OnInit {
 
   product: Product;
   imgsrc: string;
+  isLoggedIn: boolean;
+  notaddedFav: boolean = true;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(param => {
       this.getProduct(param['id']);
-    })
+      this.productsService.getFavId(param['id']).subscribe((res)=>{
+        if (res) {
+          this.notaddedFav = false;
+        }
+      });
+    });
+
+    this.authService.isLoggedInNow().subscribe((status)=>{
+      this.isLoggedIn = status;
+    });
+    this.authService.loggedIn();
   }
 
   getProduct(id) {
@@ -50,6 +62,12 @@ export class ProductDetailComponent implements OnInit {
       .subscribe(_=> {
         console.log(_);
       });
+  }
+
+  addToFav(productId) {
+    this.productsService.addToFav(productId).subscribe((res)=>{
+      this.notaddedFav = false;
+    })
   }
 
 }

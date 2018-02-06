@@ -12,6 +12,7 @@ import { PasswordValidation } from '../../../shared/password-validation';
 export class SignupComponent implements OnInit {
 
   localSignup: FormGroup;
+  signupError: boolean = false;
 
   constructor(private formBuilder: FormBuilder, 
               private authService: AuthService, 
@@ -25,14 +26,15 @@ export class SignupComponent implements OnInit {
       password: ["", Validators.required],
       passwordCheck: ["", [Validators.required]]
     }, { validator: PasswordValidation.MatchPassword });
+    this.authService.signupErrorStatus().subscribe((signupError)=>{
+      this.signupError = signupError;
+    })
   }
 
   onSubmit(e:any){
     e.preventDefault();
-    console.log(this.localSignup.value);
     if (this.localSignup.valid && this.localSignup.dirty){
-      console.log("Yeah submitting form!");
-      this.router.navigate(['/']);
+      this.authService.signup(this.localSignup.value);
     }
   }
 

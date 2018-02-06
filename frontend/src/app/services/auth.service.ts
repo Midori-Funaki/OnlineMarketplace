@@ -3,17 +3,20 @@ import { Router } from "@angular/router";
 import { Http } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { NotificationService } from './notification.service';
+declare var $:any
 
 @Injectable()
 export class AuthService {
     token: string = null;
     isLoggedIn: boolean = false;
     isLoggedIn_sub: Subject<boolean>;
+    signupError_subj: Subject<boolean>;
 
     constructor(private router: Router, private http: Http, 
                 private notificationService: NotificationService){
 
         this.isLoggedIn_sub = new Subject<boolean>();
+        this.signupError_subj = new Subject<boolean>();
         try{
             this.token = localStorage.getItem('myToken');
         } catch (err) {
@@ -58,7 +61,7 @@ export class AuthService {
             this.isLoggedIn = true;
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
-            this.router.navigate(['']);
+            this.router.navigate(['/']);
             this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your chat and other function.');
         },(err)=>{
             this.notificationService.sendErrorMessage('LogIn Failed!', 'Please check your google settings.');
@@ -75,6 +78,10 @@ export class AuthService {
         return this.isLoggedIn_sub.asObservable();
     }
 
+    signupErrorStatus(){
+        return this.signupError_subj.asObservable();
+    }
+
     logOut(){
         this.token = null;
         this.isLoggedIn = false;
@@ -82,5 +89,22 @@ export class AuthService {
         localStorage.removeItem('myToken');
         this.router.navigate(['/']);
         this.notificationService.sendSuccessMessage('Logout Successful!', 'Please do come back again.');
+    }
+
+    signup(userInfo){
+        // console.log(userInfo);
+        return this.http.post('/api/users/signup',{user:userInfo}).subscribe((res)=>{
+            this.token = res.json().token;
+            this.isLoggedIn = true;
+            this.isLoggedIn_sub.next(this.isLoggedIn);
+            localStorage.setItem('myToken',this.token);
+            $('#SignupForm').modal('hide');
+            this.notificationService.sendSuccessMessage('Registration Successful!', 'Welcome to use this shopping platform.');
+        }, (err)=>{
+            this.signupError_subj.next(true);
+            setTimeout(()=>{
+                this.signupError_subj.next(false);
+            }, 3000);
+        })
     }
 }
