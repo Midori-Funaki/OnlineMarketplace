@@ -82,6 +82,8 @@ class ProductService {
       })
   }
 
+  search(){}
+
   post(productInfo, user) {
     // console.log(productInfo);
     // let category;

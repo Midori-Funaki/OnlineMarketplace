@@ -13,12 +13,20 @@ export class ProductsComponent implements OnInit {
 
   searchKey: string;
   
-  constructor(private route: ActivatedRoute,private router: Router) { }
+  constructor(private route: ActivatedRoute,private router: Router, private productService: ProductsService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params:Params)=>{
       this.searchKey = params['searchkey'];
+      console.log('searching with ',this.searchKey);
+      this.searchItems(this.searchKey);
     });
+  }
+
+  searchItems(keywords){
+    this.productService.getSearchedProduct(this.searchKey).subscribe((result) => {
+      console.log(result);
+    })
   }
 
 }

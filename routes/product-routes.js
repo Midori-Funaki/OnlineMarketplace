@@ -12,6 +12,7 @@ class ProductRoutes{
     let router = express.Router();
     router.get('/color/:title', this.getColor.bind(this));
     router.get('/sell', auth.authenticate(), this.getSell.bind(this));
+    router.get('/search', this.search.bind(this));
     router.get('/:id', this.get.bind(this));
     router.delete('/:id',auth.authenticate(), this.delete.bind(this));
     router.put('/:id',auth.authenticate(), this.update.bind(this));
@@ -21,6 +22,7 @@ class ProductRoutes{
   }
 
   getAll(req,res){
+    console.log('Search REQ BODY',req.body)
     return this.productService.getAll()
       .then((products)=>res.json(products))
       .catch((err)=>res.status(500).json(err))
@@ -43,6 +45,13 @@ class ProductRoutes{
       return this.productService.get(req.params.id)
         .then((product) => res.json(product))
         .catch((err)=> res.status(500).json(err))
+  }
+
+  search(req, res) { //req.params =
+    console.log('SEARCH PARAMS',req.query)
+    // return this.productService.search()
+    //   .then((product) => res.json(product))
+    //   .catch((err)=> res.status(500).json(err))
   }
 
   post(req,res){
