@@ -4,6 +4,9 @@ const ProductPhoto = models.ProductPhoto;
 const Category = models.Category;
 const Transaction = models.Transaction;
 const User = models.user;
+const Op = require('sequelize').Op;
+const Tag = models.Tag;
+const Sequelize = require('sequelize');
 
 class ProductService {
 
@@ -82,7 +85,40 @@ class ProductService {
       })
   }
 
-  search(){}
+  search(words){
+    let wordArr =  words.query.split(' ');
+    // let products = [];
+    // for(let i=0; i<wordArr; i++){
+    //   Product.findAll({
+    //     include: [{
+    //       model: Tag,
+    //     }],
+    //   })
+    // }
+    let filter = [];
+    for (let word of wordArr) {
+      filter.push({keyword: word});
+    }
+    // console.log("filter: ",filter);
+    return Product.findAll({
+      // attributes:{
+      //   include: [[
+      //     Sequelize.fn("COUNT", Sequelize.col("Tags")), "tagCount"
+      //   ]]
+      // },
+      // attributes:[
+      //   "id", [Sequelize.fn("COUNT", Sequelize.col("Tags.id")), "tagCount"]
+      // ],
+      include: [{
+        attributes: [],
+        model: Tag,
+        where: {
+          [Op.or] : filter
+        }
+      }],
+      // group: ["Product.id"]
+    })
+  }
 
   post(productInfo, user) {
     // let category;

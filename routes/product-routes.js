@@ -49,9 +49,9 @@ class ProductRoutes{
 
   search(req, res) { //req.params =
     console.log('SEARCH PARAMS',req.query)
-    // return this.productService.search()
-    //   .then((product) => res.json(product))
-    //   .catch((err)=> res.status(500).json(err))
+    return this.productService.search(req.query)
+      .then((product) => res.json(product))
+      .catch((err)=> res.status(500).json(err))
   }
 
   post(req,res){
