@@ -1,6 +1,12 @@
 <form [formGroup]="checkoutForm" class="form-checkout" (ngSubmit)="onSubmit()" *ngIf="user" #myform="ngForm">
   <div class="billing-info pt-3" formGroupName="billInfo">
-    <h3>Billing Information</h3>
+    <div class="d-flex">
+      <h3>Billing Information</h3>
+      <a href="https://stripe.com/hk" class="stripe-logo ml-auto" target="_blank">
+        <img src="/assets/img/powered_by_stripe.png" alt="stripe">
+      </a>
+    </div>
+
     <div class="form-group">
       <label class="mr-2">Name:</label>
       <input class="form-control mb-2" formControlName="firstName" placeholder="First name" name="firstName">
@@ -17,7 +23,7 @@
     </div>
     <div class="form-group form-contact">
       <label>Contact Number:</label>
-      <input type="tel" class="form-control form-control-short" name="contact"  formControlName="contact" placeholder="Contact Number">
+      <input type="tel" class="form-control form-control-short" name="contact" formControlName="contact" placeholder="Contact Number">
       <small class="form-text text-danger" *ngIf="checkoutForm.controls['billInfo'].controls['contact'].hasError('required') && myform.submitted">This field is required</small>
     </div>
   </div>
