@@ -26,7 +26,7 @@ export class SellComponent implements OnInit {
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];//image array
-  sizes: string[] = [];
+  sizes: number[] = [20,20.5,21];
   colors: string[] = [];
   isOther: boolean = false;
   user: User;

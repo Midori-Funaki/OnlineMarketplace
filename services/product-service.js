@@ -83,6 +83,7 @@ class ProductService {
   }
 
   post(productInfo, user) {
+    // console.log(productInfo);
     // let category;
     return Category.findOne({
       where: {
@@ -102,18 +103,21 @@ class ProductService {
         sellerId: user.id,
         // buyerId: productInfo.INTEGER,
         categoryId: category.id,
-        brand: productInfo.brand,
-        photos: Array(productInfo.photos.map(photo=> {
-          return photo.url;
-        }))
-      })
+        brand: productInfo.brand
+      })      
     })
-    .then(() => {
-      console.log('Product posted');
-      // console.log('RESULT AFTER PRO REGIS ',result);
-      return 'Product posted';
-    }).catch(err => {
-      console.log(err)
+    .then(product => {
+      for (let photo of productInfo.photos) {
+        ProductPhoto.create({
+          url: photo.url,
+          productId: product.id
+        }).then(photo => {
+          console.log(photo);
+        })
+      }
+      return product;
+    })
+    .catch((err) => {
       return err;
     })
   }
