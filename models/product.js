@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     Product.hasMany(models.Cart, {foreignKey:'productId', sourceKey: 'id'});
     Product.hasMany(models.ProductPhoto, {foreignKey: 'productId', sourceKey: 'id'});
     Product.hasOne(models.Transaction, {foreignKey:'productId', sourceKey:'id'});
-    Product.hasMany(models.ProductTag,{foreignKey: 'productId'})
+    Product.belongsToMany(models.Tag,{through: 'ProductTag', foreignKey: 'productId'})
     Product.belongsTo(models.User,{foreignKey:'sellerId',targetKey:'id'});
     Product.hasMany(models.Favourite, {foreignKey: 'productId'});
   }

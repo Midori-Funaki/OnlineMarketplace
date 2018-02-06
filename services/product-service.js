@@ -4,6 +4,9 @@ const ProductPhoto = models.ProductPhoto;
 const Category = models.Category;
 const Transaction = models.Transaction;
 const User = models.user;
+const Op = require('sequelize').Op;
+const Tag = models.Tag;
+const Sequelize = require('sequelize');
 
 class ProductService {
 
@@ -82,7 +85,43 @@ class ProductService {
       })
   }
 
+  search(words){
+    let wordArr =  words.query.split(' ');
+    // let products = [];
+    // for(let i=0; i<wordArr; i++){
+    //   Product.findAll({
+    //     include: [{
+    //       model: Tag,
+    //     }],
+    //   })
+    // }
+    let filter = [];
+    for (let word of wordArr) {
+      filter.push({keyword: word});
+    }
+    // console.log("filter: ",filter);
+    return Product.findAll({
+      // attributes:{
+      //   include: [[
+      //     Sequelize.fn("COUNT", Sequelize.col("Tags")), "tagCount"
+      //   ]]
+      // },
+      // attributes:[
+      //   "id", [Sequelize.fn("COUNT", Sequelize.col("Tags.id")), "tagCount"]
+      // ],
+      include: [{
+        attributes: [],
+        model: Tag,
+        where: {
+          [Op.or] : filter
+        }
+      }],
+      // group: ["Product.id"]
+    })
+  }
+
   post(productInfo, user) {
+    // console.log(productInfo);
     // let category;
     return Category.findOne({
       where: {
@@ -102,18 +141,21 @@ class ProductService {
         sellerId: user.id,
         // buyerId: productInfo.INTEGER,
         categoryId: category.id,
-        brand: productInfo.brand,
-        photos: Array(productInfo.photos.map(photo=> {
-          return photo.url;
-        }))
-      })
+        brand: productInfo.brand
+      })      
     })
-    .then(() => {
-      console.log('Product posted');
-      // console.log('RESULT AFTER PRO REGIS ',result);
-      return 'Product posted';
-    }).catch(err => {
-      console.log(err)
+    .then(product => {
+      for (let photo of productInfo.photos) {
+        ProductPhoto.create({
+          url: photo.url,
+          productId: product.id
+        }).then(photo => {
+          console.log(photo);
+        })
+      }
+      return product;
+    })
+    .catch((err) => {
       return err;
     })
   }

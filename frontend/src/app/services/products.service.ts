@@ -27,8 +27,13 @@ export class ProductsService {
     return this.http.get<string[]>('/api/products/');
   }
 
-  getSearchedProduuct(searchtype: string, searchkey: string): Observable<any> {
-    return this.http.get<any>('/api/products/');
+  // getSearchedProduct(searchtype: string, searchkey: string): Observable<any> {
+  getSearchedProduct(searchkey: string): Observable<any> {
+    // let headers = new HttpHeaders().set('Content-Type', 'text/xml');
+    // headers.append('words',searchkey);
+    console.log('searchkey @ products.service',searchkey);
+    return this.http.get<any>('/api/products/search?query=' + searchkey)
+    
   }
 
   getProduct(id: number): Observable<any> {
