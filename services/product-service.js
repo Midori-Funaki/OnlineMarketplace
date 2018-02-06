@@ -82,6 +82,8 @@ class ProductService {
       })
   }
 
+  search(){}
+
   post(productInfo, user) {
     // let category;
     return Category.findOne({
