@@ -17,7 +17,7 @@ class transactionService {
       },
       include: [{
         model: Product
-      },{
+      }, {
         model: ProductPhoto
       }]
     }).then((transactions) => {
@@ -49,11 +49,7 @@ class transactionService {
           .then(product => {
             console.log("Product Found", product)
             product.quantity -= transaction.quantity;
-            if (product.quantity <= 0) {
-              return product.destroy();
-            } else {
-              return product.save();
-            }
+            return product.save();
           })
       })
       .then(_ => {

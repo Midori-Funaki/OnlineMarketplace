@@ -1,21 +1,15 @@
 <div class="container-fluid p-5" *ngIf="product">
   <div class="row">
-    <div class="col-sm-1 px-2">
+    <div class="col-sm-1 px-2" *ngIf="product.ProductPhotos>1">
       <div>
         <button class="img-control" *ngFor="let photo of product.ProductPhotos">
           <img class="thumbnail" [src]="photo.url" (click)="changeImage($event)">
         </button>
-        <!-- <button class="img-control">
-          <img class="thumbnail" src="https://picsum.photos/500/500?image=2" (click)="changeImage($event)">
-        </button>
-        <button class="img-control">
-          <img class="thumbnail" src="https://picsum.photos/500/500?image=3" (click)="changeImage($event)">
-        </button> -->
       </div>
     </div>
     <div class="col-sm-5 px-2">
       <div class="display">
-        <img [src]="product.ProductPhotos[0].url" alt="">
+        <img [src]="imgsrc" alt="">
       </div>
     </div>
     <div class="col-sm-6">
@@ -25,26 +19,23 @@
       </p>
       <div class="price">Current Price: {{ product.curentBidPrice | currency}}</div>
       <div class="options">
-        <div class="my-3">
+        <div class="my-3 form-group">
           <h5>Size:</h5>
-          <div class="size-button">
+          <div class="size-button form-group">
             <button class="btn btn-outline-dark" type="button">{{product.size}}</button>
-            <!-- <button class="btn btn-outline-dark" type="button">M</button>
-                      <button class="btn btn-outline-dark" type="button">L</button>
-                      <button class="btn btn-outline-dark" type="button">XL</button> -->
           </div>
         </div>
-        <div class="color-button my-3">
+        <div class="color-button my-3 form-group">
           <h5>Color:</h5>
           <button class="btn btn-outline-dark" type="button">{{product.color}}</button>
           <!-- <button class="btn btn-danger" type="button">Red</button>
                   <button class="btn btn-warning" type="button">Yellow</button> -->
         </div>
-        <div class="quantity-select">
+        <div class="quantity-select form-group">
           <h5>Quantity:</h5>
-          <input class="form-control form-number" type="number" name="quantity" [(ngModel)]="quantity">
+          <input class="form-control form-number form-control" type="number" name="quantity" [(ngModel)]="quantity" min="1" [max]="product.quantity">
         </div>
-        <div class="add-item my-5">
+        <div class="add-item my-5 form-group">
           <div class="btn-group">
             <button class="btn btn-primary btn-lg" type="button" (click)="addToCart(product.id)">Add to cart</button>
           </div>

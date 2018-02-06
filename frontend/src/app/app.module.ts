@@ -55,8 +55,6 @@ import { StripeService } from './services/stripe.service';
 import { StripeComponent } from './components/stripe/stripe.component';
 import { SearchbarComponent } from './components/top/searchbar/searchbar.component';
 import { ProductComponent } from './components/main/product/product.component';
-import { PurchaseComponent } from './components/main/transactions/purchase/purchase.component';
-import { SoldComponent } from './components/main/transactions/sold/sold.component';
 import { ConfirmComponent } from './components/checkout/confirm/confirm.component';
 
 @NgModule({
@@ -81,8 +79,6 @@ import { ConfirmComponent } from './components/checkout/confirm/confirm.componen
     StripeComponent,
     SearchbarComponent,
     ProductComponent,
-    PurchaseComponent,
-    SoldComponent,
     ConfirmComponent
   ],
   imports: [
