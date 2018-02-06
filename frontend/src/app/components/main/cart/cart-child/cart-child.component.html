@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="items && items.length > 0; else empty">
   <h1 class="compo-title">Shopping Cart</h1>
 
   <div class="shopping-cart">
@@ -31,3 +31,14 @@
     <!-- <button class="checkout mr-5" (click)="goToCheckout()">Checkout</button> -->
   </div>
 </div>
+
+<ng-template #empty>
+  <div class="container mt-5">
+    <div class="text-center">
+      <h2>
+        Your cart doesn't have any items.
+      </h2>
+      <button class="btn back-btn btn-lg" routerLink='/'>back</button>
+    </div>
+  </div>
+</ng-template>
