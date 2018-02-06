@@ -5,114 +5,24 @@ const ProductTag = models.ProductTag;
 const Tag = models.Tag;
 const async = require('async');
 
-const productArr = [{
-    "id": 21,
-    "title": "One Two Three Four",
-    "description": "This is the first product. Yahoo.",
-    "brand": "adidas",
-    "size": 8,
-    "color": "red",
-    "condition": "used",
-    "curentBidPrice": 705,
-    "currentAskPrice": 840,
-    "quantity": 4,
-    "sellerId": 3,
-    "buyerId": null,
-    "categoryId": 1,
-    "createdAt": "2018-02-01T18:09:36.765Z",
-    "updatedAt": "2018-02-01T18:09:36.765Z",
-    "Category": {
-        "id": 1,
-        "title": "Sneakers",
-        "createdAt": "2018-02-01T18:09:36.899Z",
-        "updatedAt": "2018-02-01T18:09:36.899Z"
-    },
-    "ProductPhotos": [
-        {
-            "id": 61,
-            "url": "https://stockx.imgix.net/Adidas-NMD-Racer-Juice-HK.png",
-            "productId": 21,
-            "createdAt": "2018-02-01T18:09:37.027Z",
-            "updatedAt": "2018-02-01T18:09:37.027Z"
-        },
-        {
-            "id": 62,
-            "url": "http://lorempixel.com/640/480/fashion",
-            "productId": 21,
-            "createdAt": "2018-02-01T18:09:37.027Z",
-            "updatedAt": "2018-02-01T18:09:37.027Z"
-        },
-        {
-            "id": 63,
-            "url": "http://lorempixel.com/640/480/fashion",
-            "productId": 21,
-            "createdAt": "2018-02-01T18:09:37.027Z",
-            "updatedAt": "2018-02-01T18:09:37.027Z"
-        }
-    ]
-},{
-    "id": 13,
-    "title": "one two three four five",
-    "description": "This is the second item. Google",
-    "brand": "adidaaas",
-    "size": 5,
-    "color": "lavender",
-    "condition": "new",
-    "curentBidPrice": 369,
-    "currentAskPrice": 639,
-    "quantity": 4,
-    "sellerId": 1,
-    "buyerId": null,
-    "categoryId": 2,
-    "createdAt": "2018-02-01T18:09:36.765Z",
-    "updatedAt": "2018-02-01T18:09:36.765Z",
-    "Category": {
-        "id": 2,
-        "title": "Handbags",
-        "createdAt": "2018-02-01T18:09:36.899Z",
-        "updatedAt": "2018-02-01T18:09:36.899Z"
-    },
-    "ProductPhotos": [
-        {
-            "id": 264,
-            "url": "https://stockx.imgix.net/Adidas-Yeezy-Boost-350-V2-Core-Black-Red-2017.png",
-            "productId": 13,
-            "createdAt": "2018-02-03T10:09:52.916Z",
-            "updatedAt": "2018-02-03T10:09:52.916Z"
-        },
-        {
-            "id": 265,
-            "url": "http://lorempixel.com/640/480/fashion",
-            "productId": 13,
-            "createdAt": "2018-02-03T10:09:52.916Z",
-            "updatedAt": "2018-02-03T10:09:52.916Z"
-        },
-        {
-            "id": 266,
-            "url": "http://lorempixel.com/640/480/fashion",
-            "productId": 13,
-            "createdAt": "2018-02-03T10:09:52.916Z",
-            "updatedAt": "2018-02-03T10:09:52.916Z"
-        },
-        {
-            "id": 267,
-            "url": "http://res.cloudinary.com/dealshubspace/image/upload/v1517652582/dealshub/ojyszytknxdeub9cuajp.jpg",
-            "productId": 13,
-            "createdAt": "2018-02-03T10:09:52.920Z",
-            "updatedAt": "2018-02-03T10:09:52.920Z"
-        }
-    ]
-}];
+let productArr = [];
 
-
-// productService.get()
-//     .then((products) => {
-//         // productArr = products;
-//         registerTags();
-//     })
-//     .catch((err) => {
-//         console.log(err)
-//     });
+function getProductFromDb() {
+    console.log('getProductFromDb');
+    productService.getAll()
+    .then((products) => {
+        console.log('GOT ALL PRODUCTS',products[0]);
+        productArr = products;
+        console.log('products length ', products.length);
+        console.log('productarr length ', productArr.length);
+        setTimeout(function(){
+            registerTagByEach();
+        },5000)
+    })
+    .catch((err) => {
+        console.log(err)
+    });
+}
 
 //create a queue object with concurrency 1
 let q = async.queue(function(keyword, callback) {
@@ -126,6 +36,7 @@ q.drain = function() {
 };
 
 function registerTagByEach(){
+    console.log('product arr length ',productArr.length);
     for(let i=0;i<productArr.length; i++) {
         registerTags(productArr[i]);
     }
@@ -143,7 +54,7 @@ function registerTags(eachProduct){
         wordsSet.add(word);
     })
     eachProduct.description.replace(/\.(?=(?:\s*[A-Z])|$)/g,' ').toLowerCase().split(' ').forEach((word) => {
-        if (word.length > 1) {
+        if (word.length > 1 && word !== "is" && word !== "this" && word !== "these") {
             wordsSet.add(word);
         }
     })
@@ -199,7 +110,8 @@ function registerTagId(tag, product, callback){
     })
 }
 
-// module.exports.registerTagByEach = registerTagByEach;
-// module.exports.registerTags = registerTags;
-// module.exports.registerInTable = registerInTable;
-module.exports.registerTagByEach = registerTagByEach;
+module.exports.getProductFromDb = getProductFromDb;
+
+//CODE FOR APP.JS
+// var tagCreator = require('./tag-creator'); 
+// tagCreator.getProductFromDb();

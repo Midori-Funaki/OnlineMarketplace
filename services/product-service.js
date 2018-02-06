@@ -12,6 +12,8 @@ class ProductService {
     return Product.findAll({
       include: [{
         model: ProductPhoto
+      },{
+        model: Category
       }]
     })
       .then(products => {
@@ -106,6 +108,7 @@ class ProductService {
     })
     .then(() => {
       console.log('Product posted');
+      // console.log('RESULT AFTER PRO REGIS ',result);
       return 'Product posted';
     }).catch(err => {
       console.log(err)
