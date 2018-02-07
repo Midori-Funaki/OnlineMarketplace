@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Cart,{foreignKey:'userId', sourceKey: 'id'});
     User.hasMany(models.Transaction,{foreignKey:'buyerId',sourceKey:'id'});
     User.hasMany(models.Product,{foreignKey:'sellerId',sourceKey:'id'});
-    //User.hasMany(models.FavItem,{foreignKey:'userId',sourceKey:'id'});
+    User.hasMany(models.Favourite,{foreignKey:'userId',sourceKey:'id'});
   }
   
   return User;

@@ -148,7 +148,7 @@ label {
   float: right;
   clear: both;
   width: 100%;
-  margin-bottom: 10px;
+  margin: 10px 0px;
 }
 .totals .totals-item label {
   float: left;

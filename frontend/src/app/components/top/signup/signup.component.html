@@ -6,6 +6,9 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <div *ngIf="signupError" class="alert alert-danger">
+            The email already exist
+        </div>
         <form [formGroup]="localSignup" (ngSubmit)="onSubmit($event)">
             <div class="modal-body">
                 <div class="form-group">
@@ -14,10 +17,10 @@
                         formControlName="lastname"/>
 
                     <div *ngIf="localSignup.controls['lastname'].hasError('required') && localSignup.controls['lastname'].dirty" class="alert alert-danger">
-                        Password should be no less than 1 letter
+                        Last Name should be no less than 1 letter
                     </div>
                     <div *ngIf="localSignup.controls['lastname'].hasError('maxlength') && localSignup.controls['lastname'].dirty" class="alert alert-danger">
-                        Password should be no more than 25 letters
+                        Last Name should be no more than 25 letters
                     </div>
                 </div>
                 <div class="form-group">
@@ -26,10 +29,10 @@
                         formControlName="firstname"/>
 
                     <div *ngIf="localSignup.controls['firstname'].hasError('required') && localSignup.controls['firstname'].dirty" class="alert alert-danger">
-                        Password should be no less than 1 letter
+                        First Name should be no less than 1 letter
                     </div>
                     <div *ngIf="localSignup.controls['firstname'].hasError('maxlength') && localSignup.controls['firstname'].dirty" class="alert alert-danger">
-                        Password should be no more than 25 letters
+                        First NamePassword should be no more than 25 letters
                     </div>
                 </div>
                 <div class="form-group">

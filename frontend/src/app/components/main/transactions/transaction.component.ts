@@ -11,9 +11,9 @@ import { User } from '../../../models/User';
   styleUrls: ['./transaction.component.css']
 })
 export class TransactionComponent implements OnInit {
-  transactions: Transaction[];
-  purchases: Transaction[];
-  solds: Transaction[];
+  transactions: Transaction[] = [];
+  purchases: Transaction[] = [];
+  solds: Transaction[] =[];
   user: User;
 
   constructor(

@@ -18,8 +18,8 @@ export class ProductsService {
     })
   }
   constructor(
-    private router:Router, 
-    private http:HttpClient,
+    private router: Router,
+    private http: HttpClient,
     private authService: AuthService
   ) { }
 
@@ -39,19 +39,46 @@ export class ProductsService {
   getProduct(id: number): Observable<any> {
     return this.http.get<any>('/api/products/' + id);
   }
-  
+
   getSellProducts(): Observable<string[]> {
-    return this.http.get<string[]>('/api/products/sell',{
+    return this.http.get<string[]>('/api/products/sell', {
       headers: new HttpHeaders().set(
         'Authorization', 'Bearer ' + this.authService.token)
     });
   }
 
-  addToCart(obj: {id: number, quantity: number, productId:number}): Observable<Cart> {
-    return this.http.post<Cart>('/api/carts/', { 
-      id: obj.id, 
+  addToCart(obj: { id: number, quantity: number, productId: number }): Observable<Cart> {
+    return this.http.post<Cart>('/api/carts/', {
+      id: obj.id,
       quantity: obj.quantity,
       productId: obj.productId
-    }, this.httpOptions );
+    }, this.httpOptions);
+  }
+
+  addToFav(productId: number) {
+    return this.http.post<string>('/api/favourite/', {
+      productId: productId
+    }, this.httpOptions);
+  }
+
+  getFav() {
+    return this.http.get<Object[]>('/api/favourite', {
+      headers: new HttpHeaders().set(
+        'Authorization', 'Bearer ' + this.authService.token)
+    });
+  }
+
+  getFavId(productId) {
+    return this.http.get<Object[]>(`/api/favourite/${productId}`, {
+      headers: new HttpHeaders().set(
+        'Authorization', 'Bearer ' + this.authService.token)
+    });
+  }
+
+  removeFav(favouriteId) {
+    return this.http.delete<Object[]>(`/api/favourite/${favouriteId}`, {
+      headers: new HttpHeaders().set(
+        'Authorization', 'Bearer ' + this.authService.token)
+    });
   }
 }

@@ -11,6 +11,7 @@ module.exports = function(){
         secretOrKey: config.jwtSecret,
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken('JWT')
     },(payload,done)=>{
+        console.log('payload is ', payload.id);
         User.findOne({
             where: {
                 id: payload.id

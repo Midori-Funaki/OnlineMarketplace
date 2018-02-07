@@ -74,14 +74,12 @@ class CartService {
     })
   }
 
-  delete(userId, productId) {
-    return Cart.destroy({
-      where: {
-        userId: userId,
-        productId: productId,
-      }
-    }).then(() => {
-      return this.get(user);
+  delete(cartId) {
+    // console.log("cart");
+    return Cart.findById(cartId)
+      .then((cart) => {
+        console.log(cart);
+      return cart.destroy();
     }).catch((err) => {
       return err;
     })

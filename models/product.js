@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     Product.hasOne(models.Transaction, {foreignKey:'productId', sourceKey:'id'});
     Product.belongsToMany(models.Tag,{through: 'ProductTag', foreignKey: 'productId'})
     Product.belongsTo(models.User,{foreignKey:'sellerId',targetKey:'id'});
+    Product.hasMany(models.Favourite, {foreignKey: 'productId'});
   }
   return Product;
 };

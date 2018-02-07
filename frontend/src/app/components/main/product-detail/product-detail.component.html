@@ -35,9 +35,12 @@
           <h5>Quantity:</h5>
           <input class="form-control form-number form-control" type="number" name="quantity" [(ngModel)]="quantity" min="1" [max]="product.quantity">
         </div>
-        <div class="add-item my-5 form-group">
+        <div *ngIf="isLoggedIn" class="add-item my-5 form-group">
           <div class="btn-group">
             <button class="btn btn-primary btn-lg" type="button" (click)="addToCart(product.id)">Add to cart</button>
+          </div>
+          <div *ngIf="notaddedFav" class="btn-group">
+            <button class="btn btn-primary btn-lg" type="button" (click)="addToFav(product.id)">Add to Favorite</button>
           </div>
         </div>
       </div>

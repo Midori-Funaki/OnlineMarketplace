@@ -51,6 +51,7 @@ class LoginRoutes {
             //check if that email exist in the database
             this.userService.auth(data.data.email).then((user) => {
                 if (user) {
+                  console.log(user);
                   var payload = {
                     id: user.id
                   };
@@ -68,9 +69,9 @@ class LoginRoutes {
                     email: data.data.email,
                     shippingAddress: '',
                     billingAddress: ''
-                  }).then(()=>{
+                  }).then((user)=>{
                     var payload = {
-                      id: data.data.id
+                      id: user.dataValues.id
                     };
                     var token = jwt.encode(payload, config.jwtSecret);
                     res.json({
@@ -108,9 +109,44 @@ class LoginRoutes {
               id: accessToken
             };
             console.log(data.data);
-            var token = jwt.encode(payload, config.jwtSecret);
-            res.json({
-              token: token
+            /*
+              data.data info used:
+                user_id
+                email
+            */
+
+            // check if the email exist or not
+            this.userService.auth(data.data.email).then((user) => {
+              if (user) {
+                var payload = {
+                  id: user.id
+                };
+                var token = jwt.encode(payload, config.jwtSecret);
+                res.json({
+                  token: token
+                });
+              } else {
+                //create new user if not available
+                this.userService.register({
+                  userId: data.data.user_id,
+                  firstName: '',
+                  lastName: '',
+                  password: '',
+                  email: data.data.email,
+                  shippingAddress: '',
+                  billingAddress: ''
+                }).then((user)=>{
+                  var payload = {
+                    id: user.dataValues.id
+                  };
+                  var token = jwt.encode(payload, config.jwtSecret);
+                  res.json({
+                    token: token
+                  });
+                }).catch((err)=>{
+                  console.log(err);
+                })
+              }
             });
           } else {
             res.sendStatus(401);

@@ -36,3 +36,7 @@
     padding-right: 28px;
     padding-left: 28px;
 }
+
+.alert.alert-danger{
+    margin-top: 10px;
+}
