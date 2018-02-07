@@ -56,10 +56,19 @@ h1 {
   width: 65%;
   margin: auto;
 }
+select{
+  border: 1px solid #bcbcbc;
+  border-radius: 0;
+  -webkit-appearance: none;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: transparent;
+}
 .box {
   display: block;
   min-width: 300px;
-  height: 200px;
+  height: 180px;
   margin: 10px;
   background-color: white;
   border-radius: 0px;
@@ -145,7 +154,7 @@ h1 {
   color: lightgray;
 }
 .js--image-preview {
-  height: 125px;
+  height: 105px;
   width: 100%;
   position: relative;
   overflow: hidden;
