@@ -4,8 +4,8 @@
       <app-sidebar></app-sidebar>
     </div>
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
-      <app-product
-      [searchKey]="searchKey"
+      <app-product *ngIf="products"
+      [searchKey]="searchKey" [searchedProducts]="products"
       ></app-product>
     </div><!-- col-xs-10 -->
   </div>

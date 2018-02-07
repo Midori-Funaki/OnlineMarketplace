@@ -2,6 +2,7 @@ const models = require('./../models');
 const Product = models.Product;
 const ProductPhoto = models.ProductPhoto;
 const Category = models.Category;
+const ProductTag = models.ProductTag;
 const Transaction = models.Transaction;
 const User = models.user;
 const Op = require('sequelize').Op;
@@ -97,26 +98,64 @@ class ProductService {
     // }
     let filter = [];
     for (let word of wordArr) {
-      filter.push({keyword: word});
+      filter.push({'keyword': word});
     }
-    // console.log("filter: ",filter);
+    console.log("filter: ",filter);
+
+    /*
+    select pt."productId" as productId, count(pt."tagId") as tagCount
+    from "ProductTags" as pt
+    inner join "Tags" as t on pt."tagId" = t.Id
+    where t.keyword in ('adidas', 'black')
+    group by pt."productId"
+    order by tagCount desc, productId desc;
+    */
+
     return Product.findAll({
-      // attributes:{
-      //   include: [[
-      //     Sequelize.fn("COUNT", Sequelize.col("Tags")), "tagCount"
-      //   ]]
-      // },
-      // attributes:[
-      //   "id", [Sequelize.fn("COUNT", Sequelize.col("Tags.id")), "tagCount"]
-      // ],
+
+      /*
+      attributes:[
+        'id'// , Sequelize.fn("COUNT", Sequelize.col("id"),"count")
+      ],
       include: [{
-        attributes: [],
         model: Tag,
+        attributes: { 
+          include: ['id']
+        },
+        through: {attributes:[]},
+        nested: false,
+        // required: true,
         where: {
           [Op.or] : filter
         }
       }],
-      // group: ["Product.id"]
+      //group: ['Product.id'],
+      raw: true,
+      limit: 10
+    }).then((result) => {
+      let productTags = {};
+      result.map((data) => {
+        productTags[data.id] = productTags[data.id] + 1 || 1 
+      })
+      console.log(productTags);
+      return result
+    }).catch((err) => {
+      return err
+    */
+
+    include: [{
+      model:Tag,
+      where: {
+        [Op.or] : filter
+      }
+    }, {
+      model: ProductPhoto
+    }]
+    }).then((result) => {
+      return result
+    }).catch((err) => {
+      return err
+
     })
   }
 

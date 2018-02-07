@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit {
   loadMore: boolean = false;
 
   @Input() searchKey: string;
+  @Input() searchedProducts: any;
 
   constructor(private productService: ProductsService) { }
 
@@ -27,8 +28,9 @@ export class ProductComponent implements OnInit {
       this.getAll();
     } else {
       // call search Service
+      this.getSearched();
       console.log('Using the searchkey to get products');
-      this.noResult = true;
+      // this.noResult = true;
     }
   }
 
@@ -38,6 +40,20 @@ export class ProductComponent implements OnInit {
       this.InitDisplay();
     })
   }
+
+  sortByTags(products) :any{
+    return products.sort((a,b) => {
+      return b.Tags.length - a.Tags.length;
+    })
+  }
+
+  getSearched() {
+    this.products = this.sortByTags(this.searchedProducts);
+    // this.products = this.searchedProducts;
+    console.log(this.products);
+    this.InitDisplay();
+  }
+
 
   InitDisplay() {
     if (!this.products) {
