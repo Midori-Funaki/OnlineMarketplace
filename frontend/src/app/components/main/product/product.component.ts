@@ -54,7 +54,7 @@ export class ProductComponent implements OnInit {
   getSearched() {
     this.products = this.sortByTags(this.searchedProducts);
     // this.products = this.searchedProducts;
-    console.log(this.products);
+    // console.log(this.products);
     this.InitDisplay();
   }
 

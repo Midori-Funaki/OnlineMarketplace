@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
     this.productService.getSearchedProduct(this.searchKey).subscribe((result) => {
       // console.log(result);
       this.products = result;
-      console.log(this.products);
+      // console.log(this.products);
       // location.reload();
     })
   }
