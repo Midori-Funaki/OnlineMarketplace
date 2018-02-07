@@ -3,7 +3,25 @@
     Categories
   </h4>
   <div id="accordion" role="tablist">
-    <div role="tab">
+    <div *ngFor="let category of filter" role="tab">
+        <h5>
+          <a href="#collapse{{object.keys(category)}}" data-parent="#accordion" data-toggle="collapse">
+            <div *ngFor="let name of object.keys(category)">
+              {{object.keys(category)}}
+            </div>
+          </a>
+        </h5>
+        <div id="collapse{{object.keys(category)}}" class="collapse">
+          <div class="card-body side-card-body">
+            <ul class="nav flex-column">
+              <li *ngFor="let series of category[object.keys(category)]" class="nav-item">
+                <a class="nav-link" href="#">{{series}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </div>
+    <!--<div role="tab">
       <h5>
         <a href="#collapse1" data-parent="#accordion" data-toggle="collapse">
           Sneakers
@@ -95,10 +113,10 @@
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 
-<div class="card p-2 my-2 side-card">
+<!--<div class="card p-2 my-2 side-card">
   <h4 class="card-title">
     Filters
   </h4>
@@ -128,7 +146,7 @@
         <input type="checkbox" class="form-check-input"> test
       </label>
     </div>
-  </div>
+  </div>-->
 </div>
 
 

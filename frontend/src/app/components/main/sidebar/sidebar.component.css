@@ -11,4 +11,14 @@
 }
 .side-card-body {
     padding: 0;
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+.nav-link {
+    font-size: 11px !important;
+}
+
+#accordion {
+    margin-bottom: 30px;
 }

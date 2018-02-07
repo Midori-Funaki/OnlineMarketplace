@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as filter from './config';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  filter: Object[];
+  object: Object;
+
+  constructor() {
+    this.filter = filter;
+    this.object = Object;
+  }
 
   ngOnInit() {
   }
