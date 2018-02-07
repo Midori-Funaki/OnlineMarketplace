@@ -56,7 +56,7 @@ export class ProductComponent implements OnInit {
 
 
   InitDisplay() {
-    if (!this.products) {
+    if (!this.products.length) {
       this.noResult = true;
     } else {
       if (this.products.length > this.increment) {

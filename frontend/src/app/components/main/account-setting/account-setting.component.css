@@ -1,0 +1,29 @@
+#account-box {
+    padding: 40px 30% 0px 30%;
+}
+
+.account-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.account-detail-box {
+    padding-left: 30px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.account-detail-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.account-detail-title {
+    font-size: 16px;
+    margin-bottom: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+}

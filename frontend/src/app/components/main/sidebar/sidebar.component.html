@@ -15,138 +15,13 @@
           <div class="card-body side-card-body">
             <ul class="nav flex-column">
               <li *ngFor="let series of category[object.keys(category)]" class="nav-item">
-                <a class="nav-link" href="#">{{series}}</a>
+                <a class="nav-link" href="#" (click)="moveTo($event,series)">{{series}}</a>
               </li>
             </ul>
           </div>
         </div>
     </div>
-    <!--<div role="tab">
-      <h5>
-        <a href="#collapse1" data-parent="#accordion" data-toggle="collapse">
-          Sneakers
-        </a>
-      </h5>
-    </div>
-    <div id="collapse1" class="collapse">
-      <div class="card-body side-card-body">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div role="tab">
-      <h5>
-        <a href="#collapse2" data-parent="#accordion" data-toggle="collapse">
-          Handbags
-        </a>
-      </h5>
-    </div>
-    <div id="collapse2" class="collapse">
-      <div class="card-body side-card-body">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div role="tab">
-      <h5>
-        <a href="#collapse3" data-parent="#accordion" data-toggle="collapse">
-          Watches
-        </a>
-      </h5>
-    </div>
-    <div id="collapse3" class="collapse">
-      <div class="card-body side-card-body">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div role="tab">
-      <h5>
-        <a href="#collapse4" data-parent="#accordion" data-toggle="collapse">
-          Collectables
-        </a>
-      </h5>
-    </div>
-    <div id="collapse4" class="collapse">
-      <div class="card-body">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
-</div>-->
-
-
-<!--<div class="card p-2 my-2 side-card">
-  <h4 class="card-title">
-    Filters
-  </h4>
-  <div class="mx-3">
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="checkbox" class="form-check-input"> test
-      </label>
-    </div>
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="checkbox" class="form-check-input"> test
-      </label>
-    </div>
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="checkbox" class="form-check-input"> test
-      </label>
-    </div>
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="checkbox" class="form-check-input"> test
-      </label>
-    </div>
-    <div class="form-check">
-      <label class="form-check-label">
-        <input type="checkbox" class="form-check-input"> test
-      </label>
-    </div>
-  </div>-->
 </div>
 
 
