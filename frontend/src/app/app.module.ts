@@ -79,7 +79,7 @@ import { ConfirmComponent } from './components/checkout/confirm/confirm.componen
     StripeComponent,
     SearchbarComponent,
     ProductComponent,
-    ConfirmComponent
+    ConfirmComponent,
   ],
   imports: [
     CommonModule,

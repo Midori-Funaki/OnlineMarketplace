@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-top',
@@ -11,7 +11,11 @@ import { Router } from '@angular/router';
 export class TopComponent implements OnInit {
   
   isLoggedIn: boolean = false;
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+              private authService: AuthService, 
+              private router: Router,
+              private http: Http,
+            ) {
     this.authService.isLoggedInNow().subscribe((res)=>{
       this.isLoggedIn = res
     });
@@ -23,6 +27,10 @@ export class TopComponent implements OnInit {
 
   logOut(){
     this.authService.logOut();
+  }
+
+  userSetting(e){
+    this.router.navigate(['/account']);
   }
 
 }

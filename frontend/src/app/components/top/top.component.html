@@ -10,6 +10,7 @@
       <app-searchbar></app-searchbar>
     </div>
     <div class="login-signup-btn" *ngIf="isLoggedIn; else login">
+        <button class="btn btn-secondary"  (click)="userSetting($event)"><i class="fa fa-user"></i></button>
       <button class="btn btn-secondary"  (click)="logOut($event)">Logout</button>
     </div>
     <ng-template #login>

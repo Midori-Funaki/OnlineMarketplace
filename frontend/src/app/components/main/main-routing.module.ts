@@ -14,6 +14,7 @@ import { CheckoutComponent } from './../checkout/checkout.component';
 import { TransactionComponent } from './../../components/main/transactions/transaction.component';
 import { SellListComponent } from './../../components/main/sell-list/sell-list.component';
 import { ConfirmComponent } from '../checkout/confirm/confirm.component';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const routes: Routes = [
     { path: 'auth/google/callback', component: GoogleComponent },
     { path: 'auth/stripe/callback', component: StripeComponent },
     { path: 'checkout', component: CheckoutComponent, pathMatch: 'full' },
-    { path: 'complete', component: ConfirmComponent, pathMatch: 'full'}
+    { path: 'complete', component: ConfirmComponent, pathMatch: 'full'},
+    { path: 'account', component: AccountSettingComponent, pathMatch: 'full'}
 ]
 
 @NgModule({
@@ -53,5 +55,6 @@ export const routingComponents = [
     CheckoutComponent,
     TransactionComponent,
     SellListComponent,
-    StripeComponent
+    StripeComponent,
+    AccountSettingComponent
 ]
