@@ -9,7 +9,19 @@ import { User } from '../../../models/User'
 })
 export class AccountSettingComponent implements OnInit {
 
-  userProfile: User;
+  userProfile: any ={
+    "id": '',
+    "userId": "",
+    "firstName": "",
+    "lastName": "",
+    "password": "",
+    "email": "",
+    "shippingAddress": "",
+    "shippingAddress2": "",
+    "billingAddress": "",
+    "billingAddress2": "",
+    "contact": ""
+  };
 
   constructor(
                 private userService: UserService,
