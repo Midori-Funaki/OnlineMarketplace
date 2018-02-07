@@ -7,3 +7,8 @@
 #ads-container {
     padding: 30px;
 }
+
+.ads-image {
+    width: 1000px;
+    height: 200px;
+}

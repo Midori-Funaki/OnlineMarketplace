@@ -11,6 +11,7 @@ export class CartChildComponent implements OnInit {
   items: Observable<any>;
   grandTotal: number;
   shipping: number = 0;
+  hasItems: boolean = false;
 
   constructor(
     private cartService: CartService,
@@ -29,9 +30,13 @@ export class CartChildComponent implements OnInit {
   getTotal(): void {
     this.items.subscribe(items => {
       this.grandTotal = 0;
-      for (let item of items) {
-        // console.log(item);
-        this.grandTotal += item.Product.currentAskPrice * item.quantity;
+      // console.log(items);
+      if (items.length) {
+        this.hasItems = true;
+        for (let item of items) {
+          // console.log(item);
+          this.grandTotal += item.Product.currentAskPrice * item.quantity;
+        }
       }
     })
   }
