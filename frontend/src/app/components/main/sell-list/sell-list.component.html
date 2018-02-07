@@ -1,14 +1,23 @@
-<div class="btn-container">
-<app-connect-stripe *ngIf="!isConnectedAccount && user; else connected"></app-connect-stripe>
-<ng-template #connected>
-  <div *ngIf="user">Your stripe account is connected</div>
-</ng-template>
+<div class="row ml-5 mt-3 d-flex">
+  <a href="sell/new">
+    <button class="btn sell-btn" *ngIf="isConnectedAccount">Sell New Item</button>
+  </a>
+  <app-connect-stripe *ngIf="!isConnectedAccount && user; else connected"></app-connect-stripe>
+  <ng-template #connected>
+    <div *ngIf="user" class="ml-auto mt-2 mr-3">
+      <a href="https://stripe.com/hk" class="stripe-logo" target="_blank">
+        <img src="/assets/img/powered_by_stripe.png" alt="stripe">
+      </a>
+    </div>
 
-<div>
-  <a href="sell/new"><button class="btn sell-btn">Sell New Item</button></a>
+  </ng-template>
+
+  <ng-template #connectMessage>
+    <h3>Connect your stripe account now to start selling!!</h3>
+  </ng-template>
 </div>
 
-<div class="products-container">
+<div class="products-container" *ngIf="isConnectedAccount; else connectMessage">
   <div *ngFor="let product of products | async" class="each-product">
     <a href="sell/{{product.id}}">
       <div class="card">
@@ -21,16 +30,22 @@
         </div>
         <footer class="card-footer">
           <div>
-            Lowest bid : <span class="price bid-price">$ {{ product.curentBidPrice }}</span>
+            Lowest bid :
+            <span class="price bid-price">$ {{ product.curentBidPrice }}</span>
           </div>
           <div>
-            Lowest ask : <span class="price ask-price">$ {{ product.currentAskPrice }}</span>
+            Lowest ask :
+            <span class="price ask-price">$ {{ product.currentAskPrice }}</span>
           </div>
         </footer>
-      </div><!-- ./card -->
+      </div>
+      <!-- ./card -->
     </a>
-  </div><!-- ngFor -->
+  </div>
+  <!-- ngFor -->
 </div>
+
+
 <!-- <div class="sell-item-container">
   <app-product></app-product>
 </div> -->
