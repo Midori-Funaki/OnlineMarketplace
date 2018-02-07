@@ -19,10 +19,20 @@ export class ProductComponent implements OnInit {
 
   @Input() searchKey: string;
   @Input() searchedProducts: any;
+  // @Input() searchSubject: any;
 
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
+    // this.searchSubject.subscribe(res => {
+    //   console.log(res, "doing search");
+    //   // console.log("reinit");
+    //   this.init();
+    // })
+    this.init();
+  }
+
+  init() {
     this.counter = 0;
     if (!this.searchKey) {
       this.getAll();
@@ -41,8 +51,8 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  sortByTags(products) :any{
-    return products.sort((a,b) => {
+  private sortByTags(products): any {
+    return products.sort((a, b) => {
       return b.Tags.length - a.Tags.length;
     })
   }
