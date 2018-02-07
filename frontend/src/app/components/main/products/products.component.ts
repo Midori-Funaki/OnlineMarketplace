@@ -12,6 +12,7 @@ import { ActivatedRoute, Router, Params } from "@angular/router";
 export class ProductsComponent implements OnInit {
 
   searchKey: string;
+  products:any;
   
   constructor(private route: ActivatedRoute,private router: Router, private productService: ProductsService) { }
 
@@ -25,7 +26,9 @@ export class ProductsComponent implements OnInit {
 
   searchItems(keywords){
     this.productService.getSearchedProduct(this.searchKey).subscribe((result) => {
-      console.log(result);
+      // console.log(result);
+      this.products = result;
+      console.log(this.products);
     })
   }
 
