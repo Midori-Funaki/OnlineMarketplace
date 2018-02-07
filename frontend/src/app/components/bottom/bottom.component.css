@@ -1,14 +1,16 @@
 #ads {
-    padding: 20px;
-    border: 1px solid black;
+    margin-top: 30px;
+    width: 80%;
     text-align: center;
+    height: 10vh;
 }
 
 #ads-container {
-    padding: 30px;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
 }
 
-.ads-image {
-    width: 1000px;
-    height: 200px;
+#ads-image {
+    display: inline-flex !important;
 }

@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BottomComponent implements OnInit {
 
-  imagePath: string = "/assets/img/ads.jpg";
-
   constructor() { }
 
   ngOnInit() {
