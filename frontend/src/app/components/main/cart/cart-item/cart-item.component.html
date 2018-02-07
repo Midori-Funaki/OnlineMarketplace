@@ -1,6 +1,7 @@
 <div class="product">
   <div class="product-image">
-    <img [src]="item.Product.ProductPhotos[0].url"> <!-- to add photos -->
+    <img [src]="item.Product.ProductPhotos[0].url">
+    <!-- to add photos -->
   </div>
   <div class="product-details">
     <div class="product-title">{{item.Product.title}}</div>
@@ -11,6 +12,9 @@
   <div class="product-price">{{item.Product.currentAskPrice}}</div>
   <div class="product-quantity">
     {{item.quantity}}
-  </div>  
+  </div>
   <div class="product-line-price">{{item.Product.currentAskPrice * item.quantity}}</div>
+  <button type="button" class="close" aria-label="Close" (click)="deleteItem(item.id)">
+    <span aria-hidden="true">×</span>
+  </button>
 </div>

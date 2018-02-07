@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CartService } from '../../../../services/cart.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
@@ -34,6 +34,10 @@ export class CartChildComponent implements OnInit {
         this.grandTotal += item.Product.currentAskPrice * item.quantity;
       }
     })
+  }
+
+  onRemoveCart() {
+    this.getItems();
   }
 
 }
