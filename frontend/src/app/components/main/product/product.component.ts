@@ -23,6 +23,10 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
+    this.init();
+  }
+  
+  init() {
     this.counter = 0;
     if (!this.searchKey) {
       this.getAll();

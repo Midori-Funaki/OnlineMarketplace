@@ -5,7 +5,7 @@
     </div>
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
       <app-product *ngIf="products"
-      [searchKey]="searchKey" [searchedProducts]="products"
+      [searchKey]="searchKey" [searchedProducts]="products" (keydown)="searchItems(enter.keyCode)"
       ></app-product>
     </div><!-- col-xs-10 -->
   </div>

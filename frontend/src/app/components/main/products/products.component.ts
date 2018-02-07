@@ -29,6 +29,7 @@ export class ProductsComponent implements OnInit {
       // console.log(result);
       this.products = result;
       console.log(this.products);
+      // location.reload();
     })
   }
 

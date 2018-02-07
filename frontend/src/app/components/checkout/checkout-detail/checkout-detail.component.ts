@@ -119,6 +119,7 @@ export class CheckoutDetailComponent implements OnInit {
   private createTransfer(items) {
     let transfers = []
     for (let item of items) {
+      console.log(item);
       let inArray = false;
       for (let i = 0; i < transfers.length; i++) {
         if (transfers[i].id == item.Product.User.id) {
