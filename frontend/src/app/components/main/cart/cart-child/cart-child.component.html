@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="items">
+<div class="container-fluid" *ngIf="items && items.length > 0; else empty">
   <h1 class="compo-title">Shopping Cart</h1>
 
   <div class="shopping-cart">
@@ -10,7 +10,7 @@
       <label class="product-quantity">Quantity</label>
       <label class="product-line-price">Total</label>
     </div>
-    <app-cart-item *ngFor="let item of items | async" [item]="item" (removeCart)="onRemoveCart()"></app-cart-item>
+    <app-cart-item *ngFor="let item of items" [item]="item" (removeCart)="onRemoveCart()"></app-cart-item>
     <div *ngIf="grandTotal" class="mr-5">
       <div class="totals">
         <div class="totals-item">

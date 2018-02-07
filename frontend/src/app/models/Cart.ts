@@ -1,6 +1,8 @@
 export interface Cart {
-    userId: number,
-    produdctId: number,
-    createdAt: string,
-    updatedAt: string
-  }
+  userId: number;
+  produdctId: number;
+  createdAt: string;
+  updatedAt: string;
+  quantity: number;
+  Product?: any;
+}

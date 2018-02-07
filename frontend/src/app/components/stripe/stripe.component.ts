@@ -25,6 +25,7 @@ export class StripeComponent implements OnInit {
 
   ngOnInit() {
     this.responseHandler();
+    this.router.navigate(['sell-list']);
   }
 
   responseHandler() {
@@ -35,9 +36,11 @@ export class StripeComponent implements OnInit {
       this.router.navigate(['/home']);
     } else if (this.params.code) {
       this.stripeService.register(this.params.code).subscribe(res => {
-        console.log(res);
+        // console.log(res);
       })
     }
   }
+
+  
 
 }

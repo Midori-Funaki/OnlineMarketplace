@@ -9,6 +9,7 @@ class StripeService {
   constructor() { }
 
   register(token, user) { //user = { id : 1}
+  console.log("registering with: ", token, user)
     if (token) {
       return axios.post(
         'https://connect.stripe.com/oauth/token',
@@ -27,8 +28,8 @@ class StripeService {
       }).then(data => {
         console.log("stripe user returned: ", data);
         return User.findById(user.id).then(user => {
-          user.stripeId = data.user_id;
-          user.refresh_token = user.refresh_token;
+          user.stripeId = data.stripe_user_id;
+          user.refresh_token = data.refresh_token;
           console.log("stripe user created:", user.stripeId, user.refresh_token);
           return user.save();
         })

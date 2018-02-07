@@ -20,8 +20,8 @@ export class CartService {
     private authService: AuthService
   ) { }
 
-  getItems(): Observable<Product[]> {
-    return this.http.get<Product[]>('/api/carts', {
+  getItems(): Observable<Cart[]> {
+    return this.http.get<Cart[]>('/api/carts', {
       headers: new HttpHeaders().set(
         'Authorization', 'Bearer ' + this.authService.token)
     });
