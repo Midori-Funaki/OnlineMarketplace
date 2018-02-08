@@ -2,10 +2,10 @@
     <form class="sell-form" [formGroup]="sellForm" (ngSubmit)="createNewSell()">
       <div class="form-group">
         <div class="float-field float-select">
-          <label class="float-label">Category</label>
-          <select id="category" class="form-control" formControlName="category" (change)="filterBrand($event.target.value)">
+          <select id="category" class="form-control select-input" formControlName="category" (change)="filterBrand($event.target.value)">
             <option *ngFor="let category of categories" [value]="category.title">{{ category.title }}</option>
           </select>
+          <label class="float-label">Category</label>
         </div>
       </div><!-- form-group -->
       <div class="form-group">

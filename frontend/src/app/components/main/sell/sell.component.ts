@@ -78,7 +78,7 @@ export class SellComponent implements OnInit {
     })
 
     this.sellForm = new FormGroup({
-      category: new FormControl(''),
+      category: new FormControl('',[Validators.minLength(1)]),
       brand: new FormControl(''),
       title: new FormControl(''),
       quantity: new FormControl(''),
@@ -191,7 +191,7 @@ export class SellComponent implements OnInit {
     this.getSellProduct(this.productId)
     .then((data) => {
       this.sellForm = new FormGroup({
-        category: new FormControl(data.Category.title),
+        category: new FormControl(data.Category.title,[Validators.minLength(1)]),
         brand: new FormControl(data.brand),
         title: new FormControl(data.title),
         quantity: new FormControl(data.quantity),

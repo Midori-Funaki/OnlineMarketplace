@@ -24,6 +24,7 @@ body {
 }
 .sell-form {
   padding-bottom: 20px;
+  margin-top: 30px;
 }
 .select-btn {
   width: 100px;
@@ -53,8 +54,24 @@ h1 {
   text-align: center;
 }
 .float-field {
+  position: relative;
   width: 65%;
   margin: auto;
+  z-index: 10
+}
+.float-label {
+  position: absolute;
+  pointer-events: none;
+  top: 10px;
+  transform: translate(0, 20px);
+  transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  z-index: 1;
+}
+.select-input:focus,
+.ng-dirty {
+  color: black;
+  border-bottom: 1px solid rgb(137,212,26);
+  top: -12px;
 }
 select{
   border: 1px solid #bcbcbc;
