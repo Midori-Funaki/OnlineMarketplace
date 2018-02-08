@@ -23,8 +23,12 @@ body {
   background-color: #eff5f6;
 }
 .sell-form {
+  margin-top: 38px;
   padding-bottom: 20px;
   margin-top: 30px;
+}
+.sell-form select {
+  margin-top: 38px;
 }
 .select-btn {
   width: 100px;
@@ -56,22 +60,50 @@ h1 {
 .float-field {
   position: relative;
   width: 65%;
+  height: 35px;
   margin: auto;
-  z-index: 10
+  z-index: 10;
+  outline: none;
+}
+.non-float-field {
+  position: relative;
+  width: 65%;
+  height: 80px;
+  margin: auto;
+  overflow: scroll;
+  margin-top: 38px;
+}
+.sell-form label {
+  color: #a9a9a9;
+}.sell-form btn label {
+  color: white;
 }
 .float-label {
   position: absolute;
   pointer-events: none;
-  top: 10px;
+  top: -10px;
   transform: translate(0, 20px);
   transition: all 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
   z-index: 1;
 }
+.form-control:focus,
 .select-input:focus,
-.ng-dirty {
+.select-input .ng-dirty {
   color: black;
+  background-color: transparent;
   border-bottom: 1px solid rgb(137,212,26);
+  border-color: rgb(137,212,26);
+  transform: translate(0,0);
   top: -12px;
+  box-shadow: none;
+}
+/* .select-input {
+  margin-top: 38px;
+} */
+.select-input:focus ~ .float-label,
+.ng-dirty ~ .float-label {
+  color: rgb(137,212,26);
+  transform: translate(0,-10px);
 }
 select{
   border: 1px solid #bcbcbc;
