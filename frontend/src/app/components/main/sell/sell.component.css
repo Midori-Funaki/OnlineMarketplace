@@ -1,47 +1,47 @@
 .photo-upload-container{
-    height: 210px;
-    width: 380px;
-    border: 1px dotted gray;
+  height: 210px;
+  width: 380px;
+  border: 1px dotted gray;
 }
 /* Photo Upload Trial */
 body {
-  font-family: "Raleway", sans-serif;
-  height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: #eff5f6;
+font-family: "Raleway", sans-serif;
+height: 100vh;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+-webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+-webkit-box-orient: vertical;
+-webkit-box-direction: normal;
+    -ms-flex-direction: column;
+        flex-direction: column;
+background-color: #eff5f6;
 }
 .select-btn {
-  width: 100px;
+width: 100px;
 }
 .wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  /* -ms-flex-wrap: wrap;
-      flex-wrap: wrap; */
-  -webkit-box-align: left;
-      -ms-flex-align: left;
-          align-items: left;
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-  overflow: scroll;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+    -ms-flex-direction: row;
+        flex-direction: row;
+/* -ms-flex-wrap: wrap;
+    flex-wrap: wrap; */
+-webkit-box-align: left;
+    -ms-flex-align: left;
+        align-items: left;
+-webkit-box-pack: left;
+    -ms-flex-pack: left;
+        justify-content: left;
+overflow: scroll;
 }
 h1 {
   font-family: inherit;
@@ -90,6 +90,7 @@ h1 {
 .upload-options:hover {
   background-color: #7fb1b3;
 }
+
 .upload-options input {
   width: 0.1px;
   height: 0.1px;
@@ -137,18 +138,17 @@ h1 {
 .upload-options label span:hover i.material-icons {
   color: lightgray;
 }
-.js--image-preview {
+.js-image-preview {
   height: 125px;
   width: 100%;
   position: relative;
   overflow: hidden;
-  background-image: url("");
   background-color: white;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-.js--image-preview::after {
+.js-image-preview::after {
   content: "\f1c5";
   font-family: 'FontAwesome';
   position: relative;
@@ -158,17 +158,11 @@ h1 {
   left: calc(50% - 2.25rem);
   z-index: 0;
 }
-.js--image-preview.js--no-default::after {
+
+.js-image-preview .js-no-default::after {
   display: none;
 }
-i.material-icons {
-  -webkit-transition: color 100ms ease-in-out;
-  transition: color 100ms ease-in-out;
-  font-size: 2.25em;
-  line-height: 55px;
-  color: white;
-  display: block;
-}
+
 .drop {
   display: block;
   position: absolute;
@@ -207,20 +201,4 @@ i.material-icons {
 .delete-btn:hover{
   background: rgba(203,32,39,1);
   cursor: pointer;
-}
-
-@-webkit-keyframes ripple {
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(2.5);
-            transform: scale(2.5);
-  }
-}
-
-@keyframes ripple {
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(2.5);
-            transform: scale(2.5);
-  }
 }
