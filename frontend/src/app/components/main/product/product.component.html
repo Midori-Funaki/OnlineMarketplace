@@ -11,8 +11,7 @@
                   <img *ngIf="product.ProductPhotos[0]" class="card-product-img" [src]="product.ProductPhotos[0].url" alt="Card image cap">
                 </div>
                 <div class="card-body">
-                  <h4 class="card-title">{{ product.title }}</h4>
-                  <span *ngIf="product.condition == 'new'" class="badge badge-pill badge-success">NEW</span>
+                  <h4 class="card-title">{{ product.title }}&nbsp;<span *ngIf="product.condition == 'new'" class="badge badge-pill badge-success">NEW</span></h4>
                 </div>
                 <footer class="card-footer">Lowest bid price : <br><span class="price">$ {{ product.curentBidPrice }}</span></footer>
               </div><!-- ./card -->

@@ -25,12 +25,13 @@ p {
 .card-img-top {
     position: relative;
     width: 200px;
-    height: 100px;
+    height: 100%;
     overflow: hidden;
 }
 .card-product-img {
     position: absolute;
-    width: 190px;
+    width: auto;
+    height: 100%;
     margin: auto;
     top: 0;
     left: 0;
@@ -47,17 +48,18 @@ p {
 .card-footer {
     padding: 0;
 }
+.badge-pill {
+    font-size: 11px;
+}
 .price {
     font-size: 22px;
     float: right;
     margin-right: 26px;
 }
-
 .loadmore-container {
     margin: 30px 0px;
     text-align: center;
 }
-
 .loadmore-container .btn{
     width: 95%;
 }
