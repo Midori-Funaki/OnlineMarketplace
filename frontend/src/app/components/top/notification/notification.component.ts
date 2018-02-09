@@ -5,6 +5,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 interface Message {
   msgStatus: string;
   message?: string;
+  title ?: string;
 }
 
 @Component({

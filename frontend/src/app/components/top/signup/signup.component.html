@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type='text' name="password" class="form-control" placeholder="Enter your password" 
+                    <input type='password' name="password" class="form-control" placeholder="Enter your password" 
                         formControlName="password"/>
                     <div *ngIf="localSignup.controls['password'].hasError('required') && localSignup.controls['password'].dirty" class="alert alert-danger">
                         Password is required
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                     <label>Confirm password</label>
-                    <input type='text' name="passwordCheck" class="form-control" placeholder="Confirm password" 
+                    <input type='password' name="passwordCheck" class="form-control" placeholder="Confirm password" 
                         formControlName="passwordCheck"/>
                     <div *ngIf="localSignup.controls['passwordCheck'].hasError('MatchPassword') && localSignup.controls['passwordCheck'].dirty" class="alert alert-danger">
                         Password does not match

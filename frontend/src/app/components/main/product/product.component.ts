@@ -19,13 +19,19 @@ export class ProductComponent implements OnInit {
 
   @Input() searchKey: string;
   @Input() searchedProducts: any;
+  // @Input() searchSubject: any;
 
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
     this.init();
+    this.productService.searchEvent$.subscribe(products => {
+      this.products = this.sortByTags(products);
+      console.log("thisproduct: ",this.products);
+      this.InitDisplay();
+    })
   }
-  
+
   init() {
     this.counter = 0;
     if (!this.searchKey) {
@@ -45,8 +51,8 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  sortByTags(products) :any{
-    return products.sort((a,b) => {
+  private sortByTags(products): any {
+    return products.sort((a, b) => {
       return b.Tags.length - a.Tags.length;
     })
   }
@@ -54,13 +60,13 @@ export class ProductComponent implements OnInit {
   getSearched() {
     this.products = this.sortByTags(this.searchedProducts);
     // this.products = this.searchedProducts;
-    console.log(this.products);
+    // console.log(this.products);
     this.InitDisplay();
   }
 
 
   InitDisplay() {
-    if (!this.products) {
+    if (!this.products.length) {
       this.noResult = true;
     } else {
       if (this.products.length > this.increment) {
