@@ -17,6 +17,7 @@ export class ProductsService {
       'Authorization': 'Bearer ' + this.authService.token
     })
   }
+  searchEvent$ = new Subject();
   constructor(
     private router: Router,
     private http: HttpClient,

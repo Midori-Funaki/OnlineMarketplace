@@ -24,12 +24,12 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
-    // this.searchSubject.subscribe(res => {
-    //   console.log(res, "doing search");
-    //   // console.log("reinit");
-    //   this.init();
-    // })
     this.init();
+    this.productService.searchEvent$.subscribe(products => {
+      this.products = this.sortByTags(products);
+      console.log("thisproduct: ",this.products);
+      this.InitDisplay();
+    })
   }
 
   init() {
@@ -60,7 +60,7 @@ export class ProductComponent implements OnInit {
   getSearched() {
     this.products = this.sortByTags(this.searchedProducts);
     // this.products = this.searchedProducts;
-    console.log(this.products);
+    // console.log(this.products);
     this.InitDisplay();
   }
 

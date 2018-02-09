@@ -16,7 +16,11 @@ export class ProductsComponent implements OnInit {
   products:any;
   // searchEvent= new Subject<any>();
   
-  constructor(private route: ActivatedRoute,private router: Router, private productService: ProductsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, 
+    private productService: ProductsService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params:Params)=>{
@@ -28,9 +32,9 @@ export class ProductsComponent implements OnInit {
 
   searchItems(keywords){
     this.productService.getSearchedProduct(keywords).subscribe((result) => {
-      console.log(result);
       this.products = result;
       // console.log(this.products);
+      this.productService.searchEvent$.next(this.products);
     })
   }
 
