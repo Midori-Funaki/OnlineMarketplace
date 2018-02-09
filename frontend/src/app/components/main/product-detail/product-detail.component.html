@@ -19,7 +19,7 @@
       </p>
       <div class="price">Current Price: {{ product.curentBidPrice | currency}}</div>
       <div class="options">
-        <div class="my-3 form-group">
+        <div *ngIf="product.size > 0" class="my-3 form-group">
           <h5>Size:</h5>
           <div class="size-button form-group">
             <button class="btn btn-outline-dark" type="button">{{product.size}}</button>

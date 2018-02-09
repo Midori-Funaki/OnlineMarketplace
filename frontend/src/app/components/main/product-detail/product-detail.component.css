@@ -24,5 +24,20 @@
 }
 
 .form-number {
-  width: 10%;
+  width: 15%;
+}
+
+.btn-primary {
+  border: 5px solid rgb(137,212,26);
+  background-color: rgb(104,51,97);
+  margin-right: 20px;
+}
+
+.btn-primary:hover {
+  color: darkslategrey;
+  background-color: rgb(137,212,26);
+}
+
+.btn-lg {
+  border-radius: 0;
 }
