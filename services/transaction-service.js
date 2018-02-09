@@ -1,6 +1,4 @@
-var gateway = require('./../gateway'),
-  braintree = require('braintree'),
-  models = require('./../models'),
+var models = require('./../models'),
   Transaction = models.Transaction,
   Product = models.Product,
   ProductPhoto = models.ProductPhoto;
@@ -28,7 +26,7 @@ class transactionService {
   }
 
   post(userid, body) {
-    console.log("posting...");
+    // console.log("posting...");
     return Transaction.create({
       orderId: body.orderId,
       status: body.status,
@@ -44,10 +42,10 @@ class transactionService {
       productId: body.productId
     })
       .then(transaction => {
-        console.log("post done", transaction);
+        // console.log("post done", transaction);
         return Product.findById(transaction.productId)
           .then(product => {
-            console.log("Product Found", product)
+            // console.log("Product Found", product)
             product.quantity -= transaction.quantity;
             return product.save();
           })
