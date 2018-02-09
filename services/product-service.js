@@ -108,16 +108,18 @@ class ProductService {
       includeIgnoreAttributes: false, //force to ignore children attribute
       required: true,
       attributes:[
-        'id', [Sequelize.fn('COUNT', Sequelize.col('Tags->ProductTags.productId')),'tagCount']
+        'id', [Sequelize.fn('COUNT', Sequelize.col('Tags->ProductTag.productId')),'tagCount']
       ],
-      group: ['Products.id']
-
+      group: ['Product.id'],
+      order: [
+            ['count', 'DESC']
+        ]
     }).then((result) => {
       return result
     }).catch((err) => {
       return err
     */
-    
+
     include: [{
       model:Tag,
       where: {
