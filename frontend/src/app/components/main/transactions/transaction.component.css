@@ -5,10 +5,10 @@
     padding: 5px;
 }
 .statement-outline {
-    margin-top: 25px;
-    width: 80vw;
+    width: 85vw;
     margin: auto;
     border: 1px solid rgba(0,0,0,0.125);
+    margin-top: 25px;
 }
 .table-container {
     width: 80vw;
