@@ -117,6 +117,9 @@ select,
   color: rgb(137,212,26);
   transform: translate(0,-10px);
 }
+.ng-dirty ~ .non-float-field label {
+  color: rgb(137,212,26);
+}
 .photo-upload-section {
   margin-top: 50px;
 }
