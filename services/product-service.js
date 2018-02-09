@@ -88,61 +88,36 @@ class ProductService {
 
   search(words){
     let wordArr =  words.query.split(' ');
-    // let products = [];
-    // for(let i=0; i<wordArr; i++){
-    //   Product.findAll({
-    //     include: [{
-    //       model: Tag,
-    //     }],
-    //   })
-    // }
     let filter = [];
     for (let word of wordArr) {
       filter.push({'keyword': word});
     }
     console.log("filter: ",filter);
 
-    /*
-    select pt."productId" as productId, count(pt."tagId") as tagCount
-    from "ProductTags" as pt
-    inner join "Tags" as t on pt."tagId" = t.Id
-    where t.keyword in ('adidas', 'black')
-    group by pt."productId"
-    order by tagCount desc, productId desc;
-    */
-
     return Product.findAll({
-
-      /*
-      attributes:[
-        'id'// , Sequelize.fn("COUNT", Sequelize.col("id"),"count")
-      ],
+      /** 
       include: [{
         model: Tag,
-        attributes: { 
-          include: ['id']
-        },
-        through: {attributes:[]},
-        nested: false,
-        // required: true,
+        required: true,
+        attributes: [],
         where: {
           [Op.or] : filter
-        }
+        },
+        through: { attributes: [] }
       }],
-      //group: ['Product.id'],
-      raw: true,
-      limit: 10
+      includeIgnoreAttributes: false, //force to ignore children attribute
+      required: true,
+      attributes:[
+        'id', [Sequelize.fn('COUNT', Sequelize.col('Tags->ProductTags.productId')),'tagCount']
+      ],
+      group: ['Products.id']
+
     }).then((result) => {
-      let productTags = {};
-      result.map((data) => {
-        productTags[data.id] = productTags[data.id] + 1 || 1 
-      })
-      console.log(productTags);
       return result
     }).catch((err) => {
       return err
     */
-
+    
     include: [{
       model:Tag,
       where: {
@@ -155,7 +130,6 @@ class ProductService {
       return result
     }).catch((err) => {
       return err
-
     })
   }
 
