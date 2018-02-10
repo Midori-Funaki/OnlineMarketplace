@@ -10,7 +10,7 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="purchase" role="tabpanel" aria-labelledby="purchase-tab">
         <div *ngIf="transactions && transactions.length > 0; else empty">
-          <div class="table-container mt-5">
+          <div class="table-container">
             <div class="row table-title">
               <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Date</div>
               <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Transaction</div>
@@ -39,41 +39,39 @@
               </div>
             </div>
           </div>
-          <div class="table-container mt-5" *ngIf="solds && solds.length > 0">
-            <div>
-              <h3>Items Sold:</h3>
-            </div>
-            <div class="row table-title">
-              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Date</div>
-              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Transaction</div>
-              <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">Product</div>
-            </div>
-            <div class="row detail-row pt-3 pb-3" *ngFor="let sold of solds;">
-              <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                {{ sold.updatedAt | date}}
+        </div>
+      </div>
+    <div class="tab-pane fade" id="sell" role="tabpanel" aria-labelledby="sell-tab">
+      <div class="table-container" *ngIf="solds && solds.length > 0">
+        <div class="row table-title">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Date</div>
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Transaction</div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">Product</div>
+        </div>
+        <div class="row detail-row pt-3 pb-3" *ngFor="let sold of solds;">
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            {{ sold.updatedAt | date}}
+          </div>
+          <div *ngIf="sold.Product != null" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            Qty: {{ sold.Product.quantity }}
+            <br> TOTAL: $ {{ sold.price }}
+            <br> Status: {{ sold.status }}
+          </div>
+          <div *ngIf="sold.Product != null" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <div class="row">
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img class="transaction-product-img" [src]="sold.ProductPhotos[0].url">
               </div>
-              <div *ngIf="sold.Product != null" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                Qty: {{ sold.Product.quantity }}
-                <br> TOTAL: $ {{ sold.price }}
-                <br> Status: {{ sold.status }}
-              </div>
-              <div *ngIf="sold.Product != null" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <div class="row">
-                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <img class="transaction-product-img" [src]="sold.ProductPhotos[0].url">
-                  </div>
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    {{ sold.Product.brand }}
-                    <br> {{ sold.Product.title }}
-                    <br> {{ sold.Product.color }}
-                  </div>
-                </div>
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                {{ sold.Product.brand }}
+                <br> {{ sold.Product.title }}
+                <br> {{ sold.Product.color }}
               </div>
             </div>
           </div>
         </div>
       </div>
-    <div class="tab-pane fade" id="sell" role="tabpanel" aria-labelledby="sell-tab">...</div>
+    </div>
   </div>
 </div>
 

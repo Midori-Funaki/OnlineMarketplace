@@ -31,14 +31,15 @@ export class TransactionComponent implements OnInit {
     // console.log(this.user);
     this.transactionService.getAll().subscribe(transactions => {
       this.transactions = transactions;
+      console.log('TRANSACTIONS',this.transactions);
       this.purchases = transactions.filter(transaction => {
         return transaction.buyerId == this.user.id;
       });
-      // console.log(this.purchases);
+      console.log('PUCHASE',this.purchases);
       this.solds = transactions.filter(transaction => {
         return transaction.sellerId == this.user.id;
       });
-      // console.log(this.solds);
+      console.log('SOLD',this.solds);
     });
   }
 
