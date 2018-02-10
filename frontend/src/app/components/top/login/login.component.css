@@ -21,6 +21,8 @@ btn:hover {
 }
 .submit-btn:hover {
     cursor: pointer;
+    background-color: rgb(137,212,26);
+    color: darkslategrey;
 }
 .modal-header {
     border-bottom: 8px solid #333;
