@@ -87,7 +87,7 @@ select,
   overflow: scroll;
   margin-top: 38px;
 }
-.sell-form label {
+label {
   color: #a9a9a9;
 }.sell-form btn label {
   color: white;
@@ -119,7 +119,7 @@ select,
   color: rgb(137,212,26);
   transform: translate(0,-10px);
 }
-.ng-dirty ~ .non-float-field label {
+.ng-dirty ~ .sell-form .radio-title-label {
   color: rgb(137,212,26);
 }
 .photo-upload-section {

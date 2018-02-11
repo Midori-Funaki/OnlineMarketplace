@@ -31,15 +31,11 @@
         </div>
       </div><!-- form-group -->
       <div *ngIf="isShoeCategory" class="form-group">
-        <div class="non-float-field">
-          <label>Size (CM)</label>
-          <div class="btn-toolbar">
-            <div *ngFor="let size of sizes" class="btn-group btn-group-toggle" ngbRadioGroup name="size" formControlName="size">
-              <label ngbButtonLabel class="btn-primary select-btn radio-label">
-                <input ngbButton type="radio" [value]="size"> {{ size }}
-              </label>
-            </div>
-          </div>
+        <div class="float-field float-select">
+          <select class="form-control select-input" formControlName="size">
+            <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+          </select>
+          <label class="float-label">Size (CM)</label>
         </div>
       </div><!-- form-group -->
       <div class="form-group">
