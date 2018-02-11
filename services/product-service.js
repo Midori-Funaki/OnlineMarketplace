@@ -95,31 +95,6 @@ class ProductService {
     console.log("filter: ",filter);
 
     return Product.findAll({
-      /** 
-      include: [{
-        model: Tag,
-        required: true,
-        attributes: [],
-        where: {
-          [Op.or] : filter
-        },
-        through: { attributes: [] }
-      }],
-      includeIgnoreAttributes: false, //force to ignore children attribute
-      required: true,
-      attributes:[
-        'id', [Sequelize.fn('COUNT', Sequelize.col('Tags->ProductTag.productId')),'tagCount']
-      ],
-      group: ['Product.id'],
-      order: [
-            ['count', 'DESC']
-        ]
-    }).then((result) => {
-      return result
-    }).catch((err) => {
-      return err
-    */
-
     include: [{
       model:Tag,
       where: {
@@ -127,6 +102,8 @@ class ProductService {
       }
     }, {
       model: ProductPhoto
+    },{
+      model: Transactions
     }]
     }).then((result) => {
       return result

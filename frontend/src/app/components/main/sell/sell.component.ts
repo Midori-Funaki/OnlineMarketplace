@@ -190,6 +190,8 @@ export class SellComponent implements OnInit {
   getSellInfoForEdit() {
     this.getSellProduct(this.productId)
     .then((data) => {
+      console.log('PRODUCT DATA',data);
+      console.log('PRODUCT DATA',data.Transactions);
       this.sellForm = new FormGroup({
         category: new FormControl(data.Category.title),
         brand: new FormControl(data.brand),
@@ -305,5 +307,9 @@ export class SellComponent implements OnInit {
     console.log("sending edit info @ sell compo ",this.sellForm.value);
 
     this.sellService.editSellItem(this.sellForm.value)
+  }
+
+  deleteSellItem() {
+
   }
 }
