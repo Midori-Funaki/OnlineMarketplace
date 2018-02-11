@@ -98,7 +98,10 @@
           </div><!-- wrapper -->
         </fieldset>
       </div>
-      <button *ngIf="isEditMode" class="btn btn-success sell-btn" (click)="editSellItem()">Save Changes</button>
+      <div *ngIf="isEditMode" class="edit-sell-btn">
+      <button class="btn btn-success sell-btn" (click)="editSellItem()">Save Changes</button>
+      <button class="btn btn-danger sell-btn delete-item-btn" (click)="deleteSellItem()">Delete This Item</button>
+      </div>
       <!-- delete button -->
       <button *ngIf="!isEditMode" type="submit" class="btn btn-primary sell-btn">Start Selling</button>
     </form>
