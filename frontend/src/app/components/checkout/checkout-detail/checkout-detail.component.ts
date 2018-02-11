@@ -92,7 +92,7 @@ export class CheckoutDetailComponent implements OnInit {
         buyerBillAddress2: form.billInfo.address2,
         contact: form.shipInfo.contact,
         sellerId: item.Product.sellerId,
-        productId: item.id
+        productId: item.Product.id
       };
       this.transactionService.create(transaction).subscribe(transaction => console.log(transaction));
     }

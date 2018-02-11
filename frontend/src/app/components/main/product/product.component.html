@@ -1,6 +1,6 @@
-<div >
-  <div *ngIf="noResult; else loadResult">
-    No Result
+<div *ngIf="products">
+  <div *ngIf="products.length == 0; else loadResult">
+    Oops... No Result for your Search
   </div>
   <ng-template #loadResult>
       <div class="products-container">
@@ -27,6 +27,5 @@
             <i>This is the end of the Search</i>
         </div>
       </ng-template>
-
   </ng-template>
 </div>

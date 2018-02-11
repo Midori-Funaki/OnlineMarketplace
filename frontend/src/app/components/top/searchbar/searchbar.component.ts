@@ -12,7 +12,7 @@ export class SearchbarComponent implements OnInit {
   productSearch: FormGroup;
 
   constructor(private formBuilder: FormBuilder, 
-              private router: Router,
+              private router: Router
              ) {}
 
   ngOnInit() {

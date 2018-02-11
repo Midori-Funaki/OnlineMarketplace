@@ -22,6 +22,7 @@
         <div *ngIf="product.size > 0" class="my-3 form-group">
           <h5>Size:</h5>
           <div class="size-button form-group">
+            
             <button class="btn btn-outline-dark" type="button">{{product.size}}</button>
           </div>
         </div>
@@ -34,6 +35,8 @@
         <div class="quantity-select form-group">
           <h5>Quantity:</h5>
           <input class="form-control form-number form-control" type="number" name="quantity" [(ngModel)]="quantity" min="1" [max]="product.quantity">
+          <div class="form-text" [ngClass]="{'text-danger': product.quantity < 3}">
+            <span *ngIf="product.quantity < 3">Only </span>{{product.quantity}} in stock.</div>
         </div>
         <div *ngIf="isLoggedIn" class="add-item my-5 form-group">
           <div class="btn-group">

@@ -3,6 +3,7 @@ import { ProductsService } from '../../../services/products.service';
 import { getParseErrors } from '@angular/compiler/src/util';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router, Params } from "@angular/router";
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-products',
@@ -13,8 +14,13 @@ export class ProductsComponent implements OnInit {
 
   searchKey: string;
   products:any;
+  // searchEvent= new Subject<any>();
   
-  constructor(private route: ActivatedRoute,private router: Router, private productService: ProductsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router, 
+    private productService: ProductsService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params:Params)=>{
@@ -25,11 +31,14 @@ export class ProductsComponent implements OnInit {
   }
 
   searchItems(keywords){
-    this.productService.getSearchedProduct(this.searchKey).subscribe((result) => {
-      // console.log(result);
+    this.productService.getSearchedProduct(keywords).subscribe((result) => {
       this.products = result;
       // console.log(this.products);
+<<<<<<< HEAD
       // location.reload();
+=======
+      this.productService.searchEvent$.next(this.products);
+>>>>>>> master
     })
   }
 
