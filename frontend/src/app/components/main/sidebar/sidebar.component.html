@@ -4,27 +4,25 @@
   </h4>
   <div id="accordion" role="tablist">
     <div *ngFor="let category of filter" role="tab">
-        <h5>
-          <a href="#collapse{{object.keys(category)}}" data-parent="#accordion" data-toggle="collapse">
-            <div *ngFor="let name of object.keys(category)">
-              {{object.keys(category)}}
-            </div>
-          </a>
-        </h5>
-        <div id="collapse{{object.keys(category)}}" class="collapse">
-          <div class="card-body side-card-body">
-            <ul class="nav flex-column">
-              <li *ngFor="let series of category[object.keys(category)]" class="nav-item">
-                <a class="nav-link" href="#" (click)="moveTo($event,series)">{{series}}</a>
-              </li>
-            </ul>
+      <h5>
+        <a href="#collapse{{object.keys(category)}}" data-parent="#accordion" data-toggle="collapse">
+          <div *ngFor="let name of object.keys(category)">
+            {{object.keys(category)}}
           </div>
+        </a>
+      </h5>
+      <div id="collapse{{object.keys(category)}}" class="collapse">
+        <div class="card-body side-card-body">
+          <ul class="nav flex-column">
+            <li *ngFor="let series of category[object.keys(category)]" class="nav-item">
+              <a class="nav-link" href="#" (click)="moveTo($event,series)">{{series}}</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </div>
   </div>
 </div>
-
-
 <div class="card p-2 my-2 side-card">
   <h4 class="card-title">
     Sorting
@@ -35,9 +33,8 @@
       Price
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" href="#">Action</a>
-      <a class="dropdown-item" href="#">Another action</a>
-      <a class="dropdown-item" href="#">Something else here</a>
+      <a class="dropdown-item" href="#">New</a>
+      <a class="dropdown-item" href="#">Used</a>
     </div>
 
   </div>
