@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: 'home/:searchkey', component: ProductsComponent, pathMatch: 'full' },
     { path: 'products/:id', component: ProductDetailComponent, pathMatch: 'full' },
     { path: 'sell/:id', component: SellComponent, pathMatch: 'full' },
-    { path: 'transactions', component: TransactionComponent, pathMatch: 'full' },
+    { path: 'orders', component: TransactionComponent, pathMatch: 'full' },
     { path: 'sell-list', component: SellListComponent, pathMatch: 'full' },
     { path: 'cart', component: CartComponent, pathMatch: 'full' },
     { path: 'favourites', component: FavComponent, pathMatch: 'full' },
