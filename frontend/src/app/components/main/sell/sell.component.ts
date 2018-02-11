@@ -206,6 +206,15 @@ export class SellComponent implements OnInit {
       this.filterTitle(data.brand);
       this.colors.push(data.color);
       this.colors.push('other');
+      this.sellForm.controls.category.markAsDirty(data.Category.title);
+      this.sellForm.controls.brand.markAsDirty(data.brand);
+      this.sellForm.controls.title.markAsDirty(data.title);
+      this.sellForm.controls.quantity.markAsDirty(data.quantity);
+      this.sellForm.controls.size.markAsDirty(data.size);
+      this.sellForm.controls.color.markAsDirty(data.color);
+      this.sellForm.controls.currentAskPrice.markAsDirty(data.currentAskPrice);
+      this.sellForm.controls.condition.markAsDirty(data.condition);
+      this.sellForm.controls.description.markAsDirty(data.description);
       for(let i=0; i<data.ProductPhotos.length; i++) {
         let cloudinaryId = data.ProductPhotos[i].url.match(/dealshub\/[a-z0-9]+/g);
         if (cloudinaryId === null){
