@@ -87,7 +87,7 @@ select,
   overflow: scroll;
   margin-top: 38px;
 }
-label {
+.sell-form label {
   color: #a9a9a9;
 }.sell-form btn label {
   color: white;
@@ -155,7 +155,7 @@ bottom: 0;
 }
 .upload-options {
 position: relative;
-height: 75px;
+height: 100%;
 background-color: cadetblue;
 cursor: pointer;
 overflow: hidden;
