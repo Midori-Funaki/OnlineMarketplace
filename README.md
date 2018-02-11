@@ -4,7 +4,7 @@ This is an E-commerce plateform specially for high ticket items.
 
 ## Demo
 
-Demo is available on [dealshub.space](https://dealshub.space)
+Available on [dealshub.space](https://dealshub.space)
 
 ## Built With
 
