@@ -321,6 +321,9 @@ input[type='radio']:before {
 input[type='radio']:checked:before {
   background:white;
 }
+.sell-form .radio-label {
+  color: white;
+}
 .sell-btn {
   border: 5px solid rgb(137,212,26);
   border-radius: 0;
