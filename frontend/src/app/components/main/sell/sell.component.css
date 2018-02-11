@@ -124,7 +124,6 @@ select,
   margin-top: 50px;
 }
 .box {
-<<<<<<< HEAD
   display: block;
   min-width: 300px;
   height: 180px;
@@ -138,21 +137,6 @@ select,
   overflow: hidden;
   position: relative;
   border: 2px dashed gray;
-=======
-display: block;
-min-width: 300px;
-height: 200px;
-margin: 10px;
-background-color: white;
-border-radius: 0px;
--webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
--webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-overflow: hidden;
-position: relative;
-border: 2px dashed gray;
->>>>>>> master
 }
 .box-preview {
 border: none;
@@ -225,7 +209,6 @@ vertical-align: middle;
 text-align: center;
 }
 .upload-options label span:hover i.material-icons {
-<<<<<<< HEAD
   color: lightgray;
 }
 .js--image-preview {
@@ -251,32 +234,6 @@ text-align: center;
 }
 .js--image-preview.js--no-default::after {
   display: none;
-=======
-color: lightgray;
-}
-.js-image-preview {
-height: 125px;
-width: 100%;
-position: relative;
-overflow: hidden;
-background-color: white;
-background-position: center center;
-background-repeat: no-repeat;
-background-size: cover;
-}
-.js-image-preview::after {
-content: "\f1c5";
-font-family: 'FontAwesome';
-position: relative;
-font-size: 4.5em;
-color: #e6e6e6;
-top: calc(50% - 3rem);
-left: calc(50% - 2.25rem);
-z-index: 0;
-}
-.js-image-preview.js-no-default::after {
-display: none;
->>>>>>> master
 }
 i.material-icons {
 -webkit-transition: color 100ms ease-in-out;

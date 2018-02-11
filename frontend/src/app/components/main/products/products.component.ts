@@ -34,11 +34,8 @@ export class ProductsComponent implements OnInit {
     this.productService.getSearchedProduct(keywords).subscribe((result) => {
       this.products = result;
       // console.log(this.products);
-<<<<<<< HEAD
       // location.reload();
-=======
       this.productService.searchEvent$.next(this.products);
->>>>>>> master
     })
   }
 
