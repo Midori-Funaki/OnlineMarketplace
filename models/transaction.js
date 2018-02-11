@@ -55,11 +55,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    chargeId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    transferId: {
+      type: DataTypes.STRING
+    }
   });
 
   Transaction.associate = function (models) {
-    Transaction.belongsTo(models.User, { foreignKey: 'buyerId', targetKey: 'id' });
-    // Transaction.belongsTo(models.User, { foreignKey: 'sellerId', targetKey: 'id' });
+    // Transaction.belongsTo(models.User, { foreignKey: 'buyerId', targetKey: 'id' });
+    Transaction.belongsTo(models.User, { foreignKey: 'sellerId', targetKey: 'id' });
     Transaction.belongsTo(models.Product, { foreignKey: 'productId', targetKey: 'id' });
     Transaction.hasMany(models.ProductPhoto, { foreignKey: 'productId', sourceKey: 'productId' });
   }

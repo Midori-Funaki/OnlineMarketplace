@@ -21,7 +21,7 @@
                 {{ purchase.updatedAt | date}}
               </div>
               <div *ngIf="purchase.Product != null" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                Qty: {{ purchase.Product.quantity }}
+                Qty: {{ purchase.quantity }}
                 <br> TOTAL: $ {{ purchase.price }}
                 <br> Status: {{ purchase.status }}
               </div>
@@ -38,6 +38,12 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="col-xs-2 align-self-center">
+            <button class="btn btn-primary font-italic" *ngIf="purchase.status < 3; else confirmed" (click)="onConfirm(purchase.id)">Confirm this item</button>
+            <ng-template #confirmed>
+              Thanks for purchase!
+            </ng-template>
           </div>
         </div>
       </div>
@@ -63,15 +69,18 @@
                 <img class="transaction-product-img" [src]="sold.ProductPhotos[0].url">
               </div>
               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                {{ sold.Product.brand }}
+                {{ sold.brand }}
                 <br> {{ sold.Product.title }}
                 <br> {{ sold.Product.color }}
               </div>
             </div>
           </div>
+          <div class="col-xs-2 align-self-center">
+            <button class="btn btn-primary font-italic" (click)="onShipping(sold.id)">Ship this item</button>
+          </div>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
 </div>
 

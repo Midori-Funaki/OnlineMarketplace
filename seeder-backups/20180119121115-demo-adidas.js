@@ -9,7 +9,7 @@ var conditions = ["new", "used"];
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let products = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < data.length; i++) {
       products.push({
         title: data[i].name,
         description: faker.lorem.lines(),
@@ -19,7 +19,7 @@ module.exports = {
         curentBidPrice: faker.commerce.price(),
         currentAskPrice: faker.commerce.price(),
         quantity: Math.floor(Math.random() * 10) + 1,
-        sellerId: 1,
+        sellerId: Math.floor(Math.random() * 3) + 1,
         // buyerId: Math.floor(Math.random() * 3) + 4,
         categoryId: Math.floor(Math.random() * 3) + 1,
         brand: "adidas",

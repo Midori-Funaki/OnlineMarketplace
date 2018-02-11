@@ -4,12 +4,11 @@
   </a>
   <app-connect-stripe *ngIf="!isConnectedAccount && user; else connected"></app-connect-stripe>
   <ng-template #connected>
-    <div *ngIf="user" class="ml-auto mt-2 mr-3">
+    <div *ngIf="user" class="ml-auto mt-2 mr-5">
       <a href="https://stripe.com/hk" class="stripe-logo" target="_blank">
-        <img src="/assets/img/powered_by_stripe.png" alt="stripe">
+        <img src="/assets/img/powered_by_stripe.png" alt="stripe" target="_blank">
       </a>
     </div>
-
   </ng-template>
 
   <ng-template #connectMessage>

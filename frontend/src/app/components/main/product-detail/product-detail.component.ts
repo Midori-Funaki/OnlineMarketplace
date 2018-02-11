@@ -51,7 +51,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   changeImage(event) {
-    console.log(event.srcElement.src);
     this.imgsrc = event.srcElement.src;
   }
 

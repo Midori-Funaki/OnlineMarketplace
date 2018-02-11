@@ -14,12 +14,15 @@ class ProductService {
   constructor() { }
 
   getAll() {
+    // console.log("get all...")
     return Product.findAll({
-      include: [{
-        model: ProductPhoto
-      },{
-        model: Category
-      }],
+      include: [
+        {
+          model: Category
+        }, 
+        {
+          model: ProductPhoto
+        }],
       limit: 20
     })
       .then(products => {
@@ -29,7 +32,7 @@ class ProductService {
       })
   }
 
-  getSell(user){  
+  getSell(user) {
     return Product.findAll({
       where: {
         sellerId: user.id
@@ -70,13 +73,13 @@ class ProductService {
       include: {
         model: ProductPhoto
       },
-      attributes: { 
-        exclude: ['CategoryId'] 
+      attributes: {
+        exclude: ['CategoryId']
       },
       include: [{
         model: Category
-      },{
-        model:ProductPhoto
+      }, {
+        model: ProductPhoto
       }]
     })
       .then((product) => {
@@ -90,9 +93,9 @@ class ProductService {
     let wordArr =  words.query.split(' ');
     let filter = [];
     for (let word of wordArr) {
-      filter.push({'keyword': word});
+      filter.push({ 'keyword': word });
     }
-    console.log("filter: ",filter);
+    console.log("filter: ", filter);
 
     return Product.findAll({
       /** 
@@ -120,14 +123,14 @@ class ProductService {
       return err
     */
 
-    include: [{
-      model:Tag,
-      where: {
-        [Op.or] : filter
-      }
-    }, {
-      model: ProductPhoto
-    }]
+      include: [{
+        model: Tag,
+        where: {
+          [Op.or]: filter
+        }
+      }, {
+        model: ProductPhoto
+      }]
     }).then((result) => {
       return result
     }).catch((err) => {
@@ -143,41 +146,41 @@ class ProductService {
         title: productInfo.category
       }
     })
-    .then(category => {
-      return Product.create({
-        title: productInfo.title,
-        description: productInfo.description,
-        size: productInfo.size,
-        color: productInfo.color,
-        condition: productInfo.condition,
-        // curentBidPrice: productInfo.curentBidPrice,
-        currentAskPrice: productInfo.currentAskPrice,
-        quantity: productInfo.quantity,
-        sellerId: user.id,
-        // buyerId: productInfo.INTEGER,
-        categoryId: category.id,
-        brand: productInfo.brand
-      })      
-    })
-    .then(product => {
-      for (let photo of productInfo.photos) {
-        ProductPhoto.create({
-          url: photo.url,
-          productId: product.id
-        }).then(photo => {
-          console.log(photo);
+      .then(category => {
+        return Product.create({
+          title: productInfo.title,
+          description: productInfo.description,
+          size: productInfo.size,
+          color: productInfo.color,
+          condition: productInfo.condition,
+          // curentBidPrice: productInfo.curentBidPrice,
+          currentAskPrice: productInfo.currentAskPrice,
+          quantity: productInfo.quantity,
+          sellerId: user.id,
+          // buyerId: productInfo.INTEGER,
+          categoryId: category.id,
+          brand: productInfo.brand
         })
-      }
-      return product;
-    })
-    .catch((err) => {
-      return err;
-    })
+      })
+      .then(product => {
+        for (let photo of productInfo.photos) {
+          ProductPhoto.create({
+            url: photo.url,
+            productId: product.id
+          }).then(photo => {
+            console.log(photo);
+          })
+        }
+        return product;
+      })
+      .catch((err) => {
+        return err;
+      })
   }
 
   update(productId, productInfo, user) {
     return Product.findOne({
-      where:{
+      where: {
         id: productId,
         sellerId: user.id
       }
@@ -194,16 +197,16 @@ class ProductService {
         brand: productInfo.brand
       }).then(() => {
         return ProductPhoto.destroy({
-          where:{
+          where: {
             productId: productId
           }
         }).then(() => {
-          return productInfo.photos.forEach((data)=>{
+          return productInfo.photos.forEach((data) => {
             ProductPhoto.create({
               url: data.url,
               productId: productId
             })
-          }).then(()=>{
+          }).then(() => {
             return 'Update completed'
           })
         })

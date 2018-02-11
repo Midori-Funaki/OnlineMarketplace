@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from './../payment-config';
 import { CartService } from './cart.service';
@@ -22,7 +22,7 @@ export class CheckoutService {
   total: number;
   transferObject: any;
   orderId: string;
-  paymentComplete$ = new BehaviorSubject(false);
+  paymentComplete$ = new Subject<any>();
 
   constructor(
     private http: HttpClient,
@@ -36,10 +36,10 @@ export class CheckoutService {
     return this.cartService.getItems();
   }
 
-  openCheckout(total, transferObject) {
+  openCheckout(total) {
     // return this.http.get('/api/checkout');
     this.total = total;
-    this.transferObject = transferObject;
+    // this.transferObject = transferObject;
     let orderId = this.newOrderID();
     this.orderId = orderId;
     this.transactionService.orderId = orderId;
@@ -69,9 +69,13 @@ export class CheckoutService {
       token: this.token,
       orderId: this.orderId,
       transferObject: this.transferObject
-    }, this.httpOptions).subscribe(charges => {
-      this.paymentComplete$.next(true);
+    }, this.httpOptions).subscribe(charge => {
+      this.paymentComplete$.next(charge);
     });
+  }
+
+  createTransfer(id) {
+    return 
   }
 
   emptyCart() {

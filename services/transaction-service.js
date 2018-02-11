@@ -2,6 +2,7 @@ var models = require('./../models'),
   Transaction = models.Transaction,
   Product = models.Product,
   ProductPhoto = models.ProductPhoto;
+User = models.User;
 const Op = require('sequelize').Op;
 
 class transactionService {
@@ -17,6 +18,8 @@ class transactionService {
         model: Product
       }, {
         model: ProductPhoto
+      }, {
+        model: User
       }]
     }).then((transactions) => {
       return transactions;
@@ -39,7 +42,8 @@ class transactionService {
       buyerBillAddress2: body.buyerBillAddress2,
       buyerId: userid,
       sellerId: body.sellerId,
-      productId: body.productId
+      productId: body.productId,
+      chargeId: body.chargeId
     })
       .then(transaction => {
         // console.log("post done", transaction);
@@ -50,12 +54,16 @@ class transactionService {
             return product.save();
           })
       })
-      .then(_ => {
-        return "Transaction created"
+      .then(_ => "transaction done", err => err)
+  }
+
+  updateStatus(id, body) {
+    return Transaction.findById(id)
+      .then(transaction => {
+        transaction.status = body.status
+        return transaction.save();
       })
-      .catch(err => {
-        return err;
-      });
+      .then(res => res, err => err)
   }
 }
 

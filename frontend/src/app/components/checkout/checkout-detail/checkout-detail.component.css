@@ -1,8 +1,5 @@
-.form-checkout {
-  width: 90%
-}
 .form-contact {
-  width: 50%
+  width: 60%
 }
 .checkout {
   float: right;
@@ -20,4 +17,9 @@
 .checkout:active {
   color: darkslategrey;
   background-color: rgb(137,212,26);
+}
+
+.stripe-logo img {
+  width: 10em;
+  height: auto;
 }

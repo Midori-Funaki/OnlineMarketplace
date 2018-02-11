@@ -1,6 +1,6 @@
 <div class="container-fluid p-5" *ngIf="product">
   <div class="row">
-    <div class="col-sm-1 px-2" *ngIf="product.ProductPhotos>1">
+    <div class="col-sm-1 px-2" *ngIf="product.ProductPhotos.length>1">
       <div>
         <button class="img-control" *ngFor="let photo of product.ProductPhotos">
           <img class="thumbnail" [src]="photo.url" (click)="changeImage($event)">
@@ -9,7 +9,7 @@
     </div>
     <div class="col-sm-5 px-2">
       <div class="display">
-        <img [src]="imgsrc" alt="">
+        <img [src]="imgsrc" alt="image">
       </div>
     </div>
     <div class="col-sm-6">
@@ -17,7 +17,7 @@
       <p class="lead mb-4">
         {{product.description}}
       </p>
-      <div class="price">Current Price: {{ product.curentBidPrice | currency}}</div>
+      <div class="price">Current Price: {{ product.currentAskPrice | currency}}</div>
       <div class="options">
         <div *ngIf="product.size > 0" class="my-3 form-group">
           <h5>Size:</h5>

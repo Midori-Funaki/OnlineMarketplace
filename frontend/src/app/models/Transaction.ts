@@ -1,4 +1,5 @@
 export interface Transaction {
+    id:number,
     status: string,
     price: number,
     sellerShipAddress: string,

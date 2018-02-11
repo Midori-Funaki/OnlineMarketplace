@@ -6,10 +6,6 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class StripeService {
-  publish_key: string = config.publish_key;
-  secret_key: string = config.secret_key;
-  client_id: string = config.client_id;
-
   constructor(
     private http: HttpClient,
     private authService: AuthService

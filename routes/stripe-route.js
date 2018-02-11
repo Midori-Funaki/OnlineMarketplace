@@ -13,6 +13,7 @@ class StripeRoute {
     // router.get('/', this.get.bind(this));
     router.post('/register', auth.authenticate(), this.register.bind(this));
     router.post('/charge', auth.authenticate(), this.charge.bind(this));
+    router.post('/transfers/:id', auth.authenticate(), this.transfer.bind(this));
     return router;
   }
 
@@ -29,6 +30,14 @@ class StripeRoute {
       .then(charges => res.json(charges))
       .catch(err => res.status(500).json(err))
   }
+
+  transfer(req, res) {
+    return this.stripeService.transfer(req.params.id)
+      .then(transfer => res.json(transfer))
+      .catch(err => res.status(500).json(err))
+  }
+
+
 
 }
 

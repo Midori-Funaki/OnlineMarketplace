@@ -1,9 +1,9 @@
 <form [formGroup]="checkoutForm" class="form-checkout" (ngSubmit)="onSubmit()" *ngIf="user" #myform="ngForm">
-  <div class="billing-info pt-3" formGroupName="billInfo">
+  <div class="billing-info" formGroupName="billInfo">
     <div class="d-flex">
-      <h3>Billing Information</h3>
+      <h3 class="pt-3">Billing Information</h3>
       <a href="https://stripe.com/hk" class="stripe-logo ml-auto" target="_blank">
-        <img src="/assets/img/powered_by_stripe.png" alt="stripe">
+        <img src="/assets/img/logos-stripe.png" alt="stripe">
       </a>
     </div>
 

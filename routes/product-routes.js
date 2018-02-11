@@ -22,7 +22,7 @@ class ProductRoutes{
   }
 
   getAll(req,res){
-    console.log('Search REQ BODY',req.body)
+    // console.log('Search REQ BODY',req.body)
     return this.productService.getAll()
       .then((products)=>res.json(products))
       .catch((err)=>res.status(500).json(err))

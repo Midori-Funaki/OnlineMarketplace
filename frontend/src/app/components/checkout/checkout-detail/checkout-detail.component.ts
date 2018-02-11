@@ -17,7 +17,7 @@ export class CheckoutDetailComponent implements OnInit {
   items: any[]; //cart object with Product sub object
   grandTotal: number;
   checkoutForm: FormGroup;
-  sellersTransfer: any[];
+  // sellersTransfer: any[];
 
   constructor(
     private userService: UserService,
@@ -48,10 +48,11 @@ export class CheckoutDetailComponent implements OnInit {
           })
         });
       })
-    this.checkoutService.paymentComplete$.subscribe(boo => {
-      if (boo == true) {
+    this.checkoutService.paymentComplete$.subscribe(charge => {
+      if (charge) {
+        console.log(charge);
         this.emptyCart();
-        this.createTransactions(this.items, this.checkoutForm.value);
+        this.createTransactions(charge, this.items, this.checkoutForm.value);
         this.router.navigate(['complete']);
       }
     })
@@ -79,7 +80,7 @@ export class CheckoutDetailComponent implements OnInit {
     }
   }
 
-  createTransactions(items, form) {
+  createTransactions(charge, items, form) {
     // console.log(form);
     for (let item of this.items) {
       let transaction = {
@@ -92,7 +93,8 @@ export class CheckoutDetailComponent implements OnInit {
         buyerBillAddress2: form.billInfo.address2,
         contact: form.shipInfo.contact,
         sellerId: item.Product.sellerId,
-        productId: item.Product.id
+        productId: item.Product.id,
+        chargeId: charge.id
       };
       this.transactionService.create(transaction).subscribe(transaction => console.log(transaction));
     }
@@ -106,37 +108,36 @@ export class CheckoutDetailComponent implements OnInit {
     // console.log("Items: ", this.items);
     // console.log(this.checkoutForm.value)
     // console.log("total", this.grandTotal);
-    console.log(this.createTransfer(this.items));
+    // console.log(this.createTransfer(this.items));
     this.openCheckOut(this.grandTotal * 100)
   }
 
   openCheckOut(grandTotal) {
-    this.sellersTransfer = this.createTransfer(this.items);
-    return this.checkoutService.openCheckout(grandTotal, this.sellersTransfer);
+    // this.sellersTransfer = this.createTransfer(this.items);
+    return this.checkoutService.openCheckout(grandTotal);
   }
 
-  // private methods:
-  private createTransfer(items) {
-    let transfers = []
-    for (let item of items) {
-      console.log(item);
-      let inArray = false;
-      for (let i = 0; i < transfers.length; i++) {
-        if (transfers[i].id == item.Product.User.id) {
-          transfers[i].amount += item.Product.currentAskPrice * item.quantity;
-          inArray = true;
-        }
-      }
-      if (inArray == false) {
-        transfers.push({
-          id: item.Product.User.id,
-          stripeId: item.Product.User.stripeId,
-          amount: item.Product.currentAskPrice * item.quantity
-        })
-      }
-    }
-    return transfers;
-  }
+  // // private methods:
+  // private createTransfer(items) {
+  //   let transfers = []
+  //   for (let item of items) {
+  //     let inArray = false;
+  //     for (let i = 0; i < transfers.length; i++) {
+  //       if (transfers[i].id == item.Product.User.id) {
+  //         transfers[i].amount += item.Product.currentAskPrice * item.quantity;
+  //         inArray = true;
+  //       }
+  //     }
+  //     if (inArray == false) {
+  //       transfers.push({
+  //         id: item.Product.User.id,
+  //         stripeId: item.Product.User.stripeId,
+  //         amount: item.Product.currentAskPrice * item.quantity
+  //       })
+  //     }
+  //   }
+  //   return transfers;
+  // }
 
   private emptyCart() {
     this.checkoutService.emptyCart().subscribe(res => {

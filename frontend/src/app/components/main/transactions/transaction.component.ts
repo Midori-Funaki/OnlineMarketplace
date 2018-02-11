@@ -13,7 +13,7 @@ import { User } from '../../../models/User';
 export class TransactionComponent implements OnInit {
   transactions: Transaction[] = [];
   purchases: Transaction[] = [];
-  solds: Transaction[] =[];
+  solds: Transaction[] = [];
   user: User;
 
   constructor(
@@ -27,20 +27,32 @@ export class TransactionComponent implements OnInit {
       .then(_ => this.getAll())
   }
 
-  getAll() {
+  getAll():void {
     // console.log(this.user);
     this.transactionService.getAll().subscribe(transactions => {
       this.transactions = transactions;
-      console.log('TRANSACTIONS',this.transactions);
-      this.purchases = transactions.filter(transaction => {
-        return transaction.buyerId == this.user.id;
-      });
-      console.log('PUCHASE',this.purchases);
-      this.solds = transactions.filter(transaction => {
-        return transaction.sellerId == this.user.id;
-      });
-      console.log('SOLD',this.solds);
+      if (this.transactions.length > 0) {
+        this.purchases = transactions.filter(transaction => {
+          return transaction.buyerId == this.user.id;
+        });
+        this.solds = transactions.filter(transaction => {
+          return transaction.sellerId == this.user.id;
+        });
+      }
     });
+  }
+
+  onShipping(id) {
+    this.transactionService.toShipping(id).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  onConfirm(id) {
+    this.transactionService.toConfirm(id).toPromise().then(transaction => {
+      console.log(transaction);
+      this.transactionService.toTransfer(transaction.id).subscribe(res => console.log(res));
+    })
   }
 
 }

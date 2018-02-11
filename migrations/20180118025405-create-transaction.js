@@ -62,6 +62,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
+      chargeId: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      transferId: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -7,11 +7,11 @@
     "dialect": "postgresql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "ivan",
+    "password": "password",
+    "database": "shop_dev",
+    "host": "localhost",
+    "dialect": "postgresql"
   },
   "production": {
     "username": "root",
