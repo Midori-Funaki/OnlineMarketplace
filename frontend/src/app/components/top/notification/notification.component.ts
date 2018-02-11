@@ -21,7 +21,7 @@ interface Message {
       })),
       state('failShow', style({
         // background: 'rgba(255, 0, 0, 0.500)',
-        border:'2px solid rgb(220,41,66)',
+        border:'2px solid rgb(255,36,0)',
         opacity: 1
       })),
       state('hide', style({

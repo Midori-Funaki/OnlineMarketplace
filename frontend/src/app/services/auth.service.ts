@@ -36,7 +36,7 @@ export class AuthService {
             this.isLoggedIn = true;
             this.isLoggedIn_sub.next(this.isLoggedIn);
             this.router.navigate(['/']);
-            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your chat and other function.');
+            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your buy and sell functions.');
         },(err)=>{
             this.notificationService.sendErrorMessage('LogIn Failed!', 'Please try again.');
         });
