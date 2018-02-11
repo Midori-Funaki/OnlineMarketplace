@@ -49,7 +49,7 @@ export class AuthService {
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['/']);
-            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your chat and other function.');
+            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your buy and sell functions.');
         },(err)=>{
             this.notificationService.sendErrorMessage('LogIn Failed!', 'Please check your facebook settings.');
         });
@@ -62,7 +62,7 @@ export class AuthService {
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
             this.router.navigate(['/']);
-            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your chat and other function.');
+            this.notificationService.sendSuccessMessage('Login Successful!', 'You can now access your buy and sell functions.');
         },(err)=>{
             this.notificationService.sendErrorMessage('LogIn Failed!', 'Please check your google settings.');
         });
@@ -88,7 +88,7 @@ export class AuthService {
         this.isLoggedIn_sub.next(this.isLoggedIn);
         localStorage.removeItem('myToken');
         this.router.navigate(['/']);
-        this.notificationService.sendSuccessMessage('Logout Successful!', 'Please do come back again.');
+        this.notificationService.sendSuccessMessage('Logout Successful!', 'See you next time.');
     }
 
     signup(userInfo){
@@ -99,7 +99,7 @@ export class AuthService {
             this.isLoggedIn_sub.next(this.isLoggedIn);
             localStorage.setItem('myToken',this.token);
             $('#SignupForm').modal('hide');
-            this.notificationService.sendSuccessMessage('Registration Successful!', 'Welcome to use this shopping platform.');
+            this.notificationService.sendSuccessMessage('Registration Successful!', 'Welcome to Deals Hub.');
         }, (err)=>{
             this.signupError_subj.next(true);
             setTimeout(()=>{
