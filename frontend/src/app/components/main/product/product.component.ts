@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit {
     this.init();
     this.productService.searchEvent$.subscribe(products => {
       this.products = this.sortByTags(products);
-      console.log("thisproduct: ",this.products);
+      // console.log("thisproduct: ",this.products);
       this.InitDisplay();
     })
   }
@@ -66,9 +66,9 @@ export class ProductComponent implements OnInit {
 
 
   InitDisplay() {
-    if (!this.products.length) {
-      this.noResult = true;
-    } else {
+    // if (!this.products.length) {
+    //   this.noResult = true;
+    // } else {
       if (this.products.length > this.increment) {
         this.loadMore = true;
         this.displayproducts = this.products.slice(0, this.increment);
@@ -76,7 +76,7 @@ export class ProductComponent implements OnInit {
       } else {
         this.displayproducts = this.products.slice(0, this.products.length);
       }
-    }
+    // }
   }
 
   loadNext() {
