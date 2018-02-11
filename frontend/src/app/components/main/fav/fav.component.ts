@@ -10,7 +10,7 @@ import { ProductsService } from '../../../services/products.service';
 export class FavComponent implements OnInit {
 
   favourite: Object[]=[];
-  noResult:boolean = false;
+  noResult:boolean = true;
 
   constructor(
       private productsService: ProductsService

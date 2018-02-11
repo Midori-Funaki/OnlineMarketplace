@@ -1,6 +1,8 @@
-<div >
+<div class="mt-5">
   <div *ngIf="noResult; else loadResult">
-    No Result
+    <div class="text-center">
+      <h3>Please add something to your collection...</h3>
+    </div>
   </div>
   <ng-template #loadResult>
       <div class="products-container">

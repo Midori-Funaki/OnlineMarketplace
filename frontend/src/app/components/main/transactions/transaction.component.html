@@ -9,79 +9,86 @@
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="purchase" role="tabpanel" aria-labelledby="purchase-tab">
-      <div>
-        <div class="table-container">
-          <div class="row table-title">
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Date</div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Transaction</div>
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">Product</div>
+      <div class="table-container">
+        <div class="row table-title">
+          <div class="col-xs-1 col-sm-1 text-center">Date</div>
+          <div class="col-xs-5 col-sm-5 text-center">Item</div>
+          <div class="col-xs-1 col-sm-1 text-center">Unit Price</div>
+          <div class="col-xs-1 col-sm-1 text-center">Quantity</div>
+          <div class="col-xs-2 col-sm-2 text-center">Total</div>
+          <div class="col-xs-2 col-sm-2 text-center">Action</div>
+        </div>
+        <div class="row detail-row pt-3 pb-3" *ngFor="let purchase of purchases;">
+          <div class="col-xs-1 col-sm-1 align-self-center text-center">
+            {{ purchase.updatedAt | date}}
           </div>
-          <div class="row detail-row pt-3 pb-3" *ngFor="let purchase of purchases;">
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-              {{ purchase.updatedAt | date}}
-            </div>
-            <div *ngIf="purchase.Product != null" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-              Qty: {{ purchase.Product.quantity }}
-              <br> TOTAL: $ {{ purchase.price }}
-              <br> Status: {{ purchase.status }}
-            </div>
-            <div *ngIf="purchase.Product != null" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-              <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                  <img class="transaction-product-img" [src]="purchase.ProductPhotos[0].url">
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                  {{ purchase.Product.brand }}
-                  <br> {{ purchase.Product.title }}
-                  <br> {{ purchase.Product.color }}
-                </div>
-                <div class="col-xs-2 align-self-center">
-                  <button class="btn btn-primary font-italic" *ngIf="purchase.status < 3; else confirmed" (click)="onConfirm(purchase.id)">Confirm this item</button>
-                  <ng-template #confirmed>
-                    Thanks for purchase!
-                  </ng-template>
-                </div>
-              </div>
-            </div>
+          <div class="col-xs-2 col-sm-2 text-center">
+            <img class="transaction-product-img" [src]="purchase.ProductPhotos[0].url">
+          </div>
+          <div class="col-xs-3 col-sm-3">
+            {{ purchase.Product.brand }}
+            <br> {{ purchase.Product.title }}
+            <br> {{ purchase.Product.color }}
+          </div>
+          <div class="col-xs-1 col-sm-1 align-self-center text-center">
+            {{ purchase.price | currency:'HKD':'code'}}
+          </div>
+          <div class="col-xs-1 col-sm-1 align-self-center text-center font-italic">
+            {{ purchase.quantity}}
+          </div>
+          <div class="col-xs-2 col-sm-2 align-self-center text-center">
+            {{ purchase.price * purchase.quantity | currency:'HKD':'code'}}
+          </div>
+          <div class="col-xs-2 col-sm-2 align-self-center text-center">
+            <div class="font-weight-bold">{{purchaseStatus[purchase.status -1]}}</div>
+            <button class="btn btn-primary font-italic" (click)="confirmRecipt(purchase.id)" *ngIf="purchase.status == 2">
+              Confirm this item
+            </button>
           </div>
         </div>
       </div>
     </div>
-  <div class="tab-pane fade" id="sell" role="tabpanel" aria-labelledby="sell-tab">
-    <div class="table-container" *ngIf="solds && solds.length > 0">
-      <div class="row table-title">
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Date</div>
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Transaction</div>
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">Product</div>
-      </div>
-      <div class="row detail-row pt-3 pb-3" *ngFor="let sold of solds;">
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-          {{ sold.updatedAt | date}}
+    <div class="tab-pane fade" id="sell" role="tabpanel" aria-labelledby="sell-tab">
+      <div class="table-container" *ngIf="solds && solds.length > 0">
+        <div class="row table-title">
+          <div class="col-xs-1 col-sm-1">Date</div>
+          <div class="col-xs-5 col-sm-5">Item</div>
+          <div class="col-xs-1 col-sm-1">Unit Price</div>
+          <div class="col-xs-1 col-sm-1">Quantity</div>
+          <div class="col-xs-2 col-sm-2">Total</div>
+          <div class="col-xs-2 col-sm-2">Action</div>
         </div>
-        <div *ngIf="sold.Product != null" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-          Qty: {{ sold.Product.quantity }}
-          <br> TOTAL: $ {{ sold.price }}
-          <br> Status: {{ sold.status }}
-        </div>
-        <div *ngIf="sold.Product != null" class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <img class="transaction-product-img" [src]="sold.ProductPhotos[0].url">
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              {{ sold.Product.brand }}
-              <br> {{ sold.Product.title }}
-              <br> {{ sold.Product.color }}
-            </div>
-            <div class="col-xs-2 align-self-center">
-              <button class="btn btn-primary font-italic" (click)="onShipping(sold.id)">Ship this item</button>
-            </div>
+        <div class="row detail-row pt-3 pb-3" *ngFor="let sold of solds">
+          <div class="col-xs-1 col-sm-1 align-self-center text-center">
+            {{ sold.updatedAt | date}}
+          </div>
+          <div class="col-xs-2 col-sm-2 text-center">
+            <img class="transaction-product-img" [src]="sold.ProductPhotos[0].url">
+          </div>
+          <div class="col-xs-3 col-sm-3">
+            {{ sold.Product.brand }}
+            <br> {{ sold.Product.title }}
+            <br> {{ sold.Product.color }}
+          </div>
+          <div class="col-xs-1 col-sm-1 align-self-center text-center">
+            {{ sold.price | currency:'HKD':'code'}}
+          </div>
+          <div class="col-xs-1 col-sm-1 align-self-center text-center font-italic">
+            {{ sold.quantity }}
+          </div>
+          <div class="col-xs-2 col-sm-2 align-self-center text-center">
+            {{ sold.price * sold.quantity | currency:'HKD':'code'}}
+          </div>
+          <div class="col-xs-2 col-sm-2 align-self-center text-center">
+            <div class="font-weight-bold">{{soldStatus[sold.status -1]}}</div>
+            <button class="btn btn-primary font-italic" (click)="confirmShipping(sold.id)" *ngIf="sold.status == 1">
+              Ship this item
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 
@@ -93,13 +100,13 @@
 <app-sold></app-sold>
 </div> -->
 <ng-template #empty>
-<div class="container mt-5">
-  <div class="text-center">
-    <h2>
-      You don't have any orders!
-    </h2>
-    <button class="btn back-btn btn-lg" routerLink='/'>back</button>
+  <div class="container mt-5">
+    <div class="text-center">
+      <h2>
+        You don't have any orders!
+      </h2>
+      <button class="btn back-btn btn-lg" routerLink='/'>back</button>
+    </div>
   </div>
-</div>
 
 </ng-template>
