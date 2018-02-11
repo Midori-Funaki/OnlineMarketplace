@@ -119,9 +119,6 @@ select,
   color: rgb(137,212,26);
   transform: translate(0,-10px);
 }
-.ng-dirty ~ .sell-form .radio-title-label {
-  color: rgb(137,212,26);
-}
 .photo-upload-section {
   margin-top: 50px;
 }
