@@ -15,11 +15,13 @@ interface Message {
   animations:[
     trigger('Notification', [
       state('successShow', style({
-        background: 'rgba(0, 128, 0, 0.500)',
+        // background: 'rgba(0, 128, 0, 0.500)',
+        border:'2px solid rgb(137,212,26)',
         opacity: 1
       })),
       state('failShow', style({
-        background: 'rgba(255, 0, 0, 0.500)',
+        // background: 'rgba(255, 0, 0, 0.500)',
+        border:'2px solid rgb(220,41,66)',
         opacity: 1
       })),
       state('hide', style({
