@@ -41,7 +41,7 @@
           </div>
           <div class="col-xs-2 col-sm-2 align-self-center text-center">
             <div class="font-weight-bold">{{purchaseStatus[purchase.status -1]}}</div>
-            <button class="btn btn-primary font-italic" (click)="confirmRecipt(purchase.id)" *ngIf="purchase.status == 2">
+            <button class="btn btn-info font-italic" (click)="confirmRecipt(purchase.id)" *ngIf="purchase.status == 2">
               Confirm this item
             </button>
           </div>
@@ -81,7 +81,7 @@
           </div>
           <div class="col-xs-2 col-sm-2 align-self-center text-center">
             <div class="font-weight-bold">{{soldStatus[sold.status -1]}}</div>
-            <button class="btn btn-primary font-italic" (click)="confirmShipping(sold.id)" *ngIf="sold.status == 1">
+            <button class="btn btn-info font-italic" (click)="confirmShipping(sold.id)" *ngIf="sold.status == 1">
               Ship this item
             </button>
           </div>
