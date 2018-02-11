@@ -29,14 +29,14 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(param => {
       this.getProduct(param['id']);
-      this.productsService.getFavId(param['id']).subscribe((res)=>{
+      this.productsService.getFavId(param['id']).subscribe((res) => {
         if (res) {
           this.notaddedFav = false;
         }
       });
     });
 
-    this.authService.isLoggedInNow().subscribe((status)=>{
+    this.authService.isLoggedInNow().subscribe((status) => {
       this.isLoggedIn = status;
     });
     this.authService.loggedIn();
@@ -45,9 +45,9 @@ export class ProductDetailComponent implements OnInit {
   getProduct(id) {
     this.productsService.getProduct(id)
       .subscribe(product => {
-      this.product = product;
-      this.imgsrc = product.ProductPhotos[0].url;
-    })
+        this.product = product;
+        this.imgsrc = product.ProductPhotos[0].url;
+      })
   }
 
   changeImage(event) {
@@ -55,18 +55,19 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(id) {
-    this.productsService.addToCart({ 
-        id: id, 
-        quantity: this.quantity, 
-        productId: this.product.id 
-      })
-      .subscribe(_=> {
+    this.productsService.addToCart({
+      id: id,
+      quantity: this.quantity,
+      productId: this.product.id
+    })
+      .subscribe(res => {
+        // console.log(res);
         this.notificationService.sendSuccessMessage('Product Added!', 'Your product has been added to the cart.');
-      });
+      }, (err) => this.notificationService.sendErrorMessage('Error!', 'Oops, we do not seem to have enough stock'));
   }
 
   addToFav(productId) {
-    this.productsService.addToFav(productId).subscribe((res)=>{
+    this.productsService.addToFav(productId).subscribe((res) => {
       this.notaddedFav = false;
       this.notificationService.sendSuccessMessage('Favourite Added!', 'Now you can view this product in Favourite.');
     })

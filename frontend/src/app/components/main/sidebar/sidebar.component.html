@@ -33,8 +33,10 @@
       Price
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <a class="dropdown-item" href="#">New</a>
-      <a class="dropdown-item" href="#">Used</a>
+      <a class="dropdown-item" (click)="onSorting($event)" attr="new">New</a>
+      <a class="dropdown-item" (click)="onSorting($event)" attr="used">Used</a>
+      <a class="dropdown-item" (click)="onSorting($event)" attr="high">Price(low to high)</a>
+      <a class="dropdown-item" (click)="onSorting($event)" attr="low">Price(high to low)</a>
     </div>
 
   </div>

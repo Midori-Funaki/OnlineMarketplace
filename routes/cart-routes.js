@@ -28,9 +28,12 @@ class ProductRoutes {
     return this.cartService.post(req.user, req.body)
       .then((cart) => {
         // console.log("cart: ", cart )
-        res.json(cart)
+        res.json(cart);
       })
-      .catch((err) => res.status(500).json(err))
+      .catch((err) => {
+        // console.log(err);
+        res.status(500).json(err);
+      })
   }
 
   put(req, res) {

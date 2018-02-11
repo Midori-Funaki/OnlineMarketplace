@@ -30,31 +30,42 @@ class CartService {
   }
 
   post(user, productInfo) {
-    // console.log("add to cart", user, productInfo);
+    //{ id: number, quantity: number, productId: number }
     return Cart.findOne({
       where: {
         userId: user.id,
         productId: productInfo.productId
-      }
+      }, include: [{
+        model: Product
+      }]
     }).then(cart => {
+      // console.log("cart", cart);
       if (cart) {
-        console.log("cart: ", cart.id);
-        cart.quantity += productInfo.quantity;
-        cart.save();
-        return cart;
+        // console.log("cart: ", cart.id);
+        if (cart.quantity + productInfo.quantity <= cart.Product.quantity) {
+          cart.quantity += productInfo.quantity;
+          return cart.save();
+        }
+        else {
+          throw new Error("Not enough stock!");
+        }
+        // return cart;
       }
       else {
         return Cart.create({
           userId: user.id,
           productId: productInfo.productId,
           quantity: productInfo.quantity
-        }).then(cart => {
-          return cart;
         })
       }
-    }).catch((err) => {
-      return err;
     })
+      .then(cart => {
+        // console.log("cart", cart);
+        return cart;
+      }, err => {
+        // console.log("err", err);
+        throw new Error(err);
+      })
   }
 
   put(user, productInfo) {
@@ -79,10 +90,10 @@ class CartService {
     return Cart.findById(cartId)
       .then((cart) => {
         console.log(cart);
-      return cart.destroy();
-    }).catch((err) => {
-      return err;
-    })
+        return cart.destroy();
+      }).catch((err) => {
+        return err;
+      })
   }
 
   empty(userId) {

@@ -23,6 +23,7 @@ export class ProductsService {
     private http: HttpClient,
     private authService: AuthService
   ) { }
+  onSort$ = new Subject();
 
   getProducts(): Observable<string[]> {
     return this.http.get<string[]>('/api/products/');

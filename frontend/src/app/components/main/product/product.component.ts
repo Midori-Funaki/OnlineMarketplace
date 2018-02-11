@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 import { getParseErrors } from '@angular/compiler/src/util';
 import { Observable } from 'rxjs/Observable';
+import { Product } from '../../../models/Product';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProductComponent implements OnInit {
 
   displayproducts: string[];
-  products: string[];
+  products: any[];
   counter: number;
   increment: number = 10;
   noResult: boolean = false;
@@ -42,6 +43,40 @@ export class ProductComponent implements OnInit {
       console.log('Using the searchkey to get products');
       // this.noResult = true;
     }
+    this.productService.onSort$.subscribe(attr => {
+      console.log(attr);
+      if (attr == "new") {
+        this.products = this.products.sort((a, b) => {
+          if (a.condition == attr && b.condition != attr) {
+            return -1;
+          } else if (a.condition == attr && b.condition == attr) {
+            return 0;
+          } else {
+            return 1;
+          }
+        })
+      } else if (attr == "used") {
+        this.products = this.products.sort((a, b) => {
+          if (a.condition == attr && b.condition != attr) {
+            return -1;
+          } else if (a.condition == attr && b.condition == attr) {
+            return 0;
+          } else {
+            return 1;
+          }
+        })
+      } else if (attr == "high") {
+        this.products = this.products.sort((a, b) => {
+          return a.curentBidPrice - b.curentBidPrice;
+        })
+      } else if (attr == "low") {
+        this.products = this.products.sort((a, b) => {
+          return b.curentBidPrice - a.curentBidPrice;
+        })
+      }
+      // console.log(this.products);
+      this.InitDisplay();
+    })
   }
 
   getAll() {
@@ -69,13 +104,13 @@ export class ProductComponent implements OnInit {
     // if (!this.products.length) {
     //   this.noResult = true;
     // } else {
-      if (this.products.length > this.increment) {
-        this.loadMore = true;
-        this.displayproducts = this.products.slice(0, this.increment);
-        this.counter += this.increment;
-      } else {
-        this.displayproducts = this.products.slice(0, this.products.length);
-      }
+    if (this.products.length > this.increment) {
+      this.loadMore = true;
+      this.displayproducts = this.products.slice(0, this.increment);
+      this.counter += this.increment;
+    } else {
+      this.displayproducts = this.products.slice(0, this.products.length);
+    }
     // }
   }
 
