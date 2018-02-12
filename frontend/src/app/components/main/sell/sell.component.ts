@@ -39,6 +39,7 @@ export class SellComponent implements OnInit {
   title: string = '';
   imageurl: string = '';
   uploadResult: any;
+  transaction: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -190,8 +191,15 @@ export class SellComponent implements OnInit {
   getSellInfoForEdit() {
     this.getSellProduct(this.productId)
     .then((data) => {
-      console.log('PRODUCT DATA',data);
-      console.log('PRODUCT DATA',data.Transactions);
+      // console.log('PRODUCT DATA',data);
+      // console.log('PRODUCT DATA',data.Transaction);
+      if(data.Transaction == null) {
+        this.transaction = false;
+        // console.log('UNDEFINED!!!!')
+      } else if (data.Transactions != null) {
+        this.transaction = true;
+      }
+      // console.log('TRANSACTION BOOLEAN',this.transaction);
       this.sellForm = new FormGroup({
         category: new FormControl(data.Category.title),
         brand: new FormControl(data.brand),
@@ -208,6 +216,7 @@ export class SellComponent implements OnInit {
       this.filterTitle(data.brand);
       this.colors.push(data.color);
       this.colors.push('other');
+
       this.sellForm.controls.category.markAsDirty(data.Category.title);
       this.sellForm.controls.brand.markAsDirty(data.brand);
       this.sellForm.controls.title.markAsDirty(data.title);
@@ -217,6 +226,7 @@ export class SellComponent implements OnInit {
       this.sellForm.controls.currentAskPrice.markAsDirty(data.currentAskPrice);
       this.sellForm.controls.condition.markAsDirty(data.condition);
       this.sellForm.controls.description.markAsDirty(data.description);
+
       for(let i=0; i<data.ProductPhotos.length; i++) {
         let cloudinaryId = data.ProductPhotos[i].url.match(/dealshub\/[a-z0-9]+/g);
         if (cloudinaryId === null){
@@ -303,13 +313,21 @@ export class SellComponent implements OnInit {
   editSellItem() {
     this.sellForm.value.id = this.productId;
     this.sellForm.value.photos = this.images;
-
-    console.log("sending edit info @ sell compo ",this.sellForm.value);
-
+    // console.log("sending edit info @ sell compo ",this.sellForm.value);
     this.sellService.editSellItem(this.sellForm.value)
   }
 
   deleteSellItem() {
-
+    console.log('Deleting')
+    console.log('Delete item id',this.productId);
+    console.log('Transaction boolean',this.transaction);
+    if(this.transaction == false) {
+      this.productsService.deleteSellItem(this.productId);
+      for(let image of this.images){
+        if(/dealshub/.test(image.id)){
+          this.deleteFromCloudinary(image.id);
+        }
+      }
+    }
   }
 }

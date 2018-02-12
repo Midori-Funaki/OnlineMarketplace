@@ -75,9 +75,10 @@ class ProductRoutes{
   }
 
   delete(req,res){
+    console.log('Received del req param id',req.params.id);
     return this.productService.delete(req.params.id)
-      .then(()=>{
-        res.send('Product Deletion Completed')
+      .then((result)=>{
+        res.send('RESULT product-routes',result)
       })
       .catch((err)=>{res.status(500).json(err)})
   }

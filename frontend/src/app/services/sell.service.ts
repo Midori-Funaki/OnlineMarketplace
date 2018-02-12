@@ -98,7 +98,7 @@ export class SellService {
   }
 
   deleteImageByIdFromCloudinary(id){
-    return this.http.delete('api/images/' + id)
+    return this.http.delete('api/images/dealshub/' + id)
   }
 
   // deleteImageByIdFromDb(id) {

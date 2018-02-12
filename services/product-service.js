@@ -67,9 +67,6 @@ class ProductService {
       where: {
         id: productId
       },
-      include: {
-        model: ProductPhoto
-      },
       attributes: { 
         exclude: ['CategoryId'] 
       },
@@ -77,6 +74,8 @@ class ProductService {
         model: Category
       },{
         model:ProductPhoto
+      },{
+        model: Transaction
       }]
     })
       .then((product) => {
@@ -102,8 +101,6 @@ class ProductService {
       }
     }, {
       model: ProductPhoto
-    },{
-      model: Transactions
     }]
     }).then((result) => {
       return result
@@ -194,7 +191,13 @@ class ProductService {
     return Product.destroy({
       where: { id: productId }
     }).then(() => {
-      console.log('Deleted product: ', productId)
+      return ProductPhoto.destroy({
+        where: {productId : productId}
+      }).then(()=>{
+        console.log('Deleted photos of :',productId);
+      }).catch((err) => {
+        console.log('Err @ product-serviceJS', productId)
+      })
     }).catch(err => {
       console.log(err)
     })
