@@ -5,9 +5,17 @@
     grid-template-columns: 80% 20%;
     float: right;
 }
-
 #search-submit-btn {
     border-radius: 5px;
     margin: 0px;
     height: 40px;
+    background: transparent;
+    border: none;
+}
+#search-submit-btn:hover {
+    cursor: pointer;
+}
+.search-input {
+    width: 125%;
+    padding-right: 30px;
 }
