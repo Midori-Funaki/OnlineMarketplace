@@ -11,20 +11,25 @@ const Sequelize = require('sequelize');
 
 class ProductService {
 
-  constructor() { }
+  constructor() {}
 
   getAll() {
     // console.log("get all...")
     return Product.findAll({
-      include: [
-        {
-          model: Category
+        where: {
+          quantity: {
+            [Op.gt]: 0
+          }
         },
-        {
-          model: ProductPhoto
-        }],
-      limit: 60
-    })
+        include: [{
+            model: Category
+          },
+          {
+            model: ProductPhoto
+          }
+        ],
+        limit: 60
+      })
       .then(products => {
         return products;
       }).catch(err => {
@@ -34,13 +39,16 @@ class ProductService {
 
   getSell(user) {
     return Product.findAll({
-      where: {
-        sellerId: user.id
-      },
-      include: [{
-        model: ProductPhoto
-      }]
-    })
+        where: {
+          sellerId: user.id,
+          quantity: {
+            [Op.gt]: 0
+          }
+        },
+        include: [{
+          model: ProductPhoto
+        }]
+      })
       .then(products => {
         return products
       })
@@ -51,10 +59,10 @@ class ProductService {
 
   getColor(title) {
     return Product.findAll({
-      where: {
-        title: title
-      }
-    })
+        where: {
+          title: title
+        }
+      })
       .then((result) => {
         return result.map((e) => {
           return e.color
@@ -67,17 +75,17 @@ class ProductService {
 
   get(productId) {
     return Product.findById(productId, {
-      attributes: {
-        exclude: ['CategoryId']
-      },
-      include: [{
-        model: Category
-      }, {
-        model: ProductPhoto
-      }, {
-        model: Transaction
-      }]
-    })
+        attributes: {
+          exclude: ['CategoryId']
+        },
+        include: [{
+          model: Category
+        }, {
+          model: ProductPhoto
+        }, {
+          model: Transaction
+        }]
+      })
       .then((product) => {
         return product;
       }).catch(err => {
@@ -89,7 +97,9 @@ class ProductService {
     let wordArr = words.query.split(' ');
     let filter = [];
     for (let word of wordArr) {
-      filter.push({ 'keyword': word });
+      filter.push({
+        'keyword': word
+      });
     }
     console.log("filter: ", filter);
 
@@ -113,10 +123,10 @@ class ProductService {
     // console.log(productInfo);
     // let category;
     return Promise.all([Category.findOne({
-      where: {
-        title: productInfo.category
-      }
-    }), this.insertHighestBid(productInfo)])
+        where: {
+          title: productInfo.category
+        }
+      }), this.insertHighestBid(productInfo)])
       .then(([category, currentBidPrice]) => {
         // console.log("data is", category,currentBidPrice )
         return Product.create({
@@ -148,8 +158,8 @@ class ProductService {
       }).catch((err) => {
         return err;
       })
-    }})
   }
+
 
   insertHighestBid(product) {
     return Product.findAll({
@@ -206,10 +216,14 @@ class ProductService {
 
   delete(productId) {
     return Product.destroy({
-      where: { id: productId }
+      where: {
+        id: productId
+      }
     }).then(() => {
       return ProductPhoto.destroy({
-        where: { productId: productId }
+        where: {
+          productId: productId
+        }
       }).then(() => {
         console.log('Deleted photos of :', productId);
       }).catch((err) => {
@@ -220,5 +234,4 @@ class ProductService {
     })
   }
 }
-
 module.exports = ProductService;
