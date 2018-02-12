@@ -20,15 +20,14 @@ export class ProductComponent implements OnInit {
 
   @Input() searchKey: string;
   @Input() searchedProducts: any;
-  // @Input() searchSubject: any;
 
   constructor(private productService: ProductsService) { }
 
   ngOnInit() {
     this.init();
     this.productService.searchEvent$.subscribe(products => {
+      console.log(products);
       this.products = this.sortByTags(products);
-      // console.log("thisproduct: ",this.products);
       this.InitDisplay();
     })
   }
@@ -38,18 +37,17 @@ export class ProductComponent implements OnInit {
     if (!this.searchKey) {
       this.getAll();
     } else {
-      // call search Service
       this.getSearched();
       console.log('Using the searchkey to get products');
-      // this.noResult = true;
     }
     this.productService.onSort$.subscribe(attr => {
-      console.log(attr);
       if (attr == "new") {
         this.products = this.products.sort((a, b) => {
           if (a.condition == attr && b.condition != attr) {
             return -1;
           } else if (a.condition == attr && b.condition == attr) {
+            return 0;
+          } else if (a.condition != attr && b.condition != attr) {
             return 0;
           } else {
             return 1;
@@ -60,6 +58,8 @@ export class ProductComponent implements OnInit {
           if (a.condition == attr && b.condition != attr) {
             return -1;
           } else if (a.condition == attr && b.condition == attr) {
+            return 0;
+          } else if (a.condition != attr && b.condition != attr) {
             return 0;
           } else {
             return 1;
@@ -74,7 +74,6 @@ export class ProductComponent implements OnInit {
           return b.curentBidPrice - a.curentBidPrice;
         })
       }
-      // console.log(this.products);
       this.InitDisplay();
     })
   }
@@ -94,16 +93,11 @@ export class ProductComponent implements OnInit {
 
   getSearched() {
     this.products = this.sortByTags(this.searchedProducts);
-    // this.products = this.searchedProducts;
-    // console.log(this.products);
     this.InitDisplay();
   }
 
 
   InitDisplay() {
-    // if (!this.products.length) {
-    //   this.noResult = true;
-    // } else {
     if (this.products.length > this.increment) {
       this.loadMore = true;
       this.displayproducts = this.products.slice(0, this.increment);

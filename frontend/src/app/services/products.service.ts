@@ -33,7 +33,7 @@ export class ProductsService {
   getSearchedProduct(searchkey: string): Observable<any> {
     // let headers = new HttpHeaders().set('Content-Type', 'text/xml');
     // headers.append('words',searchkey);
-    console.log('searchkey @ products.service',searchkey);
+    // console.log('searchkey @ products.service',searchkey);
     return this.http.get<any>('/api/products/search?query=' + searchkey)
     
   }
