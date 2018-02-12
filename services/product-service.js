@@ -70,18 +70,6 @@ class ProductService {
       where: {
         id: productId
       },
-<<<<<<< HEAD
-      include: {
-        model: ProductPhoto
-      },
-      attributes: {
-        exclude: ['CategoryId']
-      },
-      include: [{
-        model: Category
-      }, {
-        model: ProductPhoto
-=======
       attributes: { 
         exclude: ['CategoryId'] 
       },
@@ -91,7 +79,6 @@ class ProductService {
         model:ProductPhoto
       },{
         model: Transaction
->>>>>>> midori
       }]
     })
       .then((product) => {
@@ -114,31 +101,6 @@ class ProductService {
         model:Tag,
         where: {
           [Op.or] : filter
-<<<<<<< HEAD
-        },
-        through: { attributes: [] }
-      }],
-      includeIgnoreAttributes: false, //force to ignore children attribute
-      required: true,
-      attributes:[
-        'id', [Sequelize.fn('COUNT', Sequelize.col('Tags->ProductTag.productId')),'tagCount']
-      ],
-      group: ['Product.id'],
-      order: [
-            ['count', 'DESC']
-        ]
-    }).then((result) => {
-      return result
-    }).catch((err) => {
-      return err
-    */
-
-      include: [{
-        model: Tag,
-        where: {
-          [Op.or]: filter
-=======
->>>>>>> midori
         }
       }, {
         model: ProductPhoto
@@ -157,24 +119,7 @@ class ProductService {
       where: {
         title: productInfo.category
       }
-    })
-<<<<<<< HEAD
-      .then(category => {
-        return Product.create({
-          title: productInfo.title,
-          description: productInfo.description,
-          size: productInfo.size,
-          color: productInfo.color,
-          condition: productInfo.condition,
-          // curentBidPrice: productInfo.curentBidPrice,
-          currentAskPrice: productInfo.currentAskPrice,
-          quantity: productInfo.quantity,
-          sellerId: user.id,
-          // buyerId: productInfo.INTEGER,
-          categoryId: category.id,
-          brand: productInfo.brand
-=======
-    .then(category => {
+    }).then(category => {
       return Product.create({
         title: productInfo.title,
         description: productInfo.description,
@@ -189,20 +134,16 @@ class ProductService {
         categoryId: category.id,
         brand: productInfo.brand
       })      
-    })
-    .then(product => {
+    }).then((product) => {
       for (let photo of productInfo.photos) {
         ProductPhoto.create({
           url: photo.url,
           productId: product.id
         }).then(photo => {
           console.log(photo);
->>>>>>> midori
-        })
-      })
-      .then(product => {
-        for (let photo of productInfo.photos) {
-          ProductPhoto.create({
+        }).then(product => {
+          for (let photo of productInfo.photos) {
+            ProductPhoto.create({
             url: photo.url,
             productId: product.id
           }).then(photo => {
@@ -210,10 +151,10 @@ class ProductService {
           })
         }
         return product;
-      })
-      .catch((err) => {
+      }).catch((err) => {
         return err;
       })
+    }})
   }
 
   insertHighestBid(product){
