@@ -28,7 +28,7 @@ export class SellComponent implements OnInit {
   brands: string[] = [];
   titles: string[] = [];
   images: Array<any> = [];//image array
-  sizes: number[] = [20,20.5,21,21.5,22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30];
+  sizes: number[] = [22,22.5,23,23.5,24,24.5,25,25.5,26,26.5,27,27.5,28,28.5,29,29.5,30,30.5,31,31.5,32,32.5,33,33.5,34,34.5,35,35.5,36,36.5,37,37.5,38,38.5,39,39.5,40,40.5,41,41.5,42,42.5,43,43.5,44,44.5,45];
   colors: string[] = [];
   isOther: boolean = false;
   user: User;
@@ -241,7 +241,7 @@ export class SellComponent implements OnInit {
           url: data.ProductPhotos[i].url
         });
       }
-      console.log('IMAGES ',this.images);
+      // console.log('IMAGES ',this.images);
     })
     .catch((err) => {
       console.log(err)

@@ -50,12 +50,21 @@ export class SellService {
 
   getBrandsByCategory(categoryTitle:string){
     this.http.get<string[]>('/api/categories/brands/'+categoryTitle).subscribe(result=>{
-      this.brand$.next(result);
+      let data:string[] = result.sort((a,b) => {
+        if (a <b) {
+          return -1;
+        }
+        if (a > b) {
+          return 1;
+        }
+        return 0;
+      })
+      this.brand$.next(data);
     });
   }
 
   getBrandById(id:any) {
-    console.log('id @ sell.service ',id);
+    // console.log('id @ sell.service ',id);
     this.http.get<string>('/api/categories/name/' + id).subscribe(brand => {
       this.brandName$.next(brand);
     })
@@ -63,7 +72,7 @@ export class SellService {
 
   getTitlesByBrands(categoryTitle:string, brand:string){
     this.http.get<string[]>('/api/categories/titles/'+categoryTitle+'/'+brand).subscribe(result=>{
-      console.log(result);
+      // console.log(result);
       let data:string[] = result.sort((a,b) => {
         if (a <b) {
           return -1;
@@ -85,7 +94,7 @@ export class SellService {
           colors.push(each);
         }
       })
-      this.color$.next(result);
+      this.color$.next(colors);
     });
   }
 
@@ -93,7 +102,7 @@ export class SellService {
     return this.http.post<string[]>('api/products/', formValues, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)
     }).subscribe(result => {
-      console.log('REGISTER NEW POST RESULT ',result);
+      // console.log('REGISTER NEW POST RESULT ',result);
     })
   }
 
@@ -103,7 +112,7 @@ export class SellService {
     return this.http.put('api/products/' + productInfo.id, productInfo, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)
     }).subscribe(result => {
-      console.log('PUT REQ RESULT ',result);
+      // console.log('PUT REQ RESULT ',result);
     })
   }
 
