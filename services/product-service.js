@@ -94,14 +94,14 @@ class ProductService {
     console.log("filter: ",filter);
 
     return Product.findAll({
-    include: [{
-      model:Tag,
-      where: {
-        [Op.or] : filter
-      }
-    }, {
-      model: ProductPhoto
-    }]
+      include: [{
+        model:Tag,
+        where: {
+          [Op.or] : filter
+        }
+      }, {
+        model: ProductPhoto
+      }]
     }).then((result) => {
       return result
     }).catch((err) => {
