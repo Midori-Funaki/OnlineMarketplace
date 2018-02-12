@@ -14,11 +14,19 @@
     overflow-y: auto;
     max-height: 250px;
 }
-
 .nav-link {
     font-size: 11px !important;
 }
-
 #accordion {
     margin-bottom: 30px;
+}
+.show > .btn-secondary.dropdown-toggle,
+.btn-secondary:active,
+.btn-secondary:hover,
+.btn-secondary {
+    background-color: rgb(137,212,26);
+    border-color: rgb(137,212,26);
+}
+.dropdown-item:hover {
+    background-color: rgb(137,212,26);
 }
