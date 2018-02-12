@@ -124,7 +124,7 @@ class ProductService {
         size: productInfo.size,
         color: productInfo.color,
         condition: productInfo.condition,
-        // curentBidPrice: productInfo.curentBidPrice,
+        curentBidPrice: this.insertHighestBid(productInfo),
         currentAskPrice: productInfo.currentAskPrice,
         quantity: productInfo.quantity,
         sellerId: user.id,
@@ -146,6 +146,26 @@ class ProductService {
     })
     .catch((err) => {
       return err;
+    })
+  }
+
+  insertHighestBid(product){
+    return ProductPhoto.findAll({
+      include: [{
+        where: {
+          brand: product.brand,
+          title: product.title,
+          size: product.size,
+          condition: product.condition
+        }
+      }],
+      order: [
+        ['currentBidPrice','DESC']
+      ]
+    }).then((items) => {
+      return items[0].currentBidPrice
+    }).catch((err) => {
+      return err
     })
   }
 

@@ -27,10 +27,8 @@ p {
     padding-left: 20px;
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     padding-bottom: 60px;
-}
-.each-product{
-    margin: 0 auto 0 0;
 }
 .card{
     width: 210px;
