@@ -29,6 +29,18 @@ module.exports = (sequelize, DataTypes) => {
     sellerBillAddress2: {
       type: DataTypes.STRING
     },
+    buyerFirstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    buyerLastName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    buyerContact: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     buyerShipAddress: {
       type: DataTypes.STRING,
       allowNull: false

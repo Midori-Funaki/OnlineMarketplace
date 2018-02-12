@@ -49,7 +49,7 @@ display: flex;
 -webkit-box-pack: left;
     -ms-flex-pack: left;
         justify-content: left;
-overflow: scroll;
+overflow-x: scroll;
 }
 h1 {
 font-family: inherit;
@@ -84,7 +84,6 @@ select,
   position: relative;
   width: 65%;
   margin: auto;
-  overflow: scroll;
   margin-top: 38px;
 }
 .sell-form label {

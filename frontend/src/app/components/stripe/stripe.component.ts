@@ -43,7 +43,4 @@ export class StripeComponent implements OnInit {
       })
     }
   }
-
-  
-
 }

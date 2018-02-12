@@ -6,6 +6,9 @@ export interface Transaction {
     sellerBillAddress: string,
     buyerShipAddress: string,
     buyerBillAddress: string,
+    buyerFirstName: string,
+    buyerLastName: string,
+    buyerContact: string,
     buyerId: number,
     sellerId: number,
     productId?: {

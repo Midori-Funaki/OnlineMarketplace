@@ -50,6 +50,18 @@ module.exports = {
       buyerBillAddress2: {
         type: Sequelize.STRING
       },
+      buyerFirstName: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      buyerLastName: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      buyerContact: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       buyerId: {
         type: Sequelize.INTEGER,
         allowNull: false

@@ -19,11 +19,11 @@ class ProductService {
       include: [
         {
           model: Category
-        }, 
+        },
         {
           model: ProductPhoto
         }],
-      limit: 20
+      limit: 60
     })
       .then(products => {
         return products;
@@ -66,18 +66,15 @@ class ProductService {
   }
 
   get(productId) {
-    return Product.findOne({
-      where: {
-        id: productId
-      },
-      attributes: { 
-        exclude: ['CategoryId'] 
+    return Product.findById(productId, {
+      attributes: {
+        exclude: ['CategoryId']
       },
       include: [{
         model: Category
-      },{
-        model:ProductPhoto
-      },{
+      }, {
+        model: ProductPhoto
+      }, {
         model: Transaction
       }]
     })
@@ -88,8 +85,8 @@ class ProductService {
       })
   }
 
-  search(words){
-    let wordArr =  words.query.split(' ');
+  search(words) {
+    let wordArr = words.query.split(' ');
     let filter = [];
     for (let word of wordArr) {
       filter.push({ 'keyword': word });
@@ -98,9 +95,9 @@ class ProductService {
 
     return Product.findAll({
       include: [{
-        model:Tag,
+        model: Tag,
         where: {
-          [Op.or] : filter
+          [Op.or]: filter
         }
       }, {
         model: ProductPhoto
@@ -115,35 +112,32 @@ class ProductService {
   post(productInfo, user) {
     // console.log(productInfo);
     // let category;
-    return Category.findOne({
+    return Promise.all([Category.findOne({
       where: {
         title: productInfo.category
       }
-    }).then(category => {
-      return Product.create({
-        title: productInfo.title,
-        description: productInfo.description,
-        size: productInfo.size,
-        color: productInfo.color,
-        condition: productInfo.condition,
-        curentBidPrice: this.insertHighestBid(productInfo),
-        currentAskPrice: productInfo.currentAskPrice,
-        quantity: productInfo.quantity,
-        sellerId: user.id,
-        // buyerId: productInfo.INTEGER,
-        categoryId: category.id,
-        brand: productInfo.brand
-      })      
-    }).then((product) => {
-      for (let photo of productInfo.photos) {
-        ProductPhoto.create({
-          url: photo.url,
-          productId: product.id
-        }).then(photo => {
-          console.log(photo);
-        }).then(product => {
-          for (let photo of productInfo.photos) {
-            ProductPhoto.create({
+    }), this.insertHighestBid(productInfo)])
+      .then(([category, currentBidPrice]) => {
+        // console.log("data is", category,currentBidPrice )
+        return Product.create({
+          title: productInfo.title,
+          description: productInfo.description,
+          size: productInfo.size,
+          color: productInfo.color,
+          condition: productInfo.condition,
+          curentBidPrice: currentBidPrice,
+          currentAskPrice: productInfo.currentAskPrice,
+          quantity: productInfo.quantity,
+          sellerId: user.id,
+          // buyerId: productInfo.INTEGER,
+          categoryId: category.id,
+          brand: productInfo.brand
+        })
+      })
+      .then(product => {
+        console.log("product", product)
+        for (let photo of productInfo.photos) {
+          ProductPhoto.create({
             url: photo.url,
             productId: product.id
           }).then(photo => {
@@ -157,23 +151,18 @@ class ProductService {
     }})
   }
 
-  insertHighestBid(product){
-    return ProductPhoto.findAll({
-      include: [{
-        where: {
-          brand: product.brand,
-          title: product.title,
-          size: product.size,
-          condition: product.condition
-        }
-      }],
+  insertHighestBid(product) {
+    return Product.findAll({
+      where: {
+        title: product.title
+      },
       order: [
-        ['currentBidPrice','DESC']
+        ['curentBidPrice', 'DESC']
       ]
     }).then((items) => {
-      return items[0].currentBidPrice
+      return items[0].curentBidPrice;
     }).catch((err) => {
-      return err
+      return new Error(err);
     })
   }
 
@@ -220,9 +209,9 @@ class ProductService {
       where: { id: productId }
     }).then(() => {
       return ProductPhoto.destroy({
-        where: {productId : productId}
-      }).then(()=>{
-        console.log('Deleted photos of :',productId);
+        where: { productId: productId }
+      }).then(() => {
+        console.log('Deleted photos of :', productId);
       }).catch((err) => {
         console.log('Err @ product-serviceJS', productId)
       })

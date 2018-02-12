@@ -37,13 +37,15 @@ class transactionService {
       quantity: body.quantity,
       buyerShipAddress: body.buyerShipAddress,
       buyerShipAddress2: body.buyerShipAddress2,
-      contact: body.contact,
+      buyerFirstName: body.buyerFirstName,
+      buyerLastName: body.buyerLastName,
+      buyerContact: body.buyerContact,
       buyerBillAddress: body.buyerBillAddress,
       buyerBillAddress2: body.buyerBillAddress2,
       buyerId: userid,
       sellerId: body.sellerId,
       productId: body.productId,
-      chargeId: body.chargeId
+      chargeId: body.chargeId,
     })
       .then(transaction => {
         // console.log("post done", transaction);
