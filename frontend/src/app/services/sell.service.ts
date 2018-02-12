@@ -14,23 +14,23 @@ export class SellService {
   title$: Subject<string[]>;
   color$: Subject<string[]>;
 
-  constructor(private http:HttpClient, private cloudinary: Cloudinary, private authService: AuthService) { 
-    this.category$ = new Subject<string[]>(); 
+  constructor(private http: HttpClient, private cloudinary: Cloudinary, private authService: AuthService) {
+    this.category$ = new Subject<string[]>();
     this.brand$ = new Subject<string[]>();
     this.title$ = new Subject<string[]>();
     this.color$ = new Subject<string[]>();
     this.brandName$ = new Subject<string>();
   }
 
-  getcategorySub():Observable<string[]>{
+  getcategorySub(): Observable<string[]> {
     return this.category$.asObservable();
   }
 
-  getbrandSub():Observable<string[]>{
+  getbrandSub(): Observable<string[]> {
     return this.brand$.asObservable();
   }
 
-  gettitleSub():Observable<string[]>{
+  gettitleSub(): Observable<string[]> {
     return this.title$.asObservable();
   }
 
@@ -42,16 +42,16 @@ export class SellService {
     return this.brandName$.asObservable();
   }
 
-  getCategories():void{
-    this.http.get<string[]>('/api/categories/').subscribe(result=>{
+  getCategories(): void {
+    this.http.get<string[]>('/api/categories/').subscribe(result => {
       this.category$.next(result);
     });
   }
 
-  getBrandsByCategory(categoryTitle:string){
-    this.http.get<string[]>('/api/categories/brands/'+categoryTitle).subscribe(result=>{
-      let data:string[] = result.sort((a,b) => {
-        if (a <b) {
+  getBrandsByCategory(categoryTitle: string) {
+    this.http.get<string[]>('/api/categories/brands/' + categoryTitle).subscribe(result => {
+      let data: string[] = result.sort((a, b) => {
+        if (a < b) {
           return -1;
         }
         if (a > b) {
@@ -63,18 +63,18 @@ export class SellService {
     });
   }
 
-  getBrandById(id:any) {
+  getBrandById(id: any) {
     // console.log('id @ sell.service ',id);
     this.http.get<string>('/api/categories/name/' + id).subscribe(brand => {
       this.brandName$.next(brand);
     })
   }
 
-  getTitlesByBrands(categoryTitle:string, brand:string){
-    this.http.get<string[]>('/api/categories/titles/'+categoryTitle+'/'+brand).subscribe(result=>{
+  getTitlesByBrands(categoryTitle: string, brand: string) {
+    this.http.get<string[]>('/api/categories/titles/' + categoryTitle + '/' + brand).subscribe(result => {
       // console.log(result);
-      let data:string[] = result.sort((a,b) => {
-        if (a <b) {
+      let data: string[] = result.sort((a, b) => {
+        if (a < b) {
           return -1;
         }
         if (a > b) {
@@ -86,19 +86,21 @@ export class SellService {
     });
   }
 
-  getColor(title:string) {
-    this.http.get<string[]>('/api/products/color/'+title).subscribe(result => {
+  getColor(title: string) {
+    this.http.get<string[]>('/api/products/color/' + title).subscribe(result => {
       let colors = [];
-      result.forEach((each) => {
-        if(colors.indexOf(each) === -1) {
-          colors.push(each);
-        }
-      })
+      if (result.length > 0) {
+        result.forEach((each) => {
+          if (colors.indexOf(each) === -1) {
+            colors.push(each);
+          }
+        })
+      }
       this.color$.next(colors);
     });
   }
 
-  registerNewSell(formValues){
+  registerNewSell(formValues) {
     return this.http.post<string[]>('api/products/', formValues, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)
     }).subscribe(result => {
@@ -116,7 +118,7 @@ export class SellService {
     })
   }
 
-  deleteImageByIdFromCloudinary(id){
+  deleteImageByIdFromCloudinary(id) {
     return this.http.delete('api/images/dealshub/' + id)
   }
 
@@ -124,7 +126,7 @@ export class SellService {
   //   return this.http.delete('api/photos/' + id)
   // }
 
-  upload(){
+  upload() {
     console.log('received image data *****');
   }
 }

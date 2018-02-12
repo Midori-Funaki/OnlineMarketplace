@@ -1,109 +1,131 @@
 <div class="container">
-    <form class="sell-form" [formGroup]="sellForm" (ngSubmit)="createNewSell()">
-      <div class="form-group">
-        <div class="float-field float-select">
-          <select id="category" class="form-control select-input" formControlName="category" (change)="filterBrand($event.target.value)">
-            <option *ngFor="let category of categories" [value]="category.title">{{ category.title }}</option>
-          </select>
-          <label class="float-label">Category</label>
-        </div>
-      </div><!-- form-group -->
-      <div class="form-group">
-        <div class="float-field float-select">
-          <select id="brand" class="form-control select-input" formControlName="brand" (change)="filterTitle($event.target.value)">
-            <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
-          </select>
-          <label class="float-label">Brand</label>
-        </div>
-      </div><!-- form-group -->
-      <div class="form-group">
-        <div class="float-field float-select">
-          <select id="title" class="form-control select-input" formControlName="title" (change)="filterColor($event.target.value)">
-            <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
-          </select>
-          <label class="float-label">Item Name</label>
-        </div>
-      </div><!-- form-group -->
-      <div class="form-group">
-        <div class="float-field float-select">
-          <input type="number" name="quantity" id="quantity" class="form-control select-input" [value]="" formControlName="quantity">
-          <label class="float-label">Quantity</label>
-        </div>
-      </div><!-- form-group -->
-      <div *ngIf="isShoeCategory" class="form-group">
-        <div class="float-field float-select">
-          <select class="form-control select-input" formControlName="size">
-            <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
-          </select>
-          <label class="float-label">Size (CM)</label>
-        </div>
-      </div><!-- form-group -->
-      <div class="form-group">
-        <div *ngIf="colors.length > 0" class="non-float-field">
-          <label>Color</label>
-          <div class="btn-toolbar">
-            <div *ngFor="let color of colors" class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color">
-              <label ngbButtonLabel class="btn-primary select-btn radio-label">
-                <input ngbButton type="radio" [value]="color" (change)="checkColor($event.target.value)"> {{ color }}
-              </label>
-            </div>
-            <input class="form-control" *ngIf="isOther" type="text" name="otherColor" id="otherColor" [value]="" formControlName="otherColor">
+  <form class="sell-form" [formGroup]="sellForm" (ngSubmit)="createNewSell()">
+    <div class="form-group">
+      <div class="float-field float-select">
+        <select id="category" class="form-control select-input" formControlName="category" (change)="filterBrand($event.target.value)">
+          <option *ngFor="let category of categories" [value]="category.title">{{ category.title }}</option>
+        </select>
+        <label class="float-label">Category</label>
+      </div>
+    </div>
+    <!-- form-group -->
+    <div class="form-group">
+      <div class="float-field float-select">
+        <select id="brand" class="form-control select-input" formControlName="brand" (change)="filterTitle($event.target.value)">
+          <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+        </select>
+        <label class="float-label">Brand</label>
+      </div>
+    </div>
+    <!-- form-group -->
+    <div class="form-group">
+      <div class="float-field float-select">
+        <select id="title" class="form-control select-input" formControlName="title" (change)="filterColor($event.target.value); toggleEditableTitle($event.target.value)">
+          <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
+          <option [value]="otherTitle" [selected]="otherTitleInput">Other</option>
+        </select>
+        <label class="float-label">Item Name</label>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="otherTitleInput">
+      <div class="float-field float-select">
+        <input class="form-control" type="text" id="otherTitle" [(ngModel)]="otherTitle" [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+    <!-- form-group -->
+    <div class="form-group">
+      <div class="float-field float-select">
+        <input type="number" name="quantity" id="quantity" class="form-control select-input" [value]="" formControlName="quantity">
+        <label class="float-label">Quantity</label>
+      </div>
+    </div>
+    <!-- form-group -->
+    <div *ngIf="isShoeCategory" class="form-group">
+      <div class="float-field float-select">
+        <select class="form-control select-input" formControlName="size">
+          <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+        </select>
+        <label class="float-label">Size (CM)</label>
+      </div>
+    </div>
+    <!-- form-group -->
+    <div class="form-group">
+      <div *ngIf="colors.length > 0 || otherTitleInput" class="non-float-field">
+        <label>Color</label>
+        <div class="btn-toolbar">
+          <div *ngFor="let color of colors" class="btn-group btn-group-toggle" ngbRadioGroup name="color">
+            <label ngbButtonLabel class="btn-primary select-btn radio-label">
+              <input ngbButton type="radio" [value]="color" formControlName="color" (ngModelChange)="toggleEditableColor($event)"> {{ color }}
+            </label>
           </div>
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="color">
+            <label ngbButtonLabel class="btn-primary select-btn radio-label">
+              <input ngbButton type="radio" [value]="otherColor" formControlName="color" (ngModelChange)="toggleEditableColor($event)"> Other
+            </label>
+          </div>
+          <input class="form-control" type="text" id="otherColor" [(ngModel)]="otherColor" *ngIf="otherColorInput" [ngModelOptions]="{standalone: true}">
         </div>
-      </div><!-- form-group -->
-      <div class="form-group">
-        <div class="float-field float-select">
-          <input type="number" name="askPrice" id="askPrice" class="form-control select-input" [value]="" formControlName="currentAskPrice">
-          <label class="float-label seller-input">Ask Price</label>
-        </div>
-      </div><!-- form-group -->
-      <div class="form-group">
-        <div class="non-float-field">
-          <label>Product Condition</label>
-          <div class="btn-toolbar">
-            <div class="btn-group btn-group-toggle" ngbRadioGroup name="condition" formControlName="condition">
-              <label ngbButtonLabel class="btn-primary select-btn radio-label">
-                <input ngbButton type="radio" value="new"> new
-              </label>
-              <label ngbButtonLabel class="btn-primary select-btn radio-label">
-                <input ngbButton type="radio" value="used"> used
-              </label>
+      </div>
+    </div>
+    <!-- form-group -->
+    <div class="form-group">
+      <div class="float-field float-select">
+        <input type="number" name="askPrice" id="askPrice" class="form-control select-input" [value]="" formControlName="currentAskPrice">
+        <label class="float-label seller-input">Ask Price</label>
+      </div>
+    </div>
+    <!-- form-group -->
+    <div class="form-group">
+      <div class="non-float-field">
+        <label>Product Condition</label>
+        <div class="btn-toolbar">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="condition" formControlName="condition">
+            <label ngbButtonLabel class="btn-primary select-btn radio-label">
+              <input ngbButton type="radio" value="new"> new
+            </label>
+            <label ngbButtonLabel class="btn-primary select-btn radio-label">
+              <input ngbButton type="radio" value="used"> used
+            </label>
           </div>
         </div>
       </div>
-      </div><!-- form-group -->
-      <div class="form-group">
-        <div class="float-field float-select">
-          <textarea name="description" id="description" class="form-control select-input" [value]="" formControlName="description"></textarea>
-          <label class="float-label seller-input">Description</label>
-        </div>
-      </div><!-- form-group -->
-      <div class="form-group photo-group photo-upload-section">
-        <p>Product Photos</p>
-        <fieldset>
-          <div class="wrapper">
-            <div class="box form-group" ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}">
-              <div class="js-image-preview">
-              </div>
-              <div class="upload-options">
-                <label>
-                  <input type="file" class="image-upload" #fileInput ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"/>
-                </label>
-              </div>
-            </div>
-            <div class="box box-preview box-full-preview" *ngFor="let image of images">
-              <div class="delete-btn" (click)="deleteImage(image.id)"></div>
-              <img class="product-img" [src]="image.url">
-            </div>
-          </div><!-- wrapper -->
-        </fieldset>
+    </div>
+    <!-- form-group -->
+    <div class="form-group">
+      <div class="float-field float-select">
+        <textarea name="description" id="description" class="form-control select-input" [value]="" formControlName="description"></textarea>
+        <label class="float-label seller-input">Description</label>
       </div>
-      <!-- delete button -->
-      <button *ngIf="!isEditMode" type="submit" class="btn btn-primary sell-btn">Start Selling</button>
-    </form>
-    <div *ngIf="isEditMode" class="edit-sell-btn">
+    </div>
+    <!-- form-group -->
+    <div class="form-group photo-group photo-upload-section">
+      <p>Product Photos</p>
+      <fieldset>
+        <div class="wrapper">
+          <div class="box form-group" ng2FileDrop [uploader]="uploader" (fileOver)="fileOverBase($event)" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}">
+            <div class="js-image-preview">
+            </div>
+            <div class="upload-options">
+              <label>
+                <input type="file" class="image-upload" #fileInput ng2FileSelect accept="image/*" [uploader]="uploader" (change)="fileInput.value=''"
+                />
+              </label>
+            </div>
+          </div>
+          <div class="box box-preview box-full-preview" *ngFor="let image of images">
+            <div class="delete-btn" (click)="deleteImage(image.id)"></div>
+            <img class="product-img" [src]="image.url">
+          </div>
+        </div>
+        <!-- wrapper -->
+      </fieldset>
+    </div>
+    <!-- delete button -->
+    <button *ngIf="!isEditMode" type="submit" class="btn btn-primary sell-btn">Start Selling</button>
+  </form>
+  <div *ngIf="isEditMode" class="edit-sell-btn">
     <button class="btn btn-success sell-btn" (click)="editSellItem()">Save Changes</button>
     <button class="btn btn-danger sell-btn delete-item-btn" (click)="deleteSellItem()">Delete This Item</button>
-    </div>
+  </div>
 </div>
 <!-- <pre>{{ sellForm?.value | json }}</pre> -->
