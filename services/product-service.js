@@ -147,7 +147,6 @@ class ProductService {
         return product;
       })
       .catch((err) => {
-        console.log(err);
         return err;
       })
   }
@@ -161,10 +160,8 @@ class ProductService {
         ['curentBidPrice', 'DESC']
       ]
     }).then((items) => {
-      console.log("items", items)
       return items[0].curentBidPrice;
     }).catch((err) => {
-      console.log("error is ", err);
       return new Error(err);
     })
   }

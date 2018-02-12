@@ -63,7 +63,17 @@ export class SellService {
 
   getTitlesByBrands(categoryTitle:string, brand:string){
     this.http.get<string[]>('/api/categories/titles/'+categoryTitle+'/'+brand).subscribe(result=>{
-      this.title$.next(result);
+      console.log(result);
+      let data:string[] = result.sort((a,b) => {
+        if (a <b) {
+          return -1;
+        }
+        if (a > b) {
+          return 1;
+        }
+        return 0;
+      })
+      this.title$.next(data);
     });
   }
 
