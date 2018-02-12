@@ -1,26 +1,33 @@
-<div class="mt-5">
+<div class="mt-3">
   <div *ngIf="noResult; else loadResult">
     <div class="text-center">
       <h3>Please add something to your collection...</h3>
     </div>
   </div>
   <ng-template #loadResult>
-      <div class="products-container">
-          <div *ngFor="let product of favourite" class="each-product">
-            <a href="products/{{product.productId}}">
-              <div class="card">
-                <div class="card-img-top">
-                  <img *ngIf="product.Product.ProductPhotos[0]" class="card-product-img" [src]="product.Product.ProductPhotos[0].url" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">{{ product.Product.title }}</h4>
-                  <span *ngIf="product.Product.condition == 'new'" class="badge badge-pill badge-success">NEW</span>
-                </div>
-                <footer class="card-footer">Market price : <br><span class="price">$ {{ product.Product.curentBidPrice }}</span></footer>
-              </div><!-- ./card -->
-            </a>
-            <button class="btn btn-primary remove-fav" (click)="removeFav(product.id)"><i class="fa fa-times"></i></button>
-        </div><!-- ngFor -->
+    <div class="products-container">
+      <div *ngFor="let product of favourite" class="each-product">
+        <a href="products/{{product.productId}}">
+          <div class="card">
+            <div class="card-img-top">
+              <img *ngIf="product.Product.ProductPhotos[0]" class="card-product-img" [src]="product.Product.ProductPhotos[0].url" alt="Card image cap">
+            </div>
+            <div class="card-body">
+              <h4 class="card-title">{{ product.Product.title }}</h4>
+              <span *ngIf="product.Product.condition == 'new'" class="badge badge-pill badge-success">NEW</span>
+            </div>
+            <footer class="card-footer">Market price :
+              <br>
+              <span class="price">$ {{ product.Product.curentBidPrice }}</span>
+            </footer>
+          </div>
+          <!-- ./card -->
+        </a>
+        <button class="btn btn-primary remove-fav" (click)="removeFav(product.id)">
+          <i class="fa fa-times"></i>
+        </button>
       </div>
+      <!-- ngFor -->
+    </div>
   </ng-template>
 </div>
