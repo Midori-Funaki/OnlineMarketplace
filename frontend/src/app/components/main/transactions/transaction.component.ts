@@ -37,25 +37,25 @@ export class TransactionComponent implements OnInit {
         this.purchases = transactions.filter(transaction => {
           return transaction.buyerId == this.user.id;
         });
-        console.log("puchases", this.purchases);
+        // console.log("puchases", this.purchases);
         this.solds = transactions.filter(transaction => {
           return transaction.sellerId == this.user.id;
         });
-        console.log("sold", this.solds);
+        // console.log("sold", this.solds);
       }
     });
   }
 
   confirmShipping(id) {
     this.transactionService.toShipping(id).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.getAll();
     });
   }
 
   confirmRecipt(id) {
     this.transactionService.toConfirm(id).toPromise().then(transaction => {
-      console.log(transaction);
+      // console.log(transaction);
       this.getAll();
       this.transactionService.toTransfer(transaction.id).subscribe(res => console.log(res));
     })

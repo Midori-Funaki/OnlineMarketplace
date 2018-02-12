@@ -14,32 +14,33 @@ export class LoginComponent implements OnInit {
 
   localLogin: FormGroup
 
-  constructor(private formBuilder: FormBuilder, 
-              private authService: AuthService, 
-              private facebookAuthService: FacebookAuthService,
-              private googleAuthService: GoogleAuthService,
-              private router: Router
-            ) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private facebookAuthService: FacebookAuthService,
+    private googleAuthService: GoogleAuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.localLogin = this.formBuilder.group({
       email: ["", [Validators.required]],
-      password: ["",Validators.required]
+      password: ["", Validators.required]
     });
   }
 
-  onSubmit(e:any){
+  onSubmit(e: any) {
     // console.log(this.localLogin.value);
-    if (this.localLogin.valid && this.localLogin.dirty){
+    if (this.localLogin.valid && this.localLogin.dirty) {
       this.authService.logIn(this.localLogin.value.email, this.localLogin.value.password);
     }
   }
 
-  onLoginWithFacebook(event){
+  onLoginWithFacebook(event) {
     this.facebookAuthService.logIn();
   }
 
-  onLoginWithGoogle(event){
+  onLoginWithGoogle(event) {
     this.googleAuthService.logIn();
   }
 }
