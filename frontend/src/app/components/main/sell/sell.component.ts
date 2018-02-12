@@ -283,6 +283,7 @@ export class SellComponent implements OnInit {
     this.sellForm.value.photos = this.images;
     // console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
     this.sellService.registerNewSell(this.sellForm.value);
+    this.notificationService.sendSuccessMessage('Successfully created an new item','');
     this.router.navigate(['sell-list']);
   }
 
@@ -333,8 +334,8 @@ export class SellComponent implements OnInit {
           this.deleteFromCloudinary(image.id);
         }
       }
-      this.router.navigate(['sell-list']);
       this.notificationService.sendSuccessMessage('Deleted the Item','');
+      this.router.navigate(['sell-list']);
     } else if (this.transaction == true) {
       this.notificationService.sendErrorMessage('Cannot Delete', 'The item has processing transaction status.');
     }

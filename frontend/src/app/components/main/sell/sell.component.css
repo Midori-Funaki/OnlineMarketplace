@@ -335,6 +335,7 @@ input[type='radio']:checked:before {
   font-size: 20px;
   margin-right: 45px;
   margin-top: 60px;
+  margin: auto;
 }
 .sell-btn:hover {
   background-color: rgb(137,212,26);
