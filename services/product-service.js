@@ -70,6 +70,7 @@ class ProductService {
       where: {
         id: productId
       },
+<<<<<<< HEAD
       include: {
         model: ProductPhoto
       },
@@ -80,6 +81,17 @@ class ProductService {
         model: Category
       }, {
         model: ProductPhoto
+=======
+      attributes: { 
+        exclude: ['CategoryId'] 
+      },
+      include: [{
+        model: Category
+      },{
+        model:ProductPhoto
+      },{
+        model: Transaction
+>>>>>>> midori
       }]
     })
       .then((product) => {
@@ -98,13 +110,11 @@ class ProductService {
     console.log("filter: ", filter);
 
     return Product.findAll({
-      /** 
       include: [{
-        model: Tag,
-        required: true,
-        attributes: [],
+        model:Tag,
         where: {
           [Op.or] : filter
+<<<<<<< HEAD
         },
         through: { attributes: [] }
       }],
@@ -127,6 +137,8 @@ class ProductService {
         model: Tag,
         where: {
           [Op.or]: filter
+=======
+>>>>>>> midori
         }
       }, {
         model: ProductPhoto
@@ -146,6 +158,7 @@ class ProductService {
         title: productInfo.category
       }
     })
+<<<<<<< HEAD
       .then(category => {
         return Product.create({
           title: productInfo.title,
@@ -160,6 +173,31 @@ class ProductService {
           // buyerId: productInfo.INTEGER,
           categoryId: category.id,
           brand: productInfo.brand
+=======
+    .then(category => {
+      return Product.create({
+        title: productInfo.title,
+        description: productInfo.description,
+        size: productInfo.size,
+        color: productInfo.color,
+        condition: productInfo.condition,
+        curentBidPrice: this.insertHighestBid(productInfo),
+        currentAskPrice: productInfo.currentAskPrice,
+        quantity: productInfo.quantity,
+        sellerId: user.id,
+        // buyerId: productInfo.INTEGER,
+        categoryId: category.id,
+        brand: productInfo.brand
+      })      
+    })
+    .then(product => {
+      for (let photo of productInfo.photos) {
+        ProductPhoto.create({
+          url: photo.url,
+          productId: product.id
+        }).then(photo => {
+          console.log(photo);
+>>>>>>> midori
         })
       })
       .then(product => {
@@ -176,6 +214,26 @@ class ProductService {
       .catch((err) => {
         return err;
       })
+  }
+
+  insertHighestBid(product){
+    return ProductPhoto.findAll({
+      include: [{
+        where: {
+          brand: product.brand,
+          title: product.title,
+          size: product.size,
+          condition: product.condition
+        }
+      }],
+      order: [
+        ['currentBidPrice','DESC']
+      ]
+    }).then((items) => {
+      return items[0].currentBidPrice
+    }).catch((err) => {
+      return err
+    })
   }
 
   update(productId, productInfo, user) {
@@ -220,7 +278,13 @@ class ProductService {
     return Product.destroy({
       where: { id: productId }
     }).then(() => {
-      console.log('Deleted product: ', productId)
+      return ProductPhoto.destroy({
+        where: {productId : productId}
+      }).then(()=>{
+        console.log('Deleted photos of :',productId);
+      }).catch((err) => {
+        console.log('Err @ product-serviceJS', productId)
+      })
     }).catch(err => {
       console.log(err)
     })

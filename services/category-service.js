@@ -77,7 +77,7 @@ class CategoryService {
       let filteredTitle = [];
       result[0].Products.forEach((item) => {
         if (filteredTitle.indexOf(item.title) < 0 ) {
-          console.log('pushing ',item.title);
+          // console.log('pushing ',item.title);
           filteredTitle.push(item.title)
         }
       })

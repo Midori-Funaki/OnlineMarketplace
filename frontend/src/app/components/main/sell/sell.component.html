@@ -31,15 +31,11 @@
         </div>
       </div><!-- form-group -->
       <div *ngIf="isShoeCategory" class="form-group">
-        <div class="non-float-field">
-          <label>Size (CM)</label>
-          <div class="btn-toolbar">
-            <div *ngFor="let size of sizes" class="btn-group btn-group-toggle" ngbRadioGroup name="size" formControlName="size">
-              <label ngbButtonLabel class="btn-primary select-btn">
-                <input ngbButton type="radio" [value]="size"> {{ size }}
-              </label>
-            </div>
-          </div>
+        <div class="float-field float-select">
+          <select class="form-control select-input" formControlName="size">
+            <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+          </select>
+          <label class="float-label">Size (CM)</label>
         </div>
       </div><!-- form-group -->
       <div class="form-group">
@@ -47,7 +43,7 @@
           <label>Color</label>
           <div class="btn-toolbar">
             <div *ngFor="let color of colors" class="btn-group btn-group-toggle" ngbRadioGroup name="color" formControlName="color">
-              <label ngbButtonLabel class="btn-primary select-btn">
+              <label ngbButtonLabel class="btn-primary select-btn radio-label">
                 <input ngbButton type="radio" [value]="color" (change)="checkColor($event.target.value)"> {{ color }}
               </label>
             </div>
@@ -61,15 +57,15 @@
           <label class="float-label seller-input">Ask Price</label>
         </div>
       </div><!-- form-group -->
-      <div class="form-group photo-upload-section">
+      <div class="form-group">
         <div class="non-float-field">
           <label>Product Condition</label>
           <div class="btn-toolbar">
             <div class="btn-group btn-group-toggle" ngbRadioGroup name="condition" formControlName="condition">
-              <label ngbButtonLabel class="btn-primary select-btn">
+              <label ngbButtonLabel class="btn-primary select-btn radio-label">
                 <input ngbButton type="radio" value="new"> new
               </label>
-              <label ngbButtonLabel class="btn-primary select-btn">
+              <label ngbButtonLabel class="btn-primary select-btn radio-label">
                 <input ngbButton type="radio" value="used"> used
               </label>
           </div>
@@ -82,7 +78,7 @@
           <label class="float-label seller-input">Description</label>
         </div>
       </div><!-- form-group -->
-      <div class="form-group">
+      <div class="form-group photo-group photo-upload-section">
         <p>Product Photos</p>
         <fieldset>
           <div class="wrapper">
@@ -102,9 +98,12 @@
           </div><!-- wrapper -->
         </fieldset>
       </div>
-      <button *ngIf="isEditMode" class="btn btn-success sell-btn" (click)="editSellItem()">Save Changes</button>
       <!-- delete button -->
       <button *ngIf="!isEditMode" type="submit" class="btn btn-primary sell-btn">Start Selling</button>
     </form>
+    <div *ngIf="isEditMode" class="edit-sell-btn">
+    <button class="btn btn-success sell-btn" (click)="editSellItem()">Save Changes</button>
+    <button class="btn btn-danger sell-btn delete-item-btn" (click)="deleteSellItem()">Delete This Item</button>
+    </div>
 </div>
 <!-- <pre>{{ sellForm?.value | json }}</pre> -->

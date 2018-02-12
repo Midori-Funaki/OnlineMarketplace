@@ -83,4 +83,14 @@ export class ProductsService {
         'Authorization', 'Bearer ' + this.authService.token)
     });
   }
+
+  deleteSellItem(productId) {
+    console.log('received del request @ product.service.ts')
+    return this.http.delete<Object[]>(`api/products/${productId}`, {
+      headers: new HttpHeaders().set(
+        'Authorization', 'Bearer ' + this.authService.token)
+    }).subscribe((result) => {
+      console.log(result)
+    })
+  }
 }

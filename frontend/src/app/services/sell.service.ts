@@ -88,8 +88,8 @@ export class SellService {
   }
 
   editSellItem(productInfo) {
-    console.log('sending id',productInfo.id)
-    console.log('sending prodyctInfo @ sell.service',productInfo);
+    // console.log('sending id',productInfo.id)
+    // console.log('sending prodyctInfo @ sell.service',productInfo);
     return this.http.put('api/products/' + productInfo.id, productInfo, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)
     }).subscribe(result => {
@@ -98,7 +98,7 @@ export class SellService {
   }
 
   deleteImageByIdFromCloudinary(id){
-    return this.http.delete('api/images/' + id)
+    return this.http.delete('api/images/dealshub/' + id)
   }
 
   // deleteImageByIdFromDb(id) {
