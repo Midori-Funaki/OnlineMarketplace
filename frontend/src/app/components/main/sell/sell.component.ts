@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { Product } from './../../../models/Product';
 import { User } from '../../../models/User';
+import { Router } from '@angular/router';
+import { NotificationService } from './../../../services/notification.service';
 
 @Component({
   selector: 'app-sell',
@@ -50,6 +52,8 @@ export class SellComponent implements OnInit {
     private http: HttpClient,
     private productsService:ProductsService,
     private userService: UserService,
+    private router: Router,
+    private notificationService: NotificationService
   ) {
     this.sellService.getcategorySub().subscribe(category=>{
       this.categories = category;
@@ -279,6 +283,7 @@ export class SellComponent implements OnInit {
     this.sellForm.value.photos = this.images;
     // console.log('SENDING NEW PRODUCT INFO ', this.sellForm.value);
     this.sellService.registerNewSell(this.sellForm.value);
+    this.router.navigate(['sell-list']);
   }
 
   deleteImage(delid){
@@ -321,13 +326,17 @@ export class SellComponent implements OnInit {
     console.log('Deleting')
     console.log('Delete item id',this.productId);
     console.log('Transaction boolean',this.transaction);
-    if(this.transaction == false) {
+    if (this.transaction == false) {
       this.productsService.deleteSellItem(this.productId);
       for(let image of this.images){
         if(/dealshub/.test(image.id)){
           this.deleteFromCloudinary(image.id);
         }
       }
+      this.router.navigate(['sell-list']);
+      this.notificationService.sendSuccessMessage('Deleted the Item','');
+    } else if (this.transaction == true) {
+      this.notificationService.sendErrorMessage('Cannot Delete', 'The item has processing transaction status.');
     }
   }
 }

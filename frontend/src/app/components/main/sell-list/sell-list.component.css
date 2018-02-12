@@ -27,6 +27,7 @@ p {
     padding-left: 20px;
     display: flex;
     flex-wrap: wrap;
+    padding-bottom: 60px;
 }
 .each-product{
     margin: 0 auto 0 0;
