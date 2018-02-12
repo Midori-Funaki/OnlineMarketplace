@@ -267,6 +267,7 @@ export class SellComponent implements OnInit {
   }
 
   filterTitle(brand) {
+    this.titles =[];
     this.sellService.getTitlesByBrands(this.sellForm.value.category, brand);
   }
 
@@ -340,8 +341,9 @@ export class SellComponent implements OnInit {
     }
   }
 
-  toggleEditableColor(value) {
-    if (this.colors.indexOf(value) == -1) {
+  toggleEditableColor(event) {
+    // console.log("changing color", event);
+    if (this.colors.indexOf(event.target.value) == -1) {
       this.otherColorInput = true;
     }else {
       this.otherColorInput = false;
@@ -349,12 +351,24 @@ export class SellComponent implements OnInit {
   }
 
   toggleEditableTitle(value) {
-    if (this.titles.indexOf(value) == -1) {
+    console.log("toggle title")
+    if (this.titles.indexOf(value) == -1 || value == "") {
       this.otherTitleInput = true;
     } else {
       this.otherTitleInput = false;
     }
     // console.log(this.otherTitleInput)
+  }
+
+  updateTitle(event){
+    this.otherTitle = event.target.value;
+    this.sellForm.controls['title'].setValue(event.target.value);
+  }
+
+  updateColor(event) {
+    this.sellForm.controls['color'].setValue(event.target.value);
+    this.otherColor = event.target.value;
+    // console.log(this.otherColor);
   }
   
 }

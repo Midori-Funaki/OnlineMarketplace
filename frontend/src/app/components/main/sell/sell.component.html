@@ -22,14 +22,14 @@
       <div class="float-field float-select">
         <select id="title" class="form-control select-input" formControlName="title" (change)="filterColor($event.target.value); toggleEditableTitle($event.target.value)">
           <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
-          <option [value]="otherTitle" [selected]="otherTitleInput">Other</option>
+          <option *ngIf="titles.length>0" [ngValue]="otherTitle" [selected]="otherTitleInput">Other</option>
         </select>
         <label class="float-label">Item Name</label>
       </div>
     </div>
     <div class="form-group" *ngIf="otherTitleInput">
       <div class="float-field float-select">
-        <input class="form-control" type="text" id="otherTitle" [(ngModel)]="otherTitle" [ngModelOptions]="{standalone: true}">
+        <input class="form-control" type="text" id="otherTitle" (input)="updateTitle($event)">
       </div>
     </div>
     <!-- form-group -->
@@ -55,15 +55,15 @@
         <div class="btn-toolbar">
           <div *ngFor="let color of colors" class="btn-group btn-group-toggle" ngbRadioGroup name="color">
             <label ngbButtonLabel class="btn-primary select-btn radio-label">
-              <input ngbButton type="radio" [value]="color" formControlName="color" (ngModelChange)="toggleEditableColor($event)"> {{ color }}
+              <input ngbButton type="radio" [value]="color" formControlName="color" (change)="toggleEditableColor($event)"> {{ color }}
             </label>
           </div>
           <div class="btn-group btn-group-toggle" ngbRadioGroup name="color">
             <label ngbButtonLabel class="btn-primary select-btn radio-label">
-              <input ngbButton type="radio" [value]="otherColor" formControlName="color" (ngModelChange)="toggleEditableColor($event)"> Other
+              <input ngbButton type="radio" [value]="otherColor" formControlName="color" (change)="toggleEditableColor($event)"> Other
             </label>
           </div>
-          <input class="form-control" type="text" id="otherColor" [(ngModel)]="otherColor" *ngIf="otherColorInput" [ngModelOptions]="{standalone: true}">
+          <input class="form-control" type="text" id="otherColor" (input)="updateColor($event)" *ngIf="otherColorInput">
         </div>
       </div>
     </div>
