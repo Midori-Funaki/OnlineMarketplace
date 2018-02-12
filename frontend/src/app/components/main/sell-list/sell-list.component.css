@@ -76,3 +76,7 @@ p {
 .ask-price {
     color: red;
 }
+.stripe-connect-section {
+    margin: auto;
+    margin-top: 180px;
+}

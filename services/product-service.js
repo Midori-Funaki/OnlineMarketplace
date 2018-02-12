@@ -145,10 +145,10 @@ class ProductService {
           })
         }
         return product;
-      })
-      .catch((err) => {
+      }).catch((err) => {
         return err;
       })
+    }})
   }
 
   insertHighestBid(product) {

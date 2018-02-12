@@ -2,7 +2,7 @@
   <a href="sell/new">
     <button class="btn sell-btn" *ngIf="isConnectedAccount">Sell New Item</button>
   </a>
-  <app-connect-stripe *ngIf="!isConnectedAccount && user; else connected"></app-connect-stripe>
+  <app-connect-stripe class="stripe-connect-section" *ngIf="!isConnectedAccount && user; else connected"></app-connect-stripe>
   <ng-template #connected>
     <div *ngIf="user" class="ml-auto mt-2 mr-5">
       <a href="https://stripe.com/hk" class="stripe-logo" target="_blank">
@@ -11,9 +11,9 @@
     </div>
   </ng-template>
 
-  <ng-template #connectMessage>
+  <!-- <ng-template #connectMessage>
     <h6>Connected your stripe account now to start selling!!</h6>
-  </ng-template>
+  </ng-template> -->
 </div>
 
 <div class="products-container" *ngIf="isConnectedAccount; else connectMessage">
@@ -43,26 +43,3 @@
   </div>
   <!-- ngFor -->
 </div>
-
-
-<!-- <div class="sell-item-container">
-  <app-product></app-product>
-</div> -->
-
-<!-- <div class="sell-container">
-  <div *ngFor="let product of products | async" class="each-product">
-    <a href="sell/{{ product.id }}">
-      <div class="card">
-        <cl-image *ngIf="product.ProductPhotos.length > 0" class="card-img-top" [public-id]="product.ProductPhotos[0].url">
-          <cl-transformation height="300" width="300" crop="fill"></cl-transformation>
-        </cl-image>
-        <div class="card-body">
-          <h4 class="card-title">{{ product.title }}</h4>
-            <p class="card-text">{{ product.description }}</p>
-            <p>Current ask price : $ {{ product.curentAskPrice }}</p>
-          <footer class="card-footer">Lowest ask price : <br><span class="price">$ {{ product.currentAskPrice }}</span></footer>
-        </div>
-      </div>
-    </a>
-  </div>
-</div> -->

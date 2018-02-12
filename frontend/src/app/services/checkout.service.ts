@@ -23,6 +23,7 @@ export class CheckoutService {
   transferObject: any;
   orderId: string;
   paymentComplete$ = new Subject<any>();
+  paymentBegin$ = new Subject<any>();
 
   constructor(
     private http: HttpClient,
@@ -60,6 +61,8 @@ export class CheckoutService {
       description: 'Checkout Order id: ' + orderId,
       amount: total
     });
+
+    this.paymentBegin$.next(total);
   }
 
   postCharge() {
