@@ -25,7 +25,7 @@ export class SearchbarComponent implements OnInit {
     // console.log(this.localLogin.value);
     if (this.productSearch.dirty){
       // console.log(this.productSearch.value);
-      this.router.navigate([`/home/`, this.productSearch.value.searchkey]);
+      this.router.navigate([`/home/`, this.productSearch.value.searchkey.toLowerCase()]);
       this.productSearch.reset();
     }
   }
