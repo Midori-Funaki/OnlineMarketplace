@@ -28,6 +28,7 @@ class ProductService {
             model: ProductPhoto
           }
         ],
+        order:[['createdAt','DESC']],
         limit: 60
       })
       .then(products => {
@@ -47,7 +48,8 @@ class ProductService {
         },
         include: [{
           model: ProductPhoto
-        }]
+        }],
+        order:[['createdAt','DESC']]
       })
       .then(products => {
         return products
