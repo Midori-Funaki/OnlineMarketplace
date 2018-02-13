@@ -16,7 +16,7 @@
   </ng-template> -->
 </div>
 
-<div class="products-container" *ngIf="isConnectedAccount; else connectMessage">
+<div class="products-container" *ngIf="isConnectedAccount">
   <div *ngFor="let product of products | async" class="each-product">
     <a href="sell/{{product.id}}">
       <div class="card">
