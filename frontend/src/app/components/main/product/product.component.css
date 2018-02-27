@@ -63,3 +63,13 @@ p {
 .loadmore-container .btn{
     width: 95%;
 }
+.load-btn {
+    background-color:rgb(72,20,68);
+    border: 5px solid rgb(137,212,26);
+    color: #fff;
+    border-radius: 0;
+}
+.load-btn:hover{
+    background-color: rgb(137,212,26);
+    color: darkslategrey;
+}

@@ -8,10 +8,13 @@ const User = models.user;
 const Op = require('sequelize').Op;
 const Tag = models.Tag;
 const Sequelize = require('sequelize');
+const productTagService = require('./product-tag-service');
 
 class ProductService {
 
-  constructor() { }
+  constructor() {
+    
+  }
 
   getAll() {
     // console.log("get all...")
@@ -135,6 +138,7 @@ class ProductService {
         })
       })
       .then(product => {
+        productTagService.registerTags(product);
         console.log("product", product)
         for (let photo of productInfo.photos) {
           ProductPhoto.create({
@@ -148,7 +152,6 @@ class ProductService {
       }).catch((err) => {
         return err;
       })
-    }})
   }
 
   insertHighestBid(product) {
