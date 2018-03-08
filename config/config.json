@@ -3,7 +3,7 @@
     "username": "ivan",
     "password": "password",
     "database": "shop_dev",
-    "host": "dealshub-bak.cxm1c7snv7fh.ap-southeast-1.rds.amazonaws.com",
+    "host": "localhost",
     "dialect": "postgresql"
   },
   "test": {
