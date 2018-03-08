@@ -20,7 +20,9 @@ class transactionService {
         model: ProductPhoto
       }, {
         model: User
-      }]
+      },
+    ],
+    order:[['createdAt','DESC']]
     }).then((transactions) => {
       return transactions;
     }).catch((err) => {

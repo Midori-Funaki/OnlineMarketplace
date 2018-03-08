@@ -20,7 +20,7 @@
       </div>
     
       <div *ngIf="loadMore; else endResult" class="loadmore-container">
-        <button class="btn btn-primary load-btn" (click)="loadNext($event)">Load More</button>
+        <button class="btn btn-light" (click)="loadNext($event)">Load More</button>
       </div>
       <ng-template #endResult>
         <div class="loadmore-container">
